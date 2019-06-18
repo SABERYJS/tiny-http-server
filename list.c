@@ -67,17 +67,7 @@ void handleRemove(struct List *list, struct ListNode *tNode) {
 }
 
 void removeNode(struct List *list, struct ListNode *node) {
-    if (list->count == 0) {
-        return;
-    }
-    struct ListNode *tNode = list->header;
-    while (tNode) {
-        if (node == tNode) {
-            handleRemove(list, tNode);
-            return;
-        }
-        tNode = tNode->next;
-    }
+    handleRemove(list, node);
 }
 
 void removeNodeByData(struct List *list, void *data) {

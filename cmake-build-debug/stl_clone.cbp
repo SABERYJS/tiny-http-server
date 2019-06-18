@@ -86,6 +86,9 @@
 		<Unit filename="E:/code/algorithm/array.h">
 			<Option target="stl_clone"/>
 		</Unit>
+		<Unit filename="E:/code/algorithm/config_header.h">
+			<Option target="stl_clone"/>
+		</Unit>
 		<Unit filename="E:/code/algorithm/hash.c">
 			<Option target="stl_clone"/>
 		</Unit>
@@ -101,10 +104,19 @@
 		<Unit filename="E:/code/algorithm/main.c">
 			<Option target="stl_clone"/>
 		</Unit>
+		<Unit filename="E:/code/algorithm/stack.c">
+			<Option target="stl_clone"/>
+		</Unit>
+		<Unit filename="E:/code/algorithm/stack.h">
+			<Option target="stl_clone"/>
+		</Unit>
 		<Unit filename="E:/code/algorithm/test/array-test.c">
 			<Option target="stl_clone"/>
 		</Unit>
 		<Unit filename="E:/code/algorithm/test/hash-test.h">
+			<Option target="stl_clone"/>
+		</Unit>
+		<Unit filename="E:/code/algorithm/test/stack-test.h">
 			<Option target="stl_clone"/>
 		</Unit>
 		<Unit filename="E:/code/algorithm/tool.c">

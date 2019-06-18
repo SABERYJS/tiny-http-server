@@ -230,6 +230,33 @@ main.c.s:
 	$(MAKE) -f CMakeFiles\stl_clone.dir\build.make CMakeFiles/stl_clone.dir/main.c.s
 .PHONY : main.c.s
 
+stack.obj: stack.c.obj
+
+.PHONY : stack.obj
+
+# target to build an object file
+stack.c.obj:
+	$(MAKE) -f CMakeFiles\stl_clone.dir\build.make CMakeFiles/stl_clone.dir/stack.c.obj
+.PHONY : stack.c.obj
+
+stack.i: stack.c.i
+
+.PHONY : stack.i
+
+# target to preprocess a source file
+stack.c.i:
+	$(MAKE) -f CMakeFiles\stl_clone.dir\build.make CMakeFiles/stl_clone.dir/stack.c.i
+.PHONY : stack.c.i
+
+stack.s: stack.c.s
+
+.PHONY : stack.s
+
+# target to generate assembly for a file
+stack.c.s:
+	$(MAKE) -f CMakeFiles\stl_clone.dir\build.make CMakeFiles/stl_clone.dir/stack.c.s
+.PHONY : stack.c.s
+
 test/array-test.obj: test/array-test.c.obj
 
 .PHONY : test/array-test.obj
@@ -359,6 +386,9 @@ help:
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s
+	@echo ... stack.obj
+	@echo ... stack.i
+	@echo ... stack.s
 	@echo ... test/array-test.obj
 	@echo ... test/array-test.i
 	@echo ... test/array-test.s

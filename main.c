@@ -5,8 +5,9 @@
 #include "unit.h"
 #include "tool.h"
 #include "test/hash-test.h"
+#include "test/stack-test.h"
 
 int main() {
-    testHash();
+    testStack();
     return 0;
 }

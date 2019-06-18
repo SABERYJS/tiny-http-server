@@ -7,6 +7,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/stl_clone.dir/unit.c.obj"
   "CMakeFiles/stl_clone.dir/hash.c.obj"
   "CMakeFiles/stl_clone.dir/tool.c.obj"
+  "CMakeFiles/stl_clone.dir/stack.c.obj"
   "stl_clone.pdb"
   "stl_clone.exe"
   "stl_clone.exe.manifest"
