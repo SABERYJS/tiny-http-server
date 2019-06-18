@@ -4,9 +4,14 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
+  "E:/code/algorithm/array.c" "E:/code/algorithm/cmake-build-debug/CMakeFiles/stl_clone.dir/array.c.obj"
+  "E:/code/algorithm/hash.c" "E:/code/algorithm/cmake-build-debug/CMakeFiles/stl_clone.dir/hash.c.obj"
   "E:/code/algorithm/list.c" "E:/code/algorithm/cmake-build-debug/CMakeFiles/stl_clone.dir/list.c.obj"
   "E:/code/algorithm/main.c" "E:/code/algorithm/cmake-build-debug/CMakeFiles/stl_clone.dir/main.c.obj"
+  "E:/code/algorithm/test/array-test.c" "E:/code/algorithm/cmake-build-debug/CMakeFiles/stl_clone.dir/test/array-test.c.obj"
+  "E:/code/algorithm/tool.c" "E:/code/algorithm/cmake-build-debug/CMakeFiles/stl_clone.dir/tool.c.obj"
   "E:/code/algorithm/tree.c" "E:/code/algorithm/cmake-build-debug/CMakeFiles/stl_clone.dir/tree.c.obj"
+  "E:/code/algorithm/unit.c" "E:/code/algorithm/cmake-build-debug/CMakeFiles/stl_clone.dir/unit.c.obj"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 

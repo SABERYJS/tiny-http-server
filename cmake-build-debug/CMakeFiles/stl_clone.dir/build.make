@@ -95,11 +95,81 @@ CMakeFiles/stl_clone.dir/tree.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/stl_clone.dir/tree.c.s"
 	D:\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S E:\code\algorithm\tree.c -o CMakeFiles\stl_clone.dir\tree.c.s
 
+CMakeFiles/stl_clone.dir/array.c.obj: CMakeFiles/stl_clone.dir/flags.make
+CMakeFiles/stl_clone.dir/array.c.obj: ../array.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=E:\code\algorithm\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/stl_clone.dir/array.c.obj"
+	D:\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\stl_clone.dir\array.c.obj   -c E:\code\algorithm\array.c
+
+CMakeFiles/stl_clone.dir/array.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/stl_clone.dir/array.c.i"
+	D:\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E E:\code\algorithm\array.c > CMakeFiles\stl_clone.dir\array.c.i
+
+CMakeFiles/stl_clone.dir/array.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/stl_clone.dir/array.c.s"
+	D:\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S E:\code\algorithm\array.c -o CMakeFiles\stl_clone.dir\array.c.s
+
+CMakeFiles/stl_clone.dir/test/array-test.c.obj: CMakeFiles/stl_clone.dir/flags.make
+CMakeFiles/stl_clone.dir/test/array-test.c.obj: ../test/array-test.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=E:\code\algorithm\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/stl_clone.dir/test/array-test.c.obj"
+	D:\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\stl_clone.dir\test\array-test.c.obj   -c E:\code\algorithm\test\array-test.c
+
+CMakeFiles/stl_clone.dir/test/array-test.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/stl_clone.dir/test/array-test.c.i"
+	D:\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E E:\code\algorithm\test\array-test.c > CMakeFiles\stl_clone.dir\test\array-test.c.i
+
+CMakeFiles/stl_clone.dir/test/array-test.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/stl_clone.dir/test/array-test.c.s"
+	D:\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S E:\code\algorithm\test\array-test.c -o CMakeFiles\stl_clone.dir\test\array-test.c.s
+
+CMakeFiles/stl_clone.dir/unit.c.obj: CMakeFiles/stl_clone.dir/flags.make
+CMakeFiles/stl_clone.dir/unit.c.obj: ../unit.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=E:\code\algorithm\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object CMakeFiles/stl_clone.dir/unit.c.obj"
+	D:\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\stl_clone.dir\unit.c.obj   -c E:\code\algorithm\unit.c
+
+CMakeFiles/stl_clone.dir/unit.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/stl_clone.dir/unit.c.i"
+	D:\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E E:\code\algorithm\unit.c > CMakeFiles\stl_clone.dir\unit.c.i
+
+CMakeFiles/stl_clone.dir/unit.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/stl_clone.dir/unit.c.s"
+	D:\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S E:\code\algorithm\unit.c -o CMakeFiles\stl_clone.dir\unit.c.s
+
+CMakeFiles/stl_clone.dir/hash.c.obj: CMakeFiles/stl_clone.dir/flags.make
+CMakeFiles/stl_clone.dir/hash.c.obj: ../hash.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=E:\code\algorithm\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object CMakeFiles/stl_clone.dir/hash.c.obj"
+	D:\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\stl_clone.dir\hash.c.obj   -c E:\code\algorithm\hash.c
+
+CMakeFiles/stl_clone.dir/hash.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/stl_clone.dir/hash.c.i"
+	D:\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E E:\code\algorithm\hash.c > CMakeFiles\stl_clone.dir\hash.c.i
+
+CMakeFiles/stl_clone.dir/hash.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/stl_clone.dir/hash.c.s"
+	D:\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S E:\code\algorithm\hash.c -o CMakeFiles\stl_clone.dir\hash.c.s
+
+CMakeFiles/stl_clone.dir/tool.c.obj: CMakeFiles/stl_clone.dir/flags.make
+CMakeFiles/stl_clone.dir/tool.c.obj: ../tool.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=E:\code\algorithm\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building C object CMakeFiles/stl_clone.dir/tool.c.obj"
+	D:\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\stl_clone.dir\tool.c.obj   -c E:\code\algorithm\tool.c
+
+CMakeFiles/stl_clone.dir/tool.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/stl_clone.dir/tool.c.i"
+	D:\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E E:\code\algorithm\tool.c > CMakeFiles\stl_clone.dir\tool.c.i
+
+CMakeFiles/stl_clone.dir/tool.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/stl_clone.dir/tool.c.s"
+	D:\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S E:\code\algorithm\tool.c -o CMakeFiles\stl_clone.dir\tool.c.s
+
 # Object files for target stl_clone
 stl_clone_OBJECTS = \
 "CMakeFiles/stl_clone.dir/main.c.obj" \
 "CMakeFiles/stl_clone.dir/list.c.obj" \
-"CMakeFiles/stl_clone.dir/tree.c.obj"
+"CMakeFiles/stl_clone.dir/tree.c.obj" \
+"CMakeFiles/stl_clone.dir/array.c.obj" \
+"CMakeFiles/stl_clone.dir/test/array-test.c.obj" \
+"CMakeFiles/stl_clone.dir/unit.c.obj" \
+"CMakeFiles/stl_clone.dir/hash.c.obj" \
+"CMakeFiles/stl_clone.dir/tool.c.obj"
 
 # External object files for target stl_clone
 stl_clone_EXTERNAL_OBJECTS =
@@ -107,11 +177,16 @@ stl_clone_EXTERNAL_OBJECTS =
 stl_clone.exe: CMakeFiles/stl_clone.dir/main.c.obj
 stl_clone.exe: CMakeFiles/stl_clone.dir/list.c.obj
 stl_clone.exe: CMakeFiles/stl_clone.dir/tree.c.obj
+stl_clone.exe: CMakeFiles/stl_clone.dir/array.c.obj
+stl_clone.exe: CMakeFiles/stl_clone.dir/test/array-test.c.obj
+stl_clone.exe: CMakeFiles/stl_clone.dir/unit.c.obj
+stl_clone.exe: CMakeFiles/stl_clone.dir/hash.c.obj
+stl_clone.exe: CMakeFiles/stl_clone.dir/tool.c.obj
 stl_clone.exe: CMakeFiles/stl_clone.dir/build.make
 stl_clone.exe: CMakeFiles/stl_clone.dir/linklibs.rsp
 stl_clone.exe: CMakeFiles/stl_clone.dir/objects1.rsp
 stl_clone.exe: CMakeFiles/stl_clone.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=E:\code\algorithm\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking C executable stl_clone.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=E:\code\algorithm\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking C executable stl_clone.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\stl_clone.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

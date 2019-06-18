@@ -122,6 +122,60 @@ stl_clone/fast:
 	$(MAKE) -f CMakeFiles\stl_clone.dir\build.make CMakeFiles/stl_clone.dir/build
 .PHONY : stl_clone/fast
 
+array.obj: array.c.obj
+
+.PHONY : array.obj
+
+# target to build an object file
+array.c.obj:
+	$(MAKE) -f CMakeFiles\stl_clone.dir\build.make CMakeFiles/stl_clone.dir/array.c.obj
+.PHONY : array.c.obj
+
+array.i: array.c.i
+
+.PHONY : array.i
+
+# target to preprocess a source file
+array.c.i:
+	$(MAKE) -f CMakeFiles\stl_clone.dir\build.make CMakeFiles/stl_clone.dir/array.c.i
+.PHONY : array.c.i
+
+array.s: array.c.s
+
+.PHONY : array.s
+
+# target to generate assembly for a file
+array.c.s:
+	$(MAKE) -f CMakeFiles\stl_clone.dir\build.make CMakeFiles/stl_clone.dir/array.c.s
+.PHONY : array.c.s
+
+hash.obj: hash.c.obj
+
+.PHONY : hash.obj
+
+# target to build an object file
+hash.c.obj:
+	$(MAKE) -f CMakeFiles\stl_clone.dir\build.make CMakeFiles/stl_clone.dir/hash.c.obj
+.PHONY : hash.c.obj
+
+hash.i: hash.c.i
+
+.PHONY : hash.i
+
+# target to preprocess a source file
+hash.c.i:
+	$(MAKE) -f CMakeFiles\stl_clone.dir\build.make CMakeFiles/stl_clone.dir/hash.c.i
+.PHONY : hash.c.i
+
+hash.s: hash.c.s
+
+.PHONY : hash.s
+
+# target to generate assembly for a file
+hash.c.s:
+	$(MAKE) -f CMakeFiles\stl_clone.dir\build.make CMakeFiles/stl_clone.dir/hash.c.s
+.PHONY : hash.c.s
+
 list.obj: list.c.obj
 
 .PHONY : list.obj
@@ -176,6 +230,60 @@ main.c.s:
 	$(MAKE) -f CMakeFiles\stl_clone.dir\build.make CMakeFiles/stl_clone.dir/main.c.s
 .PHONY : main.c.s
 
+test/array-test.obj: test/array-test.c.obj
+
+.PHONY : test/array-test.obj
+
+# target to build an object file
+test/array-test.c.obj:
+	$(MAKE) -f CMakeFiles\stl_clone.dir\build.make CMakeFiles/stl_clone.dir/test/array-test.c.obj
+.PHONY : test/array-test.c.obj
+
+test/array-test.i: test/array-test.c.i
+
+.PHONY : test/array-test.i
+
+# target to preprocess a source file
+test/array-test.c.i:
+	$(MAKE) -f CMakeFiles\stl_clone.dir\build.make CMakeFiles/stl_clone.dir/test/array-test.c.i
+.PHONY : test/array-test.c.i
+
+test/array-test.s: test/array-test.c.s
+
+.PHONY : test/array-test.s
+
+# target to generate assembly for a file
+test/array-test.c.s:
+	$(MAKE) -f CMakeFiles\stl_clone.dir\build.make CMakeFiles/stl_clone.dir/test/array-test.c.s
+.PHONY : test/array-test.c.s
+
+tool.obj: tool.c.obj
+
+.PHONY : tool.obj
+
+# target to build an object file
+tool.c.obj:
+	$(MAKE) -f CMakeFiles\stl_clone.dir\build.make CMakeFiles/stl_clone.dir/tool.c.obj
+.PHONY : tool.c.obj
+
+tool.i: tool.c.i
+
+.PHONY : tool.i
+
+# target to preprocess a source file
+tool.c.i:
+	$(MAKE) -f CMakeFiles\stl_clone.dir\build.make CMakeFiles/stl_clone.dir/tool.c.i
+.PHONY : tool.c.i
+
+tool.s: tool.c.s
+
+.PHONY : tool.s
+
+# target to generate assembly for a file
+tool.c.s:
+	$(MAKE) -f CMakeFiles\stl_clone.dir\build.make CMakeFiles/stl_clone.dir/tool.c.s
+.PHONY : tool.c.s
+
 tree.obj: tree.c.obj
 
 .PHONY : tree.obj
@@ -203,6 +311,33 @@ tree.c.s:
 	$(MAKE) -f CMakeFiles\stl_clone.dir\build.make CMakeFiles/stl_clone.dir/tree.c.s
 .PHONY : tree.c.s
 
+unit.obj: unit.c.obj
+
+.PHONY : unit.obj
+
+# target to build an object file
+unit.c.obj:
+	$(MAKE) -f CMakeFiles\stl_clone.dir\build.make CMakeFiles/stl_clone.dir/unit.c.obj
+.PHONY : unit.c.obj
+
+unit.i: unit.c.i
+
+.PHONY : unit.i
+
+# target to preprocess a source file
+unit.c.i:
+	$(MAKE) -f CMakeFiles\stl_clone.dir\build.make CMakeFiles/stl_clone.dir/unit.c.i
+.PHONY : unit.c.i
+
+unit.s: unit.c.s
+
+.PHONY : unit.s
+
+# target to generate assembly for a file
+unit.c.s:
+	$(MAKE) -f CMakeFiles\stl_clone.dir\build.make CMakeFiles/stl_clone.dir/unit.c.s
+.PHONY : unit.c.s
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -212,15 +347,30 @@ help:
 	@echo ... stl_clone
 	@echo ... edit_cache
 	@echo ... rebuild_cache
+	@echo ... array.obj
+	@echo ... array.i
+	@echo ... array.s
+	@echo ... hash.obj
+	@echo ... hash.i
+	@echo ... hash.s
 	@echo ... list.obj
 	@echo ... list.i
 	@echo ... list.s
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s
+	@echo ... test/array-test.obj
+	@echo ... test/array-test.i
+	@echo ... test/array-test.s
+	@echo ... tool.obj
+	@echo ... tool.i
+	@echo ... tool.s
 	@echo ... tree.obj
 	@echo ... tree.i
 	@echo ... tree.s
+	@echo ... unit.obj
+	@echo ... unit.i
+	@echo ... unit.s
 .PHONY : help
 
 

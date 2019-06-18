@@ -80,6 +80,18 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="E:/code/algorithm/array.c">
+			<Option target="stl_clone"/>
+		</Unit>
+		<Unit filename="E:/code/algorithm/array.h">
+			<Option target="stl_clone"/>
+		</Unit>
+		<Unit filename="E:/code/algorithm/hash.c">
+			<Option target="stl_clone"/>
+		</Unit>
+		<Unit filename="E:/code/algorithm/hash.h">
+			<Option target="stl_clone"/>
+		</Unit>
 		<Unit filename="E:/code/algorithm/list.c">
 			<Option target="stl_clone"/>
 		</Unit>
@@ -89,10 +101,28 @@
 		<Unit filename="E:/code/algorithm/main.c">
 			<Option target="stl_clone"/>
 		</Unit>
+		<Unit filename="E:/code/algorithm/test/array-test.c">
+			<Option target="stl_clone"/>
+		</Unit>
+		<Unit filename="E:/code/algorithm/test/hash-test.h">
+			<Option target="stl_clone"/>
+		</Unit>
+		<Unit filename="E:/code/algorithm/tool.c">
+			<Option target="stl_clone"/>
+		</Unit>
+		<Unit filename="E:/code/algorithm/tool.h">
+			<Option target="stl_clone"/>
+		</Unit>
 		<Unit filename="E:/code/algorithm/tree.c">
 			<Option target="stl_clone"/>
 		</Unit>
 		<Unit filename="E:/code/algorithm/tree.h">
+			<Option target="stl_clone"/>
+		</Unit>
+		<Unit filename="E:/code/algorithm/unit.c">
+			<Option target="stl_clone"/>
+		</Unit>
+		<Unit filename="E:/code/algorithm/unit.h">
 			<Option target="stl_clone"/>
 		</Unit>
 		<Unit filename="E:/code/algorithm/CMakeLists.txt">
