@@ -8,6 +8,7 @@ set(CMAKE_DEPENDS_CHECK_C
   "E:/code/algorithm/hash.c" "E:/code/algorithm/cmake-build-debug/CMakeFiles/stl_clone.dir/hash.c.obj"
   "E:/code/algorithm/list.c" "E:/code/algorithm/cmake-build-debug/CMakeFiles/stl_clone.dir/list.c.obj"
   "E:/code/algorithm/main.c" "E:/code/algorithm/cmake-build-debug/CMakeFiles/stl_clone.dir/main.c.obj"
+  "E:/code/algorithm/queue.c" "E:/code/algorithm/cmake-build-debug/CMakeFiles/stl_clone.dir/queue.c.obj"
   "E:/code/algorithm/stack.c" "E:/code/algorithm/cmake-build-debug/CMakeFiles/stl_clone.dir/stack.c.obj"
   "E:/code/algorithm/test/array-test.c" "E:/code/algorithm/cmake-build-debug/CMakeFiles/stl_clone.dir/test/array-test.c.obj"
   "E:/code/algorithm/tool.c" "E:/code/algorithm/cmake-build-debug/CMakeFiles/stl_clone.dir/tool.c.obj"

@@ -104,6 +104,12 @@
 		<Unit filename="E:/code/algorithm/main.c">
 			<Option target="stl_clone"/>
 		</Unit>
+		<Unit filename="E:/code/algorithm/queue.c">
+			<Option target="stl_clone"/>
+		</Unit>
+		<Unit filename="E:/code/algorithm/queue.h">
+			<Option target="stl_clone"/>
+		</Unit>
 		<Unit filename="E:/code/algorithm/stack.c">
 			<Option target="stl_clone"/>
 		</Unit>
