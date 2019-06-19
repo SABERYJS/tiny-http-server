@@ -12,20 +12,22 @@ struct Queue {
     struct List *list;
     size_t count;
 };
+#define QueueEmpty(q) (q->count==0)
+
+#define QueueSize(q)  (q->count)
 
 struct Queue *QueueCreate();
 
-
 int QueuePush(struct Queue *queue, void *data);
 
-void QueueNext(struct Queue *queue);
+void *QueueNext(struct Queue *queue);
 
-void QueueFront(struct Queue *queue);
+void *QueueFront(struct Queue *queue);
 
-void QueueBack(struct Queue *queue);
+void *QueueBack(struct Queue *queue);
 
+static int QueueCompareMethod(struct ListNode *node, void *data) {}
 
-#define QueueSize (q) (q->count)
-#define QueueEmpty(q) (q->count==0)
+static void QueueClearMethod(struct ListNode *node) {}
 
 #endif //STL_CLONE_QUEUE_H

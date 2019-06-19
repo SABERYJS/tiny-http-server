@@ -6,8 +6,9 @@
 #include "tool.h"
 #include "test/hash-test.h"
 #include "test/stack-test.h"
+#include "test/queue-test.h"
 
 int main() {
-    testStack();
+    testQueue();
     return 0;
 }
