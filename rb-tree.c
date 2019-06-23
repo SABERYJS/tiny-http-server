@@ -428,7 +428,7 @@ static void RbTreeDeleteCase4(struct RbTreeNode *node, struct RbTree *tree) {
         } else {
             RbTreeRotateRight5(node);
         }
-        RbTreeDeleteCase4(node, tree - );
+        RbTreeDeleteCase4(node, tree);
     }
 }
 

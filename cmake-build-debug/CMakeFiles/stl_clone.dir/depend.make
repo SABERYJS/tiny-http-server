@@ -18,6 +18,7 @@ CMakeFiles/stl_clone.dir/main.c.o: ../hash.h
 CMakeFiles/stl_clone.dir/main.c.o: ../list.h
 CMakeFiles/stl_clone.dir/main.c.o: ../main.c
 CMakeFiles/stl_clone.dir/main.c.o: ../queue.h
+CMakeFiles/stl_clone.dir/main.c.o: ../rb-tree.h
 CMakeFiles/stl_clone.dir/main.c.o: ../stack.h
 CMakeFiles/stl_clone.dir/main.c.o: ../test/hash-test.h
 CMakeFiles/stl_clone.dir/main.c.o: ../test/queue-test.h
@@ -30,6 +31,10 @@ CMakeFiles/stl_clone.dir/queue.c.o: ../config_header.h
 CMakeFiles/stl_clone.dir/queue.c.o: ../list.h
 CMakeFiles/stl_clone.dir/queue.c.o: ../queue.c
 CMakeFiles/stl_clone.dir/queue.c.o: ../queue.h
+
+CMakeFiles/stl_clone.dir/rb-tree.c.o: ../config_header.h
+CMakeFiles/stl_clone.dir/rb-tree.c.o: ../rb-tree.c
+CMakeFiles/stl_clone.dir/rb-tree.c.o: ../rb-tree.h
 
 CMakeFiles/stl_clone.dir/stack.c.o: ../config_header.h
 CMakeFiles/stl_clone.dir/stack.c.o: ../list.h
