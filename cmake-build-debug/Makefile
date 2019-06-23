@@ -258,6 +258,33 @@ queue.c.s:
 	$(MAKE) -f CMakeFiles/stl_clone.dir/build.make CMakeFiles/stl_clone.dir/queue.c.s
 .PHONY : queue.c.s
 
+rb-tree.o: rb-tree.c.o
+
+.PHONY : rb-tree.o
+
+# target to build an object file
+rb-tree.c.o:
+	$(MAKE) -f CMakeFiles/stl_clone.dir/build.make CMakeFiles/stl_clone.dir/rb-tree.c.o
+.PHONY : rb-tree.c.o
+
+rb-tree.i: rb-tree.c.i
+
+.PHONY : rb-tree.i
+
+# target to preprocess a source file
+rb-tree.c.i:
+	$(MAKE) -f CMakeFiles/stl_clone.dir/build.make CMakeFiles/stl_clone.dir/rb-tree.c.i
+.PHONY : rb-tree.c.i
+
+rb-tree.s: rb-tree.c.s
+
+.PHONY : rb-tree.s
+
+# target to generate assembly for a file
+rb-tree.c.s:
+	$(MAKE) -f CMakeFiles/stl_clone.dir/build.make CMakeFiles/stl_clone.dir/rb-tree.c.s
+.PHONY : rb-tree.c.s
+
 stack.o: stack.c.o
 
 .PHONY : stack.o
@@ -417,6 +444,9 @@ help:
 	@echo "... queue.o"
 	@echo "... queue.i"
 	@echo "... queue.s"
+	@echo "... rb-tree.o"
+	@echo "... rb-tree.i"
+	@echo "... rb-tree.s"
 	@echo "... stack.o"
 	@echo "... stack.i"
 	@echo "... stack.s"

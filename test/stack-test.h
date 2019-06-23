@@ -25,7 +25,8 @@ void testStack() {
     struct Unit *p;
     while ((p = (struct Unit *) StackNext(s))) {
         printf("value:%d\n", p->a);
-    }printf("%d\n", STackSize(s));
+    }
+    printf("%d\n", STackSize(s));
 }
 
 #endif //STL_CLONE_STACK_TEST_H

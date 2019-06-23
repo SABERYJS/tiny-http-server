@@ -110,6 +110,12 @@
 		<Unit filename="/cygdrive/g/algorithm/queue.h">
 			<Option target="stl_clone"/>
 		</Unit>
+		<Unit filename="/cygdrive/g/algorithm/rb-tree.c">
+			<Option target="stl_clone"/>
+		</Unit>
+		<Unit filename="/cygdrive/g/algorithm/rb-tree.h">
+			<Option target="stl_clone"/>
+		</Unit>
 		<Unit filename="/cygdrive/g/algorithm/stack.c">
 			<Option target="stl_clone"/>
 		</Unit>

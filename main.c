@@ -7,8 +7,8 @@
 #include "test/hash-test.h"
 #include "test/stack-test.h"
 #include "test/queue-test.h"
+#include "rb-tree.h"
 
 int main() {
-    testQueue();
     return 0;
 }

@@ -9,6 +9,7 @@ set(CMAKE_DEPENDS_CHECK_C
   "/cygdrive/g/algorithm/list.c" "/cygdrive/g/algorithm/cmake-build-debug/CMakeFiles/stl_clone.dir/list.c.o"
   "/cygdrive/g/algorithm/main.c" "/cygdrive/g/algorithm/cmake-build-debug/CMakeFiles/stl_clone.dir/main.c.o"
   "/cygdrive/g/algorithm/queue.c" "/cygdrive/g/algorithm/cmake-build-debug/CMakeFiles/stl_clone.dir/queue.c.o"
+  "/cygdrive/g/algorithm/rb-tree.c" "/cygdrive/g/algorithm/cmake-build-debug/CMakeFiles/stl_clone.dir/rb-tree.c.o"
   "/cygdrive/g/algorithm/stack.c" "/cygdrive/g/algorithm/cmake-build-debug/CMakeFiles/stl_clone.dir/stack.c.o"
   "/cygdrive/g/algorithm/test/array-test.c" "/cygdrive/g/algorithm/cmake-build-debug/CMakeFiles/stl_clone.dir/test/array-test.c.o"
   "/cygdrive/g/algorithm/tool.c" "/cygdrive/g/algorithm/cmake-build-debug/CMakeFiles/stl_clone.dir/tool.c.o"

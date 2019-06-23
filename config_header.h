@@ -10,5 +10,6 @@
 #include <stdlib.h>
 #include <math.h>
 #include <time.h>
+#include <string.h>
 
 #endif //STL_CLONE_CONFIG_HEADER_H
