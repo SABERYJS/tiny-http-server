@@ -1,0 +1,30 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/cygdrive/g/algorithm/config_header.h
+unistd.h
+-
+stdio.h
+-
+stdlib.h
+-
+math.h
+-
+time.h
+-
+string.h
+-
+
+/cygdrive/g/algorithm/rb-tree.c
+config_header.h
+/cygdrive/g/algorithm/config_header.h
+rb-tree.h
+/cygdrive/g/algorithm/rb-tree.h
+
+/cygdrive/g/algorithm/rb-tree.h
+
