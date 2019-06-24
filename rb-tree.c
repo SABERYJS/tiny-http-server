@@ -47,6 +47,19 @@ struct RbTreeNode *RbTreeCreateNewNode(struct RbTree *tree, void *data) {
     }
 }
 
+void RbTreeIterate(struct RbTreeNode *root, void(*callback)(struct RbTreeNode *)) {
+    struct RbTreeNode *node = root;
+    while (node) {
+        callback(node);
+        if (RbTreeLeftChild(node)) {
+            RbTreeIterate(RbTreeLeftChild(node), callback);
+        }
+        if (RbTreeRightChild(node)) {
+            RbTreeIterate(RbTreeRightChild(node), callback);
+        }
+    }
+}
+
 /**
  * look for node insert position
  * @attention only used by node insertion

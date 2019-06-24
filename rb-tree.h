@@ -139,5 +139,6 @@ static void RbTreeDeleteCase5(struct RbTreeNode *node, struct RbTree *tree);
 
 void RbTreeDeleteNode(struct RbTree *tree, struct RbTreeNode *node);
 
+void RbTreeIterate(struct RbTreeNode *root, void(*callback)(struct RbTreeNode *node));
 
 #endif //STL_CLONE_RB_TREE_H
