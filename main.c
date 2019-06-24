@@ -8,7 +8,9 @@
 #include "test/stack-test.h"
 #include "test/queue-test.h"
 #include "rb-tree.h"
+#include "test/rb-tree-test.h"
 
 int main() {
+    test_rbtree();
     return 0;
 }
