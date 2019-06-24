@@ -24,6 +24,8 @@ struct RbTree {
     int (*compare)(struct RbTreeNode *a, struct RbTreeNode *b);
 
     void (*update)(struct RbTreeNode *node, void *data);
+
+    void (*clear)(struct RbTreeNode *node);
 };
 
 
@@ -45,7 +47,6 @@ struct RbTree {
 #define RbTreeParentColorRed(parent) (RbTreeParentColor(parent,RBTREE_COLOR_RED))
 #define RbTreeParentColorBlack(parent) (RbTreeParentColor(parent,RBTREE_COLOR_BLACK))
 #define RbTreeIsLeft(node) (node==node->pNode->lChild)
-#define RbTreeHasOnlyOneRightChild(node) (node->color==RBTREE_COLOR_BLACK && !node->lChild && node->rChild!=NULL && RbNodeColorRed(node->rChild))
 #define RbTreeHasTwoChildren(node) (node->lChild && node->rChild)
 #define RbTreeNodeColor(node) (node->color)
 #define RbTreeNodeData(node) (node->data)
@@ -79,8 +80,15 @@ static inline void RbTreeSetNodeData(struct RbTreeNode *node, void *data) {
     node->data = data;
 }
 
+static inline int RbTreeHasOneChild(struct RbTreeNode *node) {
+    return (RbTreeLeftChild(node) && !RbTreeRightChild(node)) || (!RbTreeLeftChild(node) && RbTreeRightChild(node));
+}
+
+static void RbTreeClearNode(struct RbTreeNode *node, struct RbTree *tree);
+
 struct RbTree *RbTreeCreate(int (*compare)(struct RbTreeNode *a, struct RbTreeNode *b),
-                            void (*update)(struct RbTreeNode *node, void *data));
+                            void (*update)(struct RbTreeNode *node, void *data),
+                            void (*clear)(struct RbTreeNode *node));
 
 struct RbTreeNode *RbTreeCreateNewNode(struct RbTree *tree, void *data);
 
@@ -119,7 +127,7 @@ static void RbTreeUncleIsRed(struct RbTreeNode *node);
 
 static void RbTreeHandleDoubleRedCollision(struct RbTreeNode *node);
 
-static void RbTreeDeleteCase1(struct RbTreeNode *node);
+static void RbTreeDeleteCase1(struct RbTreeNode *node, struct RbTree *tree);
 
 static void RbTreeDeleteCase2(struct RbTreeNode *node, struct RbTree *tree);
 

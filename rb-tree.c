@@ -5,9 +5,20 @@
 #include "config_header.h"
 #include "rb-tree.h"
 
+/**
+ * create Rea Black Tree
+ * @param compare used for search Tree and compare node
+ * @param update  used for update node
+ * @attention  if failed return NULL
+ * **/
 struct RbTree *RbTreeCreate(int (*compare)(struct RbTreeNode *a, struct RbTreeNode *b),
-                            void (*update)(struct RbTreeNode *node, void *data)) {
+                            void (*update)(struct RbTreeNode *node, void *data),
+                            void (*clear)(struct RbTreeNode *node)) {
     struct RbTree *tree = malloc(sizeof(struct RbTree));
+    if (!compare) {
+        //compare method is necessary
+        return NULL;
+    }
     if (!tree) {
         return NULL;
     } else {
@@ -15,10 +26,15 @@ struct RbTree *RbTreeCreate(int (*compare)(struct RbTreeNode *a, struct RbTreeNo
         tree->compare = compare;
         tree->root = NULL;
         tree->update = update;
+        tree->clear = clear;
         return tree;
     }
 }
 
+/**
+ * create new node
+ * @attention color of inserted node must be  red
+ * **/
 struct RbTreeNode *RbTreeCreateNewNode(struct RbTree *tree, void *data) {
     struct RbTreeNode *node = malloc(sizeof(struct RbTreeNode));
     if (!node) {
@@ -31,10 +47,14 @@ struct RbTreeNode *RbTreeCreateNewNode(struct RbTree *tree, void *data) {
     }
 }
 
+/**
+ * look for node insert position
+ * @attention only used by node insertion
+ * **/
 static struct RbTreeNode *RbTreeLookParentNode(struct RbTree *tree, struct RbTreeNode *node) {
     struct RbTreeNode *tNode = tree->root;
     while (tNode) {
-        if (tree->compare(node, tNode) <= 0) {
+        if (tree->compare(node, tNode) < 0) {
             if (tNode->lChild) {
                 tNode = tNode->lChild;
             } else {
@@ -51,6 +71,9 @@ static struct RbTreeNode *RbTreeLookParentNode(struct RbTree *tree, struct RbTre
     return tNode;
 }
 
+/**
+ * look for node from Tree,if found return ,if not found return NULL
+ * **/
 struct RbTreeNode *RbTreeSearch(struct RbTree *tree, void *data) {
     struct RbTreeNode *tmp = malloc(sizeof(struct RbTreeNode));
     if (!tmp) {
@@ -76,20 +99,45 @@ struct RbTreeNode *RbTreeSearch(struct RbTree *tree, void *data) {
     }
 }
 
+static void RbTreeClearNode(struct RbTreeNode *node, struct RbTree *tree) {
+    RbTreeSetLeftChild(node, NULL);
+    RbTreeSetRightChild(node, NULL);
+    RbTreeSetParent(node, NULL);
+    if (tree->clear) {
+        tree->clear(node);
+    }
+    free(node);
+}
+
+/**
+ * handle double red node
+ * **/
 static void RbTreeHandleDoubleRedCollision(struct RbTreeNode *node) {
     struct RbTreeNode *uncle = RbUncleNode(node);
     struct RbTreeNode *father = RbTreeFather(node);
-    if (!uncle || RbNodeColorRed(uncle)) {
-        //uncle is null or red
+    //if parent  is red,so grand  is exist
+    //but  the existence and color of uncle is uncertain
+    //N stands for current inserted node
+    //P stands for parent node
+    //U stands for uncle node
+    //L stands for node is left  child
+    //R stands for node is right child
+    if (!uncle || RbNodeColorBlack(uncle)) {
         if (RbTreeIsLeft(node) && RbTreeIsLeft(father)) {
+            //N(L),P(L)
             RbTreeRotateRight1(node);
         } else if (!RbTreeIsLeft(node) && RbTreeIsLeft(father)) {
+            //N(R),P(L)
             RbTreeRotateLeft2(node);
+            //rotate father,because father is  left child  of  N now
             RbTreeRotateRight1(father);
         } else if (!RbTreeIsLeft(node) && !RbTreeIsLeft(father)) {
+            //N(R),P(R)
             RbTreeRotateLeft1(node);
         } else {
+            //N(L),P(R)
             RbTreeRotateRight2(node);
+            //now father is child of child
             RbTreeRotateLeft1(father);
         }
     } else {
@@ -98,22 +146,28 @@ static void RbTreeHandleDoubleRedCollision(struct RbTreeNode *node) {
     }
 }
 
+
+/**
+ * uncle node is red when node insertion
+ * **/
 static void RbTreeUncleIsRed(struct RbTreeNode *node) {
     RbTreeSetColorBlack(RbTreeFather(node));
     RbTreeSetColorRed(RbTreeGrand(node));
     RbTreeSetColorBlack(RbUncleNode(node));
     if (!RbTreeFather(RbTreeGrand(node))) {
-        //iterate over,the whole tree increase a new black node
+        //iterate finished,in fact the whole tree increase a new black node
         RbTreeSetColorBlack(RbTreeGrand(node));
     } else {
-        //handle red node collision  upward
+        //because  grand  become red ,so it is possible that great grand is also red,then we must iterate again,but iterated  target is grand
         RbTreeHandleDoubleRedCollision(RbTreeGrand(node));
     }
 }
 
+/**
+ * rotate for  node insertion
+ * when  N is right  side,but  father is left side
+ * **/
 static void RbTreeRotateLeft2(struct RbTreeNode *node) {
-    struct RbTreeNode *uncle = RbUncleNode(node);
-    struct RbTreeNode *greatGrand = RbTreeGreatGrand(node);
     struct RbTreeNode *grand = RbTreeGrand(node);
     struct RbTreeNode *father = RbTreeFather(node);
     RbTreeSetParent(node, grand);
@@ -126,6 +180,10 @@ static void RbTreeRotateLeft2(struct RbTreeNode *node) {
     RbTreeSetParent(RbTreeLeftChild(node), father);
 }
 
+/**
+ * rotate for node insertion
+ * when N and father are both  right side
+ * **/
 static void RbTreeRotateLeft1(struct RbTreeNode *node) {
     struct RbTreeNode *greatGrand = RbTreeGreatGrand(node);
     struct RbTreeNode *grand = RbTreeGrand(node);
@@ -183,6 +241,9 @@ static void RbTreeRotateRight4(struct RbTreeNode *node) {
     RbTreeSetRightChild(father, left);
     RbTreeSetColorBlack(left);
     RbTreeSetColorRed(brother);
+
+    RbTreeSetLeftChild(brother, RbTreeRightChild(left));
+    RbTreeSetParent(RbTreeRightChild(left), brother);
 }
 
 /**
@@ -198,6 +259,9 @@ static void RbTreeRotateLeft4(struct RbTreeNode *node) {
     RbTreeSetLeftChild(father, right);
     RbTreeSetColorBlack(right);
     RbTreeSetColorRed(brother);
+
+    RbTreeSetRightChild(brother, RbTreeLeftChild(right));
+    RbTreeSetParent(RbTreeLeftChild(right), brother);
 }
 
 /**
@@ -270,7 +334,10 @@ static void RbTreeRotateRight3(struct RbTreeNode *node) {
     RbTreeSetRightChild(brother, father);
 }
 
-
+/**
+ *  rotate for  node insertion
+ *  case :C  and P is  on the left side
+ * **/
 static void RbTreeRotateRight1(struct RbTreeNode *node) {
     struct RbTreeNode *greatGrand = RbTreeGreatGrand(node);
     struct RbTreeNode *grand = RbTreeGrand(node);
@@ -303,20 +370,22 @@ static void RbTreeRotateRight2(struct RbTreeNode *node) {
     RbTreeSetParent(RbTreeRightChild(node), father);
 }
 
+/**
+ * look for successor node
+ * **/
 struct RbTreeNode *RbTreeSearchSuccessorNode(struct RbTreeNode *node) {
     struct RbTreeNode *right = RbTreeRightChild(node);
-    if (!RbTreeLeftChild(right)) {
-        return right;
-    } else {
-        struct RbTreeNode *tmp = right;
-        while (RbTreeLeftChild(tmp)) {
-            tmp = RbTreeLeftChild(tmp);
-        }
-        return tmp;
+    struct RbTreeNode *tmp = right;
+    while (RbTreeLeftChild(tmp)) {
+        tmp = RbTreeLeftChild(tmp);
     }
+    return tmp;
 }
 
 
+/**
+ * only used for node deletion，deleted node  and successor node exchange
+ * **/
 static void RbTreeReplaceEachOther(struct RbTreeNode *target, struct RbTreeNode *replace) {
     size_t len = sizeof(struct RbTreeNode);
     struct RbTreeNode *tmp = malloc(len);
@@ -325,33 +394,44 @@ static void RbTreeReplaceEachOther(struct RbTreeNode *target, struct RbTreeNode 
     memcpy(target, tmp, len);
 }
 
+/**
+ * insert node
+ * **/
 struct RbTreeNode *RbTreeInsertNode(struct RbTree *tree, void *data) {
     struct RbTreeNode *nd;
+    //search tree firstly,if node exist and update method is defined ,then update ,otherwise return it directly
     if ((nd = RbTreeSearch(tree, data))) {
         if (tree->update) {
             tree->update(nd, data);
         }
         return nd;
     } else {
+        //create a new node
         nd = RbTreeCreateNewNode(tree, data);
     }
     if (!nd) {
         return NULL;
     } else {
         if (RbTreeEmpty(tree)) {
+            //if tree is empty，set node color  black and then return
+            //the tree is in a state of balance
             tree->root = nd;
             RbTreeSetColorBlack(tree->root);
             return nd;
         } else {
+            //look parent node to insert
+            //operation is the same as  normal binary tree
             struct RbTreeNode *parent = RbTreeLookParentNode(tree, nd);
             if (tree->compare(nd, parent) <= 0) {
                 RbTreeSetLeftChild(parent, nd);
             } else {
                 RbTreeSetRightChild(parent, nd);
             }
-            if (RbTreeParentColorBlack(nd)) {
+            if (RbNodeColorBlack(parent)) {
+                //if parent color is  black ,then return inserted node ,the tree is in a state of balance
                 return nd;
             } else {
+                //parent node color is red,so  rule is broken
                 RbTreeHandleDoubleRedCollision(nd);
             }
         }
@@ -362,7 +442,7 @@ struct RbTreeNode *RbTreeInsertNode(struct RbTree *tree, void *data) {
  * delete case 1
  * deleted node  has no children and color is red
  * */
-static void RbTreeDeleteCase1(struct RbTreeNode *node) {
+static void RbTreeDeleteCase1(struct RbTreeNode *node, struct RbTree *tree) {
     struct RbTreeNode *father = RbTreeFather(node);
     //father must exist
     if (RbTreeIsLeft(node)) {
@@ -370,55 +450,78 @@ static void RbTreeDeleteCase1(struct RbTreeNode *node) {
     } else {
         RbTreeSetRightChild(father, NULL);
     }
-    RbTreeSetParent(node, NULL);
+    RbTreeClearNode(node, tree);
 }
 
 /**
- * deleted node  has one child and color is black,we can infer the only child is right node and color is Red
+ * deleted node  has one child and color is black,we can infer the only child is Red
+ * but left or right is uncertain
  * **/
 static void RbTreeDeleteCase2(struct RbTreeNode *node, struct RbTree *tree) {
     struct RbTreeNode *father = RbTreeFather(node);
-    RbNodeColorBlack(RbTreeRightChild(node));
+    struct RbTreeNode *child = RbTreeLeftChild(node) ? RbTreeLeftChild(node) : RbTreeRightChild(node);
+    RbTreeSetColorBlack(child);
+
     if (RbNodeIsRoot(node)) {
-        tree->root = RbTreeRightChild(node);
+        tree->root = child;
     } else {
         if (RbTreeIsLeft(node)) {
-            RbTreeSetLeftChild(RbTreeFather(father), RbTreeRightChild(node));
+            RbTreeSetLeftChild(father, child);
         } else {
-            RbTreeSetRightChild(RbTreeFather(father), RbTreeRightChild(node));
+            RbTreeSetRightChild(father, child);
         }
     }
-    RbTreeSetParent(RbTreeRightChild(node), RbTreeFather(father));
+    RbTreeSetParent(child, father);
+    RbTreeClearNode(node, tree);
 }
 
 /**
- * deleted child has two child
+ * deleted child has two child,we can transform the case
  * */
 static void RbTreeDeleteCase3(struct RbTreeNode *node, struct RbTree *tree) {
     struct RbTreeNode *father = RbTreeFather(node);
     struct RbTreeNode *successor = RbTreeSearchSuccessorNode(node);
     //nodes replace each other firstly
-    RbTreeReplaceEachOther(node, successor);
+    //RbTreeReplaceEachOther(node, successor);
+    struct RbTreeNode *replace = malloc(sizeof(struct RbTreeNode));
+    if (!replace) {
+        return;
+    }
+    //copy node
+    memcpy(replace, node, sizeof(struct RbTreeNode));
+    if (RbTreeFather(node)) {
+        if (RbTreeIsLeft(node)) {
+            RbTreeSetLeftChild(RbTreeFather(node), replace);
+        } else {
+            RbTreeSetRightChild(RbTreeFather(node), replace);
+        }
+    }
+    RbTreeSetNodeData(replace, RbTreeNodeData(node));
+    //so now question is transformed to delete successor,but notice we do not care about content of the successor,just delete it
     RbTreeDeleteNode(tree, successor);
 }
 
+/**
+ * delete case when node has no children and color is black
+ * **/
 static void RbTreeDeleteCase4(struct RbTreeNode *node, struct RbTree *tree) {
     //brother must exist,But color is uncertain
     struct RbTreeNode *brother = RbTreeBrotherNode(node);
     if (RbNodeColorBlack(brother)) {
-        struct RbTreeNode *right = RbTreeRightChild(node);
-        struct RbTreeNode *left = RbTreeLeftChild(node);
-        if (right && RbTreeParentColorRed(right) && RbTreeIsLeft(node)) {
+        struct RbTreeNode *right = RbTreeRightChild(brother);
+        struct RbTreeNode *left = RbTreeLeftChild(brother);
+        if (right && RbNodeColorRed(right) && RbTreeIsLeft(node)) {
             RbTreeRotateLeft3(node);
         } else if (left && RbNodeColorRed(left) && RbTreeIsLeft(node)) {
             RbTreeRotateRight4(node);
             RbTreeRotateLeft3(node);
-        } else if (right && RbTreeParentColorRed(right) && !RbTreeIsLeft(node)) {
+        } else if (right && RbNodeColorRed(right) && !RbTreeIsLeft(node)) {
             RbTreeRotateLeft4(node);
             RbTreeRotateRight3(node);
         } else if (left && RbNodeColorRed(left) && !RbTreeIsLeft(node)) {
             RbTreeRotateRight3(node);
         } else {
+            RbTreeSetColorRed(brother);
             RbTreeDeleteCase4(RbTreeFather(node), tree);
         }
     } else {
@@ -428,24 +531,24 @@ static void RbTreeDeleteCase4(struct RbTreeNode *node, struct RbTree *tree) {
         } else {
             RbTreeRotateRight5(node);
         }
+        //situation is transformed
         RbTreeDeleteCase4(node, tree);
     }
 }
 
-static void RbTreeDeleteCase5(struct RbTreeNode *node, struct RbTree *tree) {
-
-}
-
+/**
+ * delete node  entry
+ * **/
 void RbTreeDeleteNode(struct RbTree *tree, struct RbTreeNode *node) {
     if (RbTreeEmpty(tree)) {
         return;
     }
-    struct RbTreeNode *father = RbTreeFather(node);
     if (RbNodeNoChildren(node) && RbNodeColorRed(node)) {
-        RbTreeDeleteCase1(node);
-    } else if (RbTreeHasOnlyOneRightChild(node)) {
+        RbTreeDeleteCase1(node, tree);
+    } else if (RbTreeHasOneChild(node)) {
         RbTreeDeleteCase2(node, tree);
     } else if (RbTreeHasTwoChildren(node)) {
+        //in  one  iteration cycle,it is  impossible   following code run twice
         RbTreeDeleteCase3(node, tree);
     } else {
         //node is black and no children

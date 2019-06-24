@@ -4,17 +4,17 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "/cygdrive/g/algorithm/array.c" "/cygdrive/g/algorithm/cmake-build-debug/CMakeFiles/stl_clone.dir/array.c.o"
-  "/cygdrive/g/algorithm/hash.c" "/cygdrive/g/algorithm/cmake-build-debug/CMakeFiles/stl_clone.dir/hash.c.o"
-  "/cygdrive/g/algorithm/list.c" "/cygdrive/g/algorithm/cmake-build-debug/CMakeFiles/stl_clone.dir/list.c.o"
-  "/cygdrive/g/algorithm/main.c" "/cygdrive/g/algorithm/cmake-build-debug/CMakeFiles/stl_clone.dir/main.c.o"
-  "/cygdrive/g/algorithm/queue.c" "/cygdrive/g/algorithm/cmake-build-debug/CMakeFiles/stl_clone.dir/queue.c.o"
-  "/cygdrive/g/algorithm/rb-tree.c" "/cygdrive/g/algorithm/cmake-build-debug/CMakeFiles/stl_clone.dir/rb-tree.c.o"
-  "/cygdrive/g/algorithm/stack.c" "/cygdrive/g/algorithm/cmake-build-debug/CMakeFiles/stl_clone.dir/stack.c.o"
-  "/cygdrive/g/algorithm/test/array-test.c" "/cygdrive/g/algorithm/cmake-build-debug/CMakeFiles/stl_clone.dir/test/array-test.c.o"
-  "/cygdrive/g/algorithm/tool.c" "/cygdrive/g/algorithm/cmake-build-debug/CMakeFiles/stl_clone.dir/tool.c.o"
-  "/cygdrive/g/algorithm/tree.c" "/cygdrive/g/algorithm/cmake-build-debug/CMakeFiles/stl_clone.dir/tree.c.o"
-  "/cygdrive/g/algorithm/unit.c" "/cygdrive/g/algorithm/cmake-build-debug/CMakeFiles/stl_clone.dir/unit.c.o"
+  "E:/code/algorithm/array.c" "E:/code/algorithm/cmake-build-debug/CMakeFiles/stl_clone.dir/array.c.obj"
+  "E:/code/algorithm/hash.c" "E:/code/algorithm/cmake-build-debug/CMakeFiles/stl_clone.dir/hash.c.obj"
+  "E:/code/algorithm/list.c" "E:/code/algorithm/cmake-build-debug/CMakeFiles/stl_clone.dir/list.c.obj"
+  "E:/code/algorithm/main.c" "E:/code/algorithm/cmake-build-debug/CMakeFiles/stl_clone.dir/main.c.obj"
+  "E:/code/algorithm/queue.c" "E:/code/algorithm/cmake-build-debug/CMakeFiles/stl_clone.dir/queue.c.obj"
+  "E:/code/algorithm/rb-tree.c" "E:/code/algorithm/cmake-build-debug/CMakeFiles/stl_clone.dir/rb-tree.c.obj"
+  "E:/code/algorithm/stack.c" "E:/code/algorithm/cmake-build-debug/CMakeFiles/stl_clone.dir/stack.c.obj"
+  "E:/code/algorithm/test/array-test.c" "E:/code/algorithm/cmake-build-debug/CMakeFiles/stl_clone.dir/test/array-test.c.obj"
+  "E:/code/algorithm/tool.c" "E:/code/algorithm/cmake-build-debug/CMakeFiles/stl_clone.dir/tool.c.obj"
+  "E:/code/algorithm/tree.c" "E:/code/algorithm/cmake-build-debug/CMakeFiles/stl_clone.dir/tree.c.obj"
+  "E:/code/algorithm/unit.c" "E:/code/algorithm/cmake-build-debug/CMakeFiles/stl_clone.dir/unit.c.obj"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 
