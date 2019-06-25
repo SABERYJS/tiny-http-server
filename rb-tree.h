@@ -5,6 +5,10 @@
 #ifndef STL_CLONE_RB_TREE_H
 #define STL_CLONE_RB_TREE_H
 
+#include "config_header.h"
+#include "unit.h"
+
+
 #define RBTREE_COLOR_BLACK 1
 #define RBTREE_COLOR_RED 2
 
@@ -28,15 +32,29 @@ struct RbTree {
     void (*clear)(struct RbTreeNode *node);
 };
 
+#ifdef  STL_CLONE_UNIT_H
+#define RBTREE_LOG_OPEN
+
+static struct Unit *RbTreeNodeParse(struct RbTreeNode *node) {
+    return (struct Unit *) node->data;
+}
+
+static int RbTreeNodeValue(struct RbTreeNode *node) {
+    struct Unit *u = (struct Unit *) node->data;
+    return u->a;
+}
+
+#endif
+
 
 #define RbNodeColorBlack(node) (node->color==RBTREE_COLOR_BLACK)
 #define RbNodeColorRed(node) (node->color==RBTREE_COLOR_RED)
 
-#define RbNodeNoChildren(node) (!node->lChild && !node->rChild)
-#define RbUncleNode(node) (node==node->pNode->lChild?node->pNode->rChild:node->pNode->lChild)
-#define RbTreeGrand(node) (node->pNode->pNode)
-#define RbTreeGreatGrand(node) ((RbTreeGrand(node))->pNode)
 #define RbTreeFather(node) (node->pNode)
+#define RbTreeGrand(node) (node->pNode->pNode)
+#define RbNodeNoChildren(node) (!node->lChild && !node->rChild)
+#define RbUncleNode(node) ((RbTreeFather(node)==RbTreeGrand(node)->lChild)?(RbTreeGrand(node)->rChild):(RbTreeGrand(node)->lChild))
+#define RbTreeGreatGrand(node) ((RbTreeGrand(node))->pNode)
 #define RbTreeLeftChild(node) (node->lChild)
 #define RbTreeRightChild(node) (node->rChild)
 #define RbNodeIsRoot(node)  (!node->pNode)
@@ -84,6 +102,26 @@ static inline int RbTreeHasOneChild(struct RbTreeNode *node) {
     return (RbTreeLeftChild(node) && !RbTreeRightChild(node)) || (!RbTreeLeftChild(node) && RbTreeRightChild(node));
 }
 
+static inline void RbTreeIncraseNodeCount(struct RbTree *tree) {
+    tree->count++;
+}
+
+static inline void RbTreeClearLeftChild(struct RbTreeNode *node) {
+    RbTreeSetLeftChild(node, NULL);
+}
+
+static inline void RbTreeClearRightChild(struct RbTreeNode *node) {
+    RbTreeSetRightChild(node, NULL);
+}
+
+static inline void RbTreeClearParent(struct RbTreeNode *node) {
+    RbTreeSetParent(node, NULL);
+}
+
+static inline void RbTreeSetRoot(struct RbTree *tree, struct RbTreeNode *node) {
+    tree->root = node;
+}
+
 static void RbTreeClearNode(struct RbTreeNode *node, struct RbTree *tree);
 
 struct RbTree *RbTreeCreate(int (*compare)(struct RbTreeNode *a, struct RbTreeNode *b),
@@ -101,7 +139,7 @@ struct RbTreeNode *RbTreeSearchSuccessorNode(struct RbTreeNode *node);
 
 static struct RbTreeNode *RbTreeLookParentNode(struct RbTree *tree, struct RbTreeNode *node);
 
-static void RbTreeRotateRight1(struct RbTreeNode *node);
+static void RbTreeRotateRight1(struct RbTreeNode *node, struct RbTree *tree);
 
 static void RbTreeRotateRight2(struct RbTreeNode *node);
 
@@ -111,7 +149,7 @@ static void RbTreeRotateRight4(struct RbTreeNode *node);
 
 static void RbTreeRotateRight5(struct RbTreeNode *node);
 
-static void RbTreeRotateLeft1(struct RbTreeNode *node);
+static void RbTreeRotateLeft1(struct RbTreeNode *node, struct RbTree *tree);
 
 static void RbTreeRotateLeft2(struct RbTreeNode *node);
 
@@ -123,9 +161,9 @@ static void RbTreeRotateLeft5(struct RbTreeNode *node);
 
 struct RbTreeNode *RbTreeSearch(struct RbTree *tree, void *data);
 
-static void RbTreeUncleIsRed(struct RbTreeNode *node);
+static void RbTreeUncleIsRed(struct RbTreeNode *node, struct RbTree *tree);
 
-static void RbTreeHandleDoubleRedCollision(struct RbTreeNode *node);
+static void RbTreeHandleDoubleRedCollision(struct RbTreeNode *node, struct RbTree *tree);
 
 static void RbTreeDeleteCase1(struct RbTreeNode *node, struct RbTree *tree);
 

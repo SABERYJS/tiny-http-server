@@ -2,7 +2,6 @@
 // Created by Administrator on 2019/6/23.
 //
 
-#include "config_header.h"
 #include "rb-tree.h"
 
 /**
@@ -49,14 +48,12 @@ struct RbTreeNode *RbTreeCreateNewNode(struct RbTree *tree, void *data) {
 
 void RbTreeIterate(struct RbTreeNode *root, void(*callback)(struct RbTreeNode *)) {
     struct RbTreeNode *node = root;
-    while (node) {
-        callback(node);
-        if (RbTreeLeftChild(node)) {
-            RbTreeIterate(RbTreeLeftChild(node), callback);
-        }
-        if (RbTreeRightChild(node)) {
-            RbTreeIterate(RbTreeRightChild(node), callback);
-        }
+    callback(node);
+    if (RbTreeLeftChild(node)) {
+        RbTreeIterate(RbTreeLeftChild(node), callback);
+    }
+    if (RbTreeRightChild(node)) {
+        RbTreeIterate(RbTreeRightChild(node), callback);
     }
 }
 
@@ -125,7 +122,7 @@ static void RbTreeClearNode(struct RbTreeNode *node, struct RbTree *tree) {
 /**
  * handle double red node
  * **/
-static void RbTreeHandleDoubleRedCollision(struct RbTreeNode *node) {
+static void RbTreeHandleDoubleRedCollision(struct RbTreeNode *node, struct RbTree *tree) {
     struct RbTreeNode *uncle = RbUncleNode(node);
     struct RbTreeNode *father = RbTreeFather(node);
     //if parent  is red,so grand  is exist
@@ -138,24 +135,24 @@ static void RbTreeHandleDoubleRedCollision(struct RbTreeNode *node) {
     if (!uncle || RbNodeColorBlack(uncle)) {
         if (RbTreeIsLeft(node) && RbTreeIsLeft(father)) {
             //N(L),P(L)
-            RbTreeRotateRight1(node);
+            RbTreeRotateRight1(node, tree);
         } else if (!RbTreeIsLeft(node) && RbTreeIsLeft(father)) {
             //N(R),P(L)
             RbTreeRotateLeft2(node);
             //rotate father,because father is  left child  of  N now
-            RbTreeRotateRight1(father);
+            RbTreeRotateRight1(father, tree);
         } else if (!RbTreeIsLeft(node) && !RbTreeIsLeft(father)) {
             //N(R),P(R)
-            RbTreeRotateLeft1(node);
+            RbTreeRotateLeft1(node, tree);
         } else {
             //N(L),P(R)
             RbTreeRotateRight2(node);
             //now father is child of child
-            RbTreeRotateLeft1(father);
+            RbTreeRotateLeft1(father, tree);
         }
     } else {
         //uncle is red
-        RbTreeUncleIsRed(node);
+        RbTreeUncleIsRed(node, tree);
     }
 }
 
@@ -163,16 +160,33 @@ static void RbTreeHandleDoubleRedCollision(struct RbTreeNode *node) {
 /**
  * uncle node is red when node insertion
  * **/
-static void RbTreeUncleIsRed(struct RbTreeNode *node) {
+static void RbTreeUncleIsRed(struct RbTreeNode *node, struct RbTree *tree) {
+#ifdef RBTREE_LOG_OPEN
+    printf("uncle[%d] color is red,so change grand color to red\n", RbTreeNodeValue(RbUncleNode(node)));
+#endif
     RbTreeSetColorBlack(RbTreeFather(node));
     RbTreeSetColorRed(RbTreeGrand(node));
     RbTreeSetColorBlack(RbUncleNode(node));
     if (!RbTreeFather(RbTreeGrand(node))) {
+#ifdef RBTREE_LOG_OPEN
+        printf("because great grand does not exist,so node[%d] is root,just modify  color to black\n",
+               RbTreeNodeValue(RbTreeGrand(node)));
+#endif
         //iterate finished,in fact the whole tree increase a new black node
         RbTreeSetColorBlack(RbTreeGrand(node));
     } else {
+#ifdef RBTREE_LOG_OPEN
+        printf("because great grand is not null,so iterate upward, new node [%d]\n",
+               RbTreeNodeValue(RbTreeGrand(node)));
+#endif
+        if (RbNodeColorBlack(RbTreeGreatGrand(node))) {
+#ifdef RBTREE_LOG_OPEN
+            printf("because great grand is black,so tree is in balance,iterate  finished\n");
+#endif
+            return;
+        }
         //because  grand  become red ,so it is possible that great grand is also red,then we must iterate again,but iterated  target is grand
-        RbTreeHandleDoubleRedCollision(RbTreeGrand(node));
+        RbTreeHandleDoubleRedCollision(RbTreeGrand(node), tree);
     }
 }
 
@@ -189,21 +203,33 @@ static void RbTreeRotateLeft2(struct RbTreeNode *node) {
     RbTreeSetParent(father, node);
     RbTreeSetLeftChild(node, father);
 
-    RbTreeSetRightChild(father, RbTreeLeftChild(node));
-    RbTreeSetParent(RbTreeLeftChild(node), father);
+    if (RbTreeLeftChild(node)) {
+        RbTreeSetRightChild(father, RbTreeLeftChild(node));
+        RbTreeSetParent(RbTreeLeftChild(node), father);
+    } else {
+        RbTreeClearRightChild(father);
+    }
+
+#ifdef RBTREE_LOG_OPEN
+    printf("rotate-left-2 finished,node[%d],parent[%d]\n", RbTreeNodeValue(node), RbTreeNodeValue(father));
+#endif
 }
 
 /**
  * rotate for node insertion
  * when N and father are both  right side
  * **/
-static void RbTreeRotateLeft1(struct RbTreeNode *node) {
+static void RbTreeRotateLeft1(struct RbTreeNode *node, struct RbTree *tree) {
     struct RbTreeNode *greatGrand = RbTreeGreatGrand(node);
     struct RbTreeNode *grand = RbTreeGrand(node);
     struct RbTreeNode *father = RbTreeFather(node);
     RbTreeSetLeftChild(father, grand);
-    RbTreeSetRightChild(grand, RbTreeLeftChild(father));
-    RbTreeSetParent(RbTreeLeftChild(father), grand);
+    if (RbTreeLeftChild(father)) {
+        RbTreeSetRightChild(grand, RbTreeLeftChild(father));
+        RbTreeSetParent(RbTreeLeftChild(father), grand);
+    } else {
+        RbTreeClearRightChild(grand);
+    }
     if (greatGrand) {
         RbTreeSetParent(father, greatGrand);
         if (RbTreeIsLeft(grand)) {
@@ -211,10 +237,16 @@ static void RbTreeRotateLeft1(struct RbTreeNode *node) {
         } else {
             RbTreeSetRightChild(greatGrand, father);
         }
+    } else {
+        RbTreeClearParent(father);
+        RbTreeSetRoot(tree, father);
     }
     RbTreeSetParent(grand, father);
     RbTreeSetColorRed(grand);
     RbTreeSetColorBlack(father);
+#ifdef RBTREE_LOG_OPEN
+    printf("rotate-left-1 finished,node[%d],parent[%d]\n", RbTreeNodeValue(node), RbTreeNodeValue(father));
+#endif
 }
 
 /**
@@ -351,13 +383,17 @@ static void RbTreeRotateRight3(struct RbTreeNode *node) {
  *  rotate for  node insertion
  *  case :C  and P is  on the left side
  * **/
-static void RbTreeRotateRight1(struct RbTreeNode *node) {
+static void RbTreeRotateRight1(struct RbTreeNode *node, struct RbTree *tree) {
     struct RbTreeNode *greatGrand = RbTreeGreatGrand(node);
     struct RbTreeNode *grand = RbTreeGrand(node);
     struct RbTreeNode *father = RbTreeFather(node);
 
-    RbTreeSetLeftChild(grand, RbTreeRightChild(father));
-    RbTreeSetParent(RbTreeRightChild(father), grand);
+    if (RbTreeRightChild(father)) {
+        RbTreeSetLeftChild(grand, RbTreeRightChild(father));
+        RbTreeSetParent(RbTreeRightChild(father), grand);
+    } else {
+        RbTreeClearLeftChild(grand);
+    }
     RbTreeSetRightChild(father, grand);
     if (greatGrand) {
         RbTreeSetParent(father, greatGrand);
@@ -366,10 +402,19 @@ static void RbTreeRotateRight1(struct RbTreeNode *node) {
         } else {
             RbTreeSetRightChild(greatGrand, father);
         }
+    } else {
+#ifdef RBTREE_LOG_OPEN
+        printf("new root node[%d]\n", RbTreeNodeValue(father));
+#endif
+        RbTreeClearParent(father);
+        RbTreeSetRoot(tree, father);
     }
     RbTreeSetParent(grand, father);
     RbTreeSetColorBlack(father);
     RbTreeSetColorRed(grand);
+#ifdef RBTREE_LOG_OPEN
+    printf("rotate-right-1 finished,current[%d] and parent[%d]\n", RbTreeNodeValue(node), RbTreeNodeValue(father));
+#endif
 }
 
 static void RbTreeRotateRight2(struct RbTreeNode *node) {
@@ -379,8 +424,15 @@ static void RbTreeRotateRight2(struct RbTreeNode *node) {
     RbTreeSetRightChild(node, father);
     RbTreeSetParent(father, node);
     RbTreeSetRightChild(grand, node);
-    RbTreeSetLeftChild(father, RbTreeRightChild(node));
-    RbTreeSetParent(RbTreeRightChild(node), father);
+    if (RbTreeRightChild(node)) {
+        RbTreeSetLeftChild(father, RbTreeRightChild(node));
+        RbTreeSetParent(RbTreeRightChild(node), father);
+    } else {
+        RbTreeClearLeftChild(father);
+    }
+#ifdef RBTREE_LOG_OPEN
+    printf("rotate-right-2 finished,node[%d],parent[%d]\n", RbTreeNodeValue(node), RbTreeNodeValue(father));
+#endif
 }
 
 /**
@@ -414,6 +466,9 @@ struct RbTreeNode *RbTreeInsertNode(struct RbTree *tree, void *data) {
     struct RbTreeNode *nd;
     //search tree firstly,if node exist and update method is defined ,then update ,otherwise return it directly
     if ((nd = RbTreeSearch(tree, data))) {
+#ifdef RBTREE_LOG_OPEN
+        printf("node with value[%d] exist\n", RbTreeNodeValue(nd));
+#endif
         if (tree->update) {
             tree->update(nd, data);
         }
@@ -430,22 +485,44 @@ struct RbTreeNode *RbTreeInsertNode(struct RbTree *tree, void *data) {
             //the tree is in a state of balance
             tree->root = nd;
             RbTreeSetColorBlack(tree->root);
+            RbTreeIncraseNodeCount(tree);
+#ifdef RBTREE_LOG_OPEN
+            printf("new node:%d\n", RbTreeNodeValue(nd));
+#endif
             return nd;
         } else {
             //look parent node to insert
             //operation is the same as  normal binary tree
+            RbTreeIncraseNodeCount(tree);
             struct RbTreeNode *parent = RbTreeLookParentNode(tree, nd);
+#ifdef RBTREE_LOG_OPEN
+            int left = 0;
+#endif
             if (tree->compare(nd, parent) <= 0) {
+#ifdef RBTREE_LOG_OPEN
+                left = 1;
+#endif
                 RbTreeSetLeftChild(parent, nd);
             } else {
                 RbTreeSetRightChild(parent, nd);
             }
+            RbTreeSetParent(nd, parent);
+#ifdef RBTREE_LOG_OPEN
+            printf("node[%d] found parent[%d],and act as %s node\n", RbTreeNodeValue(nd), RbTreeNodeValue(parent),
+                   left ? "left" : "right");
+#endif
             if (RbNodeColorBlack(parent)) {
                 //if parent color is  black ,then return inserted node ,the tree is in a state of balance
+#ifdef  RBTREE_LOG_OPEN
+                printf("because parent  color of inserted node is black,so insert finished\n");
+#endif
                 return nd;
             } else {
+#ifdef RBTREE_LOG_OPEN
+                printf("parent color is red, collision  happened\n");
+#endif
                 //parent node color is red,so  rule is broken
-                RbTreeHandleDoubleRedCollision(nd);
+                RbTreeHandleDoubleRedCollision(nd, tree);
             }
         }
     }
