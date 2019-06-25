@@ -70,6 +70,19 @@ static int RbTreeNodeValue(struct RbTreeNode *node) {
 #define RbTreeNodeData(node) (node->data)
 #define RbTreeBrotherNode(node) (RbTreeIsLeft(node)?RbTreeRightChild(RbTreeFather(node)):RbTreeLeftChild(RbTreeFather(node)))
 
+#ifdef RBTREE_LOG_OPEN
+
+static void RbTreePrintNode(struct RbTreeNode *node) {
+    struct Unit *u = (struct Unit *) node->data;
+    printf("value:%d,color:%s,side:%s,parent node is %d\n",
+           u->a,
+           node->color == RBTREE_COLOR_BLACK ? "black" : "red",
+           RbNodeIsRoot(node) ? "root" : (RbTreeIsLeft(node) ? "left" : "right"),
+           !RbNodeIsRoot(node) ? RbTreeNodeValue(RbTreeFather(node)) : 0);
+}
+
+#endif
+
 static inline void RbTreeSetColorRed(struct RbTreeNode *node) {
     node->color = RBTREE_COLOR_RED;
 }

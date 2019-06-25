@@ -197,11 +197,6 @@ static void RbTreeUncleIsRed(struct RbTreeNode *node, struct RbTree *tree) {
 static void RbTreeRotateLeft2(struct RbTreeNode *node) {
     struct RbTreeNode *grand = RbTreeGrand(node);
     struct RbTreeNode *father = RbTreeFather(node);
-    RbTreeSetParent(node, grand);
-    RbTreeSetLeftChild(grand, node);
-
-    RbTreeSetParent(father, node);
-    RbTreeSetLeftChild(node, father);
 
     if (RbTreeLeftChild(node)) {
         RbTreeSetRightChild(father, RbTreeLeftChild(node));
@@ -209,6 +204,12 @@ static void RbTreeRotateLeft2(struct RbTreeNode *node) {
     } else {
         RbTreeClearRightChild(father);
     }
+
+    RbTreeSetParent(node, grand);
+    RbTreeSetLeftChild(grand, node);
+
+    RbTreeSetParent(father, node);
+    RbTreeSetLeftChild(node, father);
 
 #ifdef RBTREE_LOG_OPEN
     printf("rotate-left-2 finished,node[%d],parent[%d]\n", RbTreeNodeValue(node), RbTreeNodeValue(father));
@@ -223,7 +224,6 @@ static void RbTreeRotateLeft1(struct RbTreeNode *node, struct RbTree *tree) {
     struct RbTreeNode *greatGrand = RbTreeGreatGrand(node);
     struct RbTreeNode *grand = RbTreeGrand(node);
     struct RbTreeNode *father = RbTreeFather(node);
-    RbTreeSetLeftChild(father, grand);
     if (RbTreeLeftChild(father)) {
         RbTreeSetRightChild(grand, RbTreeLeftChild(father));
         RbTreeSetParent(RbTreeLeftChild(father), grand);
@@ -241,6 +241,7 @@ static void RbTreeRotateLeft1(struct RbTreeNode *node, struct RbTree *tree) {
         RbTreeClearParent(father);
         RbTreeSetRoot(tree, father);
     }
+    RbTreeSetLeftChild(father, grand);
     RbTreeSetParent(grand, father);
     RbTreeSetColorRed(grand);
     RbTreeSetColorBlack(father);
@@ -420,16 +421,16 @@ static void RbTreeRotateRight1(struct RbTreeNode *node, struct RbTree *tree) {
 static void RbTreeRotateRight2(struct RbTreeNode *node) {
     struct RbTreeNode *grand = RbTreeGrand(node);
     struct RbTreeNode *father = RbTreeFather(node);
-    RbTreeSetParent(node, grand);
-    RbTreeSetRightChild(node, father);
-    RbTreeSetParent(father, node);
-    RbTreeSetRightChild(grand, node);
     if (RbTreeRightChild(node)) {
         RbTreeSetLeftChild(father, RbTreeRightChild(node));
         RbTreeSetParent(RbTreeRightChild(node), father);
     } else {
         RbTreeClearLeftChild(father);
     }
+    RbTreeSetParent(node, grand);
+    RbTreeSetRightChild(node, father);
+    RbTreeSetParent(father, node);
+    RbTreeSetRightChild(grand, node);
 #ifdef RBTREE_LOG_OPEN
     printf("rotate-right-2 finished,node[%d],parent[%d]\n", RbTreeNodeValue(node), RbTreeNodeValue(father));
 #endif

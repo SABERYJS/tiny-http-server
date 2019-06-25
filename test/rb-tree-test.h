@@ -31,14 +31,14 @@ void test_rbtree() {
     for (int i = 0; i < sizeof(inertted) / sizeof(int); ++i) {
         struct Unit *tmp = malloc(sizeof(struct Unit));
         tmp->a = inertted[i];
-        // printf("inserted value:%d\n", inertted[i]);
-        if (inertted[i] == 78) {
-            RbTreeIterate(tree->root, printRbTreeNode);
-            exit(0);
-        }
         RbTreeInsertNode(tree, tmp);
+        /*if (inertted[i] == 89) {
+            //RbTreeIterate(tree->root, printRbTreeNode);
+            exit(0);
+        }*/
     }
     printf("nodes count :%d\n", RbTreeSize(tree));
+    RbTreeIterate(tree->root, printRbTreeNode);
 }
 
 #endif //STL_CLONE_RB_TREE_TEST_H
