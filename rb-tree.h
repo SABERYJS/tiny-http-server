@@ -111,12 +111,19 @@ static inline void RbTreeSetNodeData(struct RbTreeNode *node, void *data) {
     node->data = data;
 }
 
+/**
+ * if node has only one child,so it`s color must be black and child is red,but which side the child is at is uncertain
+ * **/
 static inline int RbTreeHasOneChild(struct RbTreeNode *node) {
     return (RbTreeLeftChild(node) && !RbTreeRightChild(node)) || (!RbTreeLeftChild(node) && RbTreeRightChild(node));
 }
 
-static inline void RbTreeIncraseNodeCount(struct RbTree *tree) {
+static inline void RbTreeIncreaseNodeCount(struct RbTree *tree) {
     tree->count++;
+}
+
+static inline void RbTreeDecreaseNodeCount(struct RbTree *tree) {
+    tree->count--;
 }
 
 static inline void RbTreeClearLeftChild(struct RbTreeNode *node) {
@@ -156,21 +163,21 @@ static void RbTreeRotateRight1(struct RbTreeNode *node, struct RbTree *tree);
 
 static void RbTreeRotateRight2(struct RbTreeNode *node);
 
-static void RbTreeRotateRight3(struct RbTreeNode *node);
+static void RbTreeRotateRight3(struct RbTreeNode *node, struct RbTree *tree);
 
 static void RbTreeRotateRight4(struct RbTreeNode *node);
 
-static void RbTreeRotateRight5(struct RbTreeNode *node);
+static void RbTreeRotateRight5(struct RbTreeNode *node, struct RbTree *tree);
 
 static void RbTreeRotateLeft1(struct RbTreeNode *node, struct RbTree *tree);
 
 static void RbTreeRotateLeft2(struct RbTreeNode *node);
 
-static void RbTreeRotateLeft3(struct RbTreeNode *node);
+static void RbTreeRotateLeft3(struct RbTreeNode *node, struct RbTree *tree);
 
 static void RbTreeRotateLeft4(struct RbTreeNode *node);
 
-static void RbTreeRotateLeft5(struct RbTreeNode *node);
+static void RbTreeRotateLeft5(struct RbTreeNode *node, struct RbTree *tree);
 
 struct RbTreeNode *RbTreeSearch(struct RbTree *tree, void *data);
 
