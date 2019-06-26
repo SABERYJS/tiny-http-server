@@ -39,6 +39,9 @@ struct RbTreeNode *RbTreeCreateNewNode(struct RbTree *tree, void *data) {
     if (!node) {
         return NULL;
     } else {
+#ifdef RBTREE_LOG_OPEN
+        node->key = ((struct Unit *) data)->a;
+#endif
         node->data = data;
         node->color = RBTREE_COLOR_RED;
         node->rChild = node->pNode = node->lChild = NULL;
@@ -297,18 +300,18 @@ static void RbTreeRotateRight4(struct RbTreeNode *node) {
     RbTreeSetParent(left, father);
     RbTreeSetRightChild(father, left);
 
-    RbTreeSetParent(brother, left);
-    RbTreeSetRightChild(left, brother);
-
-    RbTreeSetColorBlack(left);
-    RbTreeSetColorRed(brother);
-
     if (RbTreeRightChild(left)) {
         RbTreeSetLeftChild(brother, RbTreeRightChild(left));
         RbTreeSetParent(RbTreeRightChild(left), brother);
     } else {
         RbTreeClearLeftChild(brother);
     }
+
+    RbTreeSetParent(brother, left);
+    RbTreeSetRightChild(left, brother);
+
+    RbTreeSetColorBlack(left);
+    RbTreeSetColorRed(brother);
 }
 
 /**
@@ -319,13 +322,7 @@ static void RbTreeRotateLeft4(struct RbTreeNode *node) {
     struct RbTreeNode *brother = RbTreeBrotherNode(node);
     struct RbTreeNode *right = RbTreeRightChild(brother);
     RbTreeSetParent(right, father);
-    RbTreeSetParent(brother, right);
-
-    RbTreeSetLeftChild(right, brother);
     RbTreeSetLeftChild(father, right);
-
-    RbTreeSetColorBlack(right);
-    RbTreeSetColorRed(brother);
 
     if (RbTreeLeftChild(right)) {
         RbTreeSetRightChild(brother, RbTreeLeftChild(right));
@@ -333,6 +330,13 @@ static void RbTreeRotateLeft4(struct RbTreeNode *node) {
     } else {
         RbTreeClearRightChild(brother);
     }
+
+    RbTreeSetParent(brother, right);
+    RbTreeSetLeftChild(right, brother);
+
+    RbTreeSetColorBlack(right);
+    RbTreeSetColorRed(brother);
+
 }
 
 /**
@@ -597,12 +601,12 @@ static void RbTreeDeleteCase1(struct RbTreeNode *node, struct RbTree *tree) {
     } else {
         RbTreeSetRightChild(father, NULL);
     }
-    RbTreeClearNode(node, tree);
-    RbTreeDecreaseNodeCount(tree);
 #ifdef  RBTREE_LOG_OPEN
     printf("delete case1:because current node[%d] is red and no children so delete it directly\n",
            RbTreeNodeValue(node));
 #endif
+    RbTreeClearNode(node, tree);
+    RbTreeDecreaseNodeCount(tree);
 }
 
 /**
@@ -628,11 +632,11 @@ static void RbTreeDeleteCase2(struct RbTreeNode *node, struct RbTree *tree) {
             RbTreeSetRightChild(father, child);
         }
     }
-    RbTreeClearNode(node, tree);
-    RbTreeDecreaseNodeCount(tree);
 #ifdef RBTREE_LOG_OPEN
     printf("delete case2 finished,deleted node[%d]\n", RbTreeNodeValue(node));
 #endif
+    RbTreeClearNode(node, tree);
+    RbTreeDecreaseNodeCount(tree);
 }
 
 /**
@@ -660,7 +664,7 @@ static void RbTreeDeleteCase3(struct RbTreeNode *node, struct RbTree *tree) {
 #endif
     }
     RbTreeSetParent(RbTreeLeftChild(node), replace);
-    RbTreeSetRightChild(RbTreeRightChild(node), replace);
+    RbTreeSetParent(RbTreeRightChild(node), replace);
 
     RbTreeSetNodeData(replace, RbTreeNodeData(successor));
     //because we have copy successor`s data to replace node,so clear successor`s data to NULL
@@ -680,6 +684,10 @@ static void RbTreeDeleteCase4(struct RbTreeNode *node, struct RbTree *tree) {
 #ifdef  RBTREE_LOG_OPEN
     printf("delete case4: node[%d] no children and is black\n", RbTreeNodeValue(node));
 #endif
+    if (RbNodeIsRoot(node)) {
+        //all path from root decrease a black node
+        return;
+    }
     //brother must exist,But color is uncertain
     struct RbTreeNode *brother = RbTreeBrotherNode(node);
     if (RbNodeColorBlack(brother)) {
@@ -739,7 +747,7 @@ void RbTreeDeleteNode(struct RbTree *tree, struct RbTreeNode *node) {
             RbTreeDecreaseNodeCount(tree);
             RbTreeClearNode(node, tree);
         } else {
-            //if node has parent ,so it`s parent can not be root,then grand exist and brother must exist,
+            //if node has parent ,then brother must exist,
             RbTreeDeleteCase4(node, tree);
         }
     }

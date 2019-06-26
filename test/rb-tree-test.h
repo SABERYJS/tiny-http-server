@@ -27,18 +27,40 @@ void printRbTreeNode(struct RbTreeNode *node) {
 void test_rbtree() {
     struct RbTree *tree = RbTreeCreate(Compare, NULL, NULL);
     int inertted[] = {1000, 500, 200, 100, 45, 78, 89, 789, 326, 520, 890, 903, 66, 98, 146, 210, 402, 682, 900, 970,
-                      288, 564, 156, 998, 8, 6, 4, 18, 14, 600};
+                      288, 564, 156, 998, 8, 6, 4, 18, 14, 600, 208};
     for (int i = 0; i < sizeof(inertted) / sizeof(int); ++i) {
         struct Unit *tmp = malloc(sizeof(struct Unit));
         tmp->a = inertted[i];
         RbTreeInsertNode(tree, tmp);
-        /*if (inertted[i] == 89) {
-            //RbTreeIterate(tree->root, printRbTreeNode);
-            exit(0);
-        }*/
     }
     printf("nodes count :%d\n", RbTreeSize(tree));
     RbTreeIterate(tree->root, printRbTreeNode);
+    char buffer[10];
+    memset(buffer, 0, 10);
+    char *p = buffer;
+    char c;
+    int a;
+    while ((c = getc(stdin))) {
+        if (c >= '0' && c <= '9') {
+            *(p++) = c;
+        } else {
+            a = atoi(buffer);
+            memset(buffer, 0, 10);
+            p = buffer;
+            if (a > 0) {
+                printf("input is %d\n", a);
+                struct Unit *u = malloc(sizeof(struct Unit));
+                u->a = a;
+                struct RbTreeNode *node = RbTreeSearch(tree, u);
+                if (node) {
+#ifdef  RBTREE_LOG_OPEN
+                    printf("search result:%d\n", RbTreeNodeValue(node));
+#endif
+                    RbTreeDeleteNode(tree, node);
+                }
+            }
+        }
+    }
 }
 
 #endif //STL_CLONE_RB_TREE_TEST_H

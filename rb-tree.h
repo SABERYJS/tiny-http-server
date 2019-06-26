@@ -16,6 +16,9 @@
 struct RbTreeNode {
     void *data;
     int color;
+#ifdef STL_CLONE_UNIT_H
+    int key;
+#endif
     struct RbTreeNode *lChild;
     struct RbTreeNode *rChild;
     struct RbTreeNode *pNode;
@@ -40,6 +43,10 @@ static struct Unit *RbTreeNodeParse(struct RbTreeNode *node) {
 }
 
 static int RbTreeNodeValue(struct RbTreeNode *node) {
+    if (!node->data) {
+        printf("data is null\n");
+        return 0;
+    }
     struct Unit *u = (struct Unit *) node->data;
     return u->a;
 }
