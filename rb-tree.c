@@ -779,3 +779,41 @@ void RbTreeDeleteNode(struct RbTree *tree, struct RbTreeNode *node) {
         }
     }
 }
+
+int RbTreeBlackCount(struct RbTree *tree) {
+    struct RbTreeNode *node = tree->root;
+    int count = 0;
+    while (node) {
+        if (RbNodeColorBlack(node)) {
+            count++;
+        }
+        if (RbTreeLeftChild(node)) {
+            node = RbTreeLeftChild(node);
+        } else {
+            break;
+        }
+    }
+    return count;
+}
+
+void RbTreeValidate(struct RbTreeNode *node, int stl, int count) {
+    if (RbNodeColorBlack(node)) {
+        count++;
+    }
+    if (RbTreeLeftChild(node)) {
+        RbTreeValidate(RbTreeLeftChild(node), stl, count);
+    } else {
+        if (count != stl) {
+            printf("validate failed\n");
+            exit(1);
+        }
+    }
+    if (RbTreeRightChild(node)) {
+        RbTreeValidate(RbTreeRightChild(node), stl, count);
+    } else {
+        if (count != stl) {
+            printf("validate failed\n");
+            exit(1);
+        }
+    }
+}

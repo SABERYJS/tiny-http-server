@@ -24,6 +24,7 @@ void printRbTreeNode(struct RbTreeNode *node) {
            !RbNodeIsRoot(node) ? RbTreeNodeValue(RbTreeFather(node)) : 0);
 }
 
+
 void test_rbtree() {
     struct RbTree *tree = RbTreeCreate(Compare, NULL, NULL);
     srand(time(NULL));
@@ -41,6 +42,8 @@ void test_rbtree() {
          RbTreeInsertNode(tree, tmp);
      }*/
     printf("nodes count :%d\n", RbTreeSize(tree));
+    printf("black count is %d\n", RbTreeBlackCount(tree));
+    RbTreeValidate(tree->root, RbTreeBlackCount(tree), 0);
     // RbTreeIterate(tree->root, printRbTreeNode);
     char buffer[10];
     memset(buffer, 0, 10);
@@ -64,6 +67,8 @@ void test_rbtree() {
                     printf("search result:%d\n", RbTreeNodeValue(node));
 #endif
                     RbTreeDeleteNode(tree, node);
+                    printf("--node delete finished ,start validate tree--\n");
+                    RbTreeValidate(tree->root, RbTreeBlackCount(tree), 0);
                 }
             }
         }

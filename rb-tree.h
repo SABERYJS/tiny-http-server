@@ -206,4 +206,8 @@ void RbTreeDeleteNode(struct RbTree *tree, struct RbTreeNode *node);
 
 void RbTreeIterate(struct RbTreeNode *root, void(*callback)(struct RbTreeNode *node));
 
+int RbTreeBlackCount(struct RbTree *tree);
+
+void RbTreeValidate(struct RbTreeNode *tree, int stl, int count);
+
 #endif //STL_CLONE_RB_TREE_H
