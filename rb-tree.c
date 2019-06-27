@@ -257,6 +257,9 @@ static void RbTreeRotateLeft1(struct RbTreeNode *node, struct RbTree *tree) {
  * rotate for node deletion when deleted node  is left node and brother`s  right node is not null and  color is red
  * **/
 static void RbTreeRotateLeft3(struct RbTreeNode *node, struct RbTree *tree) {
+#ifdef RBTREE_LOG_OPEN
+    printf("node [%d] rotate left-3\n", RbTreeNodeValue(node));
+#endif
     struct RbTreeNode *grand = RbTreeGrand(node);
     struct RbTreeNode *father = RbTreeFather(node);
     struct RbTreeNode *brother = RbTreeBrotherNode(node);
@@ -294,6 +297,9 @@ static void RbTreeRotateLeft3(struct RbTreeNode *node, struct RbTree *tree) {
  * rotate for node deletion when deleted node  is left node and brother`s  left node is not null and  color is red
 **/
 static void RbTreeRotateRight4(struct RbTreeNode *node) {
+#ifdef RBTREE_LOG_OPEN
+    printf("node [%d] rotate right-4\n", RbTreeNodeValue(node));
+#endif
     struct RbTreeNode *father = RbTreeFather(node);
     struct RbTreeNode *brother = RbTreeBrotherNode(node);
     struct RbTreeNode *left = RbTreeLeftChild(brother);
@@ -318,6 +324,9 @@ static void RbTreeRotateRight4(struct RbTreeNode *node) {
  * rotate for node deletion when deleted node  is right node and brother`s  right node is not null and  color is red
 **/
 static void RbTreeRotateLeft4(struct RbTreeNode *node) {
+#ifdef RBTREE_LOG_OPEN
+    printf("node [%d] rotate left-4\n", RbTreeNodeValue(node));
+#endif
     struct RbTreeNode *father = RbTreeFather(node);
     struct RbTreeNode *brother = RbTreeBrotherNode(node);
     struct RbTreeNode *right = RbTreeRightChild(brother);
@@ -343,6 +352,9 @@ static void RbTreeRotateLeft4(struct RbTreeNode *node) {
  * for deletion and brother is red and deleted node is right
  * **/
 static void RbTreeRotateRight5(struct RbTreeNode *node, struct RbTree *tree) {
+#ifdef RBTREE_LOG_OPEN
+    printf("node [%d] rotate right-5\n", RbTreeNodeValue(node));
+#endif
     struct RbTreeNode *grand = RbTreeGrand(node);
     struct RbTreeNode *brother = RbTreeBrotherNode(node);
     struct RbTreeNode *father = RbTreeFather(node);
@@ -375,6 +387,9 @@ static void RbTreeRotateRight5(struct RbTreeNode *node, struct RbTree *tree) {
  * for deletion and brother is red and deleted node is left
  * **/
 static void RbTreeRotateLeft5(struct RbTreeNode *node, struct RbTree *tree) {
+#ifdef RBTREE_LOG_OPEN
+    printf("node [%d] rotate left-5\n", RbTreeNodeValue(node));
+#endif
     struct RbTreeNode *grand = RbTreeGrand(node);
     struct RbTreeNode *brother = RbTreeBrotherNode(node);
     struct RbTreeNode *father = RbTreeFather(node);
@@ -407,6 +422,9 @@ static void RbTreeRotateLeft5(struct RbTreeNode *node, struct RbTree *tree) {
  * rotate for node deletion when deleted node is right node
  * **/
 static void RbTreeRotateRight3(struct RbTreeNode *node, struct RbTree *tree) {
+#ifdef RBTREE_LOG_OPEN
+    printf("node [%d] rotate right-3\n", RbTreeNodeValue(node));
+#endif
     struct RbTreeNode *grand = RbTreeGrand(node);
     struct RbTreeNode *father = RbTreeFather(node);
     struct RbTreeNode *brother = RbTreeBrotherNode(node);
@@ -705,10 +723,16 @@ static void RbTreeDeleteCase4(struct RbTreeNode *node, struct RbTree *tree) {
             RbTreeRotateRight3(node, tree);
         } else {
             if (RbNodeColorRed(RbTreeFather(node))) {
+#ifdef RBTREE_LOG_OPEN
+                printf("node [%d] parent color is red ,just swap color\n", RbTreeNodeValue(node));
+#endif
                 //swap parent and  node color
                 RbTreeSetColorBlack(RbTreeFather(node));
                 RbTreeSetColorRed(brother);
             } else {
+#ifdef RBTREE_LOG_OPEN
+                printf("for node [%d],brother and father both black,so iterate upward\n", RbTreeNodeValue(node));
+#endif
                 RbTreeSetColorRed(brother);
                 RbTreeDeleteCase4(RbTreeFather(node), tree);
             }
@@ -742,6 +766,9 @@ void RbTreeDeleteNode(struct RbTree *tree, struct RbTreeNode *node) {
     } else {
         //node is black and no children
         if (RbNodeIsRoot(node)) {
+#ifdef RBTREE_LOG_OPEN
+            printf("node [%d] is root ,just return\n", RbTreeNodeValue(node));
+#endif
             //if current is root ,so delete it directly
             RbTreeSetRoot(tree, NULL);
             RbTreeDecreaseNodeCount(tree);

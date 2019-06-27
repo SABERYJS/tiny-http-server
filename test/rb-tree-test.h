@@ -26,15 +26,22 @@ void printRbTreeNode(struct RbTreeNode *node) {
 
 void test_rbtree() {
     struct RbTree *tree = RbTreeCreate(Compare, NULL, NULL);
-    int inertted[] = {1000, 500, 200, 100, 45, 78, 89, 789, 326, 520, 890, 903, 66, 98, 146, 210, 402, 682, 900, 970,
-                      288, 564, 156, 998, 8, 6, 4, 18, 14, 600, 208};
-    for (int i = 0; i < sizeof(inertted) / sizeof(int); ++i) {
+    srand(time(NULL));
+    for (int j = 0; j < 10000; ++j) {
         struct Unit *tmp = malloc(sizeof(struct Unit));
-        tmp->a = inertted[i];
+        tmp->a = rand() % 100000;
+        printf("insert value:%d\n", tmp->a);
         RbTreeInsertNode(tree, tmp);
     }
+    /* int inertted[] = {1000, 500, 200, 100, 45, 78, 89, 789, 326, 520, 890, 903, 66, 98, 146, 210, 402, 682, 900, 970,
+                       288, 564, 156, 998, 8, 6, 4, 18, 14, 600, 208};
+     for (int i = 0; i < sizeof(inertted) / sizeof(int); ++i) {
+         struct Unit *tmp = malloc(sizeof(struct Unit));
+         tmp->a = inertted[i];
+         RbTreeInsertNode(tree, tmp);
+     }*/
     printf("nodes count :%d\n", RbTreeSize(tree));
-    RbTreeIterate(tree->root, printRbTreeNode);
+    // RbTreeIterate(tree->root, printRbTreeNode);
     char buffer[10];
     memset(buffer, 0, 10);
     char *p = buffer;
