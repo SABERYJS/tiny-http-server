@@ -5,9 +5,9 @@
 #ifndef STL_CLONE_QUEUE_TEST_H
 #define STL_CLONE_QUEUE_TEST_H
 
-#include "../config_header.h"
-#include "../queue.h"
-#include "../unit.h"
+#include "../src/algorithm/config_header.h"
+#include "../src/algorithm/queue.h"
+#include "../src/algorithm/unit.h"
 
 void testQueue() {
     struct Queue *queue = QueueCreate();

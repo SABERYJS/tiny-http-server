@@ -2,8 +2,8 @@
 // Created by Administrator on 2019/6/17.
 //
 
-#include "../tree.h"
-#include "../unit.h"
+#include "../src/algorithm/tree.h"
+#include "../src/algorithm/unit.h"
 
 int compareTree(struct TreeNode *node, void *data) {
     struct Unit *u = (struct Unit *) data;

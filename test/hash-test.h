@@ -5,9 +5,9 @@
 #ifndef  TEST_HASH
 #define TEST_HASH
 
-#include "../hash.h"
-#include "../tool.h"
-#include "../unit.h"
+#include "../src/algorithm/hash.h"
+#include "../src/algorithm/tool.h"
+#include "../src/algorithm/unit.h"
 
 void testHash() {
     struct HashTable *table = HashTableCreate(100000, NULL);

@@ -5,9 +5,9 @@
 #ifndef STL_CLONE_RB_TREE_TEST_H
 #define STL_CLONE_RB_TREE_TEST_H
 
-#include "../config_header.h"
-#include "../rb-tree.h"
-#include "../unit.h"
+#include "../src/algorithm/config_header.h"
+#include "../src/algorithm/rb-tree.h"
+#include "../src/algorithm/unit.h"
 
 int Compare(struct RbTreeNode *a, struct RbTreeNode *b) {
     struct Unit *at = (struct Unit *) a->data;

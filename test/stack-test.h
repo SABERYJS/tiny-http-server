@@ -5,8 +5,8 @@
 #ifndef STL_CLONE_STACK_TEST_H
 #define STL_CLONE_STACK_TEST_H
 
-#include "../stack.h"
-#include "../unit.h"
+#include "../src/algorithm/stack.h"
+#include "../src/algorithm/unit.h"
 
 void testStack() {
     struct Stack *s = StackCreate();
