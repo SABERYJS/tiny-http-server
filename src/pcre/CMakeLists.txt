@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 3.13)
+project(regex)
+aux_source_directory(. PCRE_WRAPPER)
+add_library(regex ${PCRE_WRAPPER})
+target_link_libraries(regex pcre)
