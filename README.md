@@ -1,3 +1,4 @@
 # algorithm
 base algorithm implemention for learning  
-#project is developing,please wait
+# notice
+project is developing,please wait
