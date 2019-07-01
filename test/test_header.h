@@ -17,5 +17,6 @@
 #include <fcntl.h>
 #include <netdb.h>
 #include <unistd.h>
+#include <netinet/tcp.h>
 
 #endif //QC_TEST_HEADER_H
