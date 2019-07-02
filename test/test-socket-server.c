@@ -46,7 +46,7 @@ int main() {
                     p = buffer;
                     while (1) {
                         readAgain:
-                        rs = read(fd, p, 1024);
+                        rs = read(ret, p, 1024);
                         printf("here");
                         if (rs < 0) {
                             if (errno == EINTR) {
@@ -60,6 +60,7 @@ int main() {
                             if (rs == 0) {
                                 printf("client close connection,receive from client:%s\n", buffer);
                                 close(fd);
+				continue;
                             } else {
                                 printf("read bytes:%d\n", rs);
                                 p += rs;
