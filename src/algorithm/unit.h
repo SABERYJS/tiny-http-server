@@ -2,8 +2,8 @@
 // Created by Administrator on 2019/6/17.
 //
 
-#ifndef STL_CLONE_UNIT_H
-#define STL_CLONE_UNIT_H
+#ifndef STL_CLONE_UNIT_HH
+#define STL_CLONE_UNIT_HH
 struct Unit {
     int a;
 };

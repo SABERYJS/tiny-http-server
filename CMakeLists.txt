@@ -21,5 +21,5 @@ add_executable(test-net-func test/test-net-func.c)
 target_link_libraries(test-rax rax)
 target_link_libraries(test-regex pcre regex)
 target_link_libraries(test-command-line core)
-target_link_libraries(test-net-func core)
+target_link_libraries(test-net-func core stl)
 

@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.13)
 project(core)
 aux_source_directory(. APP_CORE)
-add_library(core ${APP_CORE})
+add_library(core ${APP_CORE} event.c event.h)
 target_link_libraries(core stl)

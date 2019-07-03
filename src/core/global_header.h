@@ -18,6 +18,8 @@
 #include <netdb.h>
 #include <unistd.h>
 #include <netinet/tcp.h>
+#include <sys/select.h>
+#include "../algorithm/rb-tree.h"
 
 
 #endif //QC_GLOBAL_HEADER_H

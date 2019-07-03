@@ -18,5 +18,5 @@
 #include <netdb.h>
 #include <unistd.h>
 #include <netinet/tcp.h>
-
+#include <sys/select.h>
 #endif //QC_TEST_HEADER_H
