@@ -27,3 +27,4 @@ target_link_libraries(test-socket-server core)
 
 target_link_libraries(test-event core stl)
 
+SET(CMAKE_INSTALL_PREFIX ./bin)
