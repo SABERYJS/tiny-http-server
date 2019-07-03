@@ -39,6 +39,7 @@ int EventAdd(struct EventDepositary *depositary, unsigned int type, int fd, void
                 handler->data = data;
                 handler->callback = callback;
                 handler->ref = 0;
+                handler->flag = 0;
                 handler->depositary = depositary;
                 if (!RbTreeInsertNode(depositary->rbTree, handler)) {
                     return -1;
@@ -108,14 +109,15 @@ static void EventReInitSingleFd(struct RbTreeNode *node) {
     struct EventHandler *handler = (struct EventHandler *) node->data;
     struct EventDepositary *depositary = handler->depositary;
     if (handler->flag | EVENT_READABLE) {
-        FD_SET(handler->fd, &depositary->rs);
+        FD_SET(handler->fd, &(depositary->rs));
     }
     if (handler->flag | EVENT_WRITEABLE) {
-        FD_SET(handler->fd, &depositary->ws);
+        FD_SET(handler->fd, &(depositary->ws));
     }
     if (handler->flag | EVENT_ERROR) {
-        FD_SET(handler->fd, &depositary->es);
+        FD_SET(handler->fd, &(depositary->es));
     }
+    printf("EventReInitSingleFd finished\n");
 }
 
 static void EventReInitLoop(struct EventDepositary *depositary) {
@@ -142,7 +144,9 @@ static void EventHandleCallback(struct RbTreeNode *node) {
 int EventLoop(struct EventDepositary *depositary) {
     int ret;
     EventReInitLoop(depositary);
+    printf("selected start\n");
     ret = select(FD_SETSIZE, &depositary->rs, &depositary->ws, &depositary->es, depositary->tv);
+    printf("selected finished\n");
     if (ret < 0) {
         return -1;
     } else {

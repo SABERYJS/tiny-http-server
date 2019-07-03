@@ -18,8 +18,12 @@ add_executable(test-command-line test/test-command-line.c)
 add_executable(test-socket-server test/test-socket-server.c)
 add_executable(test-socket-client test/test-socket-client.c test/test_header.h)
 add_executable(test-net-func test/test-net-func.c)
+add_executable(test-event test/test-event.c)
 target_link_libraries(test-rax rax)
 target_link_libraries(test-regex pcre regex)
 target_link_libraries(test-command-line core)
 target_link_libraries(test-net-func core stl)
+target_link_libraries(test-socket-server core)
+
+target_link_libraries(test-event core stl)
 

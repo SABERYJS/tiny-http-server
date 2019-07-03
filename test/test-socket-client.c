@@ -16,7 +16,7 @@ int main() {
         struct sockaddr_in serverAddr;
         memset(&serverAddr, 0, sizeof(struct sockaddr_in));//it is necessary
         serverAddr.sin_family = AF_INET;
-        serverAddr.sin_port = htons(80);
+        serverAddr.sin_port = htons(81);
         inet_aton("127.0.0.1", &serverAddr.sin_addr);
         if (connect(fd, (const struct sockaddr *) &serverAddr, sizeof(struct sockaddr_in)) < 0) {
             printf("connect server failed\n");
@@ -37,7 +37,6 @@ int main() {
                         printf("write failed\n");
                         exit(1);
                     }
-                    // memset(buf,0,10);
                 }
             }
         }
