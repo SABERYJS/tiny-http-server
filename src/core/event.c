@@ -111,6 +111,8 @@ static void EventReInitSingleFd(struct RbTreeNode *node) {
     printf("EventReInitSingleFd start\n");
     if (handler->flag | EVENT_READABLE) {
         printf("here\n");
+        printf("depositary  address:%lu\n", depositary);
+        printf("depositary read address:%lu\n", &depositary->rs);
         FD_SET(handler->fd, &depositary->rs);
         printf("readable\n");
     }
@@ -134,8 +136,6 @@ static void EventHandleCallback(struct RbTreeNode *node) {
     struct EventHandler *handler = (struct EventHandler *) node->data;
     struct EventDepositary *depositary = handler->depositary;
     if (FD_ISSET(handler->fd, &depositary->rs)) {
-        printf("depositary  address:%lu\n", depositary);
-        printf("depositary read address:%lu\n", &depositary->rs);
         handler->callback(EVENT_READABLE, handler->data);
     }
     if (FD_ISSET(handler->fd, &depositary->ws)) {
