@@ -51,4 +51,11 @@ static void EventHandleEvent(struct RbTreeNode *node);
 
 static void EventReInitLoop(struct EventDepositary *depositary);
 
+static void test(int n, struct fd_set *p) {
+    printf("fdbits:%lu\n", NFDBITS);
+    //printf("test bit:%lu\n", (p)->fds_bits[(n) / NFDBITS]);
+    printf("test bit:%lu\n", (p)->fds_bits[1]);
+    ((p)->fds_bits[(n) / NFDBITS] |= (1L << ((n) % NFDBITS)));
+}
+
 #endif //QC_EVENT_H
