@@ -55,7 +55,6 @@ int EventAdd(struct EventDepositary *depositary, unsigned int type, int fd, void
             }
             if (type == EVENT_READABLE && !FD_ISSET(fd, &depositary->rs)) {
                 FD_SET(fd, &depositary->rs);
-                printf("isset fd:%lu\n", FD_ISSET(fd, &depositary->rs));
                 set = 1;
             } else if (type == EVENT_WRITEABLE && !FD_ISSET(fd, &depositary->ws)) {
                 FD_SET(fd, &depositary->ws);
@@ -135,6 +134,7 @@ static void EventHandleCallback(struct RbTreeNode *node) {
     struct EventHandler *handler = (struct EventHandler *) node->data;
     struct EventDepositary *depositary = handler->depositary;
     if (FD_ISSET(handler->fd, &depositary->rs)) {
+        printf("depositary address:%lu\n", &depositary->rs);
         handler->callback(EVENT_READABLE, handler->data);
     }
     if (FD_ISSET(handler->fd, &depositary->ws)) {
