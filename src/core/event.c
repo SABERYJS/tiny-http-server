@@ -108,10 +108,8 @@ int EventRemove(struct EventDepositary *depositary, unsigned int type, int fd) {
 static void EventReInitSingleFd(struct RbTreeNode *node) {
     struct EventHandler *handler = (struct EventHandler *) node->data;
     struct EventDepositary *depositary = handler->depositary;
+    printf("EventReInitSingleFd start\n");
     if (handler->flag | EVENT_READABLE) {
-        printf("%lu\n", (&depositary->rs)->fds_bits[5]);
-        printf("%d\n", handler->fd);
-        test(handler->fd, &depositary->rs);
         FD_SET(handler->fd, &(depositary->rs));
     }
     if (handler->flag | EVENT_WRITEABLE) {
