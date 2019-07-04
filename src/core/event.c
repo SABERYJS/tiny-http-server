@@ -36,6 +36,7 @@ int EventAdd(struct EventDepositary *depositary, unsigned int type, int fd, void
             int set = 0;
             free(handler);
             if (!node) {
+                handler->fd = fd;
                 handler->data = data;
                 handler->callback = callback;
                 handler->ref = 0;
