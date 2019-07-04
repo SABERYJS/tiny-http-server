@@ -11,7 +11,8 @@
 
 void testQueue() {
     struct Queue *queue = QueueCreate();
-    for (int i = 0; i < 10; ++i) {
+    int i;
+    for (i = 0; i < 10; ++i) {
         struct Unit *u = malloc(sizeof(struct Unit));
         u->a = i;
         QueuePush(queue, u);

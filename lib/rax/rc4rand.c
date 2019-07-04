@@ -49,10 +49,11 @@ void rc4srand(uint64_t seed) {
     /* To seed the RNG in a reproducible way we use a simple
      * hashing function, together with the swapping idea of the
      * original RC4 key scheduling algorithm. */
-    for (int j = 0; j < 255; j++) rc4_sbox[j] = j;
+    int j;
+    for (j = 0; j < 255; j++) rc4_sbox[j] = j;
 
     seed ^= 5381;
-    for (int j = 0; j < 256; j++) {
+    for (j = 0; j < 256; j++) {
         seed = ((seed << 5) + seed) + j + 1;
         int i = seed & 0xff;
 

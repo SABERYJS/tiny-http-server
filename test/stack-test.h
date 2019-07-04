@@ -11,7 +11,8 @@
 void testStack() {
     struct Stack *s = StackCreate();
     srand(time(NULL));
-    for (int i = 0; i < 10; i++) {
+    int i;
+    for (i = 0; i < 10; i++) {
         struct Unit *u = malloc(sizeof(struct Unit));
         u->a = rand();
         printf("push value:%d\n", u->a);

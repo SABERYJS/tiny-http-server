@@ -23,7 +23,8 @@ void testarray() {
     struct Tree *tree = createTree(compareTree, clearTreeNode);
     int a[10] = {100, 29, 34, 78, 12, 9, 46, 200, 176, 38};
     struct TreeNode *uu, *up;
-    for (int i = 0; i < 10; i++) {
+    int i;
+    for (i = 0; i < 10; i++) {
         struct Unit *u = malloc(sizeof(struct Unit));
         u->a = a[i];
         uu = insertNode(tree, u);

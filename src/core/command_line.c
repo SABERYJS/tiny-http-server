@@ -36,7 +36,8 @@ struct CommandLineArgs *ParseCommandLine(int argc, char *argv[]) {
         } else {
             struct CommandOption *upper = NULL;
             int require;
-            for (int i = 1; i < argc; i++) {
+            int i;
+            for (i = 1; i < argc; i++) {
                 char *option = argv[i];
                 if (option[0] == '-') {
                     if (option[1] == '-') {

@@ -12,7 +12,8 @@
 void testHash() {
     struct HashTable *table = HashTableCreate(100000, NULL);
     char *tk;
-    for (int i = 0; i < 100000; i++) {
+    int i;
+    for (i = 0; i < 100000; i++) {
         struct Unit *u = malloc(sizeof(struct Unit));
         u->a = i;
         char *key = RandomChars(32, i);

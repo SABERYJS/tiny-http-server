@@ -28,7 +28,8 @@ void printRbTreeNode(struct RbTreeNode *node) {
 void test_rbtree() {
     struct RbTree *tree = RbTreeCreate(Compare, NULL, NULL);
     srand(time(NULL));
-    for (int j = 0; j < 10000; ++j) {
+    int j;
+    for (j = 0; j < 10000; ++j) {
         struct Unit *tmp = malloc(sizeof(struct Unit));
         tmp->a = rand() % 100000;
         printf("insert value:%d\n", tmp->a);
