@@ -110,13 +110,15 @@ static void EventReInitSingleFd(struct RbTreeNode *node) {
     struct EventDepositary *depositary = handler->depositary;
     printf("EventReInitSingleFd start\n");
     if (handler->flag | EVENT_READABLE) {
-        FD_SET(handler->fd, &(depositary->rs));
+        printf("here\n");
+        printf("%ul\n", &depositary);
+        FD_SET(handler->fd, &depositary->rs);
     }
     if (handler->flag | EVENT_WRITEABLE) {
-        FD_SET(handler->fd, &(depositary->ws));
+        FD_SET(handler->fd, &depositary->ws);
     }
     if (handler->flag | EVENT_ERROR) {
-        FD_SET(handler->fd, &(depositary->es));
+        FD_SET(handler->fd, &depositary->es);
     }
     printf("EventReInitSingleFd finished\n");
 }
