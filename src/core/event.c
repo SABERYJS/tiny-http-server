@@ -113,7 +113,8 @@ static void EventReInitSingleFd(struct RbTreeNode *node) {
         printf("here\n");
         printf("depositary  address:%lu\n", depositary);
         printf("depositary read address:%lu\n", &depositary->rs);
-        printf("bit:%d\n", depositary->rs.__fds_bits[1023]);
+        printf("bit[1023]:%d\n", depositary->rs.__fds_bits[1023]);
+        printf("bit[1025]:%d\n", depositary->rs.__fds_bits[1025]);
         FD_SET(handler->fd, &depositary->rs);
         printf("readable\n");
     }
