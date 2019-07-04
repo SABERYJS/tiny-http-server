@@ -1581,7 +1581,8 @@ int raxSeek(raxIterator *it, const char *op, unsigned char *ele, size_t len) {
          * we start from the parent and go to the current node, accumulating
          * the characters found along the way. */
         if (!raxStackPush(&it->stack, it->node)) return 0;
-        for (size_t j = 1; j < it->stack.items; j++) {
+        size_t j;
+        for (j = 1; j < it->stack.items; j++) {
             raxNode *parent = it->stack.stack[j - 1];
             raxNode *child = it->stack.stack[j];
             if (parent->iscompr) {
@@ -1866,7 +1867,8 @@ void raxRecursiveShow(int level, int lpad, raxNode *n) {
         if (numchildren == 1) lpad += numchars;
     }
     raxNode **cp = raxNodeFirstChildPtr(n);
-    for (int i = 0; i < numchildren; i++) {
+    int i
+    for (i = 0; i < numchildren; i++) {
         char *branch = " `-(%c) ";
         if (numchildren > 1) {
             printf("\n");
@@ -1932,7 +1934,8 @@ unsigned long raxTouch(raxNode *n) {
     int numchildren = n->iscompr ? 1 : n->size;
     raxNode **cp = raxNodeFirstChildPtr(n);
     int count = 0;
-    for (int i = 0; i < numchildren; i++) {
+    int i
+    for (i = 0; i < numchildren; i++) {
         if (numchildren > 1) {
             sum += (long) n->data[i];
         }
