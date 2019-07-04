@@ -32,11 +32,11 @@ int EventAdd(struct EventDepositary *depositary, unsigned int type, int fd, void
             return -1;
         } else {
             handler->fd = fd;
+            printf("insert fd is:%lu\n", fd);
             struct RbTreeNode *node = RbTreeSearch(depositary->rbTree, handler);
             int set = 0;
             free(handler);
             if (!node) {
-                handler->fd = fd;
                 handler->data = data;
                 handler->callback = callback;
                 handler->ref = 0;
