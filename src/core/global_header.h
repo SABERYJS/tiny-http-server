@@ -9,15 +9,16 @@
 #include <stdio.h>
 #include <string.h>
 #include <sys/socket.h>
-#include <sys/types.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <error.h>
 #include <errno.h>
 #include <fcntl.h>
 #include <netdb.h>
-#include <unistd.h>
 #include <netinet/tcp.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/time.h>
 #include <sys/select.h>
 #include "../algorithm/rb-tree.h"
 
