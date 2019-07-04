@@ -35,7 +35,6 @@ int EventAdd(struct EventDepositary *depositary, unsigned int type, int fd, void
             printf("insert fd is:%lu\n", fd);
             struct RbTreeNode *node = RbTreeSearch(depositary->rbTree, handler);
             int set = 0;
-            free(handler);
             if (!node) {
                 handler->data = data;
                 handler->callback = callback;
@@ -46,6 +45,7 @@ int EventAdd(struct EventDepositary *depositary, unsigned int type, int fd, void
                     return -1;
                 }
             } else {
+                free(handler);
                 handler = (struct EventHandler *) node->data;
                 if (data) {
                     handler->data = data;
@@ -113,10 +113,10 @@ static void EventReInitSingleFd(struct RbTreeNode *node) {
     if (handler->flag | EVENT_READABLE) {
         printf("here\n");
         printf("depositary  address:%lu\n", depositary);
-        printf("depositary read address:%lu\n", &depositary->rs);
-        printf("bit[1023]:%d\n", depositary->rs.__fds_bits[1023]);
-        printf("bit[1025]:%d\n", depositary->rs.__fds_bits[1025]);
-        printf("file descriptor:%lu\n", handler->fd);
+        /* printf("depositary read address:%lu\n", &depositary->rs);
+         printf("bit[1023]:%d\n", depositary->rs.__fds_bits[1023]);
+         printf("bit[1025]:%d\n", depositary->rs.__fds_bits[1025]);
+         printf("file descriptor:%lu\n", handler->fd);*/
         FD_SET(handler->fd, &depositary->rs);
         printf("readable\n");
     }
