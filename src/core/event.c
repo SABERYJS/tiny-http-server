@@ -134,7 +134,8 @@ static void EventHandleCallback(struct RbTreeNode *node) {
     struct EventHandler *handler = (struct EventHandler *) node->data;
     struct EventDepositary *depositary = handler->depositary;
     if (FD_ISSET(handler->fd, &depositary->rs)) {
-        printf("depositary address:%lu\n", &depositary->rs);
+        printf("depositary  address:%lu\n", depositary);
+        printf("depositary read address:%lu\n", &depositary->rs);
         handler->callback(EVENT_READABLE, handler->data);
     }
     if (FD_ISSET(handler->fd, &depositary->ws)) {
