@@ -4,7 +4,6 @@
 #include "test_header.h"
 #include "../src/core/event.h"
 
-#define __USE_W32_SOCKETS
 
 struct ListenSocket {
     int fd;
