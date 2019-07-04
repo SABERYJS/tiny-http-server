@@ -111,8 +111,8 @@ static void EventReInitSingleFd(struct RbTreeNode *node) {
     printf("EventReInitSingleFd start\n");
     if (handler->flag | EVENT_READABLE) {
         printf("here\n");
-        printf("%ul\n", &depositary);
         FD_SET(handler->fd, &depositary->rs);
+        printf("readable\n");
     }
     if (handler->flag | EVENT_WRITEABLE) {
         FD_SET(handler->fd, &depositary->ws);
