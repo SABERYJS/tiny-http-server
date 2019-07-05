@@ -1,0 +1,32 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../lib/rax/radix-tree.h
+rax.h
+../lib/rax/rax.h
+stdlib.h
+-
+
+../lib/rax/rax.h
+stdint.h
+-
+stdlib.h
+-
+
+../src/algorithm/unit.h
+
+/cygdrive/e/code/algorithm/test/test-rax.c
+radix-tree.h
+/cygdrive/e/code/algorithm/test/radix-tree.h
+stdlib.h
+-
+stdio.h
+-
+unit.h
+/cygdrive/e/code/algorithm/test/unit.h
+

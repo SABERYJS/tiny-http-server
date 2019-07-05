@@ -1,0 +1,1 @@
+/usr/bin/cc -std=c99 -g  -Wl,--enable-auto-import CMakeFiles/test-event.dir/test/test-event.c.o  -o test-event.exe -Wl,--out-implib,libtest-event.dll.a -Wl,--major-image-version,0,--minor-image-version,0 src/core/libcore.a src/algorithm/libstl.a 

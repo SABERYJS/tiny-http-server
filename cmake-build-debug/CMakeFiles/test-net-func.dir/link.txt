@@ -1,0 +1,1 @@
+/usr/bin/cc -std=c99 -g  -Wl,--enable-auto-import CMakeFiles/test-net-func.dir/test/test-net-func.c.o  -o test-net-func.exe -Wl,--out-implib,libtest-net-func.dll.a -Wl,--major-image-version,0,--minor-image-version,0 src/core/libcore.a src/algorithm/libstl.a 

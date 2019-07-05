@@ -11,6 +11,7 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
+#include <string.h>
 #include <error.h>
 #include <errno.h>
 #include <fcntl.h>
@@ -21,6 +22,8 @@
 #include <sys/time.h>
 #include <sys/select.h>
 #include "../algorithm/rb-tree.h"
-
+#include "../algorithm/list.h"
+#include "../algorithm/hash.h"
+#include "memory.h"
 
 #endif //QC_GLOBAL_HEADER_H

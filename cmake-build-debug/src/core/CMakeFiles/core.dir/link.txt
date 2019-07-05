@@ -1,0 +1,2 @@
+/usr/bin/ar.exe qc libcore.a  CMakeFiles/core.dir/buffer.c.o CMakeFiles/core.dir/client.c.o CMakeFiles/core.dir/command_line.c.o CMakeFiles/core.dir/event.c.o CMakeFiles/core.dir/http.c.o CMakeFiles/core.dir/memory.c.o CMakeFiles/core.dir/net.c.o
+/usr/bin/ranlib.exe libcore.a

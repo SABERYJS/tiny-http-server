@@ -1,11 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/rb-tree.h" line="130" mnemonic="9" />
+    <bookmark url="file://$PROJECT_DIR$/CMakeLists.txt" description="install(TARGETS test-event )" line="30" />
   </component>
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
     <generated>
-      <config projectName="stl_clone" targetName="stl_clone" />
+      <config projectName="qc" targetName="test-socket-client" />
+      <config projectName="qc" targetName="qc" />
+      <config projectName="qc" targetName="regex" />
+      <config projectName="qc" targetName="rax" />
+      <config projectName="qc" targetName="test-net-func" />
+      <config projectName="qc" targetName="test-socket-server" />
+      <config projectName="qc" targetName="test-regex" />
+      <config projectName="qc" targetName="test-rax" />
+      <config projectName="qc" targetName="stl" />
+      <config projectName="qc" targetName="test-command-line" />
+      <config projectName="qc" targetName="core" />
+      <config projectName="qc" targetName="test-event" />
     </generated>
   </component>
   <component name="CMakeSettings" AUTO_RELOAD="true">
@@ -15,12 +26,285 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2f4e10ce-5e89-4b52-984d-0f4a01f24546" name="Default Changelist" comment="cmake build">
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CMakeFiles/3.15.0-rc1/CMakeSystem.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CMakeFiles/3.15.0-rc1/CompilerIdC/CMakeCCompilerId.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CMakeFiles/3.15.0-rc1/CompilerIdCXX/CMakeCXXCompilerId.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CMakeFiles/CMakeError.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CMakeFiles/CMakeOutput.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CMakeFiles/cmake.check_cache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/algorithm.si4project/algorithm.bookmarks.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/algorithm.si4project/algorithm.sip_sym" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/algorithm.si4project/algorithm.sip_xab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/algorithm.si4project/algorithm.sip_xad" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/algorithm.si4project/algorithm.sip_xc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/algorithm.si4project/algorithm.sip_xf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/algorithm.si4project/algorithm.sip_xm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/algorithm.si4project/algorithm.sip_xr" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/algorithm.si4project/algorithm.sip_xsb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/algorithm.si4project/algorithm.sip_xsd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/algorithm.si4project/algorithm.siproj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/algorithm.si4project/algorithm.siproj_settings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/algorithm.si4project/algorithm.siwork" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/cmake-build-debug_CMakeFiles_3.14.3_CompilerIdCXX_CMakeCXXCompilerId.cpp.sisc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/cmake-build-debug_CMakeFiles_3.14.3_CompilerIdC_CMakeCCompilerId.c.sisc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/cmake-build-debug_CMakeFiles_feature_tests.c.sisc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/cmake-build-debug_CMakeFiles_feature_tests.cxx.sisc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/lib_rax_crc16.c.sisc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/lib_rax_radix-tree.c.sisc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/lib_rax_radix-tree.h.sisc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/lib_rax_rax.c.sisc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/lib_rax_rax.h.sisc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/lib_rax_rax_malloc.h.sisc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/lib_rax_rax_oom_malloc.h.sisc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/lib_rax_rc4rand.c.sisc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/lib_rax_rc4rand.h.sisc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/src_algorithm_array.c.sisc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/src_algorithm_array.h.sisc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/src_algorithm_config_header.h.sisc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/src_algorithm_hash.c.sisc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/src_algorithm_hash.h.sisc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/src_algorithm_list.c.sisc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/src_algorithm_list.h.sisc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/src_algorithm_queue.c.sisc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/src_algorithm_queue.h.sisc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/src_algorithm_rb-tree.c.sisc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/src_algorithm_rb-tree.h.sisc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/src_algorithm_stack.c.sisc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/src_algorithm_stack.h.sisc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/src_algorithm_tool.c.sisc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/src_algorithm_tool.h.sisc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/src_algorithm_tree.c.sisc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/src_algorithm_tree.h.sisc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/src_algorithm_unit.c.sisc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/src_algorithm_unit.h.sisc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/src_core_command_line.c.sisc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/src_core_command_line.h.sisc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/src_core_event.c.sisc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/src_core_event.h.sisc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/src_core_global_header.h.sisc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/src_core_net.c.sisc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/src_core_net.h.sisc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/src_main.c.sisc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/src_pcre_regex.c.sisc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/src_pcre_regex.h.sisc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/test_array-test.c.sisc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/test_hash-test.h.sisc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/test_queue-test.h.sisc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/test_rb-tree-test.h.sisc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/test_stack-test.h.sisc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/test_test-command-line.c.sisc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/test_test-net-func.c.sisc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/test_test-rax.c.sisc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/test_test-regex.c.sisc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/test_test-socket-client.c.sisc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/test_test-socket-server.c.sisc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/test_test_header.h.sisc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.14.3/CMakeCCompiler.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.14.3/CMakeCXXCompiler.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.14.3/CMakeDetermineCompilerABI_C.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.14.3/CMakeDetermineCompilerABI_CXX.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.14.3/CMakeRCCompiler.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.14.3/CMakeSystem.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.14.3/CompilerIdC/CMakeCCompilerId.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.14.3/CompilerIdC/a.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.14.3/CompilerIdCXX/CMakeCXXCompilerId.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.14.3/CompilerIdCXX/a.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/qc.dir/C.includecache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/qc.dir/DependInfo.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/qc.dir/build.make" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/qc.dir/cmake_clean.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/qc.dir/depend.internal" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/qc.dir/depend.make" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/qc.dir/flags.make" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/qc.dir/link.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/qc.dir/progress.make" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/qc.dir/src/main.c.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-command-line.dir/C.includecache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-command-line.dir/DependInfo.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-command-line.dir/build.make" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-command-line.dir/cmake_clean.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-command-line.dir/depend.internal" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-command-line.dir/depend.make" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-command-line.dir/flags.make" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-command-line.dir/link.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-command-line.dir/progress.make" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-command-line.dir/test/test-command-line.c.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-command-line.dir/test/test-event.c.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-event.dir/C.includecache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-event.dir/DependInfo.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-event.dir/build.make" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-event.dir/cmake_clean.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-event.dir/depend.internal" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-event.dir/depend.make" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-event.dir/flags.make" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-event.dir/link.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-event.dir/progress.make" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-event.dir/test/test-event.c.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-net-func.dir/C.includecache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-net-func.dir/DependInfo.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-net-func.dir/build.make" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-net-func.dir/cmake_clean.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-net-func.dir/depend.internal" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-net-func.dir/depend.make" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-net-func.dir/flags.make" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-net-func.dir/link.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-net-func.dir/progress.make" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-rax.dir/C.includecache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-rax.dir/DependInfo.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-rax.dir/build.make" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-rax.dir/cmake_clean.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-rax.dir/depend.internal" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-rax.dir/depend.make" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-rax.dir/flags.make" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-rax.dir/link.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-rax.dir/progress.make" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-rax.dir/test/test-rax.c.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-regex.dir/C.includecache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-regex.dir/DependInfo.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-regex.dir/build.make" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-regex.dir/cmake_clean.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-regex.dir/depend.internal" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-regex.dir/depend.make" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-regex.dir/flags.make" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-regex.dir/link.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-regex.dir/progress.make" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-regex.dir/test/test-regex.c.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-socket-client.dir/C.includecache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-socket-client.dir/DependInfo.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-socket-client.dir/build.make" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-socket-client.dir/cmake_clean.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-socket-client.dir/depend.internal" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-socket-client.dir/depend.make" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-socket-client.dir/flags.make" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-socket-client.dir/link.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-socket-client.dir/progress.make" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-socket-client.dir/test/test-socket-client.c.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-socket-server.dir/DependInfo.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-socket-server.dir/build.make" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-socket-server.dir/cmake_clean.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-socket-server.dir/flags.make" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-socket-server.dir/link.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-socket-server.dir/progress.make" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/lib/rax/CMakeFiles/CMakeDirectoryInformation.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/lib/rax/CMakeFiles/progress.marks" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/lib/rax/CMakeFiles/rax.dir/C.includecache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/lib/rax/CMakeFiles/rax.dir/DependInfo.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/lib/rax/CMakeFiles/rax.dir/build.make" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/lib/rax/CMakeFiles/rax.dir/cmake_clean.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/lib/rax/CMakeFiles/rax.dir/cmake_clean_target.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/lib/rax/CMakeFiles/rax.dir/crc16.c.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/lib/rax/CMakeFiles/rax.dir/depend.internal" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/lib/rax/CMakeFiles/rax.dir/depend.make" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/lib/rax/CMakeFiles/rax.dir/flags.make" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/lib/rax/CMakeFiles/rax.dir/link.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/lib/rax/CMakeFiles/rax.dir/progress.make" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/lib/rax/CMakeFiles/rax.dir/radix-tree.c.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/lib/rax/CMakeFiles/rax.dir/rax.c.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/lib/rax/CMakeFiles/rax.dir/rc4rand.c.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/lib/rax/Makefile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/lib/rax/cmake_install.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/lib/rax/librax.a" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/lib/rax/rax.cbp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/qc.cbp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/qc.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/algorithm/CMakeFiles/CMakeDirectoryInformation.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/algorithm/CMakeFiles/progress.marks" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/algorithm/CMakeFiles/stl.dir/C.includecache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/algorithm/CMakeFiles/stl.dir/DependInfo.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/algorithm/CMakeFiles/stl.dir/array.c.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/algorithm/CMakeFiles/stl.dir/build.make" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/algorithm/CMakeFiles/stl.dir/cmake_clean.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/algorithm/CMakeFiles/stl.dir/cmake_clean_target.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/algorithm/CMakeFiles/stl.dir/depend.internal" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/algorithm/CMakeFiles/stl.dir/depend.make" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/algorithm/CMakeFiles/stl.dir/flags.make" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/algorithm/CMakeFiles/stl.dir/hash.c.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/algorithm/CMakeFiles/stl.dir/link.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/algorithm/CMakeFiles/stl.dir/list.c.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/algorithm/CMakeFiles/stl.dir/progress.make" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/algorithm/CMakeFiles/stl.dir/queue.c.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/algorithm/CMakeFiles/stl.dir/rb-tree.c.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/algorithm/CMakeFiles/stl.dir/stack.c.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/algorithm/CMakeFiles/stl.dir/tool.c.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/algorithm/CMakeFiles/stl.dir/tree.c.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/algorithm/CMakeFiles/stl.dir/unit.c.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/algorithm/Makefile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/algorithm/cmake_install.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/algorithm/libstl.a" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/algorithm/stl.cbp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/core/CMakeFiles/CMakeDirectoryInformation.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/core/CMakeFiles/core.dir/C.includecache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/core/CMakeFiles/core.dir/DependInfo.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/core/CMakeFiles/core.dir/build.make" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/core/CMakeFiles/core.dir/cmake_clean.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/core/CMakeFiles/core.dir/cmake_clean_target.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/core/CMakeFiles/core.dir/command_line.c.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/core/CMakeFiles/core.dir/depend.internal" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/core/CMakeFiles/core.dir/depend.make" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/core/CMakeFiles/core.dir/flags.make" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/core/CMakeFiles/core.dir/link.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/core/CMakeFiles/core.dir/net.c.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/core/CMakeFiles/core.dir/progress.make" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/core/CMakeFiles/progress.marks" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/core/Makefile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/core/cmake_install.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/core/core.cbp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/core/libcore.a" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/pcre/CMakeFiles/CMakeDirectoryInformation.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/pcre/CMakeFiles/progress.marks" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/pcre/CMakeFiles/regex.dir/C.includecache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/pcre/CMakeFiles/regex.dir/DependInfo.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/pcre/CMakeFiles/regex.dir/build.make" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/pcre/CMakeFiles/regex.dir/cmake_clean.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/pcre/CMakeFiles/regex.dir/cmake_clean_target.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/pcre/CMakeFiles/regex.dir/depend.internal" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/pcre/CMakeFiles/regex.dir/depend.make" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/pcre/CMakeFiles/regex.dir/flags.make" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/pcre/CMakeFiles/regex.dir/link.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/pcre/CMakeFiles/regex.dir/progress.make" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/pcre/CMakeFiles/regex.dir/regex.c.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/pcre/Makefile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/pcre/cmake_install.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/pcre/libregex.a" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/pcre/regex.cbp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/test-event.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/test-rax.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/test-regex.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/test-socket-client.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/core/buffer.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/core/buffer.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/core/client.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/core/client.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/core/http.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/core/http.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/core/memory.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/core/memory.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rb-tree.c" beforeDir="false" afterPath="$PROJECT_DIR$/rb-tree.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rb-tree.h" beforeDir="false" afterPath="$PROJECT_DIR$/rb-tree.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/rb-tree-test.h" beforeDir="false" afterPath="$PROJECT_DIR$/test/rb-tree-test.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeDirectoryInformation.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeDirectoryInformation.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeOutput.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeOutput.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile2" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TargetDirectories.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TargetDirectories.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-environment.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-environment.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-log.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/feature_tests.bin" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/feature_tests.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/progress.marks" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/progress.marks" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/stl_clone.dir/DependInfo.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/stl_clone.dir/build.make" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/stl_clone.dir/cmake_clean.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/stl_clone.dir/depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-socket-server.dir/depend.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/stl_clone.dir/flags.make" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/stl_clone.dir/link.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/stl_clone.dir/progress.make" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/cmake_install.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/cmake_install.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/global_header.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/global_header.h" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
+    <ignored path="$PROJECT_DIR$/CMakeFiles/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,45 +333,66 @@
     <favorites_list name="stl_clone" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test/test-event.c">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="476">
+              <caret line="36" column="1" selection-start-line="36" selection-start-column="1" selection-end-line="36" selection-end-column="1" />
+              <folding>
+                <element signature="e#47#71#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/core/buffer.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="315">
+              <caret line="21" column="72" lean-forward="true" selection-start-line="21" selection-start-column="72" selection-end-line="21" selection-end-column="72" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/core/buffer.c">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-126">
+              <caret line="7" column="30" selection-start-line="7" selection-start-column="30" selection-end-line="7" selection-end-column="30" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/core/client.c">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="160">
+              <caret line="11" column="12" selection-start-line="11" selection-start-column="12" selection-end-line="11" selection-end-column="12" />
+              <folding>
+                <element signature="e#53#72#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/test/rb-tree-test.h">
+        <entry file="file://$PROJECT_DIR$/src/core/http.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="284">
-              <caret line="23" column="74" lean-forward="true" selection-start-line="23" selection-start-column="74" selection-end-line="23" selection-end-column="74" />
+            <state relative-caret-position="475">
+              <caret line="146" column="8" selection-start-line="146" selection-start-column="8" selection-end-line="146" selection-end-column="8" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/core/http.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="358">
+              <caret line="45" column="107" lean-forward="true" selection-start-line="45" selection-start-column="107" selection-end-line="45" selection-end-column="107" />
               <folding>
-                <element signature="e#116#145#0" expanded="true" />
+                <element signature="e#104#130#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/rb-tree.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="162" selection-start-line="162" selection-end-line="162" />
-              <folding>
-                <element signature="e#105#131#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/rb-tree.c">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="322">
-              <caret line="57" column="1" lean-forward="true" selection-start-line="57" selection-start-column="1" selection-end-line="57" selection-end-column="1" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main.c">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="198">
-              <caret line="9" column="20" selection-start-line="9" selection-start-column="20" selection-end-line="9" selection-end-column="20" />
             </state>
           </provider>
         </entry>
@@ -105,13 +410,21 @@
       <find>so change grand color to red</find>
       <find>RbTreeHandleDoubleRedCollision</find>
       <find>rotate-left-1</find>
+      <find>test-event</find>
+      <find>for (size_t j = 1; j &lt; it-&gt;stack.items; j++)</find>
+      <find>for (int i = 0; i &lt; numchildren; i++)</find>
+      <find>for (int j = 0; j &lt; lpad; j++)</find>
+      <find>for (i = 0; i &lt; numchildren; i++)</find>
+      <find>for (int</find>
+      <find>raxRandomWalk</find>
+      <find>here</find>
     </findStrings>
     <replaceStrings>
       <replace>RbTreeNode</replace>
     </replaceStrings>
     <dirStrings>
-      <dir>E:\code\algorithm</dir>
       <dir>G:\algorithm</dir>
+      <dir>E:\code\algorithm</dir>
     </dirStrings>
   </component>
   <component name="Git.Settings">
@@ -125,15 +438,12 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/CMakeLists.txt" />
         <option value="$PROJECT_DIR$/array.h" />
         <option value="$PROJECT_DIR$/array.c" />
         <option value="$PROJECT_DIR$/hash.h" />
         <option value="$PROJECT_DIR$/list.c" />
         <option value="$PROJECT_DIR$/stack.c" />
         <option value="$PROJECT_DIR$/stack.h" />
-        <option value="$PROJECT_DIR$/test/stack-test.h" />
-        <option value="$PROJECT_DIR$/test/queue-test.h" />
         <option value="$PROJECT_DIR$/queue.h" />
         <option value="$PROJECT_DIR$/queue.c" />
         <option value="$PROJECT_DIR$/config_header.h" />
@@ -141,11 +451,40 @@
         <option value="$PROJECT_DIR$/unit.h" />
         <option value="$PROJECT_DIR$/rb-tree.h" />
         <option value="$PROJECT_DIR$/rb-tree.c" />
+        <option value="$PROJECT_DIR$/test/test_header.h" />
+        <option value="$PROJECT_DIR$/src/algorithm/unit.h" />
+        <option value="$PROJECT_DIR$/test/test-socket-server.c" />
+        <option value="$PROJECT_DIR$/lib/rax/rax.c" />
+        <option value="$PROJECT_DIR$/test/stack-test.h" />
+        <option value="$PROJECT_DIR$/lib/rax/rc4rand.c" />
+        <option value="$PROJECT_DIR$/test/array-test.c" />
+        <option value="$PROJECT_DIR$/test/queue-test.h" />
+        <option value="$PROJECT_DIR$/test/hash-test.h" />
+        <option value="$PROJECT_DIR$/src/core/command_line.c" />
         <option value="$PROJECT_DIR$/test/rb-tree-test.h" />
+        <option value="$PROJECT_DIR$/CMakeLists.txt" />
+        <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/test/test-net-func.c" />
+        <option value="$PROJECT_DIR$/src/core/event.h" />
+        <option value="$PROJECT_DIR$/src/core/event.c" />
+        <option value="$PROJECT_DIR$/test/test-event.c" />
+        <option value="$PROJECT_DIR$/test/test-socket-client.c" />
+        <option value="$PROJECT_DIR$/src/core/memory.h" />
+        <option value="$PROJECT_DIR$/src/core/memory.c" />
+        <option value="$PROJECT_DIR$/src/core/client.h" />
+        <option value="$PROJECT_DIR$/src/core/client.c" />
+        <option value="$PROJECT_DIR$/src/core/global_header.h" />
+        <option value="$PROJECT_DIR$/src/core/buffer.c" />
+        <option value="$PROJECT_DIR$/src/core/buffer.h" />
+        <option value="$PROJECT_DIR$/src/core/http.h" />
+        <option value="$PROJECT_DIR$/src/core/http.c" />
       </list>
     </option>
   </component>
   <component name="OCFindUsagesOptions" text="true" ivars="false" properties="true" derivedClasses="false" />
+  <component name="OCResolveContextSettings">
+    <option name="configuration" value="0-core" />
+  </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="9" />
     <option name="y" value="52" />
@@ -160,6 +499,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -167,11 +507,26 @@
               <item name="stl_clone" type="b2602c69:ProjectViewProjectNode" />
               <item name="algorithm" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="stl_clone" type="b2602c69:ProjectViewProjectNode" />
+              <item name="algorithm" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="stl_clone" type="b2602c69:ProjectViewProjectNode" />
+              <item name="algorithm" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="core" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="stl_clone" type="b2602c69:ProjectViewProjectNode" />
+              <item name="algorithm" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -182,7 +537,7 @@
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -201,12 +556,27 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
-    <configuration name="stl_clone" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="stl_clone" TARGET_NAME="stl_clone" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="stl_clone" RUN_TARGET_NAME="stl_clone">
+  <component name="RunManager" selected="CMake Application.test-event">
+    <configuration name="test-event" type="CMakeRunConfiguration" factoryName="Application" temporary="true" PASS_PARENT_ENVS_2="true" PROJECT_NAME="qc" TARGET_NAME="test-event" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="qc" RUN_TARGET_NAME="test-event">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
+    <configuration name="test-socket-client" type="CMakeRunConfiguration" factoryName="Application" temporary="true" PASS_PARENT_ENVS_2="true" PROJECT_NAME="qc" TARGET_NAME="test-socket-client" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="qc" RUN_TARGET_NAME="test-socket-client">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="CMake Application.test-event" />
+      <item itemvalue="CMake Application.test-socket-client" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="CMake Application.test-event" />
+        <item itemvalue="CMake Application.test-socket-client" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -222,6 +592,8 @@
       <workItem from="1560757376387" duration="8319000" />
       <workItem from="1560827443564" duration="6834000" />
       <workItem from="1561425314456" duration="27809000" />
+      <workItem from="1562151031275" duration="4290000" />
+      <workItem from="1562202962901" duration="50058000" />
     </task>
     <task id="LOCAL-00001" summary="cmake build">
       <created>1560736568495</created>
@@ -265,11 +637,242 @@
       <option name="project" value="LOCAL" />
       <updated>1561370515268</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="cmake build">
+      <created>1562141600859</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1562141600859</updated>
+    </task>
+    <task id="LOCAL-00008" summary="cmake build">
+      <created>1562154214866</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1562154214866</updated>
+    </task>
+    <task id="LOCAL-00009" summary="cmake build">
+      <created>1562155435492</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1562155435492</updated>
+    </task>
+    <task id="LOCAL-00010" summary="cmake build">
+      <created>1562155699595</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1562155699595</updated>
+    </task>
+    <task id="LOCAL-00011" summary="cmake build">
+      <created>1562203839749</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1562203839749</updated>
+    </task>
+    <task id="LOCAL-00012" summary="cmake build">
+      <created>1562204528897</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1562204528897</updated>
+    </task>
+    <task id="LOCAL-00013" summary="cmake build">
+      <created>1562205567027</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1562205567027</updated>
+    </task>
+    <task id="LOCAL-00014" summary="cmake build">
+      <created>1562205992153</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1562205992153</updated>
+    </task>
+    <task id="LOCAL-00015" summary="cmake build">
+      <created>1562206429831</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1562206429831</updated>
+    </task>
+    <task id="LOCAL-00016" summary="cmake build">
+      <created>1562220752263</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1562220752263</updated>
+    </task>
+    <task id="LOCAL-00017" summary="cmake build">
+      <created>1562221808175</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1562221808175</updated>
+    </task>
+    <task id="LOCAL-00018" summary="cmake build">
+      <created>1562221902037</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1562221902037</updated>
+    </task>
+    <task id="LOCAL-00019" summary="cmake build">
+      <created>1562222358790</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1562222358791</updated>
+    </task>
+    <task id="LOCAL-00020" summary="cmake build">
+      <created>1562222425952</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1562222425952</updated>
+    </task>
+    <task id="LOCAL-00021" summary="cmake build">
+      <created>1562224719762</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1562224719762</updated>
+    </task>
+    <task id="LOCAL-00022" summary="cmake build">
+      <created>1562225040974</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1562225040974</updated>
+    </task>
+    <task id="LOCAL-00023" summary="cmake build">
+      <created>1562225233103</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1562225233103</updated>
+    </task>
+    <task id="LOCAL-00024" summary="cmake build">
+      <created>1562229130800</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1562229130801</updated>
+    </task>
+    <task id="LOCAL-00025" summary="cmake build">
+      <created>1562229813421</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1562229813421</updated>
+    </task>
+    <task id="LOCAL-00026" summary="cmake build">
+      <created>1562230278355</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1562230278355</updated>
+    </task>
+    <task id="LOCAL-00027" summary="cmake build">
+      <created>1562230620260</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1562230620260</updated>
+    </task>
+    <task id="LOCAL-00028" summary="cmake build">
+      <created>1562230830570</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1562230830570</updated>
+    </task>
+    <task id="LOCAL-00029" summary="cmake build">
+      <created>1562231228622</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1562231228622</updated>
+    </task>
+    <task id="LOCAL-00030" summary="cmake build">
+      <created>1562232131540</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1562232131540</updated>
+    </task>
+    <task id="LOCAL-00031" summary="cmake build">
+      <created>1562232200653</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1562232200653</updated>
+    </task>
+    <task id="LOCAL-00032" summary="cmake build">
+      <created>1562232312108</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1562232312108</updated>
+    </task>
+    <task id="LOCAL-00033" summary="cmake build">
+      <created>1562232420123</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1562232420123</updated>
+    </task>
+    <task id="LOCAL-00034" summary="cmake build">
+      <created>1562235246703</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1562235246703</updated>
+    </task>
+    <task id="LOCAL-00035" summary="cmake build">
+      <created>1562236700114</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1562236700114</updated>
+    </task>
+    <task id="LOCAL-00036" summary="cmake build">
+      <created>1562236907700</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1562236907700</updated>
+    </task>
+    <task id="LOCAL-00037" summary="cmake build">
+      <created>1562239721295</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1562239721295</updated>
+    </task>
+    <task id="LOCAL-00038" summary="cmake build">
+      <created>1562239753128</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1562239753128</updated>
+    </task>
+    <task id="LOCAL-00039" summary="cmake build">
+      <created>1562293847807</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1562293847807</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="68017000" />
+    <option name="totallyTimeSpent" value="140572000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -282,27 +885,28 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4983871" visible="true" weight="0.0974359" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4983871" visible="true" weight="0.1375969" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Favorites" order="2" sideWeight="0.5016129" side_tool="true" visible="true" weight="0.0974359" />
+      <window_info id="Favorites" order="2" sideWeight="0.5016129" side_tool="true" weight="0.0974359" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Debug" order="2" weight="0.416" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32933334" />
+      <window_info anchor="bottom" id="Debug" order="2" sideWeight="0.49935898" weight="0.388" />
       <window_info anchor="bottom" id="Cvs" order="3" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="4" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="5" weight="0.32933334" />
       <window_info anchor="bottom" id="Database Changes" order="6" />
-      <window_info anchor="bottom" id="Messages" order="7" visible="true" weight="0.17333333" />
-      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49935898" weight="0.32933334" />
-      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50064105" side_tool="true" weight="0.32933334" />
+      <window_info anchor="bottom" id="Messages" order="7" sideWeight="0.49935898" visible="true" weight="0.10068966" />
+      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49935898" weight="0.32133332" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50064105" side_tool="true" weight="0.296" />
       <window_info anchor="bottom" id="Version Control" order="10" weight="0.43733335" />
-      <window_info anchor="bottom" id="CMake" order="11" sideWeight="0.49871793" weight="0.328" />
+      <window_info anchor="bottom" id="CMake" order="11" sideWeight="0.49871793" weight="0.356" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Database" order="3" weight="0.32948717" />
-      <window_info anchor="right" id="Run" order="4" visible="true" weight="0.3679487" />
+      <window_info anchor="right" id="Run" order="4" visible="true" weight="0.09754522" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -314,15 +918,6 @@
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/test/rb-tree-test.h</url>
-          <line>35</line>
-          <option name="timeStamp" value="13" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <watches-manager>
       <configuration name="CMakeRunConfiguration">
         <watch expression="nd-&gt;data" />
@@ -350,194 +945,310 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/cmake-build-debug/Makefile">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LICENSE">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="5" column="77" lean-forward="true" selection-start-line="5" selection-start-column="77" selection-end-line="5" selection-end-column="77" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/array.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="482">
-          <caret line="31" selection-start-line="31" selection-end-line="31" selection-end-column="34" />
-          <folding>
-            <element signature="e#107#125#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://D:/mingw/include/stdio.h" />
-    <entry file="file://$PROJECT_DIR$/list.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="34" lean-forward="true" selection-start-line="34" selection-end-line="34" />
-          <folding>
-            <element signature="e#88#107#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/hash-test.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="17" column="28" lean-forward="true" selection-start-line="17" selection-start-column="28" selection-end-line="17" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/stack-test.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="460">
-          <caret line="26" column="35" lean-forward="true" selection-start-line="26" selection-start-column="35" selection-end-line="26" selection-end-column="35" />
-          <folding>
-            <element signature="e#117#138#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/stack.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="482">
-          <caret line="31" column="9" lean-forward="true" selection-start-line="31" selection-start-column="9" selection-end-line="31" selection-end-column="9" />
-          <folding>
-            <element signature="e#107#133#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/stack.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="318">
-          <caret line="32" column="20" selection-start-line="32" selection-start-column="20" selection-end-line="32" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/queue-test.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="163">
-          <caret line="24" column="42" lean-forward="true" selection-start-line="24" selection-start-column="42" selection-end-line="24" selection-end-column="42" />
-          <folding>
-            <element signature="e#112#141#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/queue.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="16" column="32" lean-forward="true" selection-start-line="16" selection-start-column="32" selection-end-line="16" selection-end-column="32" />
-          <folding>
-            <element signature="e#107#133#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/list.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="298">
-          <caret line="19" column="4" selection-start-line="19" selection-start-column="4" selection-end-line="19" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/queue.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="28" column="5" lean-forward="true" selection-start-line="28" selection-start-column="5" selection-end-line="28" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tool.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="17" column="31" lean-forward="true" selection-start-line="17" selection-start-column="31" selection-end-line="17" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tree.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-206">
-          <caret line="114" lean-forward="true" selection-start-line="114" selection-end-line="114" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hash.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="542">
-          <caret line="36" lean-forward="true" selection-start-line="36" selection-end-line="36" />
-          <folding>
-            <element signature="e#100#119#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hash.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="88">
-          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
-          <folding>
-            <element signature="e#129#146#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config_header.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="11" column="17" lean-forward="true" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/array.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="47" column="9" lean-forward="true" selection-start-line="47" selection-start-column="9" selection-end-line="47" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/unit.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="5" column="24" selection-start-line="5" selection-start-column="8" selection-end-line="5" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="9" column="20" selection-start-line="9" selection-start-column="20" selection-end-line="9" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/rb-tree.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="162" selection-start-line="162" selection-end-line="162" />
-          <folding>
-            <element signature="e#105#131#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/rb-tree.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="322">
-          <caret line="57" column="1" lean-forward="true" selection-start-line="57" selection-start-column="1" selection-end-line="57" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/queue.c" />
+    <entry file="file://$PROJECT_DIR$/tool.c" />
+    <entry file="file://$PROJECT_DIR$/tree.c" />
+    <entry file="file://$PROJECT_DIR$/hash.h" />
+    <entry file="file://$PROJECT_DIR$/hash.c" />
+    <entry file="file://$PROJECT_DIR$/config_header.h" />
+    <entry file="file://$PROJECT_DIR$/array.c" />
+    <entry file="file://$PROJECT_DIR$/unit.h" />
+    <entry file="file://$PROJECT_DIR$/main.c" />
+    <entry file="file://$PROJECT_DIR$/rb-tree.h" />
+    <entry file="file://$PROJECT_DIR$/rb-tree.c" />
     <entry file="file://$PROJECT_DIR$/test/rb-tree-test.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="284">
           <caret line="23" column="74" lean-forward="true" selection-start-line="23" selection-start-column="74" selection-end-line="23" selection-end-column="74" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/core/net.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="7" column="17" lean-forward="true" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/cygwin/usr/include/sys/_timeval.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="53" column="15" selection-start-line="53" selection-start-column="4" selection-end-line="53" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/algorithm/unit.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="10" column="25" lean-forward="true" selection-start-line="10" selection-start-column="25" selection-end-line="10" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pcre/regex.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-483" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-596">
+          <caret line="8" column="45" lean-forward="true" selection-start-line="8" selection-start-column="45" selection-end-line="8" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/test-socket-server.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="51" column="37" lean-forward="true" selection-start-line="51" selection-start-column="37" selection-end-line="51" selection-end-column="37" />
           <folding>
-            <element signature="e#116#145#0" expanded="true" />
+            <element signature="e#47#71#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/core/CMakeLists.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="88">
+          <caret line="4" column="31" lean-forward="true" selection-start-line="4" selection-start-column="31" selection-end-line="4" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CMakeCache.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/algorithm/CMakeLists.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/algorithm/rb-tree.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-550">
+          <caret line="38" column="23" lean-forward="true" selection-start-line="38" selection-start-column="23" selection-end-line="38" selection-end-column="23" />
+          <folding>
+            <element signature="e#106#132#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/cygwin/usr/include/sys/types.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-116">
+          <caret line="213" column="28" lean-forward="true" selection-start-line="213" selection-start-column="28" selection-end-line="213" selection-end-column="28" />
+          <folding>
+            <element signature="e#550#568#0" expanded="true" />
+            <element signature="e#1235#1254#0" expanded="true" />
+            <element signature="e#1323#1686#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/cygwin/usr/include/sys/unistd.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-4711" />
+      </provider>
+    </entry>
+    <entry file="file://D:/cygwin/usr/include/unistd.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="66">
+          <caret line="3" column="21" selection-start-line="3" selection-start-column="21" selection-end-line="3" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/test_header.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="14" column="18" lean-forward="true" selection-start-line="14" selection-start-column="18" selection-end-line="14" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="461">
+          <caret line="26" lean-forward="true" selection-start-line="26" selection-end-line="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/cygwin/usr/include/znc/Csocket.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6754">
+          <caret line="364" column="1" lean-forward="true" selection-start-line="364" selection-start-column="1" selection-end-line="364" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/test-net-func.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="2" lean-forward="true" selection-start-column="2" selection-end-column="2" />
+          <folding>
+            <element signature="e#103#131#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/cygwin/usr/include/sys/select.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="87">
+          <caret line="55" column="3" lean-forward="true" selection-start-line="55" selection-start-column="3" selection-end-line="55" selection-end-column="3" />
+          <folding>
+            <element signature="e#508#530#0" expanded="true" />
+            <element signature="e#642#697#0" expanded="true" />
+            <element signature="e#2018#2171#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/test-socket-client.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="550">
+          <caret line="25" column="19" lean-forward="true" selection-start-line="25" selection-start-column="19" selection-end-line="25" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/core/command_line.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-101" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/core/net.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-990" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/algorithm/list.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1737" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/algorithm/rb-tree.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-16186">
+          <caret line="54" column="32" lean-forward="true" selection-start-line="54" selection-start-column="32" selection-end-line="54" selection-end-column="32" />
+          <folding>
+            <element signature="e#17361#17420#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="44">
+          <caret line="2" column="23" lean-forward="true" selection-start-line="2" selection-start-column="23" selection-end-line="2" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/core/event.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="138" column="54" lean-forward="true" selection-start-line="138" selection-start-column="54" selection-end-line="138" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/algorithm/hash.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="206">
+          <caret line="22" column="19" selection-start-line="22" selection-start-column="19" selection-end-line="22" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/algorithm/hash.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="406">
+          <caret line="32" column="19" lean-forward="true" selection-start-line="32" selection-start-column="19" selection-end-line="32" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/core/memory.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="140">
+          <caret line="7" column="20" lean-forward="true" selection-start-line="7" selection-start-column="20" selection-end-line="7" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/test-event.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="36" column="1" selection-start-line="36" selection-start-column="1" selection-end-line="36" selection-end-column="1" />
+          <folding>
+            <element signature="e#47#71#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/core/event.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="13" column="58" lean-forward="true" selection-start-line="13" selection-start-column="58" selection-end-line="13" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/core/memory.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="5" column="6" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/cygwin/usr/include/string.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="206">
+          <caret line="128" column="9" selection-start-line="128" selection-start-column="9" selection-end-line="128" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/core/client.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="355">
+          <caret line="46" column="10" selection-start-line="46" selection-start-column="10" selection-end-line="46" selection-end-column="10" />
+          <folding>
+            <element signature="e#108#134#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/core/global_header.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="215">
+          <caret line="16" column="18" lean-forward="true" selection-start-line="16" selection-start-column="18" selection-end-line="16" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/core/buffer.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="21" column="72" lean-forward="true" selection-start-line="21" selection-start-column="72" selection-end-line="21" selection-end-column="72" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/core/buffer.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-126">
+          <caret line="7" column="30" selection-start-line="7" selection-start-column="30" selection-end-line="7" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/core/client.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="11" column="12" selection-start-line="11" selection-start-column="12" selection-end-line="11" selection-end-column="12" />
+          <folding>
+            <element signature="e#53#72#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/core/http.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="358">
+          <caret line="45" column="107" lean-forward="true" selection-start-line="45" selection-start-column="107" selection-end-line="45" selection-end-column="107" />
+          <folding>
+            <element signature="e#104#130#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/core/http.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="475">
+          <caret line="146" column="8" selection-start-line="146" selection-start-column="8" selection-end-line="146" selection-end-column="8" />
         </state>
       </provider>
     </entry>

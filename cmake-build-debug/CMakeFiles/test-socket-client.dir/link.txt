@@ -1,0 +1,1 @@
+/usr/bin/cc -std=c99 -g  -Wl,--enable-auto-import CMakeFiles/test-socket-client.dir/test/test-socket-client.c.o  -o test-socket-client.exe -Wl,--out-implib,libtest-socket-client.dll.a -Wl,--major-image-version,0,--minor-image-version,0 

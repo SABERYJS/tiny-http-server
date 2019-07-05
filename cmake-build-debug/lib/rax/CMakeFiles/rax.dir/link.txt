@@ -1,0 +1,2 @@
+/usr/bin/ar.exe qc librax.a  CMakeFiles/rax.dir/crc16.c.o CMakeFiles/rax.dir/radix-tree.c.o CMakeFiles/rax.dir/rax.c.o CMakeFiles/rax.dir/rc4rand.c.o
+/usr/bin/ranlib.exe librax.a

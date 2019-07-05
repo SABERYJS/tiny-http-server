@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../src/pcre/regex.h
+pcre.h
+-
+string.h
+-
+stdio.h
+-
+
+/cygdrive/e/code/algorithm/src/main.c
+regex.h
+-
+

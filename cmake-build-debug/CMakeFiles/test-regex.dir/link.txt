@@ -1,0 +1,1 @@
+/usr/bin/cc -std=c99 -g  -Wl,--enable-auto-import CMakeFiles/test-regex.dir/test/test-regex.c.o  -o test-regex.exe -Wl,--out-implib,libtest-regex.dll.a -Wl,--major-image-version,0,--minor-image-version,0 -lpcre src/pcre/libregex.a -lpcre 

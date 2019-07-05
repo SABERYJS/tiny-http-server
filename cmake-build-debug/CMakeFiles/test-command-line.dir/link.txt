@@ -1,0 +1,1 @@
+/usr/bin/cc -std=c99 -g  -Wl,--enable-auto-import CMakeFiles/test-command-line.dir/test/test-command-line.c.o  -o test-command-line.exe -Wl,--out-implib,libtest-command-line.dll.a -Wl,--major-image-version,0,--minor-image-version,0 src/core/libcore.a src/algorithm/libstl.a 

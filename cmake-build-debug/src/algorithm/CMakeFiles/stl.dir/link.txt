@@ -1,0 +1,2 @@
+/usr/bin/ar.exe qc libstl.a  CMakeFiles/stl.dir/array.c.o CMakeFiles/stl.dir/hash.c.o CMakeFiles/stl.dir/list.c.o CMakeFiles/stl.dir/queue.c.o CMakeFiles/stl.dir/rb-tree.c.o CMakeFiles/stl.dir/stack.c.o CMakeFiles/stl.dir/tool.c.o CMakeFiles/stl.dir/tree.c.o CMakeFiles/stl.dir/unit.c.o
+/usr/bin/ranlib.exe libstl.a

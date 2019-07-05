@@ -1,0 +1,2 @@
+/usr/bin/ar.exe qc libregex.a  CMakeFiles/regex.dir/regex.c.o
+/usr/bin/ranlib.exe libregex.a
