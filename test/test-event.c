@@ -38,9 +38,8 @@ void ListenSocketEventCallback(int type, void *data) {
 
 
 int main() {
-    printf("socket server\n");
+    printf("socket server start bootstrap\n");
     int fd = socket(AF_INET, SOCK_STREAM, 0);
-    printf("here file descriptor:%d\n", fd);
     if (fd < 0) {
         printf("create socket failed\n");
         exit(1);

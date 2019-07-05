@@ -32,7 +32,6 @@ int EventAdd(struct EventDepositary *depositary, unsigned int type, int fd, void
             return -1;
         } else {
             handler->fd = fd;
-            printf("insert fd is:%lu\n", fd);
             struct RbTreeNode *node = RbTreeSearch(depositary->rbTree, handler);
             int set = 0;
             if (!node) {
@@ -109,16 +108,8 @@ int EventRemove(struct EventDepositary *depositary, unsigned int type, int fd) {
 static void EventReInitSingleFd(struct RbTreeNode *node) {
     struct EventHandler *handler = (struct EventHandler *) node->data;
     struct EventDepositary *depositary = handler->depositary;
-    printf("EventReInitSingleFd start\n");
     if (handler->flag | EVENT_READABLE) {
-        printf("here\n");
-        printf("depositary  address:%lu\n", depositary);
-        /* printf("depositary read address:%lu\n", &depositary->rs);
-         printf("bit[1023]:%d\n", depositary->rs.__fds_bits[1023]);
-         printf("bit[1025]:%d\n", depositary->rs.__fds_bits[1025]);
-         printf("file descriptor:%lu\n", handler->fd);*/
         FD_SET(handler->fd, &depositary->rs);
-        printf("readable\n");
     }
     if (handler->flag | EVENT_WRITEABLE) {
         FD_SET(handler->fd, &depositary->ws);
@@ -126,7 +117,6 @@ static void EventReInitSingleFd(struct RbTreeNode *node) {
     if (handler->flag | EVENT_ERROR) {
         FD_SET(handler->fd, &depositary->es);
     }
-    printf("EventReInitSingleFd finished\n");
 }
 
 static void EventReInitLoop(struct EventDepositary *depositary) {
@@ -153,9 +143,7 @@ static void EventHandleCallback(struct RbTreeNode *node) {
 int EventLoop(struct EventDepositary *depositary) {
     int ret;
     EventReInitLoop(depositary);
-    printf("selected start\n");
     ret = select(FD_SETSIZE, &depositary->rs, &depositary->ws, &depositary->es, depositary->tv);
-    printf("selected finished\n");
     if (ret < 0) {
         return -1;
     } else {

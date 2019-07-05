@@ -5,7 +5,7 @@
 #include "test_header.h"
 
 int main() {
-    printf("socket client\n");
+    printf("socket client start\n");
     int fd = socket(AF_INET, SOCK_STREAM, 0);
     if (fd < 0) {
         printf("create socket failed\n");
