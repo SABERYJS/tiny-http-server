@@ -42,15 +42,26 @@
 #define CharIsEnter(c) (c==CHAR_ENTER)
 #define CharIsNewLine(c)  (c==CHAR_NEW_LINE)
 #define CharIsSpace(c)  (c==' '|| c=='\t')
+#define CharDot(c)  (c=='.')
+#define CharIsColon(c)  (c==':')
+#define CharIsNumber(c)  (c>='0' && c<='9')
+#define IsLocalhost(url)  (strncmp(url,"localhost",9)==0)
+#define CharIsAlpha(c)  ((c>='a' && c<='z') || (c>='A' &&c<='Z'))
+#define CharBar(c) (c=='-')
+#define CharEqual ('=')
 
-#define DomainValidChar(c)  ((c>='a' && c<='z') || (c>='A' &&c<='Z') ||c=='-' ||c=='.' ||(c>='0' &&c<='9'))
+#define DomainValidChar(c)  ((c>='a' && c<='z') || (c>='A' &&c<='Z') ||c=='-' ||c=='.' ||(c>='0' &&c<='9') ||c==':')
+
+#define CheckPortValidaty(port)  (port>=1 &&port<=65535)
+
+#define HTTP_DEFAULT_PORT  80
 
 
 struct HttpRequest {
     struct Client *client;
 };
 
-short HttpUrlCheckValidity(const char *url, size_t len);
+short HttpUrlCheckValidity(const char *url, size_t len, struct Client *client);
 
 /**
  * Create http request client
@@ -65,5 +76,6 @@ void HttpEventHandleCallback(int type, void *data);
 int HttpParseRequestLine(struct HttpRequest *request);
 
 int HttpParseRequestMethod(struct HttpRequest *request);
+
 
 #endif //STL_CLONE_HTTP_H

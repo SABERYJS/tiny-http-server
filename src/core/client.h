@@ -44,7 +44,8 @@ struct Client {
     unsigned int content_length;// request body length
     short status;//current client parse status
     struct ClientBuffer *buffer;//buffer that store client input
-    short request_line_parse_status;//request  line parse status
+    short request_line_parse_status;//request  line parse status,
+    short ssl;//ssl request
 };
 
 struct Client *ClientCreate(int sock, struct sockaddr_in *clientAddr);
