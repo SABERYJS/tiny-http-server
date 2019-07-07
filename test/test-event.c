@@ -3,6 +3,7 @@
 //
 #include "test_header.h"
 #include "../src/core/event.h"
+#include "../src/core/http.h"
 
 
 struct ListenSocket {
@@ -13,14 +14,20 @@ struct ListenSocket {
 struct ClientSocket {
     int fd;
     struct EventDepositary *depositary;
+    struct sockaddr_in clientAddr;
 };
 
 void clientSocketHandleCallback(int type, void *data) {
+    printf("clientSocketHandleCallback\n");
     struct ClientSocket *csk = (struct ClientSocket *) data;
-    char buffer[100];
+    struct EventDepositary *depositary = csk->depositary;
+    /*char buffer[100];
     read(csk->fd, buffer, 100);
-    printf("received from client:%s\n", buffer);
-    //write(csk->fd, buffer, strlen(buffer));
+    printf("received from client:%s\n", buffer);*/
+    EventRemove(depositary, EVENT_READABLE, csk->fd);
+    struct HttpRequest *request = HttpRequestCreate(csk->fd, &csk->clientAddr);
+    EventAdd(depositary, EVENT_READABLE, csk->fd, request, HttpEventHandleCallback);
+    printf("ffff\n");
 }
 
 
@@ -33,6 +40,7 @@ void ListenSocketEventCallback(int type, void *data) {
     struct ClientSocket *csk = malloc(sizeof(struct ClientSocket));
     csk->fd = cfd;
     csk->depositary = s->depositary;
+    memcpy(&csk->clientAddr, &client, l);
     EventAdd(s->depositary, EVENT_READABLE, cfd, csk, clientSocketHandleCallback);
 }
 

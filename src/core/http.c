@@ -33,29 +33,24 @@ int HttpParseRequestLine(struct HttpRequest *request) {
     if (client->request_line_parse_status == HTTP_REQUEST_LINE_METHOD) {
         return HttpParseRequestMethod(request);
     } else if (client->request_line_parse_status == HTTP_REQUEST_LINE_URL) {
-        url = MemAlloc(sizeof(char) * MAX_REQUEST_URL_LENGTH);
-        if (!url) {
-            return -1;
-        } else {
-            for (i = 0; i < buffer->size; ++i) {
-                if (CharIsSpace(BufferCharAtPos(buffer, i))) {
-                    if (!matchStart) {
-                        continue;
-                    } else {
-                        end = i;
-                        //match a non empty string,but url format  is not checked,so validity is uncertain
-                        if (!HttpUrlCheckValidity(BufferSubstr(buffer, start), (end - start), client)) {
-                            //url is invalid
-                            return -1;
-                        } else {
-
-                        }
-                    }
+        for (i = 0; i < buffer->size; ++i) {
+            if (CharIsSpace(BufferCharAtPos(buffer, i))) {
+                if (!matchStart) {
+                    continue;
                 } else {
-                    if (!matchStart) {
-                        matchStart = i;
-                        start = i;
+                    end = i;
+                    //match a non empty string,but url format  is not checked,so validity is uncertain
+                    if (!HttpParseUrl(BufferSubstr(buffer, start), (end - start), client)) {
+                        //url is invalid
+                        return -1;
+                    } else {
+
                     }
+                }
+            } else {
+                if (!matchStart) {
+                    matchStart = 1;
+                    start = i;
                 }
             }
         }
@@ -121,6 +116,7 @@ int HttpParseRequestMethod(struct HttpRequest *request) {
 }
 
 void HttpEventHandleCallback(int type, void *data) {
+    printf("here\n");
     struct HttpRequest *request = (struct HttpRequest *) data;
     struct Client *client = request->client;
     if (type == EVENT_READABLE) {
@@ -133,7 +129,7 @@ void HttpEventHandleCallback(int type, void *data) {
 /**
  * url as follow: http://xxx.com:81/order/delete?id=1#uncertain
  * **/
-short HttpUrlCheckValidity(const char *url, size_t len, struct Client *client) {
+short HttpParseUrl(const char *url, size_t len, struct Client *client) {
     if (len <= 8) {
         return -1;
     }
@@ -158,6 +154,7 @@ short HttpUrlCheckValidity(const char *url, size_t len, struct Client *client) {
     int port;
     int last = 0;
     int first = 0;
+    char localhost[] = "localhost";
     int left = len - off; //left character except prefix
     char *buf = MemAlloc(sizeof(char) * 6);//store port,extra 0
     if (!buf) {
@@ -165,7 +162,7 @@ short HttpUrlCheckValidity(const char *url, size_t len, struct Client *client) {
     }
     if (0 == left) {
         //no extra character to parse,just return
-        return -1;
+        goto error;
     }
     while (i < left) {
         if (i == (left - 1)) {
@@ -176,26 +173,31 @@ short HttpUrlCheckValidity(const char *url, size_t len, struct Client *client) {
         if (p[i] == CHAR_BACKSLASH || p[i] == CHAR_HASH_TAG || p[i] == CHAR_QUESTION_MARK || p[i] == CHAR_ADDRESS) {
             //url match finished,now check validity
             if (!i) {
-                //url length is 0
-                return -1;
+                //special case:domain is empty,localhost replace it
+                client->host = MemAlloc(10);
+                if (!client->host) {
+                    return -1;
+                }
+                memcpy(client->host, localhost, 9);
+                goto success;
             }
             //prev non empty
             if (!CharIsNumber(prev) && !CharIsAlpha(prev)) {
-                return -1;
+                goto error;
             }
             if (!matchDot) {
                 if (!IsLocalhost(url)) {
                     //only localhost do not contain dot
-                    return -1;
+                    goto error;
                 }
             }
             if (matchColon) {
                 if (!pl) {
                     //port is missing
-                    return -1;
+                    goto error;
                 } else {
                     if (!CheckPortValidaty((port = atoi(buf)))) {
-                        return -1;
+                        goto error;
                     } else {
                         client->port = port;
                     }
@@ -203,7 +205,7 @@ short HttpUrlCheckValidity(const char *url, size_t len, struct Client *client) {
             }
             client->host = MemAlloc(sizeof(char) * (i + 1));//tail 0
             if (!client->host) {
-                return -1;
+                goto error;
             }
             //url passed the validation
             if (!matchColon) {
@@ -218,32 +220,32 @@ short HttpUrlCheckValidity(const char *url, size_t len, struct Client *client) {
             goto success;
             //check  if  url contain char '.'
         } else if (!DomainValidChar(p[i])) {
-            return -1;
+            goto error;
         } else {
             if (CharDot(p[i])) {
                 if (last || first || (!CharIsNumber(prev) && !CharIsAlpha(prev))) {
-                    return -1;
+                    goto error;
                 }
                 matchDot = 1;
             } else if (CharIsColon(p[i])) {
                 if (last || first || (!CharIsNumber(prev) && !CharIsAlpha(prev))) {
-                    return -1;
+                    goto error;
                 }
                 if (matchColon) {
                     //colon can only be matched once
-                    return -1;
+                    goto error;
                 }
                 matchColon = 1;
                 colonPos = i;
             } else if (CharBar(p[i])) {
                 if (first || last || (!CharIsNumber(prev) && !CharIsAlpha(prev))) {
-                    return -1;
+                    goto error;
                 }
             } else {
                 if (matchColon) {
                     if (!CharIsNumber(p[i])) {
                         //char after ':' must be numeric
-                        return -1;
+                        goto error;
                     } else {
                         buf[pl++] = p[i];
                     }
@@ -253,12 +255,12 @@ short HttpUrlCheckValidity(const char *url, size_t len, struct Client *client) {
                     if (!matchDot) {
                         if (!IsLocalhost(url)) {
                             //only localhost do not contain dot
-                            return -1;
+                            goto error;
                         }
                     }
                     if (matchColon) {
                         if (!CheckPortValidaty((port = atoi(buf)))) {
-                            return -1;
+                            goto error;
                         } else {
                             client->port = port;
                         }
@@ -266,7 +268,7 @@ short HttpUrlCheckValidity(const char *url, size_t len, struct Client *client) {
 
                     client->host = MemAlloc(sizeof(char) * (i + 2));//include current character
                     if (!client->host) {
-                        return -1;
+                        goto error;
                     }
                     //url passed the validation
                     if (!matchColon) {
@@ -275,6 +277,7 @@ short HttpUrlCheckValidity(const char *url, size_t len, struct Client *client) {
                     } else {
                         memcpy(client->host, p, colonPos);
                     }
+                    goto success;
                 } else {
                     i++;
                     prev = p[i];
@@ -282,6 +285,10 @@ short HttpUrlCheckValidity(const char *url, size_t len, struct Client *client) {
             }
         }
     }
+
+    error:
+    free(buf);
+    return -1;
     success:
     p += (i + 1);
     left -= (i + 1);
@@ -290,7 +297,7 @@ short HttpUrlCheckValidity(const char *url, size_t len, struct Client *client) {
         return 1;
     }
     i = 0;
-    off_t start = 0, end = 0, delta = 0;
+    off_t start = 0, delta = 0;
     short parsePathFinished = 0;
     short parseQueryFinished = 0;
     short status = 0; // status value 1,2,3
@@ -310,36 +317,40 @@ short HttpUrlCheckValidity(const char *url, size_t len, struct Client *client) {
             parsePathFinished = 1;
             status = 1;
         }
-        if (parsePathFinished && status == 1) {
-            if (p[i] == CHAR_QUESTION_MARK) {
-                status = 2;
-                start = i;
-            }
+        if (parsePathFinished && status == 1 && prev == CHAR_QUESTION_MARK) {
+            //url contain query string
+            status = 2;
+            start = i;
         }
-        if (parseQueryFinished && status == 2) {
-            if (p[i] == CHAR_HASH_TAG) {
-                status = 3;
-                start = i;
-            }
+
+        if ((parsePathFinished && status == 1 && prev == CHAR_HASH_TAG) ||
+            (parseQueryFinished && status == 2 && prev == CHAR_HASH_TAG)) {
+            //there is  situation that url do not contain query string but contain has tag
+            status = 3;
+            start = i;
         }
+
         if (status == 1 && (CHAR_QUESTION_MARK == p[i] || CHAR_HASH_TAG == p[i] || last)) {
             if (CHAR_QUESTION_MARK == p[i] || CHAR_HASH_TAG == p[i]) {
                 delta = i - start;
             } else {
-                //last char
+                //last char included
                 delta = i - start + 1;
             }
-            //delta  contain tail 0
-            tb = MemAlloc(sizeof(char) * delta);
-            if (!tb) {
-                return -1;
-            } else {
-                memcpy(tb, p + start + 1, delta - 1);
-                client->path = tb;
-                parsePathFinished = 1;
-                if (last) {
-                    return 1;
+            //url path maybe empty,so check it
+            if ((delta - 1) > 0) {
+                //delta  contain tail 0
+                tb = MemAlloc(sizeof(char) * delta);
+                if (!tb) {
+                    return -1;
+                } else {
+                    memcpy(tb, p + start + 1, delta - 1);
+                    client->path = tb;
                 }
+            }
+            parsePathFinished = 1;
+            if (last) {
+                return 1;
             }
         }
         if (status == 2 && (CHAR_HASH_TAG == p[i] || last)) {
@@ -348,88 +359,102 @@ short HttpUrlCheckValidity(const char *url, size_t len, struct Client *client) {
             } else {
                 delta = i - start + 1;
             }
-            int j;
-            const char *pc = p + start + 1;
-            int ks = 0, ke;
-            int equalPos = 0;
-            size_t kl, vl, ml;
-            short matchEqual = 0;
-            char *key, *value;
-            short keyMatchStart = 0;
-            struct HttpQueryParam *param;
-            short queryMatchLast = 0;
-            short isAddr = 0;
-            for (j = 0; j < (delta - 1); ++j) {
-                queryMatchLast = j == (delta - 1);
-                isAddr = pc[j] == CHAR_ADDRESS;
-                if (isAddr || queryMatchLast) {
-                    if (!keyMatchStart) {
-                        keyMatchStart = 1;
-                        ks = i;
-                    } else {
-                        if (!matchEqual) {
-                            kl = isAddr ? (j - ks) : (j - ks + 1);
-                        } else {
-                            kl = (equalPos - ks);
-                        }
-                        key = MemAlloc(sizeof(char) * kl);
-                        if (!key) {
-                            return -1;
-                        } else {
-                            memcpy(key, pc + ks + 1, kl - 1);
-                        }
-                        param = MemAlloc(sizeof(struct HttpQueryParam));
-                        if (!param) {
-                            free(key);
-                            return -1;
-                        }
-                        param->name = key;
-                        HashAdd(client->headers, key, param);
-                        if (matchEqual) {
-                            vl = isAddr ? (j - (equalPos + 1)) : (j - (equalPos + 1) + 1);
-                        } else {
-                            vl = 0;
-                        }
-                        if (vl) {
-                            value = MemAlloc(sizeof(char) * vl);
-                            if (!value) {
-                                return -1;
-                            } else {
-                                memcpy(value, pc + equalPos + 1, vl - 1);
-                                param->value = value;
-                            }
-                        } else {
-                            param->value = NULL;
-                        }
-                        keyMatchStart = 0;
-                        matchEqual = 0;
-                    }
-                } else if (pc[j] == CharEqual) {
-                    equalPos = j;
-                    matchEqual = 1;
-                } else if (j == 0) {
-                    keyMatchStart = 1;
-                    ks = i;
+            if (!(delta - 1)) {
+                //url contain '?' but query string is empty
+                parseQueryFinished = 1;
+                if (last) {
+                    return 1;
                 }
             }
-            parseQueryFinished = 1;
+
+            char *pc = p + start;
+            int j = 0;
+            int ks = 0;
+            char c;
+            short keyStartMatch = 0;
+            short reachLast = 0;
+            short matchEqual = 0;
+            int equalPos = 0;
+            char *tb = NULL;
+            int kl = 0, vl = 0;
+            struct HttpQueryParam *param;
+            for (; j < (delta - 1); j++) {
+                c = pc[j];
+                reachLast = (j == (delta - 1));
+                if (c == CHAR_ADDRESS || reachLast) {
+                    if (!keyStartMatch || !matchEqual) {
+                        return -1;
+                    }
+                    keyStartMatch = 0;//reset start position
+                    kl = equalPos - ks;//key length
+                    if (!kl) {
+                        return -1;
+                    }
+                    tb = MemAlloc(kl + 1);//tail 0
+                    if (!tb) {
+                        return -1;
+                    }
+                    memcpy(tb, pc + ks, kl);
+                    param = MemAlloc(sizeof(struct HttpQueryParam));
+                    if (!param) {
+                        free(tb);
+                        return -1;
+                    }
+                    param->name = tb;
+                    if (!HashAdd(client->headers, tb, param)) {
+                        free(param);
+                        free(tb);
+                        return -1;
+                    }
+                    vl = (c == CHAR_ADDRESS) ? (j - (equalPos + 1)) : (j - (equalPos + 1) + 1);//value length
+                    if (!vl) {
+                        param->value = NULL;
+                    } else {
+                        tb = MemAlloc(vl + 1);
+                        if (!tb) {
+                            return -1;
+                        }
+                        memcpy(tb, pc + equalPos + 1, vl);
+                        param->value = tb;
+                        param = NULL; //reset param
+                    }
+                    if (reachLast) {
+                        break;
+                    }
+                    keyStartMatch = 0;
+                    matchEqual = 0;
+
+                } else if (c == CharEqual) {
+                    if (!keyStartMatch || matchEqual) {
+                        //match '=' more than one time
+                        return -1;
+                    }
+                    matchEqual = 1;
+                    equalPos = j;
+                } else {
+                    //if keyStartMatch is false ,so key match start from here
+                    if (!keyStartMatch) {
+                        keyStartMatch = 1;
+                        ks = j;
+                    }
+                }
+            }
+            parseQueryFinished = 1;//query parse finished
         }
 
         if (status == 3 && last) {
-            delta = i - (start + 1) + 2;
-            tb = MemAlloc(sizeof(char) * (delta));
+            delta = i - start + 1;
+            tb = MemAlloc(delta + 1);
             if (!tb) {
                 return -1;
             } else {
-                memcpy(tb, p + start + 1, delta - 1);
-                client->path = tb;
+                memcpy(tb, p + start, delta);
+                client->hasTag = tb;
             }
         }
 
         i++;
+        prev = p[i];
     }
     return 1;
-
 }
-
-#include "http.h"

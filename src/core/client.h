@@ -46,6 +46,7 @@ struct Client {
     struct ClientBuffer *buffer;//buffer that store client input
     short request_line_parse_status;//request  line parse status,
     short ssl;//ssl request
+    char *hasTag;//hash tag
 };
 
 struct Client *ClientCreate(int sock, struct sockaddr_in *clientAddr);

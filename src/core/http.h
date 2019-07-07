@@ -8,6 +8,7 @@
 #include "global_header.h"
 #include "client.h"
 #include "event.h"
+#include "buffer.h"
 
 #define CHAR_ENTER ('\r')
 #define CHAR_NEW_LINE ('\n')
@@ -61,7 +62,7 @@ struct HttpRequest {
     struct Client *client;
 };
 
-short HttpUrlCheckValidity(const char *url, size_t len, struct Client *client);
+short HttpParseUrl(const char *url, size_t len, struct Client *client);
 
 /**
  * Create http request client
