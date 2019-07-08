@@ -7,9 +7,9 @@
 
 #include "global_header.h"
 
-#define EVENT_READABLE 1ul
-#define EVENT_WRITEABLE 2ul
-#define EVENT_ERROR 4ul
+#define EVENT_READABLE 1
+#define EVENT_WRITEABLE 2
+#define EVENT_ERROR 4
 
 #define DEPOSITARY_IDLE 1
 #define DEPOSITARY_BUSY 2

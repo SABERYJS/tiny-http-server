@@ -202,7 +202,7 @@ int EventLoop(struct EventDepositary *depositary) {
     }
 }
 
-static void EventHandlePendingAdd(struct EventDepositary *depositary) {
+static void EventHandlePendingDelete(struct EventDepositary *depositary) {
     struct ListNode *lm;
     struct EventPendingDelete *delete;
     //remember that we remove  specified fd firstly
@@ -216,7 +216,7 @@ static void EventHandlePendingAdd(struct EventDepositary *depositary) {
     }
 }
 
-static void EventHandlePendingDelete(struct EventDepositary *depositary) {
+static void EventHandlePendingAdd(struct EventDepositary *depositary) {
     struct ListNode *ld;
     struct EventPendingAdd *add;
     while (depositary->pending_add->count > 0) {

@@ -13,7 +13,7 @@ int ReadFromSocket(int socket, struct ClientBuffer *buffer) {
         //buffer is full
         return 0;
     }
-    int rb = read(socket, pos, CLIENT_RECEIVE_BUFFER_SIZE);
+    int rb = read(socket, pos, cread);
     again:
     if (rb == -1) {
         if (errno == EINTR) {
@@ -29,13 +29,20 @@ int ReadFromSocket(int socket, struct ClientBuffer *buffer) {
     }
 }
 
+/**
+ * has read some data,so discard them
+ * **/
 void BufferDiscard(struct ClientBuffer *buffer, size_t off) {
     buffer->read_pos += off;
     buffer->size -= off;
 }
 
+/**
+ * move left chars ,so we can read more  data from  socket
+ * **/
 void BufferMoveForward(struct ClientBuffer *buffer) {
-    if (buffer->size < CLIENT_RECEIVE_BUFFER_SIZE / 3) {
+    if (buffer->size < CLIENT_RECEIVE_BUFFER_SIZE / 2) {
+        //enough data to read
         return;
     }
     memcpy(buffer->buf, buffer->buf + buffer->read_pos, buffer->size);

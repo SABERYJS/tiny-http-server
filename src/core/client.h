@@ -7,6 +7,7 @@
 
 #include "global_header.h"
 #include "buffer.h"
+#include "http.h"
 
 #define  REQUEST_METHOD_GET 1
 #define  REQUEST_METHOD_POST 2
@@ -31,6 +32,7 @@ struct HttpQueryParam {
 };
 
 struct Client {
+    struct HttpRequest *request;//belong to which http request
     struct sockaddr_in *addr; //only support ipv4
     char *ip; //client ip address
     struct HashTable *headers; //client headers

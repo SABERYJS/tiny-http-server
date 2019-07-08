@@ -9,6 +9,7 @@
 #include "client.h"
 #include "event.h"
 #include "buffer.h"
+#include "log.h"
 
 #define CHAR_ENTER ('\r')
 #define CHAR_NEW_LINE ('\n')
@@ -60,6 +61,7 @@
 
 struct HttpRequest {
     struct Client *client;
+    struct Log *log;
 };
 
 short HttpParseUrl(const char *url, size_t len, struct Client *client);

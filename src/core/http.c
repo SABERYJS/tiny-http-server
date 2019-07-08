@@ -14,6 +14,7 @@ struct HttpRequest *HttpRequestCreate(int socket, struct sockaddr_in *addr) {
             free(request);
             return NULL;
         } else {
+            request->client->request = request;
             return request;
         }
     }
@@ -29,28 +30,29 @@ int HttpParseRequestLine(struct HttpRequest *request) {
     char *url;
     int start, end;
     short matchStart = 0;
-    short prevIsSpace = 0;
-    if (client->request_line_parse_status == HTTP_REQUEST_LINE_METHOD) {
-        return HttpParseRequestMethod(request);
-    } else if (client->request_line_parse_status == HTTP_REQUEST_LINE_URL) {
-        for (i = 0; i < buffer->size; ++i) {
-            if (CharIsSpace(BufferCharAtPos(buffer, i))) {
-                if (!matchStart) {
-                    continue;
-                } else {
-                    end = i;
-                    //match a non empty string,but url format  is not checked,so validity is uncertain
-                    if (!HttpParseUrl(BufferSubstr(buffer, start), (end - start), client)) {
-                        //url is invalid
-                        return -1;
+    while (buffer->size) {
+        if (client->request_line_parse_status == HTTP_REQUEST_LINE_METHOD) {
+            return HttpParseRequestMethod(request);
+        } else if (client->request_line_parse_status == HTTP_REQUEST_LINE_URL) {
+            for (i = 0; i < buffer->size; ++i) {
+                if (CharIsSpace(BufferCharAtPos(buffer, i))) {
+                    if (!matchStart) {
+                        continue;
                     } else {
+                        end = i;
+                        //match a non empty string,but url format  is not checked,so validity is uncertain
+                        if (!HttpParseUrl(BufferSubstr(buffer, start), (end - start), client)) {
+                            //url is invalid
+                            return -1;
+                        } else {
 
+                        }
                     }
-                }
-            } else {
-                if (!matchStart) {
-                    matchStart = 1;
-                    start = i;
+                } else {
+                    if (!matchStart) {
+                        matchStart = 1;
+                        start = i;
+                    }
                 }
             }
         }
@@ -118,6 +120,7 @@ int HttpParseRequestMethod(struct HttpRequest *request) {
 void HttpEventHandleCallback(int type, void *data) {
     struct HttpRequest *request = (struct HttpRequest *) data;
     struct Client *client = request->client;
+    ReadFromSocket(client->sock, client->buffer);
     if (type == EVENT_READABLE) {
         if (client->status == STATUS_RECEIVING_HEADER) {
             HttpParseRequestLine(request);
@@ -366,7 +369,7 @@ short HttpParseUrl(const char *url, size_t len, struct Client *client) {
                 }
             }
 
-            char *pc = p + start;
+            const char *pc = p + start;
             int j = 0;
             int ks = 0;
             char c;
@@ -374,7 +377,6 @@ short HttpParseUrl(const char *url, size_t len, struct Client *client) {
             short reachLast = 0;
             short matchEqual = 0;
             int equalPos = 0;
-            char *tb = NULL;
             int kl = 0, vl = 0;
             struct HttpQueryParam *param;
             for (; j < (delta - 1); j++) {

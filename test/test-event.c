@@ -28,6 +28,12 @@ void clientSocketHandleCallback(int type, void *data) {
     struct HttpRequest *request = HttpRequestCreate(csk->fd, &csk->clientAddr);
     if (!request) {
         printf("create request failed\n");
+        return;
+    }
+    request->log = LogCreate(0, STDOUT_FILENO, NULL, LOG_LEVEL_INFO);
+    if (!request->log) {
+        printf("create log failed\n");
+        return;
     }
     EventAdd(depositary, EVENT_READABLE, csk->fd, request, HttpEventHandleCallback);
     printf("ffff\n");
