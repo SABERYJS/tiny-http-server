@@ -116,7 +116,6 @@ int HttpParseRequestMethod(struct HttpRequest *request) {
 }
 
 void HttpEventHandleCallback(int type, void *data) {
-    printf("here\n");
     struct HttpRequest *request = (struct HttpRequest *) data;
     struct Client *client = request->client;
     if (type == EVENT_READABLE) {

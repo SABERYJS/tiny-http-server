@@ -50,6 +50,10 @@ struct RbTreeNode *RbTreeCreateNewNode(struct RbTree *tree, void *data) {
 }
 
 void RbTreeIterate(struct RbTreeNode *root, void(*callback)(struct RbTreeNode *)) {
+    if (!root) {
+        //tree  empty
+        return;
+    }
     struct RbTreeNode *node = root;
     callback(node);
     if (RbTreeLeftChild(node)) {

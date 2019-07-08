@@ -11,7 +11,22 @@
 #define EVENT_WRITEABLE 2ul
 #define EVENT_ERROR 4ul
 
+#define DEPOSITARY_IDLE 1
+#define DEPOSITARY_BUSY 2
+
 typedef void (*eventHandleCallback)(int type, void *data);
+
+struct EventPendingAdd {
+    unsigned int fd;
+    void *data;
+    unsigned int flag;
+    eventHandleCallback callback;
+};
+
+struct EventPendingDelete {
+    unsigned int fd;
+    unsigned int flag;
+};
 
 struct EventHandler {
     unsigned int fd;
@@ -26,8 +41,11 @@ struct EventDepositary {
     fd_set rs;
     fd_set ws;
     fd_set es;
+    short status;
     struct timeval *tv;
     struct RbTree *rbTree;
+    struct List *pending_add;//event to add
+    struct List *pending_deleted;//event to deleted
 };
 
 static int compare(struct RbTreeNode *a, struct RbTreeNode *b) {
@@ -50,4 +68,9 @@ static void EventReInitSingleFd(struct RbTreeNode *node);
 static void EventHandleEvent(struct RbTreeNode *node);
 
 static void EventReInitLoop(struct EventDepositary *depositary);
+
+static void EventHandlePendingAdd(struct EventDepositary *depositary);
+
+static void EventHandlePendingDelete(struct EventDepositary *depositary);
+
 #endif //QC_EVENT_H

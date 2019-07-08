@@ -10,11 +10,23 @@ struct EventDepositary *EventCreateDepositary(struct timeval *out) {
         return NULL;
     } else {
         depositary->rbTree = RbTreeCreate(compare, NULL, NULL);
-        if (!depositary->rbTree) {
+        depositary->pending_add = createList(NULL, NULL);
+        depositary->pending_deleted = createList(NULL, NULL);
+        if (!depositary->rbTree || !depositary->pending_add || !depositary->pending_deleted) {
+            if (depositary->rbTree) {
+                free(depositary->rbTree);
+            }
+            if (depositary->pending_deleted) {
+                free(depositary->pending_deleted);
+            }
+            if (depositary->pending_add) {
+                free(depositary->pending_add);
+            }
             free(depositary);
             return NULL;
         } else {
             depositary->tv = out;
+            depositary->status = DEPOSITARY_IDLE;
             FD_ZERO(&depositary->rs);
             FD_ZERO(&depositary->ws);
             FD_ZERO(&depositary->es);
@@ -27,6 +39,22 @@ int EventAdd(struct EventDepositary *depositary, unsigned int type, int fd, void
     if (type != EVENT_READABLE && type != EVENT_WRITEABLE && type != EVENT_ERROR) {
         return -1;
     } else {
+        //depositary is busy,so insert later
+        if (depositary->status == DEPOSITARY_BUSY) {
+            struct EventPendingAdd *pending = MemAlloc(sizeof(struct EventPendingAdd));
+            if (!pending) {
+                return -1;
+            }
+            pending->fd = fd;
+            pending->flag = type;
+            pending->data = data;
+            pending->callback = callback;
+            if (appendNode(depositary->pending_add, pending) < 0) {
+                free(pending);
+                return -1;
+            }
+            return 1;
+        }
         struct EventHandler *handler = (struct EventHandler *) malloc(sizeof(struct EventHandler));
         if (!handler) {
             return -1;
@@ -78,6 +106,19 @@ int EventRemove(struct EventDepositary *depositary, unsigned int type, int fd) {
     if (type != EVENT_READABLE && type != EVENT_WRITEABLE && type != EVENT_ERROR) {
         return -1;
     } else {
+        if (depositary->status == DEPOSITARY_BUSY) {
+            struct EventPendingDelete *pendingDelete = MemAlloc(sizeof(struct EventPendingDelete));
+            if (!pendingDelete) {
+                return -1;
+            }
+            pendingDelete->fd = fd;
+            pendingDelete->flag = type;
+            if (appendNode(depositary->pending_deleted, pendingDelete) < 0) {
+                free(pendingDelete);
+                return -1;
+            }
+            return 1;
+        }
         struct EventHandler *handler = (struct EventHandler *) malloc(sizeof(struct EventHandler));
         if (!handler) {
             return -1;
@@ -128,6 +169,7 @@ static void EventReInitLoop(struct EventDepositary *depositary) {
 
 static void EventHandleCallback(struct RbTreeNode *node) {
     struct EventHandler *handler = (struct EventHandler *) node->data;
+    printf("EventHandleCallback entered,fd is:%d\n", handler->fd);
     struct EventDepositary *depositary = handler->depositary;
     if (FD_ISSET(handler->fd, &depositary->rs)) {
         handler->callback(EVENT_READABLE, handler->data);
@@ -141,6 +183,7 @@ static void EventHandleCallback(struct RbTreeNode *node) {
 }
 
 int EventLoop(struct EventDepositary *depositary) {
+    printf("enter  event loop again\n");
     int ret;
     EventReInitLoop(depositary);
     ret = select(FD_SETSIZE, &depositary->rs, &depositary->ws, &depositary->es, depositary->tv);
@@ -148,8 +191,40 @@ int EventLoop(struct EventDepositary *depositary) {
         return -1;
     } else {
         if (ret > 0) {
+            depositary->status = DEPOSITARY_BUSY;
             RbTreeIterate(depositary->rbTree->root, EventHandleCallback);
+            depositary->status = DEPOSITARY_IDLE;
+            //after iteration finish,we start to handle pending add or delete request
+            EventHandlePendingDelete(depositary);//delete fd
+            EventHandlePendingAdd(depositary);//add fd
         }
         return 1;
+    }
+}
+
+static void EventHandlePendingAdd(struct EventDepositary *depositary) {
+    struct ListNode *lm;
+    struct EventPendingDelete *delete;
+    //remember that we remove  specified fd firstly
+    while (depositary->pending_deleted->count > 0) {
+        lm = depositary->pending_deleted->header;
+        delete = (struct EventPendingDelete *) lm->data;
+        EventRemove(depositary, delete->flag, delete->fd);
+        removeNode(depositary->pending_deleted, lm);//remove node from list
+        free(lm->data);// free node data
+        free(lm);//free current node
+    }
+}
+
+static void EventHandlePendingDelete(struct EventDepositary *depositary) {
+    struct ListNode *ld;
+    struct EventPendingAdd *add;
+    while (depositary->pending_add->count > 0) {
+        ld = depositary->pending_add->header;
+        add = (struct EventPendingAdd *) ld->data;
+        EventAdd(depositary, add->flag, add->fd, add->data, add->callback);
+        removeNode(depositary->pending_add, ld);
+        free(ld->data);
+        free(ld);
     }
 }

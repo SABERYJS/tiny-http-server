@@ -26,6 +26,9 @@ void clientSocketHandleCallback(int type, void *data) {
     printf("received from client:%s\n", buffer);*/
     EventRemove(depositary, EVENT_READABLE, csk->fd);
     struct HttpRequest *request = HttpRequestCreate(csk->fd, &csk->clientAddr);
+    if (!request) {
+        printf("create request failed\n");
+    }
     EventAdd(depositary, EVENT_READABLE, csk->fd, request, HttpEventHandleCallback);
     printf("ffff\n");
 }
