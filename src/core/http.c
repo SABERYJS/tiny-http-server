@@ -559,6 +559,79 @@ int HttpParseRequestVersion(struct HttpRequest *request) {
 int HttpParseHeader(struct HttpRequest *request) {
     struct Client *client = request->client;
     struct ClientBuffer *buffer = client->buffer;
-    char c = BufferCharAtPos(buffer, 0);
+    char c;
+    int start, end;
+    int i;
+    short matchStart = 0;
+    int colonPos;
+    int kl, vl;
+    short last = 0;
+    size_t processed = 0;//processed how many bytes  so far
+    if (!buffer->size) {
+        return 1;
+    }
+    struct HttpHeader *header;
+    for (i = 0; i < buffer->size; ++i) {
+        c = BufferCharAtPos(buffer, i);
+        last = (i == (buffer->size - 1));
+        if (!matchStart) {
+            if (CharIsEnter(c)) {
+                if (!last) {
+                    //header match finished
+                    LogInfo(request->log, "header match finished\n");
+                    if (client->method == HTTP_METHOD_GET) {
+                        client->status = STATUS_RECEIVED_FROM_CLIENT_FINISHED;//no body
+                    } else {
+                        client->status = STATUS_RECEIVING_BODY;//post request
+                    }
+                    BufferDiscard(buffer, processed + 2);
+                } else {
+                    BufferDiscard(buffer, processed + 1);
+                }
+                return 1;
+            }
+            matchStart = 1;
+            start = i;
+        } else if (CharIsColon(c)) {
+            colonPos = i;
+        } else if (c == CHAR_ENTER) {
+            end = i;
+        } else if (c == CHAR_NEW_LINE) {
+            //match one line
+            if (!(header = MemAlloc(sizeof(struct HttpHeader)))) {
+                return -1;
+            }
+            kl = colonPos - start + 1;//tail 0
+            vl = end - colonPos;//tail 0
+            header->name = MemAlloc(kl);
+            header->value = MemAlloc(vl);
+            if (!header->name || !header->value) {
+                goto failed;
+            }
+
+            memcpy(header->name, BufferSubstr(buffer, start), (kl - 1));
+            memcpy(header->value, BufferSubstr(buffer, colonPos + 1), (vl - 1));
+            if (HashAdd(client->headers, header->name, header) != 0) {
+                goto failed;
+            }
+            matchStart = 0;
+            processed += (end - start + 2);//include tail \r\n
+            LogInfo(request->log, "handle one header[%s]:%s\n", header->name, header->value);
+        }
+    }
+    BufferDiscard(buffer, processed);
     return 1;
+
+    failed:
+    BufferDiscard(buffer, processed);//modify buffer offset
+    if (header) {
+        if (header->name) {
+            MemFree(header->name);
+        }
+        if (header->value) {
+            MemFree(header->value);
+        }
+        MemFree(header);
+        return -1;
+    }
 }
