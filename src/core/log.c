@@ -45,7 +45,7 @@ struct Log *LogCreate(unsigned short system, unsigned int fd, const char *filena
 }
 
 
-int LogWrite(struct Log *log, int level, char *format, ...) {
+int LogWrite(struct Log *log, int level, char *format, va_list vl) {
     //check  log level
     if (log->level > level) {
         return 1;
@@ -54,11 +54,8 @@ int LogWrite(struct Log *log, int level, char *format, ...) {
     if (!buf) {
         return -1;
     }
-    va_list vl;
     int ret;
-    va_start(vl, format);
     ret = vsnprintf(buf, LOG_OUTPUT_BUFFER_SIZE - 1, format, vl);//tail 0
-    va_end(vl);
     if (!ret) {
         MemFree(buf);
         return -1;

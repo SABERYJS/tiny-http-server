@@ -64,6 +64,10 @@ struct HttpRequest {
     struct Log *log;
 };
 
+static inline short HttpCheckVersionValidity(char *version) {
+    return (atoi(version) - 1.1) < 0.0001;
+}
+
 short HttpParseUrl(const char *url, size_t len, struct Client *client);
 
 /**
@@ -79,6 +83,14 @@ void HttpEventHandleCallback(int type, void *data);
 int HttpParseRequestLine(struct HttpRequest *request);
 
 int HttpParseRequestMethod(struct HttpRequest *request);
+
+int HttpParseHostHeader(struct HttpRequest *request, char *header, size_t len);
+
+int HttpParseRequestLineUrl(struct HttpRequest *request);
+
+int HttpParseRequestVersion(struct HttpRequest *request);
+
+int HttpParseHeader(struct HttpRequest *request);
 
 
 #endif //STL_CLONE_HTTP_H

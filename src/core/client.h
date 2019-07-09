@@ -15,11 +15,13 @@
 #define STATUS_RECEIVING_HEADER  1
 #define STATUS_HEADER_RECEIVED_FINISHED 2
 #define STATUS_RECEIVING_BODY 3
-#define STATUS_BODY_RECEIVED_FINISHED 4
+#define STATUS_RECEIVED_FROM_CLIENT_FINISHED 4
 
 #define HTTP_REQUEST_LINE_METHOD 1
 #define HTTP_REQUEST_LINE_URL 2
 #define HTTP_REQUEST_LINE_HTTP_VERSION 3
+
+#define HTTP_REQUEST_LINE_FINISHED 4
 
 struct HttpHeader {
     char *name;
@@ -47,7 +49,8 @@ struct Client {
     short status;//current client parse status
     struct ClientBuffer *buffer;//buffer that store client input
     short request_line_parse_status;//request  line parse status,
-    short ssl;//ssl request
+    short ssl;//ssl request,
+    struct HashTable *query;//params in query string
     char *hasTag;//hash tag
 };
 

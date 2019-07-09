@@ -30,7 +30,7 @@ struct Log {
 
 struct Log *LogCreate(unsigned short system, unsigned int fd, const char *filename, unsigned short level);
 
-int LogWrite(struct Log *log, int level, char *format, ...);
+int LogWrite(struct Log *log, int level, char *format, va_list vl);
 
 int LogInfo(struct Log *log, char *format, ...);
 

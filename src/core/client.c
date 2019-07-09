@@ -14,8 +14,15 @@ struct Client *ClientCreate(int sock, struct sockaddr_in *clientAddr) {
         client->addr = clientAddr;
         client->status = STATUS_RECEIVING_HEADER;
         client->headers = HashTableCreate(100, NULL);
+        client->query = HashTableCreate(100, NULL);
         client->request_line_parse_status = HTTP_REQUEST_LINE_METHOD;
-        if (!client->headers) {
+        if (!client->headers || !client->query) {
+            if (client->headers) {
+                MemFree(client->headers);
+            }
+            if (client->query) {
+                MemFree(client->query);
+            }
             MemFree(client);
             return NULL;
         } else {

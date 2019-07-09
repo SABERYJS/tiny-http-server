@@ -4,6 +4,7 @@
 
 #include "http.h"
 
+
 struct HttpRequest *HttpRequestCreate(int socket, struct sockaddr_in *addr) {
     struct HttpRequest *request = MemAlloc(sizeof(struct HttpRequest));
     if (!request) {
@@ -26,37 +27,28 @@ struct HttpRequest *HttpRequestCreate(int socket, struct sockaddr_in *addr) {
 int HttpParseRequestLine(struct HttpRequest *request) {
     struct Client *client = request->client;
     struct ClientBuffer *buffer = client->buffer;
-    int i;
-    char *url;
-    int start, end;
-    short matchStart = 0;
     while (buffer->size) {
         if (client->request_line_parse_status == HTTP_REQUEST_LINE_METHOD) {
-            return HttpParseRequestMethod(request);
+            if (!HttpParseRequestMethod(request)) {
+                return -1;
+            }
         } else if (client->request_line_parse_status == HTTP_REQUEST_LINE_URL) {
-            for (i = 0; i < buffer->size; ++i) {
-                if (CharIsSpace(BufferCharAtPos(buffer, i))) {
-                    if (!matchStart) {
-                        continue;
-                    } else {
-                        end = i;
-                        //match a non empty string,but url format  is not checked,so validity is uncertain
-                        if (!HttpParseUrl(BufferSubstr(buffer, start), (end - start), client)) {
-                            //url is invalid
-                            return -1;
-                        } else {
-
-                        }
-                    }
-                } else {
-                    if (!matchStart) {
-                        matchStart = 1;
-                        start = i;
-                    }
-                }
+            if (!HttpParseRequestLineUrl(request)) {
+                return -1;
+            }
+        } else if (client->request_line_parse_status == HTTP_REQUEST_LINE_HTTP_VERSION) {
+            if (!HttpParseRequestVersion(request)) {
+                return -1;
+            }
+        } else if (client->request_line_parse_status == HTTP_REQUEST_LINE_FINISHED &&
+                   client->status == STATUS_RECEIVING_HEADER) {
+            //parse http headers after parsing full request line
+            if (!HttpParseHeader(request)) {
+                return -1;
             }
         }
     }
+    return 1;
 }
 
 int HttpParseRequestMethod(struct HttpRequest *request) {
@@ -100,7 +92,7 @@ int HttpParseRequestMethod(struct HttpRequest *request) {
                 } else {
                     goto clear_error;
                 }
-                BufferDiscard(buffer, i);
+                BufferDiscard(buffer, i + 1);
                 client->request_line_parse_status = HTTP_REQUEST_LINE_URL;
                 return 1;
             }
@@ -117,10 +109,58 @@ int HttpParseRequestMethod(struct HttpRequest *request) {
     return -1;
 }
 
+int HttpParseRequestLineUrl(struct HttpRequest *request) {
+    struct Client *client = request->client;
+    struct ClientBuffer *buffer = client->buffer;
+    int i;
+    int start, end;
+    short matchStart = 0;
+
+    for (i = 0; i < buffer->size; ++i) {
+        if (CharIsSpace(BufferCharAtPos(buffer, i))) {
+            if (!matchStart) {
+                continue;
+            } else {
+                end = i;
+                if ((end - start) == 0) {
+                    //path is Invalid,char count>=1
+                    return -1;
+                }
+                char *url = MemAlloc(end - start + 1);
+                if (!url) {
+                    return -1;
+                } else {
+                    memcpy(url, BufferSubstr(buffer, start), (end - start));
+                }
+                //match a non empty string,but url format  is not checked,so validity is uncertain
+                if (!HttpParseUrl(url, (end - start), client)) {
+                    //url is invalid
+                    MemFree(url);
+                    return -1;
+                } else {
+                    //url parse finished  and no error happened
+                    client->request_line_parse_status = HTTP_REQUEST_LINE_HTTP_VERSION;
+                    BufferDiscard(client->buffer, end);//discard from i=0
+                    MemFree(url);
+                    return 1;
+                }
+            }
+        } else {
+            if (!matchStart) {
+                matchStart = 1;
+                start = i;
+            }
+        }
+    }
+    //no enough data to parse ,so parse buffer next time
+    return 1;
+}
+
 void HttpEventHandleCallback(int type, void *data) {
     struct HttpRequest *request = (struct HttpRequest *) data;
     struct Client *client = request->client;
     ReadFromSocket(client->sock, client->buffer);
+    printf("%s\n", client->buffer->buf);
     if (type == EVENT_READABLE) {
         if (client->status == STATUS_RECEIVING_HEADER) {
             HttpParseRequestLine(request);
@@ -128,37 +168,23 @@ void HttpEventHandleCallback(int type, void *data) {
     }
 }
 
-/**
- * url as follow: http://xxx.com:81/order/delete?id=1#uncertain
- * **/
-short HttpParseUrl(const char *url, size_t len, struct Client *client) {
-    if (len <= 8) {
-        return -1;
-    }
-    //http url  must start with https:// or http://
-    int matchHttp = strncmp(url, "http://", 7) == 0;
-    if (!matchHttp) {
-        if (strncmp(url, "https://", 8) != 0) {
-            return -1;
-        }
-    }
-
-    client->ssl = !matchHttp ? 1 : 0;
-    int off = matchHttp ? 7 : 8;
-    const char *p = url + off;
-    //check char '/' or '#' or '?' or '&' or ':'
-    int i = 0;
+/*int HttpParseHostHeader(struct HttpRequest *request, char *header, size_t len) {
+    struct Client *client = request->client;
     int matchDot = 0;
     int matchColon = 0;
-    char prev = 0;
+
     size_t pl = 0;
     int colonPos = 0;
     int port;
     int last = 0;
     int first = 0;
     char localhost[] = "localhost";
-    int left = len - off; //left character except prefix
+
+    int left = len - 1; //left character except prefix
     char *buf = MemAlloc(sizeof(char) * 6);//store port,extra 0
+    const char *p = header;//exclude first  backslash
+    char prev;
+    int i = 0;
     if (!buf) {
         return -1;
     }
@@ -291,33 +317,53 @@ short HttpParseUrl(const char *url, size_t len, struct Client *client) {
     error:
     free(buf);
     return -1;
-    success:
-    p += (i + 1);
-    left -= (i + 1);
+}*/
+
+/**
+ * url as follow:/order/delete?id=1
+ * url do not contain  host and port
+ * when  browser commit user request,has tag is stripped
+ * **/
+short HttpParseUrl(const char *url, size_t len, struct Client *client) {
+    struct Log *log = client->request->log;
+    LogInfo(log, "client request url:%s\n", url);
+    if (url[0] != CHAR_BACKSLASH) {
+        //all request url must start with backslash
+        return -1;
+    }
+    const char *p = url;
+    //check char '/' or '#' or '?' or '&' or ':'
+    int i = 0;
+    char prev = 0;
+    int last = 0;
+    int left = len;
     if (left == 0) {
-        //full url parse finished
+        //full url parse finished,the case: '/'
         return 1;
     }
-    i = 0;
     off_t start = 0, delta = 0;
     short parsePathFinished = 0;
     short parseQueryFinished = 0;
     short status = 0; // status value 1,2,3
-    char *tb;
+    char *tb = NULL;
+    char c;
     while (i < left) {
+        c = p[i];
         if (i == (left - 1)) {
             last = 1;
         } else {
             last = 0;
         }
-        if (i == 0 && CHAR_BACKSLASH == p[i]) {
+        if (i == 0 && CHAR_BACKSLASH == c) {
             //if url contain path ,so  the first char must be '/'
             status = 1;
             start = i;
         } else {
-            //url path parse finished
-            parsePathFinished = 1;
-            status = 1;
+            if (i == 0) {
+                //url path parse finished
+                parsePathFinished = 1;
+                status = 1;
+            }
         }
         if (parsePathFinished && status == 1 && prev == CHAR_QUESTION_MARK) {
             //url contain query string
@@ -332,17 +378,18 @@ short HttpParseUrl(const char *url, size_t len, struct Client *client) {
             start = i;
         }
 
-        if (status == 1 && (CHAR_QUESTION_MARK == p[i] || CHAR_HASH_TAG == p[i] || last)) {
-            if (CHAR_QUESTION_MARK == p[i] || CHAR_HASH_TAG == p[i]) {
+        if (status == 1 && (CHAR_QUESTION_MARK == c || CHAR_HASH_TAG == c || last)) {
+            if (CHAR_QUESTION_MARK == c || CHAR_HASH_TAG == c) {
                 delta = i - start;
             } else {
                 //last char included
                 delta = i - start + 1;
             }
             //url path maybe empty,so check it
+            // for example: /  or  /?a=1
             if ((delta - 1) > 0) {
                 //delta  contain tail 0
-                tb = MemAlloc(sizeof(char) * delta);
+                tb = MemAlloc(delta);
                 if (!tb) {
                     return -1;
                 } else {
@@ -352,11 +399,12 @@ short HttpParseUrl(const char *url, size_t len, struct Client *client) {
             }
             parsePathFinished = 1;
             if (last) {
+                //if last char ,just return
                 return 1;
             }
         }
-        if (status == 2 && (CHAR_HASH_TAG == p[i] || last)) {
-            if (CHAR_HASH_TAG == p[i]) {
+        if (status == 2 && (CHAR_HASH_TAG == c || last)) {
+            if (CHAR_HASH_TAG == c) {
                 delta = i - start;
             } else {
                 delta = i - start + 1;
@@ -372,14 +420,13 @@ short HttpParseUrl(const char *url, size_t len, struct Client *client) {
             const char *pc = p + start;
             int j = 0;
             int ks = 0;
-            char c;
             short keyStartMatch = 0;
             short reachLast = 0;
             short matchEqual = 0;
             int equalPos = 0;
             int kl = 0, vl = 0;
             struct HttpQueryParam *param;
-            for (; j < (delta - 1); j++) {
+            for (; j <= (delta - 1); j++) {
                 c = pc[j];
                 reachLast = (j == (delta - 1));
                 if (c == CHAR_ADDRESS || reachLast) {
@@ -402,7 +449,7 @@ short HttpParseUrl(const char *url, size_t len, struct Client *client) {
                         return -1;
                     }
                     param->name = tb;
-                    if (!HashAdd(client->headers, tb, param)) {
+                    if (HashAdd(client->query, tb, param) < 0) {
                         free(param);
                         free(tb);
                         return -1;
@@ -417,8 +464,8 @@ short HttpParseUrl(const char *url, size_t len, struct Client *client) {
                         }
                         memcpy(tb, pc + equalPos + 1, vl);
                         param->value = tb;
-                        param = NULL; //reset param
                     }
+                    LogInfo(log, "query name:%s  and value%s\n", param->name, param->value);
                     if (reachLast) {
                         break;
                     }
@@ -453,9 +500,65 @@ short HttpParseUrl(const char *url, size_t len, struct Client *client) {
                 client->hasTag = tb;
             }
         }
-
-        i++;
         prev = p[i];
+        i++;
     }
+    return 1;
+}
+
+int HttpParseRequestVersion(struct HttpRequest *request) {
+    struct Client *client = request->client;
+    struct ClientBuffer *buffer = client->buffer;
+    int start, i, end;
+    short hasMatchStart = 0;
+    float version;
+    char *vb = MemAlloc(4);
+    if (!vb) {
+        return -1;
+    }
+    char c;
+    if (buffer->size < 10) {
+        //10 char is required
+        //for example:HTTP/1.1\r\n
+        return 1;
+    } else {
+        for (i = 0; i < buffer->size; ++i) {
+            c = BufferCharAtPos(buffer, i);
+            if (CharIsSpace(c)) {
+                continue;
+            } else if (CHAR_ENTER == c) {
+                end = i;
+            } else if (CHAR_NEW_LINE == c) {
+                //match finished
+                memcpy(vb, BufferSubstr(buffer, start), (i - start));
+                version = atof(vb);
+                MemFree(vb);
+                LogInfo(request->log, "http version is:%f\n", version);
+                client->http_version = version;
+                BufferDiscard(buffer, end + 2);//include tail \r\n
+                LogInfo(request->log, "rest content；%s\n", BufferSubstr(buffer, 0));
+                client->request_line_parse_status = HTTP_REQUEST_LINE_FINISHED;//request line parse finished,next step parse headers
+                return 1;
+            } else {
+                if (!hasMatchStart) {
+                    start = i;
+                    hasMatchStart = 1;
+                    if (strncmp(BufferSubstr(buffer, start), "HTTP/", 5) != 0) {
+                        MemFree(vb);
+                        return -1;
+                    } else {
+                        start += 5;
+                    }
+                }
+            }
+        }
+        return 1;
+    }
+}
+
+int HttpParseHeader(struct HttpRequest *request) {
+    struct Client *client = request->client;
+    struct ClientBuffer *buffer = client->buffer;
+    char c = BufferCharAtPos(buffer, 0);
     return 1;
 }

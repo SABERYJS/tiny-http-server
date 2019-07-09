@@ -13,8 +13,9 @@ int ReadFromSocket(int socket, struct ClientBuffer *buffer) {
         //buffer is full
         return 0;
     }
-    int rb = read(socket, pos, cread);
+    int rb;
     again:
+    rb = read(socket, pos, cread);
     if (rb == -1) {
         if (errno == EINTR) {
             //system call interrupted
