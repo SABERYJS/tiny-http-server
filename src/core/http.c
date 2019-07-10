@@ -159,7 +159,7 @@ int HttpParseRequestLineUrl(struct HttpRequest *request) {
 void HttpEventHandleCallback(int type, void *data) {
     struct HttpRequest *request = (struct HttpRequest *) data;
     struct Client *client = request->client;
-    ReadFromSocket(client->sock, client->buffer);
+    ReadFromSource(client->sock, client->buffer);
     printf("%s\n", client->buffer->buf);
     if (type == EVENT_READABLE) {
         if (client->status == STATUS_RECEIVING_HEADER) {

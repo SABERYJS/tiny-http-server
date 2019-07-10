@@ -4,7 +4,7 @@
 
 #include "buffer.h"
 
-int ReadFromSocket(int socket, struct ClientBuffer *buffer) {
+int ReadFromSource(int socket, struct ClientBuffer *buffer) {
     BufferMoveForward(buffer);
     void *pos = buffer->buf + buffer->write_pos;//write from the position
     // bytes  count that can be read , because buffer size is limited

@@ -21,7 +21,7 @@ struct ClientBuffer {
 
 #define BufferSubstr(buffer, start) (buffer->buf+buffer->read_pos+start)
 
-int ReadFromSocket(int socket, struct ClientBuffer *buffer);
+int ReadFromSource(int socket, struct ClientBuffer *buffer);
 
 void BufferDiscard(struct ClientBuffer *buffer, size_t off);
 
