@@ -566,6 +566,8 @@ int HttpParseHeader(struct HttpRequest *request) {
     int colonPos;
     int kl, vl;
     short last = 0;
+    short colonMatched = 0;
+    char *ptr;
     size_t processed = 0;//processed how many bytes  so far
     if (!buffer->size) {
         return 1;
@@ -586,39 +588,49 @@ int HttpParseHeader(struct HttpRequest *request) {
                     }
                     BufferDiscard(buffer, processed + 2);
                 } else {
-                    BufferDiscard(buffer, processed + 1);
+                    // parse status has no change
+                    // last '\r' is reserved for later parse
+                    BufferDiscard(buffer, processed);
                 }
                 return 1;
             }
             matchStart = 1;
             start = i;
         } else if (CharIsColon(c)) {
-            colonPos = i;
+            if (!colonMatched) {
+                colonMatched = 1;
+                colonPos = i;
+            }
         } else if (c == CHAR_ENTER) {
             end = i;
         } else if (c == CHAR_NEW_LINE) {
             //match one line
             if (!(header = MemAlloc(sizeof(struct HttpHeader)))) {
-                return -1;
+                goto failed;
             }
             kl = colonPos - start + 1;//tail 0
             vl = end - colonPos;//tail 0
-            header->name = MemAlloc(kl);
-            header->value = MemAlloc(vl);
-            if (!header->name || !header->value) {
+
+            ptr = trim(BufferSubstr(buffer, start), kl, CHARSPACE);
+            if (!ptr) {
                 goto failed;
             }
-
-            memcpy(header->name, BufferSubstr(buffer, start), (kl - 1));
-            memcpy(header->value, BufferSubstr(buffer, colonPos + 1), (vl - 1));
+            header->name = ptr;
+            ptr = trim(BufferSubstr(buffer, colonPos + 1), vl, CHARSPACE);
+            if (!ptr) {
+                goto failed;
+            }
+            header->value = ptr;
             if (HashAdd(client->headers, header->name, header) != 0) {
                 goto failed;
             }
-            matchStart = 0;
+            matchStart = 0;//reset flag
+            colonMatched = 0;
             processed += (end - start + 2);//include tail \r\n
             LogInfo(request->log, "handle one header[%s]:%s\n", header->name, header->value);
         }
     }
+    //the case: last \r\n not match,so code run to here
     BufferDiscard(buffer, processed);
     return 1;
 

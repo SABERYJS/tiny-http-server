@@ -10,6 +10,7 @@
 #include "event.h"
 #include "buffer.h"
 #include "log.h"
+#include "string-tool.h"
 
 #define CHAR_ENTER ('\r')
 #define CHAR_NEW_LINE ('\n')
@@ -51,6 +52,7 @@
 #define CharIsAlpha(c)  ((c>='a' && c<='z') || (c>='A' &&c<='Z'))
 #define CharBar(c) (c=='-')
 #define CharEqual ('=')
+#define CHARSPACE (' ')
 
 #define DomainValidChar(c)  ((c>='a' && c<='z') || (c>='A' &&c<='Z') ||c=='-' ||c=='.' ||(c>='0' &&c<='9') ||c==':')
 
