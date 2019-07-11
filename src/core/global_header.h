@@ -25,5 +25,6 @@
 #include "../algorithm/list.h"
 #include "../algorithm/hash.h"
 #include "memory.h"
+#include "./server.h"
 
 #endif //QC_GLOBAL_HEADER_H

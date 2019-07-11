@@ -53,6 +53,7 @@
 #define CharBar(c) (c=='-')
 #define CharEqual ('=')
 #define CHARSPACE (' ')
+#define CharIsEqual(c)  (c==CharEqual)
 
 #define DomainValidChar(c)  ((c>='a' && c<='z') || (c>='A' &&c<='Z') ||c=='-' ||c=='.' ||(c>='0' &&c<='9') ||c==':')
 

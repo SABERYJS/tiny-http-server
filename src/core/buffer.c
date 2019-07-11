@@ -50,3 +50,15 @@ void BufferMoveForward(struct ClientBuffer *buffer) {
     buffer->read_pos = 0;
     buffer->write_pos = buffer->size;
 }
+
+struct ClientBuffer *BufferCreate() {
+    struct ClientBuffer *buffer = MemAlloc(sizeof(struct ClientBuffer));
+    if (!buffer) {
+        return NULL;
+    } else {
+        buffer->size = buffer->write_pos = buffer->read_pos = 0;
+        buffer->left = 0;
+        memset(buffer->buf, 0, CLIENT_RECEIVE_BUFFER_SIZE);
+        return buffer;
+    }
+}

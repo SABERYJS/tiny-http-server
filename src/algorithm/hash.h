@@ -42,4 +42,8 @@ void HashDelete(struct HashTable *table, char *key);
 void *HashSearch(struct HashTable *table, char *key);
 
 
+typedef int (*HashIterateCallback)(char *key, void *data);
+
+void *HashIterate(struct HashTable *table, HashIterateCallback callback);
+
 #endif //STL_CLONE_HASH_H

@@ -27,5 +27,7 @@ void BufferDiscard(struct ClientBuffer *buffer, size_t off);
 
 void BufferMoveForward(struct ClientBuffer *buffer);
 
+struct ClientBuffer *BufferCreate();
+
 
 #endif //STL_CLONE_BUFFER_H
