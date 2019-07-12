@@ -87,15 +87,17 @@ int ConfigFileParse(struct Config *config) {
     short matchEnter = 0;
     short keyMatchSpace = 0;
     short valueNonEmpty = 0;
-    int start, end, i, keyl, valuel, equalPos, kend;
+    int start, end, i, equalPos, kend;
     int processed = 0;//calculate how many bytes that has been processed
     size_t rc;
     char c;
     int lineStart;//line start position
     short lineStartMatched = 0;
+    short last = 0;
     //start read file
     while ((rc = ReadFromSource(config->fd, config->buffer)) > 0) {
         for (i = 0; i < config->buffer->size; ++i) {
+            last = (i == (config->buffer->size - 1));
             c = BufferCharAtPos(config->buffer, i);
             if (CharIsEnter(c)) {
                 if (!matchStart || !equalMatch || (i - equalPos) == 1 || matchEnter || !valueNonEmpty) {
@@ -108,10 +110,12 @@ int ConfigFileParse(struct Config *config) {
                     goto failed;
                 }
                 //match finished,start process text line
-                if (!ConfigProcessOneLine(config, start, (keyMatchSpace ? (kend - 1) : kend), equalPos + 1, end - 1)) {
+                if (!ConfigProcessOneLine(config, start, (kend - 1), equalPos + 1, end - 1)) {
                     goto failed;
                 }
                 processed += (end - lineStart + 2);//include \r\n
+                //clear all parse flag
+                matchStart = equalMatch = matchEnter = keyMatchSpace = valueNonEmpty = lineStartMatched = 0;
             } else if (CharIsEqual(c)) {
                 if (equalMatch) {
                     goto failed;
@@ -163,8 +167,18 @@ int ConfigFileParse(struct Config *config) {
                         valueNonEmpty = 1;
                     }
                 }
+
+                if (last && equalMatch && valueNonEmpty && rc < CLIENT_RECEIVE_BUFFER_SIZE) {
+                    //file read finished
+                    //the last character matched and '=' matched before and value non empty
+                    if (!ConfigProcessOneLine(config, start, (kend - 1), equalPos + 1, (config->buffer->size - 1))) {
+                        goto failed;
+                    } else {
+                        processed += (config->buffer->size - lineStart);//from line start to end of line
+                    }
+                }
             }
-            if (!lineStartMatched) {
+            if (!CharIsNewLine(c) && !lineStartMatched) {
                 lineStartMatched = 1;
                 lineStart = i;
             }
@@ -201,6 +215,7 @@ int ConfigProcessOneLine(struct Config *config, int kstart, int kend, int vstart
         } else {
             memcpy(item->key, BufferSubstr(buffer, kstart), (kend - kstart + 1));
             memcpy(item->value, BufferSubstr(buffer, vstart), (vend - vstart + 1));
+            LogInfo(config->log, "config parsed[%s]:%s\n", item->key, item->value);
             if (HashAdd(config->config_items, item->key, item) < 0) {
                 goto failed;
             } else {
@@ -246,4 +261,9 @@ static int ConfigCheckSystemConfig(struct Config *config) {
         }
         node = node->next;
     }
+}
+
+int ConfigInitServerCgi(struct ConfigItem *configItem) {
+    server.cgiPath = trim(configItem->value, strlen(configItem->value), CHARSPACE);
+    return server.cgiPath ? 1 : -1;
 }

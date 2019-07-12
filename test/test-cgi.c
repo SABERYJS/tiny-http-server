@@ -4,7 +4,7 @@
 #include <sys/wait.h>
 #include <stdlib.h>
 
-#define    CGI_NAME "get_post.ums"
+#define    CGI_NAME "E:\\PHPTutorial\\php\\php-7.2.1-nts\\php-cgi.exe"
 #define    REQUEST_METHOD "REQUEST_METHOD=POST"
 #define REQUEST_PARAMETER "myname=huangzhihui"
 
@@ -28,7 +28,7 @@ int main(int argc, char *argv[]) {
 
         //等待CGI子进程全然把数据读取后写入,
         //实际情况应该是使用select 或者 epoll 监听
-        usleep(1000);
+        sleep(1);
 
         //模拟接收 CGI 应答的数据
         char buff[256] = {0};
@@ -66,7 +66,9 @@ int main(int argc, char *argv[]) {
         char content_length[128] = {0};
         sprintf(content_length, "CONTENT_LENGTH=%u", strlen(REQUEST_PARAMETER));
         char *exec_argv[3] = {REQUEST_METHOD, content_length};
-        if (execve(CGI_NAME, argv, exec_argv) < 0) {
+        printf("argc:%d\n", argc);
+        printf("argv[0] is %s\n", argv[0]);
+        if (execve(CGI_NAME, argv + 1, exec_argv) < 0) {
             printf("execl error for %s", CGI_NAME);
         }
         exit(0);

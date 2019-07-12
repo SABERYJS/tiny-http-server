@@ -27,6 +27,9 @@ struct ConfigItem {
 
 typedef int (*ConfigCallback)(struct ConfigItem *configItem);
 
+int ConfigInitServerCgi(struct ConfigItem *configItem);
+
+
 struct SystemConfigDefinition {
     char *config_name;
     int flag;
@@ -34,8 +37,8 @@ struct SystemConfigDefinition {
 };
 #define SentinelConfig  {NULL, 0, NULL}
 
-struct SystemConfigDefinition definitions[] = {
-        {"cgiPath", CONFIG_REQUIRED | CONFIG_FILE_EXECUTABLE | CONFIG_FILE, NULL},
+static struct SystemConfigDefinition definitions[] = {
+        {"cgiPath", CONFIG_REQUIRED | CONFIG_FILE_EXECUTABLE | CONFIG_FILE, ConfigInitServerCgi},
         SentinelConfig
 };
 

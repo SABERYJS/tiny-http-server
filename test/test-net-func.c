@@ -2,18 +2,22 @@
 // Created by Administrator on 2019/7/2.
 //
 
-
-/*#include <w32api/inaddr.h>
-#include <cygwin/in.h>*/
 #include "../src/core/net.h"
 #include <sys/select.h>
 #include "../src/algorithm/rb-tree.h"
 #include "../src/core/string-tool.h"
+#include "../src/core/config.h"
+#include "../src/core/log.h"
 
 
 int main() {
-    char *src = "  123456789  ";//len=14
-    src = trim(src, 14, ' ');
-    printf("%d\n", strlen(src));
-    printf("%s\n", src);
+    char *filename = "E:\\code\\algorithm\\app.conf";
+    struct Config *config = ConfigCreate(filename);
+    struct Log *log = LogCreate(0, STDOUT_FILENO, NULL, LOG_LEVEL_DEBUG);
+    if (!config) {
+        LogInfo(log, "create config failed\n");
+        exit(0);
+    } else {
+        ConfigFileParse(config);
+    }
 }
