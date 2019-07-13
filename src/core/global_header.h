@@ -53,5 +53,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "memory.h"
 #include "./server.h"
 #include <stdarg.h>
+#include<ctype.h>
 
 #endif //QC_GLOBAL_HEADER_H

@@ -35,4 +35,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 char *trim(const char *source, size_t len, char c);
 
+char *strlwr(char *str);
+
 #endif //STL_CLONE_STRING_TOOL_H
