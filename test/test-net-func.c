@@ -43,6 +43,7 @@ int SetProcessTitle(int argc, char **argv, char *title, int len) {
 #ifdef  linux
     //linux system,argv and environ  stored one after another
     //so set process title is complicated
+    printf("run here\n");
     char **p = argv;
     size_t al = strlen(p[0]);
     if (al >= len) {
