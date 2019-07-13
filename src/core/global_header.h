@@ -52,5 +52,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "../algorithm/hash.h"
 #include "memory.h"
 #include "./server.h"
+#include <stdarg.h>
 
 #endif //QC_GLOBAL_HEADER_H

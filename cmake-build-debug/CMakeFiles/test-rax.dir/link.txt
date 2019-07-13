@@ -1,1 +1,1 @@
-/usr/bin/cc -std=c99 -g  -Wl,--enable-auto-import CMakeFiles/test-rax.dir/test/test-rax.c.o  -o test-rax.exe -Wl,--out-implib,libtest-rax.dll.a -Wl,--major-image-version,0,--minor-image-version,0 lib/rax/librax.a 
+/usr/bin/cc -std=c99 -g  -Wl,--enable-auto-import CMakeFiles/test-rax.dir/test/test-rax.c.o  -o test-rax.exe -Wl,--out-implib,libtest-rax.dll.a -Wl,--major-image-version,0,--minor-image-version,0 lib/rax/librax.a -lm 

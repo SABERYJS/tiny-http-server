@@ -8,18 +8,18 @@
 		<Option virtualFolders="CMake Files\;CMake Files\src\;CMake Files\src\core\;CMake Files\src\algorithm\;CMake Files\src\pcre\;CMake Files\lib\;CMake Files\lib\rax\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="/cygdrive/e/code/algorithm/cmake-build-debug/src/algorithm"/>
+				<Option working_dir="/cygdrive/g/algorithm/cmake-build-debug/src/algorithm"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make.exe -j4 -f &quot;/cygdrive/e/code/algorithm/cmake-build-debug/src/algorithm/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="/usr/bin/make.exe -j4 -f &quot;/cygdrive/e/code/algorithm/cmake-build-debug/src/algorithm/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make.exe -j4 -f &quot;/cygdrive/e/code/algorithm/cmake-build-debug/src/algorithm/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make.exe -j4 -f &quot;/cygdrive/e/code/algorithm/cmake-build-debug/src/algorithm/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make.exe -j4 -f &quot;/cygdrive/g/algorithm/cmake-build-debug/src/algorithm/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make.exe -j4 -f &quot;/cygdrive/g/algorithm/cmake-build-debug/src/algorithm/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make.exe -j4 -f &quot;/cygdrive/g/algorithm/cmake-build-debug/src/algorithm/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make.exe -j4 -f &quot;/cygdrive/g/algorithm/cmake-build-debug/src/algorithm/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="stl">
-				<Option output="/cygdrive/e/code/algorithm/cmake-build-debug/src/algorithm/libstl.a" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/cygdrive/e/code/algorithm/cmake-build-debug/src/algorithm"/>
+				<Option output="/cygdrive/g/algorithm/cmake-build-debug/src/algorithm/libstl.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/cygdrive/g/algorithm/cmake-build-debug/src/algorithm"/>
 				<Option object_output="./"/>
 				<Option type="2"/>
 				<Option compiler="gcc"/>
@@ -32,15 +32,15 @@
 					<Add directory="/usr/lib/gcc/x86_64-pc-cygwin/7.4.0/../../../../lib/../include/w32api"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make.exe -j4 -f &quot;/cygdrive/e/code/algorithm/cmake-build-debug/src/algorithm/Makefile&quot;  VERBOSE=1 stl"/>
-					<CompileFile command="/usr/bin/make.exe -j4 -f &quot;/cygdrive/e/code/algorithm/cmake-build-debug/src/algorithm/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make.exe -j4 -f &quot;/cygdrive/e/code/algorithm/cmake-build-debug/src/algorithm/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make.exe -j4 -f &quot;/cygdrive/e/code/algorithm/cmake-build-debug/src/algorithm/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make.exe -j4 -f &quot;/cygdrive/g/algorithm/cmake-build-debug/src/algorithm/Makefile&quot;  VERBOSE=1 stl"/>
+					<CompileFile command="/usr/bin/make.exe -j4 -f &quot;/cygdrive/g/algorithm/cmake-build-debug/src/algorithm/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make.exe -j4 -f &quot;/cygdrive/g/algorithm/cmake-build-debug/src/algorithm/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make.exe -j4 -f &quot;/cygdrive/g/algorithm/cmake-build-debug/src/algorithm/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="stl/fast">
-				<Option output="/cygdrive/e/code/algorithm/cmake-build-debug/src/algorithm/libstl.a" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/cygdrive/e/code/algorithm/cmake-build-debug/src/algorithm"/>
+				<Option output="/cygdrive/g/algorithm/cmake-build-debug/src/algorithm/libstl.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/cygdrive/g/algorithm/cmake-build-debug/src/algorithm"/>
 				<Option object_output="./"/>
 				<Option type="2"/>
 				<Option compiler="gcc"/>
@@ -53,80 +53,80 @@
 					<Add directory="/usr/lib/gcc/x86_64-pc-cygwin/7.4.0/../../../../lib/../include/w32api"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make.exe -j4 -f &quot;/cygdrive/e/code/algorithm/cmake-build-debug/src/algorithm/Makefile&quot;  VERBOSE=1 stl/fast"/>
-					<CompileFile command="/usr/bin/make.exe -j4 -f &quot;/cygdrive/e/code/algorithm/cmake-build-debug/src/algorithm/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make.exe -j4 -f &quot;/cygdrive/e/code/algorithm/cmake-build-debug/src/algorithm/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make.exe -j4 -f &quot;/cygdrive/e/code/algorithm/cmake-build-debug/src/algorithm/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make.exe -j4 -f &quot;/cygdrive/g/algorithm/cmake-build-debug/src/algorithm/Makefile&quot;  VERBOSE=1 stl/fast"/>
+					<CompileFile command="/usr/bin/make.exe -j4 -f &quot;/cygdrive/g/algorithm/cmake-build-debug/src/algorithm/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make.exe -j4 -f &quot;/cygdrive/g/algorithm/cmake-build-debug/src/algorithm/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make.exe -j4 -f &quot;/cygdrive/g/algorithm/cmake-build-debug/src/algorithm/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/cygdrive/e/code/algorithm/src/algorithm/array.c">
+		<Unit filename="/cygdrive/g/algorithm/src/algorithm/array.c">
 			<Option target="stl"/>
 		</Unit>
-		<Unit filename="/cygdrive/e/code/algorithm/src/algorithm/array.h">
+		<Unit filename="/cygdrive/g/algorithm/src/algorithm/array.h">
 			<Option target="stl"/>
 		</Unit>
-		<Unit filename="/cygdrive/e/code/algorithm/src/algorithm/hash.c">
+		<Unit filename="/cygdrive/g/algorithm/src/algorithm/hash.c">
 			<Option target="stl"/>
 		</Unit>
-		<Unit filename="/cygdrive/e/code/algorithm/src/algorithm/hash.h">
+		<Unit filename="/cygdrive/g/algorithm/src/algorithm/hash.h">
 			<Option target="stl"/>
 		</Unit>
-		<Unit filename="/cygdrive/e/code/algorithm/src/algorithm/list.c">
+		<Unit filename="/cygdrive/g/algorithm/src/algorithm/list.c">
 			<Option target="stl"/>
 		</Unit>
-		<Unit filename="/cygdrive/e/code/algorithm/src/algorithm/list.h">
+		<Unit filename="/cygdrive/g/algorithm/src/algorithm/list.h">
 			<Option target="stl"/>
 		</Unit>
-		<Unit filename="/cygdrive/e/code/algorithm/src/algorithm/queue.c">
+		<Unit filename="/cygdrive/g/algorithm/src/algorithm/queue.c">
 			<Option target="stl"/>
 		</Unit>
-		<Unit filename="/cygdrive/e/code/algorithm/src/algorithm/queue.h">
+		<Unit filename="/cygdrive/g/algorithm/src/algorithm/queue.h">
 			<Option target="stl"/>
 		</Unit>
-		<Unit filename="/cygdrive/e/code/algorithm/src/algorithm/rb-tree.c">
+		<Unit filename="/cygdrive/g/algorithm/src/algorithm/rb-tree.c">
 			<Option target="stl"/>
 		</Unit>
-		<Unit filename="/cygdrive/e/code/algorithm/src/algorithm/rb-tree.h">
+		<Unit filename="/cygdrive/g/algorithm/src/algorithm/rb-tree.h">
 			<Option target="stl"/>
 		</Unit>
-		<Unit filename="/cygdrive/e/code/algorithm/src/algorithm/stack.c">
+		<Unit filename="/cygdrive/g/algorithm/src/algorithm/stack.c">
 			<Option target="stl"/>
 		</Unit>
-		<Unit filename="/cygdrive/e/code/algorithm/src/algorithm/stack.h">
+		<Unit filename="/cygdrive/g/algorithm/src/algorithm/stack.h">
 			<Option target="stl"/>
 		</Unit>
-		<Unit filename="/cygdrive/e/code/algorithm/src/algorithm/tool.c">
+		<Unit filename="/cygdrive/g/algorithm/src/algorithm/tool.c">
 			<Option target="stl"/>
 		</Unit>
-		<Unit filename="/cygdrive/e/code/algorithm/src/algorithm/tool.h">
+		<Unit filename="/cygdrive/g/algorithm/src/algorithm/tool.h">
 			<Option target="stl"/>
 		</Unit>
-		<Unit filename="/cygdrive/e/code/algorithm/src/algorithm/tree.c">
+		<Unit filename="/cygdrive/g/algorithm/src/algorithm/tree.c">
 			<Option target="stl"/>
 		</Unit>
-		<Unit filename="/cygdrive/e/code/algorithm/src/algorithm/tree.h">
+		<Unit filename="/cygdrive/g/algorithm/src/algorithm/tree.h">
 			<Option target="stl"/>
 		</Unit>
-		<Unit filename="/cygdrive/e/code/algorithm/src/algorithm/unit.c">
+		<Unit filename="/cygdrive/g/algorithm/src/algorithm/unit.c">
 			<Option target="stl"/>
 		</Unit>
-		<Unit filename="/cygdrive/e/code/algorithm/src/algorithm/unit.h">
+		<Unit filename="/cygdrive/g/algorithm/src/algorithm/unit.h">
 			<Option target="stl"/>
 		</Unit>
-		<Unit filename="/cygdrive/e/code/algorithm/CMakeLists.txt">
+		<Unit filename="/cygdrive/g/algorithm/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
-		<Unit filename="/cygdrive/e/code/algorithm/src/core/CMakeLists.txt">
+		<Unit filename="/cygdrive/g/algorithm/src/core/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\src\core\"/>
 		</Unit>
-		<Unit filename="/cygdrive/e/code/algorithm/src/algorithm/CMakeLists.txt">
+		<Unit filename="/cygdrive/g/algorithm/src/algorithm/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\src\algorithm\"/>
 		</Unit>
-		<Unit filename="/cygdrive/e/code/algorithm/src/pcre/CMakeLists.txt">
+		<Unit filename="/cygdrive/g/algorithm/src/pcre/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\src\pcre\"/>
 		</Unit>
-		<Unit filename="/cygdrive/e/code/algorithm/lib/rax/CMakeLists.txt">
+		<Unit filename="/cygdrive/g/algorithm/lib/rax/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\lib\rax\"/>
 		</Unit>
 	</Project>

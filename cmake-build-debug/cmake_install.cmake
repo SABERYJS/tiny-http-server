@@ -1,4 +1,4 @@
-# Install script for directory: /cygdrive/e/code/algorithm
+# Install script for directory: /cygdrive/g/algorithm
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -33,7 +33,7 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/bin" TYPE EXECUTABLE FILES "/cygdrive/e/code/algorithm/cmake-build-debug/test-event.exe")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/bin" TYPE EXECUTABLE FILES "/cygdrive/g/algorithm/cmake-build-debug/test-event.exe")
   if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/test-event.exe" AND
      NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/test-event.exe")
     if(CMAKE_INSTALL_DO_STRIP)
@@ -44,10 +44,10 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/cygdrive/e/code/algorithm/cmake-build-debug/lib/rax/cmake_install.cmake")
-  include("/cygdrive/e/code/algorithm/cmake-build-debug/src/algorithm/cmake_install.cmake")
-  include("/cygdrive/e/code/algorithm/cmake-build-debug/src/pcre/cmake_install.cmake")
-  include("/cygdrive/e/code/algorithm/cmake-build-debug/src/core/cmake_install.cmake")
+  include("/cygdrive/g/algorithm/cmake-build-debug/lib/rax/cmake_install.cmake")
+  include("/cygdrive/g/algorithm/cmake-build-debug/src/algorithm/cmake_install.cmake")
+  include("/cygdrive/g/algorithm/cmake-build-debug/src/pcre/cmake_install.cmake")
+  include("/cygdrive/g/algorithm/cmake-build-debug/src/core/cmake_install.cmake")
 
 endif()
 
@@ -59,5 +59,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/cygdrive/e/code/algorithm/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/cygdrive/g/algorithm/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

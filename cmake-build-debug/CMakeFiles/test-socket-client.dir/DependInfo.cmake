@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "/cygdrive/e/code/algorithm/test/test-socket-client.c" "/cygdrive/e/code/algorithm/cmake-build-debug/CMakeFiles/test-socket-client.dir/test/test-socket-client.c.o"
+  "/cygdrive/g/algorithm/test/test-socket-client.c" "/cygdrive/g/algorithm/cmake-build-debug/CMakeFiles/test-socket-client.dir/test/test-socket-client.c.o"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 

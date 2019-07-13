@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "/cygdrive/e/code/algorithm/test/test-rax.c" "/cygdrive/e/code/algorithm/cmake-build-debug/CMakeFiles/test-rax.dir/test/test-rax.c.o"
+  "/cygdrive/g/algorithm/test/test-rax.c" "/cygdrive/g/algorithm/cmake-build-debug/CMakeFiles/test-rax.dir/test/test-rax.c.o"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 
@@ -17,7 +17,7 @@ set(CMAKE_C_TARGET_INCLUDE_PATH
 
 # Targets to which this target links.
 set(CMAKE_TARGET_LINKED_INFO_FILES
-  "/cygdrive/e/code/algorithm/cmake-build-debug/lib/rax/CMakeFiles/rax.dir/DependInfo.cmake"
+  "/cygdrive/g/algorithm/cmake-build-debug/lib/rax/CMakeFiles/rax.dir/DependInfo.cmake"
   )
 
 # Fortran module output directory.

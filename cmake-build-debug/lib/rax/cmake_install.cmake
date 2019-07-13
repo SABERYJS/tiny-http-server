@@ -1,4 +1,4 @@
-# Install script for directory: /cygdrive/e/code/algorithm/lib/rax
+# Install script for directory: /cygdrive/g/algorithm/lib/rax
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

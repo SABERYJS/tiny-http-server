@@ -5,16 +5,17 @@
   </component>
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
     <generated>
-      <config projectName="qc" targetName="test-socket-client" />
       <config projectName="qc" targetName="qc" />
       <config projectName="qc" targetName="regex" />
-      <config projectName="qc" targetName="rax" />
       <config projectName="qc" targetName="test-net-func" />
       <config projectName="qc" targetName="test-socket-server" />
-      <config projectName="qc" targetName="test-regex" />
       <config projectName="qc" targetName="test-rax" />
-      <config projectName="qc" targetName="stl" />
       <config projectName="qc" targetName="test-command-line" />
+      <config projectName="qc" targetName="test-cgi" />
+      <config projectName="qc" targetName="test-socket-client" />
+      <config projectName="qc" targetName="rax" />
+      <config projectName="qc" targetName="test-regex" />
+      <config projectName="qc" targetName="stl" />
       <config projectName="qc" targetName="core" />
       <config projectName="qc" targetName="test-event" />
     </generated>
@@ -25,263 +26,19 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2f4e10ce-5e89-4b52-984d-0f4a01f24546" name="Default Changelist" comment="cmake build">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CMakeFiles/3.15.0-rc1/CMakeSystem.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CMakeFiles/3.15.0-rc1/CompilerIdC/CMakeCCompilerId.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CMakeFiles/3.15.0-rc1/CompilerIdCXX/CMakeCXXCompilerId.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CMakeFiles/CMakeError.log" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CMakeFiles/CMakeOutput.log" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CMakeFiles/cmake.check_cache" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithm.si4project/algorithm.bookmarks.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithm.si4project/algorithm.sip_sym" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithm.si4project/algorithm.sip_xab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithm.si4project/algorithm.sip_xad" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithm.si4project/algorithm.sip_xc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithm.si4project/algorithm.sip_xf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithm.si4project/algorithm.sip_xm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithm.si4project/algorithm.sip_xr" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithm.si4project/algorithm.sip_xsb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithm.si4project/algorithm.sip_xsd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithm.si4project/algorithm.siproj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithm.si4project/algorithm.siproj_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithm.si4project/algorithm.siwork" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/cmake-build-debug_CMakeFiles_3.14.3_CompilerIdCXX_CMakeCXXCompilerId.cpp.sisc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/cmake-build-debug_CMakeFiles_3.14.3_CompilerIdC_CMakeCCompilerId.c.sisc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/cmake-build-debug_CMakeFiles_feature_tests.c.sisc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/cmake-build-debug_CMakeFiles_feature_tests.cxx.sisc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/lib_rax_crc16.c.sisc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/lib_rax_radix-tree.c.sisc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/lib_rax_radix-tree.h.sisc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/lib_rax_rax.c.sisc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/lib_rax_rax.h.sisc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/lib_rax_rax_malloc.h.sisc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/lib_rax_rax_oom_malloc.h.sisc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/lib_rax_rc4rand.c.sisc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/lib_rax_rc4rand.h.sisc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/src_algorithm_array.c.sisc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/src_algorithm_array.h.sisc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/src_algorithm_config_header.h.sisc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/src_algorithm_hash.c.sisc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/src_algorithm_hash.h.sisc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/src_algorithm_list.c.sisc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/src_algorithm_list.h.sisc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/src_algorithm_queue.c.sisc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/src_algorithm_queue.h.sisc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/src_algorithm_rb-tree.c.sisc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/src_algorithm_rb-tree.h.sisc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/src_algorithm_stack.c.sisc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/src_algorithm_stack.h.sisc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/src_algorithm_tool.c.sisc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/src_algorithm_tool.h.sisc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/src_algorithm_tree.c.sisc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/src_algorithm_tree.h.sisc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/src_algorithm_unit.c.sisc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/src_algorithm_unit.h.sisc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/src_core_command_line.c.sisc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/src_core_command_line.h.sisc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/src_core_event.c.sisc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/src_core_event.h.sisc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/src_core_global_header.h.sisc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/src_core_net.c.sisc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/src_core_net.h.sisc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/src_main.c.sisc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/src_pcre_regex.c.sisc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/src_pcre_regex.h.sisc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/test_array-test.c.sisc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/test_hash-test.h.sisc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/test_queue-test.h.sisc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/test_rb-tree-test.h.sisc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/test_stack-test.h.sisc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/test_test-command-line.c.sisc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/test_test-net-func.c.sisc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/test_test-rax.c.sisc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/test_test-regex.c.sisc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/test_test-socket-client.c.sisc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/test_test-socket-server.c.sisc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algorithm.si4project/cache/parse/test_test_header.h.sisc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.14.3/CMakeCCompiler.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.14.3/CMakeCXXCompiler.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.14.3/CMakeDetermineCompilerABI_C.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.14.3/CMakeDetermineCompilerABI_CXX.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.14.3/CMakeRCCompiler.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.14.3/CMakeSystem.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.14.3/CompilerIdC/CMakeCCompilerId.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.14.3/CompilerIdC/a.exe" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.14.3/CompilerIdCXX/CMakeCXXCompilerId.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.14.3/CompilerIdCXX/a.exe" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/qc.dir/C.includecache" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/qc.dir/DependInfo.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/qc.dir/build.make" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/qc.dir/cmake_clean.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/qc.dir/depend.internal" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/qc.dir/depend.make" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/qc.dir/flags.make" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/qc.dir/link.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/qc.dir/progress.make" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/qc.dir/src/main.c.o" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-command-line.dir/C.includecache" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-command-line.dir/DependInfo.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-command-line.dir/build.make" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-command-line.dir/cmake_clean.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-command-line.dir/depend.internal" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-command-line.dir/depend.make" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-command-line.dir/flags.make" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-command-line.dir/link.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-command-line.dir/progress.make" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-command-line.dir/test/test-command-line.c.o" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-command-line.dir/test/test-event.c.o" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-event.dir/C.includecache" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-event.dir/DependInfo.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-event.dir/build.make" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-event.dir/cmake_clean.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-event.dir/depend.internal" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-event.dir/depend.make" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-event.dir/flags.make" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-event.dir/link.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-event.dir/progress.make" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-event.dir/test/test-event.c.o" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-net-func.dir/C.includecache" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-net-func.dir/DependInfo.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-net-func.dir/build.make" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-net-func.dir/cmake_clean.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-net-func.dir/depend.internal" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-net-func.dir/depend.make" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-net-func.dir/flags.make" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-net-func.dir/link.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-net-func.dir/progress.make" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-rax.dir/C.includecache" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-rax.dir/DependInfo.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-rax.dir/build.make" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-rax.dir/cmake_clean.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-rax.dir/depend.internal" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-rax.dir/depend.make" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-rax.dir/flags.make" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-rax.dir/link.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-rax.dir/progress.make" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-rax.dir/test/test-rax.c.o" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-regex.dir/C.includecache" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-regex.dir/DependInfo.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-regex.dir/build.make" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-regex.dir/cmake_clean.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-regex.dir/depend.internal" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-regex.dir/depend.make" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-regex.dir/flags.make" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-regex.dir/link.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-regex.dir/progress.make" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-regex.dir/test/test-regex.c.o" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-socket-client.dir/C.includecache" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-socket-client.dir/DependInfo.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-socket-client.dir/build.make" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-socket-client.dir/cmake_clean.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-socket-client.dir/depend.internal" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-socket-client.dir/depend.make" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-socket-client.dir/flags.make" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-socket-client.dir/link.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-socket-client.dir/progress.make" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-socket-client.dir/test/test-socket-client.c.o" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-socket-server.dir/DependInfo.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-socket-server.dir/build.make" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-socket-server.dir/cmake_clean.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-socket-server.dir/flags.make" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-socket-server.dir/link.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-socket-server.dir/progress.make" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/lib/rax/CMakeFiles/CMakeDirectoryInformation.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/lib/rax/CMakeFiles/progress.marks" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/lib/rax/CMakeFiles/rax.dir/C.includecache" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/lib/rax/CMakeFiles/rax.dir/DependInfo.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/lib/rax/CMakeFiles/rax.dir/build.make" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/lib/rax/CMakeFiles/rax.dir/cmake_clean.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/lib/rax/CMakeFiles/rax.dir/cmake_clean_target.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/lib/rax/CMakeFiles/rax.dir/crc16.c.o" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/lib/rax/CMakeFiles/rax.dir/depend.internal" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/lib/rax/CMakeFiles/rax.dir/depend.make" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/lib/rax/CMakeFiles/rax.dir/flags.make" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/lib/rax/CMakeFiles/rax.dir/link.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/lib/rax/CMakeFiles/rax.dir/progress.make" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/lib/rax/CMakeFiles/rax.dir/radix-tree.c.o" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/lib/rax/CMakeFiles/rax.dir/rax.c.o" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/lib/rax/CMakeFiles/rax.dir/rc4rand.c.o" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/lib/rax/Makefile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/lib/rax/cmake_install.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/lib/rax/librax.a" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/lib/rax/rax.cbp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/qc.cbp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/qc.exe" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/algorithm/CMakeFiles/CMakeDirectoryInformation.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/algorithm/CMakeFiles/progress.marks" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/algorithm/CMakeFiles/stl.dir/C.includecache" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/algorithm/CMakeFiles/stl.dir/DependInfo.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/algorithm/CMakeFiles/stl.dir/array.c.o" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/algorithm/CMakeFiles/stl.dir/build.make" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/algorithm/CMakeFiles/stl.dir/cmake_clean.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/algorithm/CMakeFiles/stl.dir/cmake_clean_target.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/algorithm/CMakeFiles/stl.dir/depend.internal" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/algorithm/CMakeFiles/stl.dir/depend.make" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/algorithm/CMakeFiles/stl.dir/flags.make" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/algorithm/CMakeFiles/stl.dir/hash.c.o" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/algorithm/CMakeFiles/stl.dir/link.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/algorithm/CMakeFiles/stl.dir/list.c.o" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/algorithm/CMakeFiles/stl.dir/progress.make" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/algorithm/CMakeFiles/stl.dir/queue.c.o" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/algorithm/CMakeFiles/stl.dir/rb-tree.c.o" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/algorithm/CMakeFiles/stl.dir/stack.c.o" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/algorithm/CMakeFiles/stl.dir/tool.c.o" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/algorithm/CMakeFiles/stl.dir/tree.c.o" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/algorithm/CMakeFiles/stl.dir/unit.c.o" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/algorithm/Makefile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/algorithm/cmake_install.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/algorithm/libstl.a" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/algorithm/stl.cbp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/core/CMakeFiles/CMakeDirectoryInformation.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/core/CMakeFiles/core.dir/C.includecache" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/core/CMakeFiles/core.dir/DependInfo.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/core/CMakeFiles/core.dir/build.make" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/core/CMakeFiles/core.dir/cmake_clean.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/core/CMakeFiles/core.dir/cmake_clean_target.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/core/CMakeFiles/core.dir/command_line.c.o" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/core/CMakeFiles/core.dir/depend.internal" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/core/CMakeFiles/core.dir/depend.make" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/core/CMakeFiles/core.dir/flags.make" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/core/CMakeFiles/core.dir/link.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/core/CMakeFiles/core.dir/net.c.o" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/core/CMakeFiles/core.dir/progress.make" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/core/CMakeFiles/progress.marks" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/core/Makefile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/core/cmake_install.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/core/core.cbp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/core/libcore.a" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/pcre/CMakeFiles/CMakeDirectoryInformation.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/pcre/CMakeFiles/progress.marks" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/pcre/CMakeFiles/regex.dir/C.includecache" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/pcre/CMakeFiles/regex.dir/DependInfo.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/pcre/CMakeFiles/regex.dir/build.make" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/pcre/CMakeFiles/regex.dir/cmake_clean.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/pcre/CMakeFiles/regex.dir/cmake_clean_target.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/pcre/CMakeFiles/regex.dir/depend.internal" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/pcre/CMakeFiles/regex.dir/depend.make" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/pcre/CMakeFiles/regex.dir/flags.make" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/pcre/CMakeFiles/regex.dir/link.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/pcre/CMakeFiles/regex.dir/progress.make" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/pcre/CMakeFiles/regex.dir/regex.c.o" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/pcre/Makefile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/pcre/cmake_install.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/pcre/libregex.a" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/src/pcre/regex.cbp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/test-event.exe" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/test-rax.exe" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/test-regex.exe" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/test-socket-client.exe" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/core/buffer.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/core/buffer.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/core/client.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/core/client.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/core/http.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/core/http.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/core/memory.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/core/memory.h" afterDir="false" />
+    <list default="true" id="2f4e10ce-5e89-4b52-984d-0f4a01f24546" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.14.3/CMakeCCompiler.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.14.3/CMakeCXXCompiler.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.14.3/CMakeDetermineCompilerABI_C.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.14.3/CMakeDetermineCompilerABI_CXX.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.14.3/CMakeRCCompiler.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.14.3/CMakeSystem.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.14.3/CompilerIdC/CMakeCCompilerId.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.14.3/CompilerIdC/a.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.14.3/CompilerIdCXX/CMakeCXXCompilerId.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.14.3/CompilerIdCXX/a.exe" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeDirectoryInformation.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeDirectoryInformation.cmake" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeOutput.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeOutput.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile.cmake" afterDir="false" />
@@ -290,17 +47,137 @@
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-environment.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-environment.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-log.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/feature_tests.bin" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/feature_tests.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/feature_tests.c" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/feature_tests.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/feature_tests.cxx" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/feature_tests.cxx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/progress.marks" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/progress.marks" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/stl_clone.dir/DependInfo.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/stl_clone.dir/build.make" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/stl_clone.dir/cmake_clean.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/stl_clone.dir/depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-socket-server.dir/depend.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/stl_clone.dir/flags.make" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/stl_clone.dir/link.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/stl_clone.dir/progress.make" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/qc.dir/C.includecache" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/qc.dir/DependInfo.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/qc.dir/DependInfo.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/qc.dir/build.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/qc.dir/build.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/qc.dir/cmake_clean.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/qc.dir/cmake_clean.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/qc.dir/depend.internal" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/qc.dir/depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/qc.dir/depend.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/qc.dir/flags.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/qc.dir/flags.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/qc.dir/link.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/qc.dir/link.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/qc.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/qc.dir/progress.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/qc.dir/src/main.c.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-command-line.dir/C.includecache" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-command-line.dir/DependInfo.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-command-line.dir/DependInfo.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-command-line.dir/build.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-command-line.dir/build.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-command-line.dir/cmake_clean.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-command-line.dir/cmake_clean.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-command-line.dir/depend.internal" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-command-line.dir/depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-command-line.dir/depend.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-command-line.dir/flags.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-command-line.dir/flags.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-command-line.dir/link.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-command-line.dir/link.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-command-line.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-command-line.dir/progress.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-command-line.dir/test/test-command-line.c.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-command-line.dir/test/test-event.c.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-event.dir/C.includecache" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-event.dir/DependInfo.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-event.dir/DependInfo.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-event.dir/build.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-event.dir/build.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-event.dir/cmake_clean.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-event.dir/cmake_clean.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-event.dir/depend.internal" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-event.dir/depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-event.dir/depend.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-event.dir/flags.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-event.dir/flags.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-event.dir/link.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-event.dir/link.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-event.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-event.dir/progress.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-event.dir/test/test-event.c.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-net-func.dir/C.includecache" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-net-func.dir/DependInfo.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-net-func.dir/DependInfo.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-net-func.dir/build.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-net-func.dir/build.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-net-func.dir/cmake_clean.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-net-func.dir/cmake_clean.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-net-func.dir/depend.internal" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-net-func.dir/depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-net-func.dir/depend.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-net-func.dir/flags.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-net-func.dir/flags.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-net-func.dir/link.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-net-func.dir/link.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-net-func.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-net-func.dir/progress.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-rax.dir/C.includecache" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-rax.dir/DependInfo.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-rax.dir/DependInfo.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-rax.dir/build.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-rax.dir/build.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-rax.dir/cmake_clean.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-rax.dir/cmake_clean.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-rax.dir/depend.internal" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-rax.dir/depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-rax.dir/depend.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-rax.dir/flags.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-rax.dir/flags.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-rax.dir/link.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-rax.dir/link.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-rax.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-rax.dir/progress.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-rax.dir/test/test-rax.c.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-regex.dir/C.includecache" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-regex.dir/DependInfo.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-regex.dir/DependInfo.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-regex.dir/build.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-regex.dir/build.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-regex.dir/cmake_clean.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-regex.dir/cmake_clean.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-regex.dir/depend.internal" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-regex.dir/depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-regex.dir/depend.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-regex.dir/flags.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-regex.dir/flags.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-regex.dir/link.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-regex.dir/link.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-regex.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-regex.dir/progress.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-regex.dir/test/test-regex.c.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-socket-client.dir/C.includecache" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-socket-client.dir/DependInfo.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-socket-client.dir/DependInfo.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-socket-client.dir/build.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-socket-client.dir/build.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-socket-client.dir/cmake_clean.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-socket-client.dir/cmake_clean.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-socket-client.dir/depend.internal" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-socket-client.dir/depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-socket-client.dir/depend.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-socket-client.dir/flags.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-socket-client.dir/flags.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-socket-client.dir/link.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-socket-client.dir/link.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-socket-client.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-socket-client.dir/progress.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-socket-client.dir/test/test-socket-client.c.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-socket-server.dir/DependInfo.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-socket-server.dir/DependInfo.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-socket-server.dir/build.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-socket-server.dir/build.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-socket-server.dir/cmake_clean.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-socket-server.dir/cmake_clean.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-socket-server.dir/depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-socket-server.dir/depend.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-socket-server.dir/flags.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-socket-server.dir/flags.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-socket-server.dir/link.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-socket-server.dir/link.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-socket-server.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/test-socket-server.dir/progress.make" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Makefile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/cmake_install.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/cmake_install.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/lib/rax/CMakeFiles/CMakeDirectoryInformation.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/lib/rax/CMakeFiles/CMakeDirectoryInformation.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/lib/rax/CMakeFiles/progress.marks" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/lib/rax/CMakeFiles/progress.marks" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/lib/rax/CMakeFiles/rax.dir/DependInfo.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/lib/rax/CMakeFiles/rax.dir/DependInfo.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/lib/rax/CMakeFiles/rax.dir/build.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/lib/rax/CMakeFiles/rax.dir/build.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/lib/rax/CMakeFiles/rax.dir/cmake_clean.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/lib/rax/CMakeFiles/rax.dir/cmake_clean.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/lib/rax/CMakeFiles/rax.dir/cmake_clean_target.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/lib/rax/CMakeFiles/rax.dir/cmake_clean_target.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/lib/rax/CMakeFiles/rax.dir/flags.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/lib/rax/CMakeFiles/rax.dir/flags.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/lib/rax/CMakeFiles/rax.dir/link.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/lib/rax/CMakeFiles/rax.dir/link.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/lib/rax/CMakeFiles/rax.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/lib/rax/CMakeFiles/rax.dir/progress.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/lib/rax/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/lib/rax/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/lib/rax/cmake_install.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/lib/rax/cmake_install.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/lib/rax/rax.cbp" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/lib/rax/rax.cbp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/qc.cbp" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/qc.cbp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/src/algorithm/CMakeFiles/CMakeDirectoryInformation.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/src/algorithm/CMakeFiles/CMakeDirectoryInformation.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/src/algorithm/CMakeFiles/progress.marks" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/src/algorithm/CMakeFiles/progress.marks" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/src/algorithm/CMakeFiles/stl.dir/DependInfo.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/src/algorithm/CMakeFiles/stl.dir/DependInfo.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/src/algorithm/CMakeFiles/stl.dir/build.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/src/algorithm/CMakeFiles/stl.dir/build.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/src/algorithm/CMakeFiles/stl.dir/cmake_clean.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/src/algorithm/CMakeFiles/stl.dir/cmake_clean.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/src/algorithm/CMakeFiles/stl.dir/cmake_clean_target.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/src/algorithm/CMakeFiles/stl.dir/cmake_clean_target.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/src/algorithm/CMakeFiles/stl.dir/flags.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/src/algorithm/CMakeFiles/stl.dir/flags.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/src/algorithm/CMakeFiles/stl.dir/link.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/src/algorithm/CMakeFiles/stl.dir/link.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/src/algorithm/CMakeFiles/stl.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/src/algorithm/CMakeFiles/stl.dir/progress.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/src/algorithm/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/src/algorithm/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/src/algorithm/cmake_install.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/src/algorithm/cmake_install.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/src/algorithm/stl.cbp" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/src/algorithm/stl.cbp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/src/core/CMakeFiles/CMakeDirectoryInformation.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/src/core/CMakeFiles/CMakeDirectoryInformation.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/src/core/CMakeFiles/core.dir/DependInfo.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/src/core/CMakeFiles/core.dir/DependInfo.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/src/core/CMakeFiles/core.dir/build.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/src/core/CMakeFiles/core.dir/build.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/src/core/CMakeFiles/core.dir/cmake_clean.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/src/core/CMakeFiles/core.dir/cmake_clean.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/src/core/CMakeFiles/core.dir/cmake_clean_target.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/src/core/CMakeFiles/core.dir/cmake_clean_target.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/src/core/CMakeFiles/core.dir/flags.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/src/core/CMakeFiles/core.dir/flags.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/src/core/CMakeFiles/core.dir/link.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/src/core/CMakeFiles/core.dir/link.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/src/core/CMakeFiles/core.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/src/core/CMakeFiles/core.dir/progress.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/src/core/CMakeFiles/progress.marks" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/src/core/CMakeFiles/progress.marks" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/src/core/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/src/core/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/src/core/cmake_install.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/src/core/cmake_install.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/src/core/core.cbp" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/src/core/core.cbp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/src/pcre/CMakeFiles/CMakeDirectoryInformation.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/src/pcre/CMakeFiles/CMakeDirectoryInformation.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/src/pcre/CMakeFiles/progress.marks" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/src/pcre/CMakeFiles/progress.marks" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/src/pcre/CMakeFiles/regex.dir/DependInfo.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/src/pcre/CMakeFiles/regex.dir/DependInfo.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/src/pcre/CMakeFiles/regex.dir/build.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/src/pcre/CMakeFiles/regex.dir/build.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/src/pcre/CMakeFiles/regex.dir/cmake_clean.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/src/pcre/CMakeFiles/regex.dir/cmake_clean.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/src/pcre/CMakeFiles/regex.dir/cmake_clean_target.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/src/pcre/CMakeFiles/regex.dir/cmake_clean_target.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/src/pcre/CMakeFiles/regex.dir/flags.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/src/pcre/CMakeFiles/regex.dir/flags.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/src/pcre/CMakeFiles/regex.dir/link.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/src/pcre/CMakeFiles/regex.dir/link.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/src/pcre/CMakeFiles/regex.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/src/pcre/CMakeFiles/regex.dir/progress.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/src/pcre/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/src/pcre/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/src/pcre/cmake_install.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/src/pcre/cmake_install.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/src/pcre/regex.cbp" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/src/pcre/regex.cbp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/core/global_header.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/global_header.h" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
@@ -333,65 +210,40 @@
     <favorites_list name="stl_clone" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/test-event.c">
+        <entry file="file://$PROJECT_DIR$/src/core/log.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="476">
-              <caret line="36" column="1" selection-start-line="36" selection-start-column="1" selection-end-line="36" selection-end-column="1" />
+            <state relative-caret-position="414">
+              <caret line="29" column="13" lean-forward="true" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
               <folding>
-                <element signature="e#47#71#0" expanded="true" />
+                <element signature="e#0#1655#0" expanded="true" />
+                <element signature="e#3861#4052#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/core/buffer.h">
+        <entry file="file://$PROJECT_DIR$/src/core/log.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="21" column="72" lean-forward="true" selection-start-line="21" selection-start-column="72" selection-end-line="21" selection-end-column="72" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/core/buffer.c">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-126">
-              <caret line="7" column="30" selection-start-line="7" selection-start-column="30" selection-end-line="7" selection-end-column="30" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/core/client.c">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="160">
-              <caret line="11" column="12" selection-start-line="11" selection-start-column="12" selection-end-line="11" selection-end-column="12" />
+            <state relative-caret-position="612">
+              <caret line="34" column="20" lean-forward="true" selection-start-line="34" selection-start-column="20" selection-end-line="34" selection-end-column="20" />
               <folding>
-                <element signature="e#53#72#0" expanded="true" />
+                <element signature="e#0#1655#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/core/http.c">
+        <entry file="file://$PROJECT_DIR$/src/core/global_header.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="475">
-              <caret line="146" column="8" selection-start-line="146" selection-start-column="8" selection-end-line="146" selection-end-column="8" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/core/http.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="358">
-              <caret line="45" column="107" lean-forward="true" selection-start-line="45" selection-start-column="107" selection-end-line="45" selection-end-column="107" />
+            <state relative-caret-position="718">
+              <caret line="55" lean-forward="true" selection-start-line="55" selection-end-line="55" />
               <folding>
-                <element signature="e#104#130#0" expanded="true" />
+                <element signature="e#0#1655#0" expanded="true" />
+                <element signature="e#1713#1732#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -462,9 +314,7 @@
         <option value="$PROJECT_DIR$/test/hash-test.h" />
         <option value="$PROJECT_DIR$/src/core/command_line.c" />
         <option value="$PROJECT_DIR$/test/rb-tree-test.h" />
-        <option value="$PROJECT_DIR$/CMakeLists.txt" />
         <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/test/test-net-func.c" />
         <option value="$PROJECT_DIR$/src/core/event.h" />
         <option value="$PROJECT_DIR$/src/core/event.c" />
         <option value="$PROJECT_DIR$/test/test-event.c" />
@@ -473,11 +323,14 @@
         <option value="$PROJECT_DIR$/src/core/memory.c" />
         <option value="$PROJECT_DIR$/src/core/client.h" />
         <option value="$PROJECT_DIR$/src/core/client.c" />
-        <option value="$PROJECT_DIR$/src/core/global_header.h" />
         <option value="$PROJECT_DIR$/src/core/buffer.c" />
         <option value="$PROJECT_DIR$/src/core/buffer.h" />
         <option value="$PROJECT_DIR$/src/core/http.h" />
         <option value="$PROJECT_DIR$/src/core/http.c" />
+        <option value="$PROJECT_DIR$/test/test-net-func.c" />
+        <option value="$PROJECT_DIR$/CMakeLists.txt" />
+        <option value="$PROJECT_DIR$/test/test-cgi.c" />
+        <option value="$PROJECT_DIR$/src/core/global_header.h" />
       </list>
     </option>
   </component>
@@ -499,7 +352,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -518,15 +370,11 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="core" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="stl_clone" type="b2602c69:ProjectViewProjectNode" />
-              <item name="algorithm" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -556,27 +404,27 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="CMake Application.test-event">
-    <configuration name="test-event" type="CMakeRunConfiguration" factoryName="Application" temporary="true" PASS_PARENT_ENVS_2="true" PROJECT_NAME="qc" TARGET_NAME="test-event" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="qc" RUN_TARGET_NAME="test-event">
+  <component name="RunManager" selected="CMake Application.test-cgi">
+    <configuration name="test-cgi" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="qc" TARGET_NAME="test-cgi" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="qc" RUN_TARGET_NAME="test-cgi">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="test-socket-client" type="CMakeRunConfiguration" factoryName="Application" temporary="true" PASS_PARENT_ENVS_2="true" PROJECT_NAME="qc" TARGET_NAME="test-socket-client" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="qc" RUN_TARGET_NAME="test-socket-client">
+    <configuration name="test-event" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="qc" TARGET_NAME="test-event" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="qc" RUN_TARGET_NAME="test-event">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="test-socket-client" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="qc" TARGET_NAME="test-socket-client" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="qc" RUN_TARGET_NAME="test-socket-client">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
     <list>
+      <item itemvalue="CMake Application.test-cgi" />
       <item itemvalue="CMake Application.test-event" />
       <item itemvalue="CMake Application.test-socket-client" />
     </list>
-    <recent_temporary>
-      <list>
-        <item itemvalue="CMake Application.test-event" />
-        <item itemvalue="CMake Application.test-socket-client" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -868,7 +716,35 @@
       <option name="project" value="LOCAL" />
       <updated>1562293847807</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="cmake build">
+      <created>1563030118136</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1563030118136</updated>
+    </task>
+    <task id="LOCAL-00041" summary="cmake build">
+      <created>1563030587015</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1563030587015</updated>
+    </task>
+    <task id="LOCAL-00042" summary="cmake build">
+      <created>1563030657462</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1563030657462</updated>
+    </task>
+    <task id="LOCAL-00043" summary="cmake build">
+      <created>1563030837885</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1563030837885</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -884,10 +760,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4983871" visible="true" weight="0.1375969" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4983871" visible="true" weight="0.26205787" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" sideWeight="0.5016129" side_tool="true" weight="0.0974359" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -897,20 +773,58 @@
       <window_info anchor="bottom" id="Inspection" order="4" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="5" weight="0.32933334" />
       <window_info anchor="bottom" id="Database Changes" order="6" />
-      <window_info anchor="bottom" id="Messages" order="7" sideWeight="0.49935898" visible="true" weight="0.10068966" />
+      <window_info anchor="bottom" id="Messages" order="7" sideWeight="0.49935898" weight="0.10068966" />
       <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49935898" weight="0.32133332" />
-      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50064105" side_tool="true" weight="0.296" />
-      <window_info anchor="bottom" id="Version Control" order="10" weight="0.43733335" />
-      <window_info anchor="bottom" id="CMake" order="11" sideWeight="0.49871793" weight="0.356" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5005359" side_tool="true" weight="0.4372919" />
+      <window_info anchor="bottom" id="Version Control" order="10" sideWeight="0.4994641" weight="0.4372919" />
+      <window_info anchor="bottom" id="CMake" order="11" sideWeight="0.49839228" weight="0.35516092" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Database" order="3" weight="0.32948717" />
-      <window_info anchor="right" id="Run" order="4" visible="true" weight="0.09754522" />
+      <window_info anchor="right" id="Run" order="4" visible="true" weight="0.25991425" />
     </layout>
+    <layout-to-restore>
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4983871" visible="true" weight="0.2249467" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" sideWeight="0.5016129" side_tool="true" weight="0.09701493" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Debug" order="2" weight="0.39154014" />
+      <window_info anchor="bottom" id="Cvs" order="3" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="4" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="5" weight="0.32933334" />
+      <window_info anchor="bottom" id="Database Changes" order="6" />
+      <window_info anchor="bottom" id="Messages" order="7" visible="true" weight="0.27982646" />
+      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49935898" weight="0.3286334" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50064105" side_tool="true" weight="0.32933334" />
+      <window_info anchor="bottom" id="Version Control" order="10" weight="0.43275487" />
+      <window_info anchor="bottom" id="CMake" order="11" sideWeight="0.49871793" weight="0.324295" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Database" order="3" weight="0.32948717" />
+      <window_info anchor="right" id="Run" order="4" visible="true" weight="0.24413647" />
+    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list />
+          </value>
+        </entry>
+        <entry key="User">
+          <value>
+            <list />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="cmake build" />
@@ -945,13 +859,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/queue.c" />
-    <entry file="file://$PROJECT_DIR$/tool.c" />
-    <entry file="file://$PROJECT_DIR$/tree.c" />
-    <entry file="file://$PROJECT_DIR$/hash.h" />
-    <entry file="file://$PROJECT_DIR$/hash.c" />
-    <entry file="file://$PROJECT_DIR$/config_header.h" />
-    <entry file="file://$PROJECT_DIR$/array.c" />
     <entry file="file://$PROJECT_DIR$/unit.h" />
     <entry file="file://$PROJECT_DIR$/main.c" />
     <entry file="file://$PROJECT_DIR$/rb-tree.h" />
@@ -970,13 +877,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://D:/cygwin/usr/include/sys/_timeval.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="53" column="15" selection-start-line="53" selection-start-column="4" selection-end-line="53" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://D:/cygwin/usr/include/sys/_timeval.h" />
     <entry file="file://$PROJECT_DIR$/src/algorithm/unit.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="220">
@@ -1013,9 +914,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CMakeCache.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/CMakeCache.txt" />
     <entry file="file://$PROJECT_DIR$/src/algorithm/CMakeLists.txt">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -1029,30 +928,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://D:/cygwin/usr/include/sys/types.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-116">
-          <caret line="213" column="28" lean-forward="true" selection-start-line="213" selection-start-column="28" selection-end-line="213" selection-end-column="28" />
-          <folding>
-            <element signature="e#550#568#0" expanded="true" />
-            <element signature="e#1235#1254#0" expanded="true" />
-            <element signature="e#1323#1686#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://D:/cygwin/usr/include/sys/unistd.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4711" />
-      </provider>
-    </entry>
-    <entry file="file://D:/cygwin/usr/include/unistd.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="66">
-          <caret line="3" column="21" selection-start-line="3" selection-start-column="21" selection-end-line="3" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://D:/cygwin/usr/include/sys/types.h" />
+    <entry file="file://D:/cygwin/usr/include/sys/unistd.h" />
+    <entry file="file://D:/cygwin/usr/include/unistd.h" />
     <entry file="file://$PROJECT_DIR$/test/test_header.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="308">
@@ -1060,42 +938,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="461">
-          <caret line="26" lean-forward="true" selection-start-line="26" selection-end-line="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://D:/cygwin/usr/include/znc/Csocket.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6754">
-          <caret line="364" column="1" lean-forward="true" selection-start-line="364" selection-start-column="1" selection-end-line="364" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/test-net-func.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="2" lean-forward="true" selection-start-column="2" selection-end-column="2" />
-          <folding>
-            <element signature="e#103#131#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://D:/cygwin/usr/include/sys/select.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="87">
-          <caret line="55" column="3" lean-forward="true" selection-start-line="55" selection-start-column="3" selection-end-line="55" selection-end-column="3" />
-          <folding>
-            <element signature="e#508#530#0" expanded="true" />
-            <element signature="e#642#697#0" expanded="true" />
-            <element signature="e#2018#2171#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://D:/cygwin/usr/include/znc/Csocket.h" />
+    <entry file="file://D:/cygwin/usr/include/sys/select.h" />
     <entry file="file://$PROJECT_DIR$/test/test-socket-client.c">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="550">
@@ -1187,13 +1031,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://D:/cygwin/usr/include/string.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="206">
-          <caret line="128" column="9" selection-start-line="128" selection-start-column="9" selection-end-line="128" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://D:/cygwin/usr/include/string.h" />
     <entry file="file://$PROJECT_DIR$/src/core/client.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="355">
@@ -1201,13 +1039,6 @@
           <folding>
             <element signature="e#108#134#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/global_header.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="215">
-          <caret line="16" column="18" lean-forward="true" selection-start-line="16" selection-start-column="18" selection-end-line="16" selection-end-column="18" />
         </state>
       </provider>
     </entry>
@@ -1249,6 +1080,101 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="475">
           <caret line="146" column="8" selection-start-line="146" selection-start-column="8" selection-end-line="146" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/test-rax.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#1655#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/test-net-func.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="627">
+          <caret line="107" column="1" lean-forward="true" selection-start-line="107" selection-start-column="1" selection-end-line="107" selection-end-column="1" />
+          <folding>
+            <element signature="e#0#1655#0" expanded="true" />
+            <element signature="e#1658#1686#0" expanded="true" />
+            <element signature="e#1978#2174#0" expanded="true" />
+            <element signature="e#1977#3807#0" expanded="true" />
+            <element signature="e#2046#2413#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="22" column="37" lean-forward="true" selection-start-line="22" selection-start-column="37" selection-end-line="22" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://E:/cywin/usr/include/sys/_default_fcntl.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="49" column="8" selection-start-line="49" selection-start-column="8" selection-end-line="49" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://E:/cywin/usr/include/sys/stat.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="115" column="12" selection-start-line="115" selection-start-column="12" selection-end-line="115" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/test-cgi.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="84" column="70" selection-start-line="84" selection-start-column="70" selection-end-line="84" selection-end-column="70" />
+          <folding>
+            <element signature="e#0#1655#0" expanded="true" />
+            <element signature="e#1659#1677#0" expanded="true" />
+            <element signature="e#2313#2428#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://E:/cywin/lib/gcc/x86_64-pc-cygwin/7.4.0/include/stdarg.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1146">
+          <caret line="98" column="23" selection-start-line="98" selection-start-column="23" selection-end-line="98" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/core/log.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="414">
+          <caret line="29" column="13" lean-forward="true" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#1655#0" expanded="true" />
+            <element signature="e#3861#4052#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/core/log.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="612">
+          <caret line="34" column="20" lean-forward="true" selection-start-line="34" selection-start-column="20" selection-end-line="34" selection-end-column="20" />
+          <folding>
+            <element signature="e#0#1655#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/core/global_header.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="718">
+          <caret line="55" lean-forward="true" selection-start-line="55" selection-end-line="55" />
+          <folding>
+            <element signature="e#0#1655#0" expanded="true" />
+            <element signature="e#1713#1732#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

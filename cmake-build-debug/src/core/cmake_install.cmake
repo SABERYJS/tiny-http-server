@@ -1,4 +1,4 @@
-# Install script for directory: /cygdrive/e/code/algorithm/src/core
+# Install script for directory: /cygdrive/g/algorithm/src/core
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
