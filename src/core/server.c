@@ -29,3 +29,68 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
 #include "server.h"
+
+
+int SetProcessTitle(int argc, char **argv, char *title, int len) {
+    //linux system,argv and environ  stored one after another
+    //so set process title is complicated
+    char **p = argv;
+    size_t al = strlen(p[0]);
+    if (al >= len) {
+        //argv[0] has enough memory to store title,then just set argv[0]
+        memcpy(p[0], title, len);
+        //left space  reset to 0
+        memset(p[0] + len, 0, (al - len));
+        return 1;
+    } else {
+        //firstly allocate memory to store environment variables
+        size_t tl = 0;
+        size_t til;
+        char **pe = environ;
+        char *envBuf;
+        char *next;
+        int i = 0;
+        size_t nl;
+        while (*pe) {
+            tl += (strlen(*pe) + 1);//tail 0
+            pe++;
+        }
+        envBuf = MemAlloc(tl);
+        if (!envBuf) {
+            return -1;
+        }
+        pe = environ;//reset again
+        next = envBuf;
+        while (*pe) {
+            til = strlen(*pe);
+            memcpy(next, *pe, til);
+            environ[i++] = next;//reset global environ again
+            next += (til + 1);//include tail 0
+            pe++;
+        }
+
+        //args move backward,firstly calculate total memory length to store all  application args
+        tl = 0;
+        while (*p) {
+            tl += (strlen(*p) + 1);//include tail 0
+            p++;
+        }
+        p = argv;//reset again
+        nl = tl - al + len;//new args length
+        i = argc - 1;//copy from the last element
+        next = p[0] + nl - 1;//last storage position
+        while (i >= 0) {
+            if (!i) {
+                til = len;
+            } else {
+                til = strlen(p[i]);
+            }
+            next -= (til + 1);
+            memcpy(next, !i ? title : p[i], til);
+            argv[i] = next;//reset argv
+            next[til] = 0;//Required,Very important
+            i--;
+        }
+        return 1;
+    }
+}

@@ -33,6 +33,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include "global_header.h"
 
+extern char **environ;
+
 struct Server {
     char *cgiPath;//cgi app path
 };
@@ -41,4 +43,7 @@ struct Server {
  * server only  Server instance
  * **/
 struct Server server;
+
+int SetProcessTitle(int argc, char **argv, char *title, int len);
+
 #endif //STL_CLONE_SERVER_H
