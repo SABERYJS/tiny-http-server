@@ -30,4 +30,13 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifndef STL_CLONE_CGI_H
 #define STL_CLONE_CGI_H
 
+//about CGI,please refer to site:https://tools.ietf.org/html/rfc3875 and https://en.wikipedia.org/wiki/Common_Gateway_Interface
+
+#include "global_header.h"
+#include "server.h"
+
+
+#define CGI_VERSION  1.1
+
+
 #endif //STL_CLONE_CGI_H
