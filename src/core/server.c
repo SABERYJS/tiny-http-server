@@ -78,7 +78,7 @@ int SetProcessTitle(int argc, char **argv, char *title, int len) {
         p = argv;//reset again
         nl = tl - al + len;//new args length
         i = argc - 1;//copy from the last element
-        next = p[0] + nl - 1;//last storage position
+        next = p[0] + nl;//last storage position
         while (i >= 0) {
             if (!i) {
                 til = len;
