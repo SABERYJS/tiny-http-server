@@ -94,7 +94,7 @@ int SetProcessTitle(int argc, char **argv, char *title, int len) {
             }
             next -= (til + 1);
             if (i == 0 && next != argv[0]) {
-                printf("error happened\n");
+                printf("error happened,offset:%ld\n", (next - argv[0]));
             } else {
                 printf("no error,offset:%ld\n", (next - argv[0]));
             }
