@@ -37,6 +37,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <fcntl.h>
 #include <errno.h>
 #include <error.h>
+#include <sys/stat.h>
 
 #define    CGI_NAME "E:\\phpstudy\\PHPTutorial\\php\\php-7.2.1-nts\\php-cgi.exe"
 #define    REQUEST_METHOD "REQUEST_METHOD=GET"
