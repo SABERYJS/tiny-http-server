@@ -40,7 +40,7 @@ extern char **environ;
 /*#define linux  */
 
 int SetProcessTitle(int argc, char **argv, char *title, int len) {
-#ifdef  linux
+#ifdef  __UNIX__
     //linux system,argv and environ  stored one after another
     //so set process title is complicated
     printf("run here\n");
