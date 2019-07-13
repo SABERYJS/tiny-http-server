@@ -37,20 +37,12 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 extern char **environ;
 
-/*#define __linux__*/
+#define __linux__
 
 int SetProcessTitle(int argc, char **argv, char *title, int len) {
 #ifdef  __linux__
     //linux system,argv and environ  stored one after another
     //so set process title is complicated
-    char *pt = MemAlloc(len + 2);
-    if (!pt) {
-        return -1;
-    } else {
-        pt[0] = ' ';
-        memcpy(pt + 1, title, len);
-        title = pt;
-    }
     char **p = argv;
     size_t al = strlen(p[0]);
     if (al >= len) {
