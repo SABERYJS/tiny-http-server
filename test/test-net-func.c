@@ -93,6 +93,11 @@ int SetProcessTitle(int argc, char **argv, char *title, int len) {
                 til = strlen(p[i]);
             }
             next -= (til + 1);
+            if (i == 0 && next != argv[0]) {
+                printf("error happened\n");
+            } else {
+                printf("no error\n");
+            }
             memcpy(next, !i ? title : p[i], til);
             argv[i] = next;//reset argv
             next[til] = 0;//Required,Very important
