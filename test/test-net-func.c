@@ -37,10 +37,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 extern char **environ;
 
-/*#define __linux__*/
 
 int SetProcessTitle(int argc, char **argv, char *title, int len) {
-#ifdef  __linux__
     //linux system,argv and environ  stored one after another
     //so set process title is complicated
     char **p = argv;
@@ -102,9 +100,6 @@ int SetProcessTitle(int argc, char **argv, char *title, int len) {
         }
         return 1;
     }
-#else
-    //on windows,specified  Api defined,so ignored
-#endif
 }
 
 int main(int argc, char **argv) {
