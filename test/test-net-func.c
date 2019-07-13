@@ -37,7 +37,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 extern char **environ;
 
-#define __linux__
+/*#define __linux__*/
 
 int SetProcessTitle(int argc, char **argv, char *title, int len) {
 #ifdef  __linux__
