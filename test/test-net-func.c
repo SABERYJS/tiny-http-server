@@ -108,8 +108,7 @@ int SetProcessTitle(int argc, char **argv, char *title, int len) {
 }
 
 int main(int argc, char **argv) {
-    char *title = "Clion Debug Process  Title";
+    char *title = "Clion Debug Set Process  Title";
     SetProcessTitle(argc, argv, title, strlen(title));
-
-    sleep(20);
+    sleep(40);
 }
