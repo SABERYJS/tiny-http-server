@@ -43,7 +43,6 @@ int SetProcessTitle(int argc, char **argv, char *title, int len) {
 #ifdef  __linux__
     //linux system,argv and environ  stored one after another
     //so set process title is complicated
-    printf("run here\n");
     char **p = argv;
     size_t al = strlen(p[0]);
     if (al >= len) {
@@ -109,7 +108,7 @@ int SetProcessTitle(int argc, char **argv, char *title, int len) {
 }
 
 int main(int argc, char **argv) {
-    char *title = "Clion Debug Set Process  Title";
+    char *title = "clion Debug Set Process  Title";
     SetProcessTitle(argc, argv, title, strlen(title));
     char **p;
     p = argv;
