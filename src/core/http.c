@@ -769,8 +769,12 @@ int HttpParsePath(struct HttpRequest *request, char *path) {
     int i;
     int dotPos;
     short dotMatched = 0;
-    int lastSlashPos;
+    int lastSlashPos;//last match baclskash
     char c;
+    char *entry;
+    char *script_name;
+    char *path_info;
+    size_t el;
     for (i = 0; i < len; i++) {
         c = path[i];
         if (CharDot(c)) {
@@ -779,7 +783,48 @@ int HttpParsePath(struct HttpRequest *request, char *path) {
             if (strncmp(path + dotPos + 1, server.cgiExtName, strlen(server.cgiExtName)) != 0) {
                 return -1;
             }
+            //extract  entry filename
+            el = i - (lastSlashPos + 1) + strlen(server.cgiExtName) + 1;//include '.',but not contain tail '\0'
+            entry = MemAlloc(el + 1);//include tail 0
+            if (!entry) {
+                goto failed;
+            } else {
+                memcpy(entry, path + lastSlashPos + 1, el);
+                request->client->entry_file = entry;
+            }
+            //extract script_name
+            el = i;
+            script_name = MemAlloc(el + 1);
+            if (!script_name) {
+                goto failed;
+            } else {
+                memcpy(script_name, path, el);
+                request->client->script_name = script_name;
+            }
+            //extract path_info
+            el = len - (i + strlen(server.cgiExtName) + 2);
+            path_info = MemAlloc(el + 1);
+            if (!path_info) {
+                goto failed;
+            } else {
+                memcpy(path_info, path + i + strlen(server.cgiExtName) + 2, el);
+                request->client->path_info = path_info;
+            }
 
+        } else if (CHAR_BACKSLASH == c) {
+            lastSlashPos = i;
         }
     }
+
+    failed:
+    if (entry) {
+        MemFree(entry);
+    }
+    if (script_name) {
+        MemFree(script_name);
+    }
+    if (path_info) {
+        MemFree(path_info);
+    }
+    return -1;
 }

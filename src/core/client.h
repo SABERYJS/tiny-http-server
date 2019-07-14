@@ -85,6 +85,9 @@ struct Client {
     char *query_string;//full query string
     char *protocol_version;//protocol version
     char *tMethod;//method text
+    char *entry_file;//entry file
+    char *script_name;//script_name for cgi
+    char *path_info;//path info for cgi
 };
 
 struct Client *ClientCreate(int sock, struct sockaddr_in *clientAddr);
