@@ -27,32 +27,4 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-
-#ifndef STL_CLONE_SERVER_H
-#define STL_CLONE_SERVER_H
-
-#include "global_header.h"
-#include "event.h"
-
-
-extern char **environ;
-
-
-#define SERVER_NAME "KcServer_1.0"
-
-struct Server {
-    char *cgiPath;//cgi app path
-    char *docRoot;//website document root directory
-    char *cgiExtName;//url file extension name
-    struct EventDepositary *depositary;
-    struct List *environables;//
-};
-
-/**
- * server only  Server instance
- * **/
-struct Server server;
-
-int SetProcessTitle(int argc, char **argv, char *title, int len);
-
-#endif //STL_CLONE_SERVER_H
+#include "http_code.h"

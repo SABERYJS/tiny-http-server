@@ -31,6 +31,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "test_header.h"
 #include "../src/core/event.h"
 #include "../src/core/http.h"
+#include "../src/core/server.h"
 
 
 struct ListenSocket {
@@ -110,6 +111,7 @@ int main() {
                 printf("create depositary failed\n");
                 exit(1);
             } else {
+                server.depositary = depositary;
                 struct ListenSocket socket1;
                 socket1.fd = fd;
                 socket1.depositary = depositary;

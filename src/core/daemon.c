@@ -27,32 +27,53 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-
-#ifndef STL_CLONE_SERVER_H
-#define STL_CLONE_SERVER_H
-
-#include "global_header.h"
-#include "event.h"
+#include "daemon.h"
 
 
-extern char **environ;
+int RunAsDaemon(struct Log *log) {
+    int fd;
 
+    switch (fork()) {
+        case -1:
+            LogError(log, "fork() failed");
+            return -1;
 
-#define SERVER_NAME "KcServer_1.0"
+        case 0:
+            break;
 
-struct Server {
-    char *cgiPath;//cgi app path
-    char *docRoot;//website document root directory
-    char *cgiExtName;//url file extension name
-    struct EventDepositary *depositary;
-    struct List *environables;//
-};
+        default:
+            exit(0);
+    }
 
-/**
- * server only  Server instance
- * **/
-struct Server server;
+    if (setsid() == -1) {
+        LogError(log, "setsid() failed");
+        return -1;
+    }
 
-int SetProcessTitle(int argc, char **argv, char *title, int len);
+    umask(0);
 
-#endif //STL_CLONE_SERVER_H
+    fd = open("/dev/null", O_RDWR);
+    if (fd == -1) {
+        LogError(log, "open(\"/dev/null\") failed");
+        return -1;
+    }
+
+    if (dup2(fd, STDIN_FILENO) == -1) {
+        LogError(log, "dup2(STDIN) failed");
+        return -1;
+    }
+
+    if (dup2(fd, STDOUT_FILENO) == -1) {
+        LogError(log, "dup2(STDOUT) failed");
+        return -1;
+    }
+
+    if (fd > STDERR_FILENO) {
+        if (close(fd) == -1) {
+            LogError(log, "close() failed");
+            return -1;
+        }
+    }
+
+    return 1;
+}

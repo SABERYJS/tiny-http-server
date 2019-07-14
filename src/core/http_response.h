@@ -27,66 +27,41 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-
-#ifndef STL_CLONE_CLIENT_H
-#define STL_CLONE_CLIENT_H
+#ifndef STL_CLONE_HTTP_RESPONSE_H
+#define STL_CLONE_HTTP_RESPONSE_H
 
 #include "global_header.h"
-#include "buffer.h"
+#include "output_buffer.h"
 #include "http.h"
-#include "log.h"
-#include "http_response.h"
 
-#define  REQUEST_METHOD_GET 1
-#define  REQUEST_METHOD_POST 2
 
-#define STATUS_RECEIVING_HEADER  1
-#define STATUS_HEADER_RECEIVED_FINISHED 2
-#define STATUS_RECEIVING_BODY 3
-#define STATUS_RECEIVED_FROM_CLIENT_FINISHED 4
+#define HTTP_RESPONSE_STATUS_NORMAL 1
+#define HTTP_RESPONSE_STATUS_ERROR 2
 
-#define HTTP_REQUEST_LINE_METHOD 1
-#define HTTP_REQUEST_LINE_URL 2
-#define HTTP_REQUEST_LINE_HTTP_VERSION 3
-
-#define HTTP_REQUEST_LINE_FINISHED 4
-
-struct HttpHeader {
-    char *name;
-    char *value;
+struct HttpResponse {
+    struct Client *client;//current http client
+    struct OutputBuffer *output;//buffer for output
+    short status;//response status code
+    struct Log *log;//debug purpose
 };
 
-struct HttpQueryParam {
-    char *name;
-    char *value;
-};
 
-struct Client {
-    struct HttpRequest *request;//belong to which http request
-    struct sockaddr_in *addr; //only support ipv4
-    char *ip; //client ip address
-    struct HashTable *headers; //client headers
-    float http_version; //http version
-    char *request_url; //full request url
-    int method; //request method
-    char *port; //request port
-    char *host; //request host
-    char *path; //request path
-    int sock; //client  socket  file descriptor,
-    unsigned int content_length;// request body length
-    short status;//current client parse status
-    struct ClientBuffer *buffer;//buffer that store client input
-    short request_line_parse_status;//request  line parse status,
-    short ssl;//ssl request,
-    struct HashTable *query;//params in query string
-    char *hasTag;//hash tag
-    struct Log *log;//for debug
-    struct HttpResponse *response;
-    char *query_string;//full query string
-    char *protocol_version;//protocol version
-    char *tMethod;//method text
-};
+void HttpResponseHandleInternalError(struct HttpResponse *response);
 
-struct Client *ClientCreate(int sock, struct sockaddr_in *clientAddr);
+struct HttpResponse *HttpResponseCreate(struct Client *client, int readFd, struct Log *log);
 
-#endif //STL_CLONE_CLIENT_H
+int HttpResponseRegisterEvent(struct HttpResponse *response, struct EventDepositary *depositary);
+
+int HttpResponseRegisterReadEvent(struct HttpResponse *response, struct EventDepositary *depositary);
+
+int HttpResponseRegisterWriteEvent(struct HttpResponse *response, struct EventDepositary *depositary);
+
+void HttpResponseReadableEventCallback(int type, void *data);
+
+void HttpResponseWritableEventCallback(int type, void *data);
+
+void HttpResponseRemoveReadableEvent(struct HttpResponse *response, struct EventDepositary *depositary);
+
+void HttpResponseRemoveWritableEvent(struct HttpResponse *response, struct EventDepositary *depositary);
+
+#endif //STL_CLONE_HTTP_RESPONSE_H

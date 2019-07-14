@@ -29,7 +29,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
 #include "server.h"
-
+#include "event.h"
 
 int SetProcessTitle(int argc, char **argv, char *title, int len) {
     //linux system,argv and environ  stored one after another

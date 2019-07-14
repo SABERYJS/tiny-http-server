@@ -293,3 +293,13 @@ int ConfigInitServerCgi(struct ConfigItem *configItem) {
     server.cgiPath = trim(configItem->value, strlen(configItem->value), CHARSPACE);
     return server.cgiPath ? 1 : -1;
 }
+
+int ConfigInitServerDocDirectory(struct ConfigItem *configItem) {
+    server.docRoot = trim(configItem->value, strlen(configItem->value), CHARSPACE);
+    return server.docRoot ? 1 : -1;
+}
+
+int ConfigInitServerCgiExtDirectory(struct ConfigItem *configItem) {
+    server.cgiExtName = trim(configItem->value, strlen(configItem->value), CHARSPACE);
+    return server.cgiExtName ? 1 : -1;
+}

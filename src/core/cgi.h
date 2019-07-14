@@ -34,9 +34,72 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include "global_header.h"
 #include "server.h"
+#include "client.h"
 
 
 #define CGI_VERSION  1.1
 
+#define CGI_SERVER_SOFTWARE 1
+#define CGI_SERVER_NAME 2
+#define CGI_SERVER_PROTOCOL 3
+#define CGI_SERVER_PORT 4
+#define CGI_REQUEST_METHOD 5
+#define CGI_PATH_INFO 6
+#define CGI_SCRIPT_NAME 7
+#define CGI_QUERY_STRING 8
+#define CGI_REMOTE_HOST 9
+#define CGI_REMOTE_ADDR 10
+#define CGI_CONTENT_TYPE 11
+#define CGI_CONTENT_LENGTH 12
 
+
+struct Backend {
+    struct Client *client;
+    int pipes[2];//pipes to communicate with  child process
+    char *cgiPath;//absolute cgi path
+    struct Log *log;//debug
+    pid_t childPid;//child process id
+    char **environments;//current request environment variables
+    char *entry;//entry file
+};
+
+typedef int (*CgiEnvironmentVariableInitCallback)(struct Backend *backend);
+
+struct CgiEnvironmentVariableDefinition {
+    short flag;
+    CgiEnvironmentVariableInitCallback callback;
+};
+
+struct CgiEnvironmentVariableDefinition cgiEnvDefinitions[] = {
+};
+
+struct Backend *BackendCreate(struct Client *client, char *cgi, struct Log *log);
+
+int BackendExecuteCgiScript(struct Backend *backend);
+
+char **BackendCreateEnvironmentVariables(struct Backend *backend);
+
+int CgiServerSoftwareInitCallback(struct Backend *backend, int next);
+
+int CgiServerNameInitCallback(struct Backend *backend, int next);
+
+int CgiServerProtocolInitCallback(struct Backend *backend, int next);
+
+int CgiServerPortInitCallback(struct Backend *backend, int next);
+
+int CgiRequestMethodInitCallback(struct Backend *backend, int next);
+
+int CgiPathInfoInitCallback(struct Backend *backend, int next);
+
+int CgiScriptNameInitCallback(struct Backend *backend, int next);
+
+int CgiQueryStringInitCallback(struct Backend *backend, int next);
+
+int CgiRemoteHostInitCallback(struct Backend *backend, int next);
+
+int CgiRemoteAddrInitCallback(struct Backend *backend, int next);
+
+int CgiContentTypeInitCallback(struct Backend *backend, int next);
+
+int CgiContentLengthInitCallback(struct Backend *backend, int next);
 #endif //STL_CLONE_CGI_H

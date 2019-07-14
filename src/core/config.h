@@ -55,6 +55,9 @@ typedef int (*ConfigCallback)(struct ConfigItem *configItem);
 
 int ConfigInitServerCgi(struct ConfigItem *configItem);
 
+int ConfigInitServerDocDirectory(struct ConfigItem *configItem);
+
+int ConfigInitServerCgiExtDirectory(struct ConfigItem *configItem);
 
 struct SystemConfigDefinition {
     char *config_name;
@@ -65,6 +68,8 @@ struct SystemConfigDefinition {
 
 static struct SystemConfigDefinition definitions[] = {
         {"cgiPath", CONFIG_REQUIRED | CONFIG_FILE_EXECUTABLE | CONFIG_FILE, ConfigInitServerCgi},
+        {"docRoot", CONFIG_REQUIRED, ConfigInitServerDocDirectory},
+        {"cgiExtName", CONFIG_REQUIRED, ConfigInitServerCgiExtDirectory},
         SentinelConfig
 };
 

@@ -98,6 +98,12 @@ int HttpParseRequestMethod(struct HttpRequest *request) {
             if (!strlen(method)) {
                 goto clear_error;
             } else {
+                client->tMethod = MemAlloc(strlen(method) + 1);
+                if (!client->method) {
+                    goto clear_error;
+                } else {
+                    memcpy(client->tMethod, method, strlen(method));
+                }
                 char *sl = strlwr(method);
                 if (strncmp(sl, HTTP_METHOD_GET_LABEL, i) == 0) {
                     client->method = HTTP_METHOD_GET;
@@ -421,6 +427,7 @@ short HttpParseUrl(const char *url, size_t len, struct Client *client) {
                 } else {
                     memcpy(tb, p + start + 1, delta - 1);
                     client->path = tb;
+                    HttpParsePath(client->request, tb);
                 }
             }
             parsePathFinished = 1;
@@ -538,7 +545,10 @@ int HttpParseRequestVersion(struct HttpRequest *request) {
     int start, i, end;
     short hasMatchStart = 0;
     float version;
-    char *vb = MemAlloc(4);
+    char *vb = MemAlloc(4);//1.1\0
+    int protocolStart;
+    char *protocol;
+
     if (!vb) {
         return -1;
     }
@@ -555,6 +565,14 @@ int HttpParseRequestVersion(struct HttpRequest *request) {
             } else if (CHAR_ENTER == c) {
                 end = i;
             } else if (CHAR_NEW_LINE == c) {
+                protocol = MemAlloc((end - protocolStart + 1));
+                if (!protocol) {
+                    MemFree(vb);
+                    return -1;
+                } else {
+                    memcpy(protocol, BufferSubstr(buffer, protocolStart), end - protocolStart);
+                    client->protocol_version = protocol;
+                }
                 //match finished
                 memcpy(vb, BufferSubstr(buffer, start), (i - start));
                 version = atof(vb);
@@ -564,6 +582,7 @@ int HttpParseRequestVersion(struct HttpRequest *request) {
                 BufferDiscard(buffer, end + 2);//include tail \r\n
                 LogInfo(request->log, "rest content；%s\n", BufferSubstr(buffer, 0));
                 client->request_line_parse_status = HTTP_REQUEST_LINE_FINISHED;//request line parse finished,next step parse headers
+
                 return 1;
             } else {
                 if (!hasMatchStart) {
@@ -574,6 +593,7 @@ int HttpParseRequestVersion(struct HttpRequest *request) {
                         return -1;
                     } else {
                         start += 5;
+                        protocolStart = i;
                     }
                 }
             }
@@ -647,6 +667,9 @@ int HttpParseHeader(struct HttpRequest *request) {
                 goto failed;
             }
             header->value = ptr;
+            if (!HttpParseSpecifedHeader(request, header->name, header->value)) {
+                goto failed;
+            }
             if (HashAdd(client->headers, header->name, header) != 0) {
                 goto failed;
             }
@@ -671,5 +694,92 @@ int HttpParseHeader(struct HttpRequest *request) {
         }
         MemFree(header);
         return -1;
+    }
+}
+
+int HttpParseSpecifedHeader(struct HttpRequest *request, char *name, char *value) {
+    name = strlwr(name);
+    size_t len = strlen(name);
+    if (strncasecmp(name, "host", 4) == 0) {
+        HttpParseHeaderHost(request, value);
+    }
+}
+
+/**
+ * Host format like: "Host: www.baidu.com:8081"
+ * **/
+int HttpParseHeaderHost(struct HttpRequest *request, char *value) {
+    struct Client *client = request->client;
+    size_t len = strlen(value);
+    int i;
+    char c;
+    int colonPos;
+    short matchColon = 0;
+    char *host;
+    char *port;
+    size_t kl;
+    for (i = 0; i < len; ++i) {
+        c = value[i];
+        if (CharIsColon(c)) {
+            matchColon = 1;
+            colonPos = i;
+        }
+    }
+    if (matchColon) {
+        //port is specified
+        kl = colonPos + 1;
+    } else {
+        kl = len + 1;
+    }
+    host = MemAlloc(kl);//tail 0
+    if (!host) {
+        return -1;
+    } else {
+        memcpy(host, value, kl - 1);
+    }
+    if (matchColon) {
+        kl = len - (colonPos + 1) + 2;
+    } else {
+        kl = 3;//80\0
+    }
+
+    port = MemAlloc(kl);
+    if (!port) {
+        MemFree(host);
+        return -1;
+    } else {
+        if (matchColon) {
+            memcpy(port, value + colonPos + 1, kl - 1);
+        } else {
+            memcpy(port, "80", kl - 1);
+        }
+    }
+    client->host = host;
+    client->port = port;
+
+    return 1;
+
+}
+
+
+int HttpParsePath(struct HttpRequest *request, char *path) {
+    //path of client is not correct,so we parse it now
+    //check extension name .php
+    size_t len = strlen(path);
+    int i;
+    int dotPos;
+    short dotMatched = 0;
+    int lastSlashPos;
+    char c;
+    for (i = 0; i < len; i++) {
+        c = path[i];
+        if (CharDot(c)) {
+            dotMatched = 1;
+            dotPos = i;
+            if (strncmp(path + dotPos + 1, server.cgiExtName, strlen(server.cgiExtName)) != 0) {
+                return -1;
+            }
+
+        }
     }
 }

@@ -120,5 +120,11 @@ int HttpParseRequestVersion(struct HttpRequest *request);
 
 int HttpParseHeader(struct HttpRequest *request);
 
+int HttpParseSpecifedHeader(struct HttpRequest *request, char *name, char *value);
+
+int HttpParseHeaderHost(struct HttpRequest *request, char *value);
+
+int HttpParsePath(struct HttpRequest *request, char *path);
+
 
 #endif //STL_CLONE_HTTP_H
