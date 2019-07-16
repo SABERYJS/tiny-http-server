@@ -123,7 +123,6 @@ char **BackendCreateEnvironmentVariables(struct Backend *backend) {
     struct Client *client = backend->client;
     struct HttpRequest *request = client->request;
     char **environables[13];
-
 }
 
 /**
@@ -169,12 +168,15 @@ int CgiServerNameInitCallback(struct Backend *backend, int next) {
  * **/
 int CgiServerProtocolInitCallback(struct Backend *backend, int next) {
     struct Client *client = backend->client;
-    size_t len = strlen("SERVER_PROTOCOL=") + strlen(client->protocol_version) + 1;
+    size_t prefixLen = strlen(CGI_SERVER_PROTOCOL_TEXT);
+    size_t protocolLen = strlen(client->protocol_version);
+    size_t len = prefixLen + protocolLen + 1;
     char *protocol = MemAlloc(len);
     if (!protocol) {
         return -1;
     } else {
-        memcpy(protocol, client->protocol_version, len - 1);
+        memcpy(protocol, CGI_SERVER_PROTOCOL_TEXT, prefixLen);
+        memcpy(protocol + prefixLen, client->protocol_version, protocolLen);
         backend->environments[next] = protocol;
         return 1;
     }
@@ -185,12 +187,15 @@ int CgiServerProtocolInitCallback(struct Backend *backend, int next) {
  * **/
 int CgiServerPortInitCallback(struct Backend *backend, int next) {
     struct Client *client = backend->client;
-    size_t len = strlen("SERVER_PORT=") + strlen(client->port) + 1;
+    size_t prefixLen = strlen(CGI_SERVER_PORT_TEXT);
+    size_t portLen = strlen(client->port);
+    size_t len = prefixLen + portLen + 1;
     char *port = MemAlloc(len);
     if (!port) {
         return -1;
     } else {
-        memcpy(port, client->port, len - 1);
+        memcpy(port, CGI_SERVER_PROTOCOL_TEXT, prefixLen);
+        memcpy(port + prefixLen, client->port, portLen);
         backend->environments[next] = port;
         return 1;
     }
@@ -202,12 +207,15 @@ int CgiServerPortInitCallback(struct Backend *backend, int next) {
  * **/
 int CgiRequestMethodInitCallback(struct Backend *backend, int next) {
     struct Client *client = backend->client;
-    size_t len = strlen("REQUEST_METHOD=") + strlen(client->tMethod) + 1;
+    size_t prefixLen = strlen(CGI_REQUEST_METHOD_TEXT);
+    size_t methodLen = strlen(client->tMethod);
+    size_t len = prefixLen + methodLen + 1;
     char *method = MemAlloc(len);
     if (!method) {
         return -1;
     } else {
-        memcpy(method, client->tMethod, len - 1);
+        memcpy(method, CGI_REQUEST_METHOD_TEXT, prefixLen);
+        memcpy(method + prefixLen, client->tMethod, methodLen);
         backend->environments[next] = method;
         return 1;
     }
