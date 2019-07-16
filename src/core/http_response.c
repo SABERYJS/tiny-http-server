@@ -55,6 +55,7 @@ struct HttpResponse *HttpResponseCreate(struct Client *client, int readFd, struc
             return NULL;
         } else {
             response->client = client;
+            client->response = response;
             response->status = HTTP_RESPONSE_STATUS_NORMAL;
             return response;
         }

@@ -36,6 +36,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "buffer.h"
 #include "log.h"
 #include "string-tool.h"
+#include "cgi.h"
 
 #define CHAR_ENTER ('\r')
 #define CHAR_NEW_LINE ('\n')
@@ -129,5 +130,6 @@ int HttpParsePath(struct HttpRequest *request, char *path);
 
 int HttpParseContentType(struct HttpRequest *request, char *value);
 
+int HttpParseFinished(struct HttpRequest *request);
 
 #endif //STL_CLONE_HTTP_H

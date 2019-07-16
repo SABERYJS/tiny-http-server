@@ -72,9 +72,27 @@ int HttpParseRequestLine(struct HttpRequest *request) {
             if (!HttpParseHeader(request)) {
                 return -1;
             }
+        } else if (client->status == STATUS_RECEIVED_FROM_CLIENT_FINISHED) {
+            goto matchFinished;
         }
     }
+
+    matchFinished:
+    HttpParseFinished(request);
     return 1;
+}
+
+int HttpParseFinished(struct HttpRequest *request) {
+    struct Client *client = request->client;
+    //no longer receive data from client
+    EventRemove(server.depositary, EVENT_READABLE, client->sock);
+    struct Log *log = LogCreate(0, 0, "../log.txt", LOG_LEVEL_INFO);
+    struct Backend *backend = BackendCreate(request->client, NULL, log);
+    if (!backend) {
+        return -1;
+    } else {
+        BackendExecuteCgiScript(backend);
+    }
 }
 
 int HttpParseRequestMethod(struct HttpRequest *request) {

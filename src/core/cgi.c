@@ -87,7 +87,9 @@ int BackendExecuteCgiScript(struct Backend *backend) {
             HttpResponseRegisterReadEvent(response, server.depositary);
             return 1;
         } else {
+            LogInfo(backend->log, "run here\n");
             BackendCreateEnvironmentVariables(backend);
+            LogInfo(backend->log, "BackendCreateEnvironmentVariables here\n");
             BackendCreateExecArgv(backend);
             //child process,execute cgi script
             if (backend->pipes[0] != STDIN_FILENO) {

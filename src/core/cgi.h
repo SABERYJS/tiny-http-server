@@ -125,7 +125,7 @@ struct CgiEnvironmentVariableDefinition {
     CgiEnvironmentVariableInitCallback callback;
 };
 
-struct CgiEnvironmentVariableDefinition cgiEnvDefinitions[] = {
+static struct CgiEnvironmentVariableDefinition cgiEnvDefinitions[] = {
         {CGI_SERVER_SOFTWARE, CgiServerSoftwareInitCallback},
         {CGI_SERVER_NAME,     CgiServerNameInitCallback},
         {CGI_SERVER_PROTOCOL, CgiServerProtocolInitCallback},
