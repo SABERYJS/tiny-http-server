@@ -303,3 +303,9 @@ int ConfigInitServerCgiExtDirectory(struct ConfigItem *configItem) {
     server.cgiExtName = trim(configItem->value, strlen(configItem->value), CHARSPACE);
     return server.cgiExtName ? 1 : -1;
 }
+
+
+int ConfigInitServerCgiDefaultFile(struct ConfigItem *configItem) {
+    server.default_file = trim(configItem->value, strlen(configItem->value), CHARSPACE);
+    return server.default_file ? 1 : -1;
+}

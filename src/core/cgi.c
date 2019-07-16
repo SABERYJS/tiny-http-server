@@ -130,12 +130,15 @@ char **BackendCreateEnvironmentVariables(struct Backend *backend) {
  * server software environment variable init
  * **/
 int CgiServerSoftwareInitCallback(struct Backend *backend, int next) {
-    size_t len = strlen(SERVER_NAME) + 1;
+    size_t prefixLen = strlen(CGI_SERVER_SOFTWARE_TEXT);
+    size_t serverNameLen = strlen(SERVER_NAME);
+    size_t len = prefixLen + serverNameLen + 1;
     char *software = MemAlloc(len);
     if (!software) {
         return -1;
     } else {
-        memcpy(software, SERVER_NAME, len - 1);
+        memcpy(software, CGI_SERVER_SOFTWARE_TEXT, prefixLen);
+        memcpy(software + prefixLen, SERVER_NAME, serverNameLen);
         backend->environments[next] = software;
         return 1;
     }
@@ -146,12 +149,15 @@ int CgiServerSoftwareInitCallback(struct Backend *backend, int next) {
  * server name environment variable init
  * **/
 int CgiServerNameInitCallback(struct Backend *backend, int next) {
-    size_t len = strlen(backend->client->host) + 1;
+    size_t prefixLen = strlen(CGI_SERVER_NAME_TEXT);
+    size_t hostLen = strlen(backend->client->host);
+    size_t len = prefixLen + hostLen + 1;
     char *host = MemAlloc(len);
     if (!host) {
         return -1;
     } else {
-        memcpy(host, backend->client->host, len - 1);
+        memcpy(host, CGI_SERVER_NAME_TEXT, prefixLen);
+        memcpy(host + prefixLen, backend->client->host, hostLen);
         backend->environments[next] = host;
         return 1;
     }
@@ -163,7 +169,7 @@ int CgiServerNameInitCallback(struct Backend *backend, int next) {
  * **/
 int CgiServerProtocolInitCallback(struct Backend *backend, int next) {
     struct Client *client = backend->client;
-    size_t len = strlen(client->protocol_version) + 1;
+    size_t len = strlen("SERVER_PROTOCOL=") + strlen(client->protocol_version) + 1;
     char *protocol = MemAlloc(len);
     if (!protocol) {
         return -1;
@@ -179,7 +185,7 @@ int CgiServerProtocolInitCallback(struct Backend *backend, int next) {
  * **/
 int CgiServerPortInitCallback(struct Backend *backend, int next) {
     struct Client *client = backend->client;
-    size_t len = strlen(client->port) + 1;
+    size_t len = strlen("SERVER_PORT=") + strlen(client->port) + 1;
     char *port = MemAlloc(len);
     if (!port) {
         return -1;
@@ -196,7 +202,7 @@ int CgiServerPortInitCallback(struct Backend *backend, int next) {
  * **/
 int CgiRequestMethodInitCallback(struct Backend *backend, int next) {
     struct Client *client = backend->client;
-    size_t len = strlen(client->port) + 1;
+    size_t len = strlen("REQUEST_METHOD=") + strlen(client->tMethod) + 1;
     char *method = MemAlloc(len);
     if (!method) {
         return -1;
@@ -213,11 +219,28 @@ int CgiRequestMethodInitCallback(struct Backend *backend, int next) {
  * **/
 int CgiPathInfoInitCallback(struct Backend *backend, int next) {
     struct Client *client = backend->client;
-    char *path = client->path;
-    size_t len = strlen(client->path) + 1;
+    size_t len = strlen("PATH_INFO=") + strlen(client->path_info) + 1;
+    char *path_info = MemAlloc(len);
+    if (!path_info) {
+        return -1;
+    } else {
+        memcpy(path_info, client->path_info, len - 1);
+        backend->environments[next] = path_info;
+        return 1;
+    }
 }
 
 int CgiScriptNameInitCallback(struct Backend *backend, int next) {
+    struct Client *client = backend->client;
+    size_t len = strlen(client->path_info) + 1;
+    char *path_info = MemAlloc(len);
+    if (!path_info) {
+        return -1;
+    } else {
+        memcpy(path_info, client->path_info, len - 1);
+        backend->environments[next] = path_info;
+        return 1;
+    }
 }
 
 int CgiQueryStringInitCallback(struct Backend *backend, int next);

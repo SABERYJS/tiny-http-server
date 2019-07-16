@@ -71,7 +71,7 @@ struct Client {
     int method; //request method
     char *port; //request port
     char *host; //request host
-    char *path; //request path
+    char *uri; //request url except domain and query string
     int sock; //client  socket  file descriptor,
     unsigned int content_length;// request body length
     short status;//current client parse status

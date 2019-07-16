@@ -53,6 +53,20 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define CGI_CONTENT_LENGTH 12
 
 
+#define CGI_SERVER_SOFTWARE_TEXT ("SERVER_SOFTWARE=")
+#define CGI_SERVER_NAME_TEXT ("SERVER_NAME=")
+#define CGI_SERVER_PROTOCOL_TEXT  ("SERVER_PROTOCOL=")
+#define CGI_SERVER_PORT_TEXT   ("SERVER_PORT=")
+#define CGI_REQUEST_METHOD_TEXT ("REQUEST_METHOD=")
+#define CGI_PATH_INFO_TEXT  ("PATH_INFO=")
+#define CGI_SCRIPT_NAME_TEXT ("SCRIPT_NAME=")
+#define CGI_QUERY_STRING_TEXT ("QUERY_STRING=")
+#define CGI_REMOTE_HOST_TEXT  ("REMOTE_HOST=")
+#define CGI_REMOTE_ADDR_TEXT  ("REMOTE_ADDR=")
+#define CGI_CONTENT_TYPE_TEXT ("CONTENT_TYPE=")
+#define CGI_CONTENT_LENGTH_TEXT  ("CONTENT_LENGTH=")
+
+
 struct Backend {
     struct Client *client;
     int pipes[2];//pipes to communicate with  child process
@@ -102,4 +116,5 @@ int CgiRemoteAddrInitCallback(struct Backend *backend, int next);
 int CgiContentTypeInitCallback(struct Backend *backend, int next);
 
 int CgiContentLengthInitCallback(struct Backend *backend, int next);
+
 #endif //STL_CLONE_CGI_H

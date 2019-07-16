@@ -59,6 +59,8 @@ int ConfigInitServerDocDirectory(struct ConfigItem *configItem);
 
 int ConfigInitServerCgiExtDirectory(struct ConfigItem *configItem);
 
+int ConfigInitServerCgiDefaultFile(struct ConfigItem *configItem);
+
 struct SystemConfigDefinition {
     char *config_name;
     int flag;
@@ -70,6 +72,7 @@ static struct SystemConfigDefinition definitions[] = {
         {"cgiPath", CONFIG_REQUIRED | CONFIG_FILE_EXECUTABLE | CONFIG_FILE, ConfigInitServerCgi},
         {"docRoot", CONFIG_REQUIRED, ConfigInitServerDocDirectory},
         {"cgiExtName", CONFIG_REQUIRED, ConfigInitServerCgiExtDirectory},
+        {"defaultFile", CONFIG_REQUIRED, ConfigInitServerCgiDefaultFile},
         SentinelConfig
 };
 

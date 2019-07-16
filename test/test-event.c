@@ -32,6 +32,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "../src/core/event.h"
 #include "../src/core/http.h"
 #include "../src/core/server.h"
+#include "../src/core/config.h"
 
 
 struct ListenSocket {
@@ -83,6 +84,9 @@ void ListenSocketEventCallback(int type, void *data) {
 
 
 int main() {
+    printf("start parse config file\n");
+    struct Config *config = ConfigCreate("../app.conf");
+    ConfigFileParse(config);
     printf("socket server start bootstrap\n");
     int fd = socket(AF_INET, SOCK_STREAM, 0);
     if (fd < 0) {

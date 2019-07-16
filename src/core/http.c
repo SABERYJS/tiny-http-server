@@ -99,7 +99,7 @@ int HttpParseRequestMethod(struct HttpRequest *request) {
                 goto clear_error;
             } else {
                 client->tMethod = MemAlloc(strlen(method) + 1);
-                if (!client->method) {
+                if (!client->tMethod) {
                     goto clear_error;
                 } else {
                     memcpy(client->tMethod, method, strlen(method));
@@ -412,10 +412,10 @@ short HttpParseUrl(const char *url, size_t len, struct Client *client) {
 
         if (status == 1 && (CHAR_QUESTION_MARK == c || CHAR_HASH_TAG == c || last)) {
             if (CHAR_QUESTION_MARK == c || CHAR_HASH_TAG == c) {
-                delta = i - start;
+                delta = i - start + 1;
             } else {
                 //last char included
-                delta = i - start + 1;
+                delta = i - start + 2;
             }
             //url path maybe empty,so check it
             // for example: /  or  /?a=1
@@ -425,8 +425,8 @@ short HttpParseUrl(const char *url, size_t len, struct Client *client) {
                 if (!tb) {
                     return -1;
                 } else {
-                    memcpy(tb, p + start + 1, delta - 1);
-                    client->path = tb;
+                    memcpy(tb, p + start, delta - 1);
+                    client->uri = tb;
                     HttpParsePath(client->request, tb);
                 }
             }
@@ -762,6 +762,10 @@ int HttpParseHeaderHost(struct HttpRequest *request, char *value) {
 }
 
 
+/**
+ * debug/index.php/order/deleted/1?a=b&b=2
+ * order/delete/1
+ * **/
 int HttpParsePath(struct HttpRequest *request, char *path) {
     //path of client is not correct,so we parse it now
     //check extension name .php
@@ -793,7 +797,7 @@ int HttpParsePath(struct HttpRequest *request, char *path) {
                 request->client->entry_file = entry;
             }
             //extract script_name
-            el = i;
+            el = i + 4;
             script_name = MemAlloc(el + 1);
             if (!script_name) {
                 goto failed;
@@ -802,19 +806,32 @@ int HttpParsePath(struct HttpRequest *request, char *path) {
                 request->client->script_name = script_name;
             }
             //extract path_info
-            el = len - (i + strlen(server.cgiExtName) + 2);
+            el = len - (i + strlen(server.cgiExtName) + 1);
             path_info = MemAlloc(el + 1);
             if (!path_info) {
                 goto failed;
             } else {
-                memcpy(path_info, path + i + strlen(server.cgiExtName) + 2, el);
+                memcpy(path_info, path + i + strlen(server.cgiExtName) + 1, el);
                 request->client->path_info = path_info;
             }
+            //parse finished and return
+            return 1;
 
         } else if (CHAR_BACKSLASH == c) {
             lastSlashPos = i;
         }
     }
+
+    //code run here,so explain that no dot matched,then entry file is not specified,we regard default file as entry file
+    //but we do not the task here
+    request->client->path_info = MemAlloc(len + 1);
+    if (!request->client->path_info) {
+        goto failed;
+    } else {
+        memcpy(request->client->path_info, path, len);
+        return 1;
+    }
+
 
     failed:
     if (entry) {

@@ -44,6 +44,7 @@ struct Server {
     char *cgiPath;//cgi app path
     char *docRoot;//website document root directory
     char *cgiExtName;//url file extension name
+    char *default_file;//default entry file
     struct EventDepositary *depositary;
     struct List *environables;//
 };
