@@ -27,22 +27,4 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-
-#ifndef QC_NET_H
-#define QC_NET_H
-
-#include "global_header.h"
-
-#define IPV4_STR_LENGTH 16
-
-void *SockStrIpToNetByte(int family, void *src);
-
-size_t SockReadBytes(int fd, void *buf, size_t len);
-
-size_t SockWriteBytes(int fd, void *buf, size_t n);
-
-int SockClientGetSockName(int fd, void *buf, socklen_t *n);
-
-const char *Ipv4TranslateToVisualText(struct sockaddr_in *addr);
-
-#endif //QC_NET_H
+#include "http_media_type.h"

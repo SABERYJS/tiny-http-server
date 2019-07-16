@@ -88,6 +88,7 @@ struct Client {
     char *entry_file;//entry file
     char *script_name;//script_name for cgi
     char *path_info;//path info for cgi
+    char *content_type;//content type
 };
 
 struct Client *ClientCreate(int sock, struct sockaddr_in *clientAddr);

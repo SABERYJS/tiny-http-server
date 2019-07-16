@@ -702,6 +702,8 @@ int HttpParseSpecifedHeader(struct HttpRequest *request, char *name, char *value
     size_t len = strlen(name);
     if (strncasecmp(name, "host", 4) == 0) {
         HttpParseHeaderHost(request, value);
+    } else if (strncmp(name, "content-type", 12) == 0) {
+        HttpParseContentType(request, value);
     }
 }
 
@@ -843,5 +845,33 @@ int HttpParsePath(struct HttpRequest *request, char *path) {
     if (path_info) {
         MemFree(path_info);
     }
+    return -1;
+}
+
+int HttpParseContentType(struct HttpRequest *request, char *value) {
+    struct Client *client = request->client;
+    size_t len = strlen(value);
+    int i;
+    char c;
+    size_t delta;//include tail 0
+    char *buf;
+    for (i = 0; i < len; i++) {
+        c = value[i];
+        if (CharIsSemicolon(c) || (i == (len - 1))) {
+            if (CharIsSemicolon(c)) {
+                delta = i + 1;
+            } else {
+                delta = i + 2;
+            }
+            if (!(buf = MemAlloc(delta))) {
+                return -1;
+            } else {
+                memcpy(buf, value, delta - 1);
+                client->content_type = buf;
+                return 1;
+            }
+        }
+    }
+    //content-type format is invalid
     return -1;
 }

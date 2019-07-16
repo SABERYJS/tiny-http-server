@@ -61,3 +61,15 @@ char *strlwr(char *str) {
 
     return str;
 }
+
+char *strReplace(char *source, char t, char r) {
+    int i = 0;
+    size_t len = strlen(source);
+    while (i < len) {
+        if (source[i] == t) {
+            source[i] = r;
+        }
+        i++;
+    }
+    return source;
+}

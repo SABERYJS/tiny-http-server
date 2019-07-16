@@ -37,4 +37,6 @@ char *trim(const char *source, size_t len, char c);
 
 char *strlwr(char *str);
 
+char *strReplace(char *source, char t, char r);
+
 #endif //STL_CLONE_STRING_TOOL_H

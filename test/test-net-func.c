@@ -108,19 +108,5 @@ int SetProcessTitle(int argc, char **argv, char *title, int len) {
 }
 
 int main(int argc, char **argv) {
-    char *title = "clion Debug Set Process  Title";
-    SetProcessTitle(argc, argv, title, strlen(title));
-    char **p;
-    p = argv;
-    printf("first char:%c\n", p[0][0]);
-    while (*p) {
-        printf("argv:%s\n", *p);
-        p++;
-    }
-    p = environ;
-    while (*p) {
-        printf("env:%s\n", *p);
-        p++;
-    }
-    sleep(40);
+    Ipv4TranslateToVisualText()
 }

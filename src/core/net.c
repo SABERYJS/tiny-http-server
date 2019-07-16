@@ -109,3 +109,11 @@ size_t SockWriteBytes(int fd, void *buf, size_t n) {
 int SockClientGetSockName(int fd, void *buf, socklen_t *n) {
     return getsockname(fd, buf, n);
 }
+
+/**
+ * trans
+ * **/
+const char *Ipv4TranslateToVisualText(struct sockaddr_in *addr) {
+    char *receiver = MemAlloc(IPV4_STR_LENGTH);
+    return inet_ntop(AF_INET, &addr->sin_addr, receiver, IPV4_STR_LENGTH);
+}

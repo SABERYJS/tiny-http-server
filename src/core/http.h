@@ -79,6 +79,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define CharEqual ('=')
 #define CHARSPACE (' ')
 #define CharIsEqual(c)  (c==CharEqual)
+#define CharIsSemicolon(c)  (c==';')
 
 #define DomainValidChar(c)  ((c>='a' && c<='z') || (c>='A' &&c<='Z') ||c=='-' ||c=='.' ||(c>='0' &&c<='9') ||c==':')
 
@@ -125,6 +126,8 @@ int HttpParseSpecifedHeader(struct HttpRequest *request, char *name, char *value
 int HttpParseHeaderHost(struct HttpRequest *request, char *value);
 
 int HttpParsePath(struct HttpRequest *request, char *path);
+
+int HttpParseContentType(struct HttpRequest *request, char *value);
 
 
 #endif //STL_CLONE_HTTP_H

@@ -53,6 +53,7 @@ struct Backend *BackendCreate(struct Client *client, char *cgi, struct Log *log)
             backend->log = log;
             backend->cgiPath = cgi;
             backend->client = client;
+            backend->entry = client->entry_file;
 
             //after create backend finished,we need create HttpResponse object
             client->response = HttpResponseCreate(client, backend->pipes[0], log);
@@ -86,6 +87,8 @@ int BackendExecuteCgiScript(struct Backend *backend) {
             HttpResponseRegisterReadEvent(response, server.depositary);
             return 1;
         } else {
+            BackendCreateEnvironmentVariables(backend);
+            BackendCreateExecArgv(backend);
             //child process,execute cgi script
             if (backend->pipes[0] != STDIN_FILENO) {
                 if (dup2(backend->pipes[0], STDIN_FILENO) != STDIN_FILENO) {
@@ -99,8 +102,64 @@ int BackendExecuteCgiScript(struct Backend *backend) {
                 }
                 close(backend->pipes[1]);
             }
+
+            if (execve(server.cgiPath, backend->exec_argv, backend->environments) < 0) {
+                LogError(backend->log, "execve failed");
+                exit(100);
+            }
         }
     }
+}
+
+int BackendCreateExecArgv(struct Backend *backend) {
+    int i;
+    size_t lenCgiPath = strlen(server.cgiPath);
+    char c;
+    int lastBackslash;
+    for (i = lenCgiPath - 1; i >= 0; i--) {
+        c = server.cgiPath[i];
+        if (c == CHAR_BACKSLASH || c == '\\') {
+            lastBackslash = i;
+            break;
+        }
+    }
+    size_t cgiNameLen = lenCgiPath - (lastBackslash + 1);
+    char *cgiPath = MemAlloc(cgiNameLen + 1);
+    if (!cgiPath) {
+        goto failed;
+    } else {
+        memcpy(cgiPath, server.cgiPath + lastBackslash + 1, cgiNameLen);
+        backend->exec_argv[0] = cgiPath;
+    }
+
+    char *option = MemAlloc(3);
+    if (!option) {
+        goto failed;
+    } else {
+        memcpy(option, "-f", 2);
+        backend->exec_argv[1] = option;
+    }
+
+    size_t len = strlen(backend->client->entry_file ?: server.default_file);
+    char *entry_file = MemAlloc(len + 1);
+    if (!entry_file) {
+        goto failed;
+    } else {
+        memcpy(entry_file, backend->client->entry_file ?: server.default_file, len);
+        backend->exec_argv[2] = entry_file;
+        backend->exec_argv[3] = NULL;
+        return 1;
+    }
+
+    failed:
+    if (cgiPath) {
+        MemFree(cgiPath);
+    }
+    if (option) {
+        MemFree(option);
+    }
+
+    return -1;
 }
 
 /**
@@ -119,10 +178,22 @@ int BackendExecuteCgiScript(struct Backend *backend) {
  * @brief CONTENT_TYPE: Internet media type of input data if PUT or POST method are used, as provided via HTTP header.
  * @brief CONTENT_LENGTH: similarly, size of input data (decimal, in octets) if provided via HTTP header.
  * **/
-char **BackendCreateEnvironmentVariables(struct Backend *backend) {
+int BackendCreateEnvironmentVariables(struct Backend *backend) {
     struct Client *client = backend->client;
     struct HttpRequest *request = client->request;
-    char **environables[13];
+    int i;
+    int count = 0;
+    int ret;
+    for (i = 0; i < NUM_ENVIRONMENT_VARIABLES; i++) {
+        if ((ret = cgiEnvDefinitions[i].callback(backend, count)) < 0) {
+            return -1;
+        } else {
+            if (ret > 1) {
+                ++count;
+            }
+        }
+    }
+    return 1;
 }
 
 /**
@@ -227,36 +298,159 @@ int CgiRequestMethodInitCallback(struct Backend *backend, int next) {
  * **/
 int CgiPathInfoInitCallback(struct Backend *backend, int next) {
     struct Client *client = backend->client;
-    size_t len = strlen("PATH_INFO=") + strlen(client->path_info) + 1;
-    char *path_info = MemAlloc(len);
-    if (!path_info) {
+    size_t prefixLen = strlen(CGI_PATH_INFO_TEXT);
+    size_t piLen = strlen(client->path_info);
+    size_t len = prefixLen + piLen + 1;
+    char *pathInfo = MemAlloc(len);
+    if (!pathInfo) {
         return -1;
     } else {
-        memcpy(path_info, client->path_info, len - 1);
-        backend->environments[next] = path_info;
+        memcpy(pathInfo, CGI_REQUEST_METHOD_TEXT, prefixLen);
+        memcpy(pathInfo + prefixLen, client->path_info, piLen);
+        backend->environments[next] = pathInfo;
         return 1;
     }
 }
 
 int CgiScriptNameInitCallback(struct Backend *backend, int next) {
     struct Client *client = backend->client;
-    size_t len = strlen(client->path_info) + 1;
-    char *path_info = MemAlloc(len);
-    if (!path_info) {
+    size_t prefixLen = strlen(CGI_SCRIPT_NAME_TEXT);
+    size_t scriptNameLen = strlen(client->script_name);
+    size_t len = prefixLen + scriptNameLen + 1;
+    char *scriptName = MemAlloc(len);
+    if (!scriptName) {
         return -1;
     } else {
-        memcpy(path_info, client->path_info, len - 1);
-        backend->environments[next] = path_info;
+        memcpy(scriptName, CGI_SCRIPT_NAME_TEXT, prefixLen);
+        memcpy(scriptName + prefixLen, client->script_name, scriptNameLen);
+        backend->environments[next] = scriptName;
         return 1;
     }
 }
 
-int CgiQueryStringInitCallback(struct Backend *backend, int next);
 
-int CgiRemoteHostInitCallback(struct Backend *backend, int next);
+int CgiQueryStringInitCallback(struct Backend *backend, int next) {
+    struct Client *client = backend->client;
+    //firstly,we check if client->query_string is NULL,if client->query_string is NULL,we return 0
+    if (!client->query_string) {
+        return 0;
+    }
+    size_t prefixLen = strlen(CGI_QUERY_STRING_TEXT);
+    size_t queryStringLen = strlen(client->query_string);
+    size_t len = prefixLen + queryStringLen + 1;
+    char *queryString = MemAlloc(len);
+    if (!queryString) {
+        return -1;
+    } else {
+        memcpy(queryString, CGI_QUERY_STRING_TEXT, prefixLen);
+        memcpy(queryString + prefixLen, client->query_string, queryStringLen);
+        backend->environments[next] = queryString;
+        return 1;
+    }
+}
 
-int CgiRemoteAddrInitCallback(struct Backend *backend, int next);
+int CgiRemoteHostInitCallback(struct Backend *backend, int next) {
+    return 0;
+}
 
-int CgiContentTypeInitCallback(struct Backend *backend, int next);
+int CgiRemoteAddrInitCallback(struct Backend *backend, int next) {
+    struct Client *client = backend->client;
+    const char *ip = Ipv4TranslateToVisualText(client->addr);
+    if (!ip) {
+        return -1;
+    } else {
+        size_t prefixLen = strlen(CGI_REMOTE_ADDR_TEXT);
+        size_t ipLen = IPV4_STR_LENGTH;//tail 0 included
+        size_t len = prefixLen + ipLen;
+        char *addr = MemAlloc(len);
+        if (!addr) {
+            return -1;
+        } else {
+            memcpy(addr, CGI_REMOTE_ADDR_TEXT, prefixLen);
+            memcpy(addr + prefixLen, ip, ipLen - 1);
+            backend->environments[next] = addr;
+            return 1;
+        }
+    }
+}
 
-int CgiContentLengthInitCallback(struct Backend *backend, int next);
+int CgiContentTypeInitCallback(struct Backend *backend, int next) {
+    struct Client *client = backend->client;
+    if (!client->content_type) {
+        return 0;
+    } else {
+        size_t prefixLen = strlen(CGI_CONTENT_TYPE_TEXT);
+        size_t ctLen = strlen(client->content_type);//tail 0 included
+        size_t len = prefixLen + ctLen + 1;
+        char *addr = MemAlloc(len);
+        if (!addr) {
+            return -1;
+        } else {
+            memcpy(addr, CGI_CONTENT_TYPE_TEXT, prefixLen);
+            memcpy(addr + prefixLen, client->content_type, ctLen);
+            backend->environments[next] = addr;
+            return 1;
+        }
+    }
+}
+
+int CgiContentLengthInitCallback(struct Backend *backend, int next) {
+    return 0;
+}
+
+int CgiPhpRedirectStatusInitCallback(struct Backend *backend, int next) {
+    size_t len = strlen(CGI_REDIRECT_STATUS_TEXT);
+    char *buf = MemAlloc(len + 1);
+    if (!buf) {
+        return -1;
+    } else {
+        memcpy(buf, CGI_REDIRECT_STATUS_TEXT, len);
+        backend->environments[next] = buf;
+        return 1;
+    }
+}
+
+int CgiDocumentRootInitCallback(struct Backend *backend, int next) {
+    size_t prefixLen = strlen(CGI_DOCUMENT_ROOT_TEXT);
+    size_t docLen = strlen(server.docRoot);
+    size_t len = prefixLen + docLen + 1;
+    char *docRoot = MemAlloc(len);
+    if (!docRoot) {
+        return -1;
+    } else {
+        memcpy(docRoot, CGI_DOCUMENT_ROOT_TEXT, prefixLen);
+        memcpy(docRoot + prefixLen, server.docRoot, docLen);
+        backend->environments[next] = docRoot;
+        return 1;
+    }
+}
+
+int CgiScriptFilenameInitCallback(struct Backend *backend, int next) {
+    struct Client *client = backend->client;
+    char *rootDir = server.docRoot;
+    char *scriptName;
+    if (!client->script_name) {
+        size_t prefixLen = strlen(server.default_file);
+        scriptName = MemAlloc(prefixLen + 2);
+        if (!scriptName) {
+            return -1;
+        } else {
+            scriptName[0] = '/';
+            memcpy(scriptName + 1, server.default_file, prefixLen);
+        }
+    } else {
+        scriptName = client->script_name;
+    }
+    size_t rootLen = strlen(rootDir);
+    size_t scriptNameLen = strlen(scriptName);
+    size_t len = rootLen + scriptNameLen + 1;
+    char *buf = MemAlloc(len);
+    if (!buf) {
+        return -1;
+    } else {
+        memcpy(buf, rootDir, rootLen);
+        memcpy(buf + rootLen, scriptName, scriptNameLen);
+        backend->environments[next] = strReplace(buf, '\\', '/');
+        return 1;
+    }
+}

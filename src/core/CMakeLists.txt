@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.13)
 project(core)
 aux_source_directory(. APP_CORE)
-add_library(core ${APP_CORE} http_code.h http_code.c output_buffer.c output_buffer.h http_response.c http_response.h)
+add_library(core ${APP_CORE} http_code.h http_code.c output_buffer.c output_buffer.h http_response.c http_response.h http_media_type.c http_media_type.h)
 target_link_libraries(core stl)

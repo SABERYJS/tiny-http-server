@@ -35,6 +35,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "global_header.h"
 #include "server.h"
 #include "client.h"
+#include "net.h"
 
 
 #define CGI_VERSION  1.1
@@ -51,6 +52,9 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define CGI_REMOTE_ADDR 10
 #define CGI_CONTENT_TYPE 11
 #define CGI_CONTENT_LENGTH 12
+#define CGI_REDIRECT_STATUS 13
+#define CGI_DOCUMENT_ROOT 14
+#define CGI_SCRIPT_FILENAME 15
 
 
 #define CGI_SERVER_SOFTWARE_TEXT ("SERVER_SOFTWARE=")
@@ -65,6 +69,12 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define CGI_REMOTE_ADDR_TEXT  ("REMOTE_ADDR=")
 #define CGI_CONTENT_TYPE_TEXT ("CONTENT_TYPE=")
 #define CGI_CONTENT_LENGTH_TEXT  ("CONTENT_LENGTH=")
+#define CGI_REDIRECT_STATUS_TEXT ("REDIRECT_STATUS=200")
+#define CGI_DOCUMENT_ROOT_TEXT ("DOCUMENT_ROOT=")
+#define CGI_SCRIPT_FILENAME_TEXT ("SCRIPT_FILENAME=")
+
+#define NUM_ENVIRONMENT_VARIABLES 16
+#define NUM_EXEC_ARGV  4
 
 
 struct Backend {
@@ -73,25 +83,12 @@ struct Backend {
     char *cgiPath;//absolute cgi path
     struct Log *log;//debug
     pid_t childPid;//child process id
-    char **environments;//current request environment variables
+    char *environments[NUM_ENVIRONMENT_VARIABLES];//current request environment variables
+    char *exec_argv[4];
     char *entry;//entry file
 };
 
-typedef int (*CgiEnvironmentVariableInitCallback)(struct Backend *backend);
-
-struct CgiEnvironmentVariableDefinition {
-    short flag;
-    CgiEnvironmentVariableInitCallback callback;
-};
-
-struct CgiEnvironmentVariableDefinition cgiEnvDefinitions[] = {
-};
-
-struct Backend *BackendCreate(struct Client *client, char *cgi, struct Log *log);
-
-int BackendExecuteCgiScript(struct Backend *backend);
-
-char **BackendCreateEnvironmentVariables(struct Backend *backend);
+typedef int (*CgiEnvironmentVariableInitCallback)(struct Backend *backend, int next);
 
 int CgiServerSoftwareInitCallback(struct Backend *backend, int next);
 
@@ -116,5 +113,43 @@ int CgiRemoteAddrInitCallback(struct Backend *backend, int next);
 int CgiContentTypeInitCallback(struct Backend *backend, int next);
 
 int CgiContentLengthInitCallback(struct Backend *backend, int next);
+
+int CgiPhpRedirectStatusInitCallback(struct Backend *backend, int next);
+
+int CgiDocumentRootInitCallback(struct Backend *backend, int next);
+
+int CgiScriptFilenameInitCallback(struct Backend *backend, int next);
+
+struct CgiEnvironmentVariableDefinition {
+    short flag;
+    CgiEnvironmentVariableInitCallback callback;
+};
+
+struct CgiEnvironmentVariableDefinition cgiEnvDefinitions[] = {
+        {CGI_SERVER_SOFTWARE, CgiServerSoftwareInitCallback},
+        {CGI_SERVER_NAME,     CgiServerNameInitCallback},
+        {CGI_SERVER_PROTOCOL, CgiServerProtocolInitCallback},
+        {CGI_SERVER_PORT,     CgiServerPortInitCallback},
+        {CGI_REQUEST_METHOD,  CgiRequestMethodInitCallback},
+        {CGI_PATH_INFO,       CgiPathInfoInitCallback},
+        {CGI_SCRIPT_NAME,     CgiScriptNameInitCallback},
+        {CGI_QUERY_STRING,    CgiQueryStringInitCallback},
+        {CGI_REMOTE_HOST,     CgiRemoteHostInitCallback},
+        {CGI_REMOTE_ADDR,     CgiRemoteAddrInitCallback},
+        {CGI_CONTENT_TYPE,    CgiContentTypeInitCallback},
+        {CGI_CONTENT_LENGTH,  CgiContentLengthInitCallback},
+        {CGI_REDIRECT_STATUS, CgiPhpRedirectStatusInitCallback},
+        {CGI_DOCUMENT_ROOT,   CgiDocumentRootInitCallback},
+        {CGI_SCRIPT_FILENAME, CgiScriptFilenameInitCallback},
+        {0, NULL}
+};
+
+struct Backend *BackendCreate(struct Client *client, char *cgi, struct Log *log);
+
+int BackendExecuteCgiScript(struct Backend *backend);
+
+int BackendCreateEnvironmentVariables(struct Backend *backend);
+
+int BackendCreateExecArgv(struct Backend *backend);
 
 #endif //STL_CLONE_CGI_H
