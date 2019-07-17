@@ -102,7 +102,7 @@ int main(int argc, char *argv[]) {
 
         //覆盖进程空间,设置CGI环境变量
         char content_length[128] = {0};
-        char *exec_envp[7] = {"DOCUMENT_ROOT=E:\\phpstudy\\PHPTutorial\\WWW\\public\\", "SCRIPT_NAME=debug.php",
+        char *exec_envp[7] = {"DOCUMENT_ROOT=E:\\phpstudy\\PHPTutorial\\WWW\\public", "SCRIPT_NAME=debug.php",
                               "SCRIPT_FILENAME=E:\\phpstudy\\PHPTutorial\\WWW\\public\\debug.php"
                               REQUEST_METHOD, "REDIRECT_STATUS=200", "SERVER_PROTOCOL=HTTP/1.1", NULL};
         char *exec_argv[5] = {"php-cgi.exe", "-f", "debug.php", NULL};

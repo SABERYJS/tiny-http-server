@@ -51,7 +51,7 @@ struct Log *LogCreate(unsigned short system, unsigned int fd, const char *filena
                     goto failed;
                 } else {
                     log->filename = filename;
-                    log->fd = FileOpen(filename, FILE_OPEN_WRITE_ONLY | FILE_OPEN_CREATE,
+                    log->fd = FileOpen(filename, FILE_OPEN_WRITE_ONLY | FILE_OPEN_CREATE | FILE_OPEN_TRUNC,
                                        FILE_AUTH_OWNER_WRITE | FILE_AUTH_OTHER_READ | FILE_AUTH_GROUP_READ);
                     if (!log->fd) {
                         MemFree(log);
