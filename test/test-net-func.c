@@ -35,78 +35,34 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "../src/core/config.h"
 #include "../src/core/log.h"
 
-extern char **environ;
+
+int main(void) {
+
+    pid_t pid;
+
+    printf("你是我的削苹果\n");
 
 
-int SetProcessTitle(int argc, char **argv, char *title, int len) {
-    //linux system,argv and environ  stored one after another
-    //so set process title is complicated
-    char **p = argv;
-    size_t al = strlen(p[0]);
-    if (al >= len) {
-        //argv[0] has enough memory to store title,then just set argv[0]
-        memcpy(p[0], title, len);
-        //left space  reset to 0
-        memset(p[0] + len, 0, (al - len));
-        return 1;
+    pid = fork();
+
+    if (pid == -1) {
+
+        perror("fork error");
+
+        exit(1);
+
+    } else if (pid == 0) {
+
+        printf("child is here. pid = %u,ppid = %u\n", getpid(), getppid());
+
     } else {
-        //firstly allocate memory to store environment variables
-        size_t tl = 0;
-        size_t til;
-        char **pe = environ;
-        char *envBuf;
-        char *next;
-        int i = 0;
-        size_t nl;
-        while (*pe) {
-            tl += (strlen(*pe) + 1);//tail 0
-            pe++;
-        }
-        envBuf = MemAlloc(tl);
-        if (!envBuf) {
-            return -1;
-        }
-        pe = environ;//reset again
-        next = envBuf;
-        while (*pe) {
-            til = strlen(*pe);
-            memcpy(next, *pe, til);
-            environ[i++] = next;//reset global environ again
-            next += (til + 1);//include tail 0
-            pe++;
-        }
 
-        //args move backward,firstly calculate total memory length to store all  application args
-        tl = 0;
-        while (*p) {
-            tl += (strlen(*p) + 1);//include tail 0
-            p++;
-        }
-        p = argv;//reset again
-        nl = tl - al + len;//new args length
-        i = argc - 1;//copy from the last element
-        next = p[0] + nl;//last storage position
-        while (i >= 0) {
-            if (!i) {
-                til = len;
-            } else {
-                til = strlen(p[i]);
-            }
-            next -= (til + 1);
-            if (i == 0 && next != argv[0]) {
-                printf("error happened,offset:%ld\n", (next - argv[0]));
-            } else {
-                printf("no error,offset:%ld\n", (next - argv[0]));
-            }
-            memcpy(next, !i ? title : p[i], til);
-            argv[i] = next;//reset argv
-            next[til] = 0;//Required,Very important
-            i--;
-        }
-        return 1;
+        printf("parent is here. pid = %u,ppid = %u\n", getpid(), getppid());
+
+        sleep(1);
+
     }
-}
 
-int main(int argc, char **argv) {
-    Ipv4TranslateToVisualText()
+    return 0;
+
 }
