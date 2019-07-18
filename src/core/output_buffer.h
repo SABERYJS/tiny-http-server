@@ -41,7 +41,7 @@ struct OutputBuffer {
     int providerFd;//source to read
     int targetFd;//target to write
     struct Log *log;//for debug
-    struct MemoryBlockAllocator *allocator;//for
+    struct MemoryBlockAllocator *allocator;//reserved
 };
 
 struct OutputBuffer *OutputBufferCreate(int rfd, int wfd, struct Log *log);

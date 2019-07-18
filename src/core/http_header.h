@@ -27,36 +27,8 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef STL_CLONE_BUFFER_H
-#define STL_CLONE_BUFFER_H
-
-#include "global_header.h"
-
-#define CLIENT_RECEIVE_BUFFER_SIZE 1024
-
-struct ClientBuffer {
-    char buf[CLIENT_RECEIVE_BUFFER_SIZE];//buffer that receive client input
-    size_t size; //bytes that has been read
-    int read_pos; //next read position
-    int write_pos; //next write position
-    int left; //space left of buffer
-};
-
-#define BufferCharAtPos(buffer, pos) (buffer->buf[buffer->read_pos+pos])
-
-#define BufferSubstr(buffer, start) (buffer->buf+buffer->read_pos+start)
-
-int ReadFromSource(int socket, struct ClientBuffer *buffer);
-
-void BufferDiscard(struct ClientBuffer *buffer, size_t off);
-
-void BufferMoveForward(struct ClientBuffer *buffer);
-
-struct ClientBuffer *BufferCreate();
-
-int WriteToBufferManual(struct ClientBuffer *buffer, const char *src, size_t len);
-
-int WriteOneByteToBufferManual(struct ClientBuffer *buffer, char c);
+#ifndef STL_CLONE_HTTP_HEADER_H
+#define STL_CLONE_HTTP_HEADER_H
 
 
-#endif //STL_CLONE_BUFFER_H
+#endif //STL_CLONE_HTTP_HEADER_H

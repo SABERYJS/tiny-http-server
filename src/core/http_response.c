@@ -155,7 +155,6 @@ int HttpResponseRegisterWriteEvent(struct HttpResponse *response, struct EventDe
 
 int HttpResponseWriteStatusLine(struct HttpResponse *response, int code) {
     struct Client *client = response->client;
-    struct Log *log = response->log;
     char *overview;
     switch (code) {
         case HTTP_STATUS_CODE_CONTINUE:
@@ -275,19 +274,32 @@ int HttpResponseWriteStatusLine(struct HttpResponse *response, int code) {
 
     size_t protocolLen = strlen(client->protocol_version);
     char codeBuf[4];
+    struct ClientBuffer *buffer = response->output->buffer;
     itoa(code, codeBuf, 4);
     size_t overLen = strlen(overview);
-    size_t len = protocolLen + 1 + 3 + 1 + overLen + 3;//tail
-    char *buf;
-    if (!(buf = MemAlloc(len))) {
-        return -1;
-    } else {
-        memcpy(buf, client->protocol_version, protocolLen);
-        buf[protocolLen] = CHARSPACE;
-        memcpy(buf + protocolLen + 1, codeBuf, 3);
-        buf[protocolLen + 4] = CHARSPACE;
-        memcpy(buf + protocolLen + 5, overview, overLen);
-        buf[protocolLen + 5 + overLen] = CHAR_ENTER;
-        buf[protocolLen + 6 + overLen] = CHAR_NEW_LINE;
-    }
+    WriteToBufferManual(buffer, client->protocol_version, protocolLen);
+    WriteOneByteToBufferManual(buffer, CHARSPACE);
+    WriteToBufferManual(buffer, codeBuf, 3);
+    WriteOneByteToBufferManual(buffer, CHARSPACE);
+    WriteToBufferManual(buffer, overview, overLen);
+    WriteToBufferManual(buffer, RESPONSE_LINE_TAIL, 2);
+    return 1;
+}
+
+int HttpResponseWriteHeader(struct HttpResponse *response, char *header, char *value) {
+    struct ClientBuffer *buffer = response->output->buffer;
+    WriteToBufferManual(buffer, header, strlen(header));
+    WriteToBufferManual(buffer, ": ", 2);
+    WriteToBufferManual(buffer, value, strlen(value));
+    WriteToBufferManual(buffer, RESPONSE_LINE_TAIL, 2);
+    return 1;
+}
+
+/**
+ * write last  response header
+ * **/
+int HttpResponseWriteLastHeader(struct HttpResponse *response, char *header, char *value) {
+    HttpResponseWriteHeader(response, header, value);
+    WriteToBufferManual(response->output->buffer, RESPONSE_LINE_TAIL, 2);
+    return 1;
 }

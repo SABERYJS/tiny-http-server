@@ -39,6 +39,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define HTTP_RESPONSE_STATUS_NORMAL 1
 #define HTTP_RESPONSE_STATUS_ERROR 2
 
+#define RESPONSE_LINE_TAIL "\r\n"
+
 
 struct HttpResponse {
     struct Client *client;//current http client
@@ -68,5 +70,9 @@ void HttpResponseRemoveWritableEvent(struct HttpResponse *response, struct Event
 
 
 int HttpResponseWriteStatusLine(struct HttpResponse *response, int code);
+
+int HttpResponseWriteHeader(struct HttpResponse *response, char *header, char *value);
+
+int HttpResponseWriteLastHeader(struct HttpResponse *response, char *header, char *value);
 
 #endif //STL_CLONE_HTTP_RESPONSE_H

@@ -87,3 +87,26 @@ struct ClientBuffer *BufferCreate() {
         return buffer;
     }
 }
+
+/**
+ * write content to buffer manually
+ * @notice <b>suitable case:return 404  or some other status code,we assume buffer size is enough,
+ * there is no need to check if there is enough space to store data</b>
+ * **/
+int WriteToBufferManual(struct ClientBuffer *buffer, const char *src, size_t len) {
+    BufferMoveForward(buffer);
+    void *pos = buffer->buf + buffer->write_pos;//write from the position
+    memcpy(pos, src, len);
+    buffer->size += len;
+    buffer->write_pos += len;
+    return 1;
+}
+
+/**
+ * write only byte to buffer
+ * **/
+int WriteOneByteToBufferManual(struct ClientBuffer *buffer, char c) {
+    char buf[2] = {TAIL};
+    buf[0] = c;
+    WriteToBufferManual(buffer, buf, 1);
+}
