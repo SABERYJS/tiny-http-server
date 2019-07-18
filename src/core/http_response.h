@@ -33,10 +33,12 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "global_header.h"
 #include "output_buffer.h"
 #include "http.h"
+#include "http_code.h"
 
 
 #define HTTP_RESPONSE_STATUS_NORMAL 1
 #define HTTP_RESPONSE_STATUS_ERROR 2
+
 
 struct HttpResponse {
     struct Client *client;//current http client
@@ -63,5 +65,8 @@ void HttpResponseWritableEventCallback(int type, void *data);
 void HttpResponseRemoveReadableEvent(struct HttpResponse *response, struct EventDepositary *depositary);
 
 void HttpResponseRemoveWritableEvent(struct HttpResponse *response, struct EventDepositary *depositary);
+
+
+int HttpResponseWriteStatusLine(struct HttpResponse *response, int code);
 
 #endif //STL_CLONE_HTTP_RESPONSE_H

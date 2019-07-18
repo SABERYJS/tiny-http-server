@@ -33,6 +33,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include "global_header.h"
 
+
 void *MemAlloc(size_t l);
 
 void *MemFree(void *p);

@@ -151,3 +151,143 @@ int HttpResponseRegisterWriteEvent(struct HttpResponse *response, struct EventDe
     }
     return 1;
 }
+
+
+int HttpResponseWriteStatusLine(struct HttpResponse *response, int code) {
+    struct Client *client = response->client;
+    struct Log *log = response->log;
+    char *overview;
+    switch (code) {
+        case HTTP_STATUS_CODE_CONTINUE:
+            overview = HTTP_STATUS_CODE_OVERVIEW_CONTINUE;
+            break;
+        case HTTP_STATUS_CODE_SWITCH_PROTOCOL:
+            overview = HTTP_STATUS_CODE_OVERVIEW_SWITCH_PROTOCOL;
+            break;
+        case HTTP_STATUS_CODE_OK:
+            overview = HTTP_STATUS_CODE_OVERVIEW_OK;
+            break;
+        case HTTP_STATUS_CODE_CREATED:
+            overview = HTTP_STATUS_CODE_OVERVIEW_CREATED;
+            break;
+        case HTTP_STATUS_CODE_ACCEPTED:
+            overview = HTTP_STATUS_CODE_OVERVIEW_ACCEPTED;
+            break;
+        case HTTP_STATUS_CODE_NO_AUTHORITATIVE_INFORMATION:
+            overview = HTTP_STATUS_CODE_OVERVIEW_NO_AUTHORITATIVE_INFORMATION;
+            break;
+        case HTTP_STATUS_CODE_NO_CONTENT:
+            overview = HTTP_STATUS_CODE_OVERVIEW_NO_CONTENT;
+            break;
+        case HTTP_STATUS_CODE_RESET_CONTENT:
+            overview = HTTP_STATUS_CODE_OVERVIEW_RESET_CONTENT;
+            break;
+        case HTTP_STATUS_CODE_PARTIAL_CONTENT:
+            overview = HTTP_STATUS_CODE_OVERVIEW_PARTIAL_CONTENT;
+            break;
+        case HTTP_STATUS_CODE_MULTI_CHOICES:
+            overview = HTTP_STATUS_CODE_OVERVIEW_MULTI_CHOICES;
+            break;
+        case HTTP_STATUS_CODE_MOVED_PERMANENTLY:
+            overview = HTTP_STATUS_CODE_OVERVIEW_MOVED_PERMANENTLY;
+            break;
+        case HTTP_STATUS_CODE_FOUND:
+            overview = HTTP_STATUS_CODE_OVERVIEW_FOUND;
+            break;
+        case HTTP_STATUS_CODE_SEE_OTHER:
+            overview = HTTP_STATUS_CODE_OVERVIEW_SEE_OTHER;
+            break;
+        case HTTP_STATUS_CODE_NOT_MODIFIED:
+            overview = HTTP_STATUS_CODE_OVERVIEW_NOT_MODIFIED;
+            break;
+        case HTTP_STATUS_CODE_USE_PROXY:
+            overview = HTTP_STATUS_CODE_OVERVIEW_USE_PROXY;
+            break;
+        case HTTP_STATUS_CODE_TEMPORARY_REDIRECT:
+            overview = HTTP_STATUS_CODE_OVERVIEW_TEMPORARY_REDIRECT;
+            break;
+        case HTTP_STATUS_CODE_BAD_REQUEST:
+            overview = HTTP_STATUS_CODE_OVERVIEW_BAD_REQUEST;
+            break;
+        case HTTP_STATUS_CODE_UNAUTHORIZED:
+            overview = HTTP_STATUS_CODE_OVERVIEW_UNAUTHORIZED;
+            break;
+        case HTTP_STATUS_CODE_PAYMENT_REQUIRED:
+            overview = HTTP_STATUS_CODE_OVERVIEW_PAYMENT_REQUIRED;
+            break;
+        case HTTP_STATUS_CODE_FORBIDDEN:
+            overview = HTTP_STATUS_CODE_OVERVIEW_FORBIDDEN;
+            break;
+        case HTTP_STATUS_CODE_NOT_FOUND:
+            overview = HTTP_STATUS_CODE_OVERVIEW_NOT_FOUND;
+            break;
+        case HTTP_STATUS_CODE_METHOD_NOT_ALLOWED:
+            overview = HTTP_STATUS_CODE_OVERVIEW_METHOD_NOT_ALLOWED;
+            break;
+        case HTTP_STATUS_CODE_NOT_ACCEPTABLE:
+            overview = HTTP_STATUS_CODE_OVERVIEW_NOT_ACCEPTABLE;
+            break;
+        case HTTP_STATUS_CODE_PROXY_AUTHENTICATION_REQUIRED:
+            overview = HTTP_STATUS_CODE_OVERVIEW_PROXY_AUTHENTICATION_REQUIRED;
+            break;
+        case HTTP_STATUS_CODE_REQUEST_TIMEOUT:
+            overview = HTTP_STATUS_CODE_OVERVIEW_REQUEST_TIMEOUT;
+            break;
+        case HTTP_STATUS_CODE_CONFLICT:
+            overview = HTTP_STATUS_CODE_OVERVIEW_CONFLICT;
+            break;
+        case HTTP_STATUS_CODE_GONE:
+            overview = HTTP_STATUS_CODE_OVERVIEW_GONE;
+            break;
+        case HTTP_STATUS_CODE_LENGTH_REQUIRED:
+            overview = HTTP_STATUS_CODE_OVERVIEW_LENGTH_REQUIRED;
+            break;
+        case HTTP_STATUS_CODE_PRECONDITION_FAILED:
+            overview = HTTP_STATUS_CODE_OVERVIEW_PRECONDITION_FAILED;
+            break;
+        case HTTP_STATUS_CODE_REQUEST_ENTITY_TOO_LARGE:
+            overview = HTTP_STATUS_CODE_OVERVIEW_REQUEST_ENTITY_TOO_LARGE;
+            break;
+        case HTTP_STATUS_CODE_REQUEST_URL_TOO_LONG:
+            overview = HTTP_STATUS_CODE_OVERVIEW_REQUEST_URL_TOO_LONG;
+            break;
+        case HTTP_STATUS_CODE_UNSUPPORTED_MEDIA_TYPE:
+            overview = HTTP_STATUS_CODE_OVERVIEW_UNSUPPORTED_MEDIA_TYPE;
+            break;
+        case HTTP_STATUS_CODE_REQUEST_RANGE_NOT_SATISFIABLE:
+            overview = HTTP_STATUS_CODE_OVERVIEW_REQUEST_RANGE_NOT_SATISFIABLE;
+            break;
+        case HTTP_STATUS_CODE_EXPECTATION_FAILED:
+            overview = HTTP_STATUS_CODE_OVERVIEW_EXPECTATION_FAILED;
+            break;
+        case HTTP_STATUS_CODE_INTERNAL_SERVER_ERROR:
+            overview = HTTP_STATUS_CODE_OVERVIEW_INTERNAL_SERVER_ERROR;
+            break;
+        case HTTP_STATUS_CODE_BAD_GATEWAY:
+            overview = HTTP_STATUS_CODE_OVERVIEW_BAD_GATEWAY;
+            break;
+        case HTTP_STATUS_CODE_HTTP_VERSION_NOT_SUPPORTED:
+            overview = HTTP_STATUS_CODE_OVERVIEW_HTTP_VERSION_UNSUPPORT;
+            break;
+        default:
+            return -1;
+    }
+
+    size_t protocolLen = strlen(client->protocol_version);
+    char codeBuf[4];
+    itoa(code, codeBuf, 4);
+    size_t overLen = strlen(overview);
+    size_t len = protocolLen + 1 + 3 + 1 + overLen + 3;//tail
+    char *buf;
+    if (!(buf = MemAlloc(len))) {
+        return -1;
+    } else {
+        memcpy(buf, client->protocol_version, protocolLen);
+        buf[protocolLen] = CHARSPACE;
+        memcpy(buf + protocolLen + 1, codeBuf, 3);
+        buf[protocolLen + 4] = CHARSPACE;
+        memcpy(buf + protocolLen + 5, overview, overLen);
+        buf[protocolLen + 5 + overLen] = CHAR_ENTER;
+        buf[protocolLen + 6 + overLen] = CHAR_NEW_LINE;
+    }
+}

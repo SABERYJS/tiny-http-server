@@ -55,4 +55,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <stdarg.h>
 #include<ctype.h>
 
+#define TAIL ('\0')
+
 #endif //QC_GLOBAL_HEADER_H

@@ -33,6 +33,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "global_header.h"
 #include "buffer.h"
 #include "log.h"
+#include "memory_block.h"
 
 
 struct OutputBuffer {
@@ -40,6 +41,7 @@ struct OutputBuffer {
     int providerFd;//source to read
     int targetFd;//target to write
     struct Log *log;//for debug
+    struct MemoryBlockAllocator *allocator;//for
 };
 
 struct OutputBuffer *OutputBufferCreate(int rfd, int wfd, struct Log *log);

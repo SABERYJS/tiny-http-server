@@ -73,3 +73,17 @@ char *strReplace(char *source, char t, char r) {
     }
     return source;
 }
+
+char *strFirstToUpper(char *source) {
+    if ((source[0] >= 'a' && source[0] <= 'z')) {
+        source[0] = source[0] - 32;
+    }
+    return source;
+}
+
+char *strFirstToLower(char *source) {
+    if ((source[0] >= 'A' && source[0] <= 'Z')) {
+        source[0] = source[0] + 32;
+    }
+    return source;
+}

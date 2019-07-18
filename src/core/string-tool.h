@@ -39,4 +39,8 @@ char *strlwr(char *str);
 
 char *strReplace(char *source, char t, char r);
 
+char *strFirstToUpper(char *source);
+
+char *strFirstToLower(char *source);
+
 #endif //STL_CLONE_STRING_TOOL_H

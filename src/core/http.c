@@ -377,6 +377,11 @@ void HttpEventHandleCallback(int type, void *data) {
 short HttpParseUrl(const char *url, size_t len, struct Client *client) {
     struct Log *log = client->request->log;
     LogInfo(log, "client request url:%s\n", url);
+    if (!(client->request_url = MemAlloc(len + 1))) {
+        return -1;
+    } else {
+        memcpy(client->request_url, url, len);
+    }
     if (url[0] != CHAR_BACKSLASH) {
         //all request url must start with backslash
         return -1;
