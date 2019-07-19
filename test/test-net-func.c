@@ -38,10 +38,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
 int main(void) {
-    char *name = "saberyjs";
-    char *decoded = Base64_encrypt(name, strlen(name));
-    printf("encoded:%s\n", decoded);
-    printf("length:%lu\n", strlen(decoded));
-    printf("decoded:%s\n", Base64_decrypt(decoded, strlen(decoded)));
-    return 0;
+    char src[] = "welcome";
+    char *encoded = Base64Encrypt(src, strlen(src));
+    printf("%s\n", Base64Decrypt(encoded, strlen(encoded)));
 }

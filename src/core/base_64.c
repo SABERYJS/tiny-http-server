@@ -1,6 +1,31 @@
-//
-// Created by Administrator on 2019/7/19 0019.
-//
+/*Copyright (c) 2019 , saberyjs@gmail.com
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+1. Redistributions of source code must retain the above copyright
+   notice, this list of conditions and the following disclaimer.
+2. Redistributions in binary form must reproduce the above copyright
+   notice, this list of conditions and the following disclaimer in the
+   documentation and/or other materials provided with the distribution.
+3. All advertising materials mentioning features or use of this software
+   must display the following acknowledgement:
+   This product includes software developed by the <organization>.
+4. Neither the name of the <organization> nor the
+   names of its contributors may be used to endorse or promote products
+   derived from this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY <COPYRIGHT HOLDER> ''AS IS'' AND ANY
+EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL <COPYRIGHT HOLDER> BE LIABLE FOR ANY
+DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+*/
 
 #include "base_64.h"
 
@@ -13,7 +38,7 @@ static char Base64CharMap(short c) {
         return 'A' + c;
     } else if (c >= 26 && c <= 51) {
         return 'a' + (c - 26);
-    } else if (c >= '0' && c <= '9') {
+    } else if (c >= 52 && c <= 61) {
         return '0' + (c - 52);
     } else if (c == 62) {
         return '+';
@@ -36,7 +61,7 @@ static short Base64CharDecode(char c) {
     }
 }
 
-char *Base64_encrypt(char *src, size_t len) {
+char *Base64Encrypt(char *src, size_t len) {
     unsigned int m = 0, n = 0, k = 0, a = 0;//32 bits
     int cycle = len / 3;
     int left = len % 3;
@@ -86,12 +111,21 @@ char *Base64_encrypt(char *src, size_t len) {
 }
 
 
-char *Base64_decrypt(char *src, size_t len) {
+char *Base64Decrypt(char *src, size_t len) {
     unsigned int m = 0, n = 0, k = 0, h = 0, a = 0;//32 bits
+    int equalCount = 0;
+    if (src[len - 1] == '=') {
+        equalCount++;
+    }
+    if (src[len - 2] == '=') {
+        equalCount++;
+    }
+
+    len -= equalCount;
+
     int cycle = len / 4;
     int left = len % 4;
-    int equalCount = (left == 0 ? 0 : (left == 2 ? 2 : 1));
-    len -= equalCount;
+
     int memLen = cycle * 3 + (left == 0 ? 0 : (left == 2 ? 1 : 2)) + 1;//tail char '\0'
     char *buf;
     int i, j = 0;
@@ -114,13 +148,13 @@ char *Base64_decrypt(char *src, size_t len) {
             if (left == 2) {
                 unsigned char s;
                 s = ((Base64CharDecode(src[len - 2]) << 6) | (Base64CharDecode(src[len - 1]) << 0)) >> 4;
-                buf[j++] = s;
+                buf[j] = s;
             } else {
                 unsigned int s;
                 s = ((Base64CharDecode(src[len - 3]) << 12) | (Base64CharDecode(src[len - 2]) << 6) |
                      (Base64CharDecode(src[len - 1]) << 0)) >> 2;
                 buf[j++] = s >> 8;
-                buf[j++] = s & BASE64_DECODE_MASK_FIRST;
+                buf[j] = s & BASE64_DECODE_MASK_FIRST;
             }
         }
         return buf;
