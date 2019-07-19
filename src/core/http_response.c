@@ -273,9 +273,10 @@ int HttpResponseWriteStatusLine(struct HttpResponse *response, int code) {
     }
 
     size_t protocolLen = strlen(client->protocol_version);
-    char codeBuf[4];
+    char codeBuf[4] = {TAIL};
     struct ClientBuffer *buffer = response->output->buffer;
-    itoa(code, codeBuf, 4);
+    //itoa(code, codeBuf, 4);
+    sprintf(codeBuf, "%d", code);
     size_t overLen = strlen(overview);
     WriteToBufferManual(buffer, client->protocol_version, protocolLen);
     WriteOneByteToBufferManual(buffer, CHARSPACE);

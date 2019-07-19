@@ -34,35 +34,14 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "../src/core/string-tool.h"
 #include "../src/core/config.h"
 #include "../src/core/log.h"
+#include "../src/core/base_64.h"
 
 
 int main(void) {
-
-    pid_t pid;
-
-    printf("你是我的削苹果\n");
-
-
-    pid = fork();
-
-    if (pid == -1) {
-
-        perror("fork error");
-
-        exit(1);
-
-    } else if (pid == 0) {
-
-        printf("child is here. pid = %u,ppid = %u\n", getpid(), getppid());
-
-    } else {
-
-        printf("parent is here. pid = %u,ppid = %u\n", getpid(), getppid());
-
-        sleep(1);
-
-    }
-
+    char *name = "saberyjs";
+    char *decoded = Base64_encrypt(name, strlen(name));
+    printf("encoded:%s\n", decoded);
+    printf("length:%lu\n", strlen(decoded));
+    printf("decoded:%s\n", Base64_decrypt(decoded, strlen(decoded)));
     return 0;
-
 }
