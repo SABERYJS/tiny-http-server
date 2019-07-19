@@ -40,7 +40,8 @@ char *Base64_encrypt(char *src, size_t len) {
     unsigned int m = 0, n = 0, k = 0, a = 0;//32 bits
     int cycle = len / 3;
     int left = len % 3;
-    int memLen = cycle * 4 + (left == 0 ? 0 : (left == 1 ? 2 : 3)) + 1;//tail char '\0'
+    int equalCount = (left == 0 ? 0 : (left == 1 ? 2 : 1));
+    int memLen = cycle * 4 + (left == 0 ? 0 : (left == 1 ? 2 : 3)) + 1 + equalCount;//tail char '\0'
     char *buf;
     int i, j = 0;
     if (!(buf = MemAlloc(memLen))) {
@@ -75,6 +76,10 @@ char *Base64_encrypt(char *src, size_t len) {
                 buf[j++] = Base64CharMap((s & MASK_SECOND_CHAR) >> 6);
                 buf[j++] = Base64CharMap((s & MASK_FIRST_CHAR) >> 0);
             }
+            buf[j++] = '=';
+            if (equalCount == 2) {
+                buf[j++] = '=';
+            }
         }
         return buf;
     }
@@ -85,6 +90,8 @@ char *Base64_decrypt(char *src, size_t len) {
     unsigned int m = 0, n = 0, k = 0, h = 0, a = 0;//32 bits
     int cycle = len / 4;
     int left = len % 4;
+    int equalCount = (left == 0 ? 0 : (left == 2 ? 2 : 1));
+    len -= equalCount;
     int memLen = cycle * 3 + (left == 0 ? 0 : (left == 2 ? 1 : 2)) + 1;//tail char '\0'
     char *buf;
     int i, j = 0;
