@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 3.13)
+project(encode)
+aux_source_directory(. APP_ENCODE)
+add_library(encode ${APP_ENCODE})
+target_link_libraries(encode core z)
