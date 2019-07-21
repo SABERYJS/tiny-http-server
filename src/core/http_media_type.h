@@ -30,4 +30,34 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifndef STL_CLONE_HTTP_MEDIA_TYPE_H
 #define STL_CLONE_HTTP_MEDIA_TYPE_H
 
+#include "global_header.h"
+#include "log.h"
+#include "http.h"
+
+#define MEDIA_TYPE_CONFIG_FILE_PARSE_CHUNK 1024 //file parse buffer size
+
+#define BRACKET_LEFT  ('{')
+#define BRACKET_RIGHT  ('}')
+
+#define CharIsBracketLeft(c)  (c==BRACKET_LEFT)
+#define CharIsBracketRight(c)  (c==BRACKET_RIGHT)
+#define CharIsPlus(c)  (c=='+')
+#define CharIsBlackSlash(c)   (c==CHAR_BACKSLASH)
+#define CharIsBar(c)  (c=='-')
+
+struct MediaTypeEntry {
+    char *header_value;
+    char *ext_name;
+};
+
+struct MediaTypeConfig {
+    struct HashTable *hash;//store ext and header value
+    struct Log *log;//for debug
+};
+
+
+struct MediaTypeConfig *MediaTypeCreate(size_t bucket_size, struct Log *log, unsigned int (*hashMap)(char *));
+
+int MediaTypeConfigParse(struct MediaTypeConfig *config, const char *filename);
+
 #endif //STL_CLONE_HTTP_MEDIA_TYPE_H

@@ -34,6 +34,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "output_buffer.h"
 #include "http.h"
 #include "http_code.h"
+#include "http_header.h"
 
 
 #define HTTP_RESPONSE_STATUS_NORMAL 1
