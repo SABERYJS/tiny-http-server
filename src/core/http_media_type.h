@@ -34,7 +34,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "log.h"
 #include "http.h"
 
-#define MEDIA_TYPE_CONFIG_FILE_PARSE_CHUNK 1024 //file parse buffer size
+#define MEDIA_TYPE_CONFIG_FILE_PARSE_CHUNK 1024*1024 //1M,file parse buffer size
 
 #define BRACKET_LEFT  ('{')
 #define BRACKET_RIGHT  ('}')

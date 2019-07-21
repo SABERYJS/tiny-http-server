@@ -35,10 +35,15 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "../src/core/config.h"
 #include "../src/core/log.h"
 #include "../src/core/base_64.h"
+#include "../src/core/http_media_type.h"
 
 
 int main(void) {
-    char src[] = "welcome";
-    char *encoded = Base64Encrypt(src, strlen(src));
-    printf("%s\n", Base64Decrypt(encoded, strlen(encoded)));
+    struct MediaTypeConfig*config=MediaTypeCreate(100,NULL,NULL);
+    if(!config){
+        printf("create media type config failed\n");
+        exit(1);
+    }else{
+        MediaTypeConfigParse(config,"E:\\phpstudy\\PHPTutorial\\nginx\\conf\\mime.types");
+    }
 }
