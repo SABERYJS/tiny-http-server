@@ -27,65 +27,48 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include "output_buffer.h"
+#include "http_url_encode.h"
 
-struct OutputBuffer *OutputBufferCreate(int rfd, int wfd, struct Log *log) {
-    struct OutputBuffer *output = MemAlloc(sizeof(struct OutputBuffer));
-    if (!output) {
+char *HttpUrlDecode(char *str) {
+    int d = 0; /* whether or not the string is decoded */
+
+    char *dStr = malloc(strlen(str) + 1);
+    if (!dStr) {
         return NULL;
-    } else {
-        output->buffer = BufferCreate();
-        if (!output->buffer) {
-            MemFree(output);
-            return NULL;
-        } else {
-            output->providerFd = rfd;
-            output->targetFd = wfd;
-            output->log = log;
-            return output;
-        }
     }
-}
+    char eStr[] = "00"; /* for a hex code */
 
-/**
- * this method should be called by event system
- * **/
-int OutputBufferCanRead(struct OutputBuffer *output) {
-    struct ClientBuffer *readBuffer = output->buffer;
-    int ret;
-    if ((ret = ReadFromSource(output->providerFd, output->buffer)) < 0) {
-        return -1;
-    } else {
-        //ret maybe 0
-        return ret;
-    }
-}
+    strcpy(dStr, str);
 
-/**
- * this method should be called by event system
- * **/
-int OutputBufferCanWrite(struct OutputBuffer *output) {
-    struct ClientBuffer *readBuffer = output->buffer;
-    if (readBuffer->size <= 0) {
-        //no more data to write
-        return 1;
-    } else {
-        size_t canRead = readBuffer->size;
-        int wt;
-        while (1) {
-            again:
-            if ((wt = write(output->targetFd, BufferSubstr(readBuffer, 0), canRead)) < 0) {
-                if (errno == EINTR) {
-                    goto again;
-                } else {
-                    return -1;
+    while (!d) {
+        d = 1;
+        int i; /* the counter for the string */
+
+        for (i = 0; i < strlen(dStr); ++i) {
+
+            if (dStr[i] == '%') {
+                if (dStr[i + 1] == 0)
+                    return dStr;
+
+                if (isxdigit(dStr[i + 1]) && isxdigit(dStr[i + 2])) {
+
+                    d = 0;
+
+                    /* combine the next to numbers into one */
+                    eStr[0] = dStr[i + 1];
+                    eStr[1] = dStr[i + 2];
+
+                    /* convert it to decimal */
+                    long int x = strtol(eStr, NULL, 16);
+
+                    /* remove the hex */
+                    memmove(&dStr[i + 1], &dStr[i + 3], strlen(&dStr[i + 3]) + 1);
+
+                    dStr[i] = x;
                 }
-            } else {
-                //we do not care about how  many data has been wrote to socket output buffer
-                //discard read buffer some data
-                BufferDiscard(readBuffer, wt);
-                return 1;
             }
         }
     }
+
+    return dStr;
 }

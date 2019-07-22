@@ -27,19 +27,31 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#ifndef STL_CLONE_HTTP_URL_ENCODE_H
+#define STL_CLONE_HTTP_URL_ENCODE_H
 
-#include "../src/core/net.h"
-#include <sys/select.h>
-#include "../src/algorithm/rb-tree.h"
-#include "../src/core/string-tool.h"
-#include "../src/core/config.h"
-#include "../src/core/log.h"
-#include "../src/core/base_64.h"
-#include "../src/core/http_media_type.h"
-#include "../src/core/http_url_encode.h"
+#include "global_header.h"
 
+/**
+ * about Percent-encoding,please refer to https://zh.wikipedia.org/wiki/%E7%99%BE%E5%88%86%E5%8F%B7%E7%BC%96%E7%A0%81
+ * about utf-8 ,please refer to https://en.wikipedia.org/wiki/UTF-8
+ * about rfc3986,please refer to https://tools.ietf.org/html/rfc3986
+ * **/
 
-int main(void) {
-    char *src = "https://translate.google.cn/#view=home&op=translate&sl=en&tl=zh-CN&text=Since%20the%20restriction%20of%20the%20Unicode%20code-space%20to%2021-bit%20values%20in%202003%2C%20UTF-8%20is%20defined%20to%20encode%20code%20points%20in%20one%20to%20four%20bytes%2C%20depending%20on%20the%20number%20of%20significant%20bits%20in%20the%20numerical%20value%20of%20the%20code%20point.%20The%20following%20table%20shows%20the%20structure%20of%20the%20encoding.%20The%20x%20characters%20are%20replaced%20by%20the%20bits%20of%20the%20code%20point.%20If%20the%20number%20of%20significant%20bits%20is%20no%20more%20than%20seven%2C%20the%20first%20line%20applies%3B%20if%20no%20more%20than%2011%20bits%2C%20the%20second%20line%20applies%2C%20and%20so%20on.";
-    printf("%s\n", HttpUrlDecode(src));
+char *HttpUrlDecode(char *str);
+
+/**
+ * check if char c is reserved char
+ * **/
+static inline int CharIsReserved(char c) {
+    return c == '!' || c == '*' || c == ','
+           || c == '\'' || c == '(' || c == ')'
+           || c == ';' || c == ':' || c == '@' ||
+           c == '&' || c == '=' || c == '+'
+           || c == '$' || c == '/' || c == '?' || c == '#' || c == '[' || c == ']';
 }
+
+
+char *HttpUrlEncode(char *src, size_t len);
+
+#endif //STL_CLONE_HTTP_URL_ENCODE_H

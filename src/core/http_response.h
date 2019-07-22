@@ -48,6 +48,9 @@ struct HttpResponse {
     struct OutputBuffer *output;//buffer for output
     short status;//response status code
     struct Log *log;//debug purpose
+    short pipe_closed;//flag:pipe connected to CGI closed
+    short client_closed;//flag:server closed connection manual
+    short status_line_sent;//flag:whether http status line has been send
 };
 
 

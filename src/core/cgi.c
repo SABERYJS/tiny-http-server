@@ -85,6 +85,8 @@ int BackendExecuteCgiScript(struct Backend *backend) {
             close(backend->pipes[1]);
             //add read event to event system
             HttpResponseRegisterReadEvent(response, server.depositary);
+            //add write event to event system
+            HttpResponseRegisterWriteEvent(response, server.depositary);
             return 1;
         } else {
             BackendCreateEnvironmentVariables(backend);
@@ -125,24 +127,15 @@ int BackendCreateExecArgv(struct Backend *backend) {
         LogInfo(log, "cig path:%s\n", cgiPath);
     }
 
-    char *option = MemAlloc(3);
-    if (!option) {
-        goto failed;
-    } else {
-        memcpy(option, "-f", 2);
-        backend->exec_argv[1] = option;
-        LogInfo(log, "option:%s\n", option);
-    }
-
     size_t len = strlen(backend->client->entry_file ?: server.default_file);
     char *entry_file = MemAlloc(len + 1);
     if (!entry_file) {
         goto failed;
     } else {
         memcpy(entry_file, backend->client->entry_file ?: server.default_file, len);
-        backend->exec_argv[2] = entry_file;
+        backend->exec_argv[1] = entry_file;
         LogInfo(log, "entry file:%s\n", entry_file);
-        backend->exec_argv[3] = NULL;
+        backend->exec_argv[2] = NULL;
         return 1;
     }
 
@@ -150,10 +143,6 @@ int BackendCreateExecArgv(struct Backend *backend) {
     if (cgiPath) {
         MemFree(cgiPath);
     }
-    if (option) {
-        MemFree(option);
-    }
-
     return -1;
 }
 

@@ -174,13 +174,15 @@ int EventRemove(struct EventDepositary *depositary, unsigned int type, int fd) {
 static void EventReInitSingleFd(struct RbTreeNode *node) {
     struct EventHandler *handler = (struct EventHandler *) node->data;
     struct EventDepositary *depositary = handler->depositary;
-    if (handler->flag | EVENT_READABLE) {
+    if (handler->flag & EVENT_READABLE) {
+        printf("socket[%d] add readable event\n", handler->fd);
         FD_SET(handler->fd, &depositary->rs);
     }
-    if (handler->flag | EVENT_WRITEABLE) {
+    if (handler->flag & EVENT_WRITEABLE) {
+        printf("socket[%d] add writeable event\n", handler->fd);
         FD_SET(handler->fd, &depositary->ws);
     }
-    if (handler->flag | EVENT_ERROR) {
+    if (handler->flag & EVENT_ERROR) {
         FD_SET(handler->fd, &depositary->es);
     }
 }

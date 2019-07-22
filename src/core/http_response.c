@@ -57,6 +57,9 @@ struct HttpResponse *HttpResponseCreate(struct Client *client, int readFd, struc
             response->client = client;
             client->response = response;
             response->status = HTTP_RESPONSE_STATUS_NORMAL;
+            response->pipe_closed = 0;
+            response->client_closed = 0;
+            response->status_line_sent = 0;
             return response;
         }
     }
@@ -93,13 +96,36 @@ int HttpResponseRegisterEvent(struct HttpResponse *response, struct EventDeposit
  * **/
 void HttpResponseReadableEventCallback(int type, void *data) {
     struct HttpResponse *response = (struct HttpResponse *) data;
+    struct OutputBuffer *buffer = response->output;
+    if (response->pipe_closed > 0) {
+        //maybe it is possible,but who know
+        return;
+    }
+    int ret;
     if (response->status == HTTP_RESPONSE_STATUS_ERROR) {
         //for safety reason
         return;
     }
-    if (OutputBufferCanRead(response->output) < 0) {
+    if ((ret = OutputBufferCanRead(response->output)) < 0) {
         response->status = HTTP_RESPONSE_STATUS_ERROR;
         return;
+    } else {
+        if (ret == 0) {
+            //can not read more data,so close related pipe
+            close(response->output->providerFd);
+            //pipe closed
+            response->pipe_closed = 1;
+            //remove pipe readable event
+            EventRemove(server.depositary, EVENT_READABLE, response->output->providerFd);
+            EventRemove(server.depositary, EVENT_WRITEABLE, response->output->providerFd);
+            if (response->output->buffer->size <= 0) {
+                //close client connection
+                close(buffer->targetFd);
+                //remove readable and writeable event
+                EventRemove(server.depositary, EVENT_READABLE, buffer->targetFd);
+                EventRemove(server.depositary, EVENT_WRITEABLE, buffer->targetFd);
+            }
+        }
     }
 }
 
@@ -108,13 +134,26 @@ void HttpResponseReadableEventCallback(int type, void *data) {
  * **/
 void HttpResponseWritableEventCallback(int type, void *data) {
     struct HttpResponse *response = (struct HttpResponse *) data;
+    struct OutputBuffer *buffer = response->output;
+    int ret;
     if (response->status == HTTP_RESPONSE_STATUS_ERROR) {
         //for safety reason
         return;
     }
-    if (OutputBufferCanWrite(response->output) < 0) {
+    //send status line
+
+    if ((ret = OutputBufferCanWrite(response->output)) < 0) {
         response->status = HTTP_RESPONSE_STATUS_ERROR;
         return;
+    } else {
+        //no  more data to write and pipe connected to CGI was closed
+        if (buffer->buffer->size <= 0 && response->pipe_closed) {
+            //close client connection
+            close(buffer->targetFd);
+            //remove readable and writeable event
+            EventRemove(server.depositary, EVENT_READABLE, buffer->targetFd);
+            EventRemove(server.depositary, EVENT_WRITEABLE, buffer->targetFd);
+        }
     }
 }
 
