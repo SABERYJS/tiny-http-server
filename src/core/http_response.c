@@ -140,6 +140,9 @@ void HttpResponseWritableEventCallback(int type, void *data) {
         //for safety reason
         return;
     }
+    if (response->output->buffer->size <= 0) {
+        return;
+    }
     //send status line
 
     if ((ret = OutputBufferCanWrite(response->output)) < 0) {

@@ -86,6 +86,10 @@ void ListenSocketEventCallback(int type, void *data) {
 int main() {
     printf("start parse config file\n");
     struct Config *config = ConfigCreate("../app.conf");
+    if (!config) {
+        printf("Create config file failed,%s\n", strerror(errno));
+        exit(0);
+    }
     ConfigFileParse(config);
     printf("socket server start bootstrap\n");
     int fd = socket(AF_INET, SOCK_STREAM, 0);

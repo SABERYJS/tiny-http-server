@@ -105,6 +105,7 @@ struct Config *ConfigCreate(char *filename) {
         }
         MemFree(config);
     }
+    return NULL;
 }
 
 int ConfigFileParse(struct Config *config) {
