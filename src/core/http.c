@@ -86,7 +86,7 @@ int HttpParseFinished(struct HttpRequest *request) {
     struct Client *client = request->client;
     //no longer receive data from client
     EventRemove(server.depositary, EVENT_READABLE, client->sock);
-    struct Log *log = LogCreate(0, 0, "../log.txt", LOG_LEVEL_INFO);
+    struct Log *log = LogCreate(0, STDOUT_FILENO, NULL, LOG_LEVEL_INFO);
     struct Backend *backend = BackendCreate(request->client, NULL, log);
     if (!backend) {
         return -1;

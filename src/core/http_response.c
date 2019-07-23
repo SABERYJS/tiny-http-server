@@ -30,7 +30,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "http_response.h"
 
 /**
- * called   before cgi script was executed
+ * called   before CGI script was executed
  * **/
 struct HttpResponse *HttpResponseCreate(struct Client *client, int readFd, struct Log *log) {
     struct HttpResponse *response = MemAlloc(sizeof(struct HttpResponse));
@@ -54,15 +54,180 @@ struct HttpResponse *HttpResponseCreate(struct Client *client, int readFd, struc
             MemFree(response);
             return NULL;
         } else {
+            if (!(response->headers = createList(HttpResponseHeaderCompare, NULL))) {
+                if (flag) {
+                    MemFree(log);
+                }
+                MemFree(response->output);
+                MemFree(response);
+                return NULL;
+            }
             response->client = client;
             client->response = response;
             response->status = HTTP_RESPONSE_STATUS_NORMAL;
             response->pipe_closed = 0;
             response->client_closed = 0;
             response->status_line_sent = 0;
+            response->header_parse_finished = 0;
+            response->status_parsed = 0;
+            response->response_status_code = 0;
+            response->content_type_checked = 0;
+            memset(response->header_buffer, 0, HTTP_RESPONSE_HEADER_BUFFER_SIZE);
             return response;
         }
     }
+}
+
+
+static int HttpResponseHeaderCompare(struct ListNode *node, void *data) {
+    struct HttpHeader *hd1 = (struct HttpHeader *) node->data;
+    struct HttpHeader *hd2 = (struct HttpHeader *) data;
+    return strcmp(hd1->name, hd2->name);
+}
+
+
+static int HttpResponseParseHeader(struct HttpResponse *response) {
+    struct ClientBuffer *buffer = response->output->buffer;
+    struct Log *log = response->log;
+    int i = 0;
+    char c = 0;
+    short colonMatched = 0;
+    int colonPosition = 0;
+    char *ptr = NULL;
+    size_t len = 0;
+    short status_code_parsed = 0;
+    char *header_name = NULL, *header_value = NULL;
+    int start = 0;
+    short startMatched = 0;
+    struct HttpHeader *header = NULL;
+    int processed = 0;
+    short lastReached = 0;
+    char *html_header = "text/html";
+    short shouldAsHeader = 1;
+    int header_name_len = 0, header_value_len = 0;
+    //return directly,if there is no data ro read
+    if (buffer->size <= 0) {
+        return 1;
+    }
+    if (response->header_parse_finished) {
+        //header has been parse finished
+        return 1;
+    } else {
+        for (; i < buffer->size; i++) {
+            c = BufferCharAtPos(buffer, i);
+            lastReached = (i == (buffer->size - 1));
+            if (!CharIsEnter(c) && !CharIsColon(c)) {
+                //we trust data from CGI script,so data checking is unnecessary
+                if (!startMatched) {
+                    startMatched = 1;
+                    start = i;
+                }
+                continue;
+            } else if (CharIsColon(c)) {
+                colonMatched = 1;
+                colonPosition = i;
+            } else {
+                if (!startMatched) {
+                    //case is: continuously '\r\n' detected
+                    if (lastReached) {
+                        //missing character '\n'
+                        goto finished;
+                    } else {
+                        processed += 2;//header last two \r\n
+                        //http response header parse finished
+                        response->header_parse_finished = 1;
+                        if (!response->content_type_checked) {
+                            //CGI did not return Content Type,so we provide default text/html media type
+                            header = MemAlloc(sizeof(struct HttpHeader));
+                            if (!header) {
+                                return -1;
+                            } else {
+                                header_name_len = strlen(HTTP_HEADER_CONTENT_TYPE(1));
+                                header_value_len = strlen(html_header);
+                                if (!(header->name = MemAlloc(header_name_len + 1)) ||
+                                    !(header->value = MemAlloc(header_value_len + 1))) {
+                                    return -1;
+                                } else {
+                                    memcpy(header->name, HTTP_HEADER_CONTENT_TYPE(1), header_name_len);
+                                    memcpy(header->value, html_header, header_value_len);
+                                    LogInfo(log, "app default content-type provided:%s\n", html_header);
+                                }
+                            }
+                        }
+                        goto finished;
+                    }
+                }
+                if (lastReached) {
+                    //we enter here because  char c is ENTER,but we also want to match '\n'
+                    goto finished;
+                } else {
+                    if (!response->status_parsed) {
+                        if (colonMatched) {
+                            //check Status header
+                            if (strncmp("Status", BufferSubstr(buffer, 0), 6) == 0) {
+                                //parse status code
+                                ptr = trim(BufferSubstr(buffer, colonPosition + 1), (i - colonPosition - 1),
+                                           CHARSPACE);
+                                if (!ptr) {
+                                    return -1;
+                                }
+                                response->response_status_code = atoi(ptr);
+                                LogInfo(log, "Parse Status from CGI Response:%d\n", response->response_status_code);
+                                status_code_parsed = 1;
+                                shouldAsHeader = 0;
+                            }
+                        } else {
+                            //whether CGI script return http status line is uncertain
+                            len = strlen(response->client->protocol_version);
+                            if (strncmp(response->client->protocol_version, BufferSubstr(buffer, 0), len) == 0) {
+                                //first line is status line
+                                response->response_status_code = atoi(BufferSubstr(buffer, len));
+                                status_code_parsed = 1;
+                                LogInfo(log, "Parse response code from status line:%d\n",
+                                        response->response_status_code);
+                                shouldAsHeader = 0;
+                            }
+                        }
+                        //status code parse finished ,but it maybe 0,so we provide status code 200
+                        response->status_parsed = 1;
+                        if (!status_code_parsed) {
+                            response->response_status_code = 200;
+                            LogInfo(log, "because no status code return,so default 200 replaced\n");
+                        }
+                    }
+                    if (shouldAsHeader) {
+                        header_name = MemAlloc((colonPosition - start) + 1);
+                        header_value = MemAlloc((i - colonPosition));
+                        header = MemAlloc(sizeof(struct HttpHeader));
+                        if (!header_name || !header_value | !header) {
+                            return -1;
+                        }
+                        memcpy(header_name, BufferSubstr(buffer, start), (colonPosition - start));
+                        memcpy(header_value, BufferSubstr(buffer, colonPosition + 1), (i - colonPosition - 1));
+                        header->name = header_name;
+                        header->value = header_value;
+                        if (appendNode(response->headers, header) < 0) {
+                            return -1;
+                        } else {
+                            if (ContentTypeDetect(header_name)) {
+                                response->content_type_checked = 1;
+                            }
+                            LogInfo(log, "CGI response header[%s]:%s\n", header->name, header->value);
+                        }
+                    }
+                    processed += (i - start + 2);//include character '\n'
+                    startMatched = 0;
+                    colonMatched = 0;
+                    shouldAsHeader = 1;
+                    i++;//jump after character '\n'
+                }
+            }
+        }
+    }
+
+    finished:
+    BufferDiscard(buffer, processed);
+    return 1;
 }
 
 /**
@@ -92,7 +257,7 @@ int HttpResponseRegisterEvent(struct HttpResponse *response, struct EventDeposit
 }
 
 /**
- * called by event system when cgi script  wrote some data to stdout
+ * called by event system when CGI script  wrote some data to stdout
  * **/
 void HttpResponseReadableEventCallback(int type, void *data) {
     struct HttpResponse *response = (struct HttpResponse *) data;
@@ -125,6 +290,9 @@ void HttpResponseReadableEventCallback(int type, void *data) {
                 EventRemove(server.depositary, EVENT_READABLE, buffer->targetFd);
                 EventRemove(server.depositary, EVENT_WRITEABLE, buffer->targetFd);
             }
+        } else {
+            //we need to parse CGI return headers,for example:Content-Type or Http Response Status line missing
+            HttpResponseParseHeader(response);
         }
     }
 }
@@ -135,6 +303,9 @@ void HttpResponseReadableEventCallback(int type, void *data) {
 void HttpResponseWritableEventCallback(int type, void *data) {
     struct HttpResponse *response = (struct HttpResponse *) data;
     struct OutputBuffer *buffer = response->output;
+    struct List *headers = response->headers;
+    struct HttpHeader *header = NULL;
+    struct ListNode *node = NULL;
     int ret;
     if (response->status == HTTP_RESPONSE_STATUS_ERROR) {
         //for safety reason
@@ -142,6 +313,21 @@ void HttpResponseWritableEventCallback(int type, void *data) {
     }
     if (response->output->buffer->size <= 0) {
         return;
+    }
+    if (!response->header_parse_finished) {
+        return;
+    } else {
+        //http header parse finished
+        node = headers->header;
+        while (node) {
+            header = (struct HttpHeader *) node->data;
+            if (node == headers->tail) {
+                HttpResponseWriteLastHeader(response, header->name, header->value);
+            } else {
+                HttpResponseWriteHeader(response, header->name, header->value);
+            }
+            node = node->next;
+        }
     }
     //send status line
 

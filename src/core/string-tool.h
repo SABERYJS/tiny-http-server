@@ -43,6 +43,4 @@ char *strFirstToUpper(char *source);
 
 char *strFirstToLower(char *source);
 
-char *TranslateIntegerToString(int a, size_t len);
-
 #endif //STL_CLONE_STRING_TOOL_H

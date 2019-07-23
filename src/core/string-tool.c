@@ -87,8 +87,3 @@ char *strFirstToLower(char *source) {
     }
     return source;
 }
-
-
-char *TranslateIntegerToString(int a, size_t len) {
-
-}

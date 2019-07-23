@@ -42,6 +42,10 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #define RESPONSE_LINE_TAIL "\r\n"
 
+#define HTTP_RESPONSE_HEADER_BUFFER_SIZE 1024  //1kb
+
+#define ContentTypeDetect(header_name)  (strncasecmp(header_name,"Content-Type",12)==0)
+
 
 struct HttpResponse {
     struct Client *client;//current http client
@@ -51,6 +55,12 @@ struct HttpResponse {
     short pipe_closed;//flag:pipe connected to CGI closed
     short client_closed;//flag:server closed connection manual
     short status_line_sent;//flag:whether http status line has been send
+    struct List *headers;//headers to be send to client
+    short header_parse_finished;//flag:header has been parse finished
+    short status_parsed;//status line parse finished
+    char header_buffer[HTTP_RESPONSE_HEADER_BUFFER_SIZE];//buffer to store header
+    int response_status_code;//response http status code
+    short content_type_checked;//whether content type has been checked
 };
 
 
@@ -78,5 +88,11 @@ int HttpResponseWriteStatusLine(struct HttpResponse *response, int code);
 int HttpResponseWriteHeader(struct HttpResponse *response, char *header, char *value);
 
 int HttpResponseWriteLastHeader(struct HttpResponse *response, char *header, char *value);
+
+
+static int HttpResponseHeaderCompare(struct ListNode *node, void *data);
+
+
+static int HttpResponseParseHeader(struct HttpResponse *response);
 
 #endif //STL_CLONE_HTTP_RESPONSE_H
