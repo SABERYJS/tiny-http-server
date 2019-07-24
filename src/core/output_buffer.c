@@ -35,6 +35,7 @@ struct OutputBuffer *OutputBufferCreate(int rfd, int wfd, struct Log *log) {
         return NULL;
     } else {
         output->buffer = BufferCreate();
+        output->transfer_station = BufferCreate();
         if (!output->buffer) {
             MemFree(output);
             return NULL;
@@ -65,27 +66,48 @@ int OutputBufferCanRead(struct OutputBuffer *output) {
  * this method should be called by event system
  * **/
 int OutputBufferCanWrite(struct OutputBuffer *output) {
-    struct ClientBuffer *readBuffer = output->buffer;
-    if (readBuffer->size <= 0) {
+    struct ClientBuffer *transfer_station = output->transfer_station;
+    size_t canRead = transfer_station->size;
+    int wt = 0;
+    if (canRead <= 0) {
         //no more data to write
         return 1;
     } else {
-        size_t canRead = readBuffer->size;
-        int wt;
         while (1) {
             again:
-            if ((wt = write(output->targetFd, BufferSubstr(readBuffer, 0), canRead)) < 0) {
+            if ((wt = write(output->targetFd, BufferSubstr(transfer_station, 0), canRead)) < 0) {
                 if (errno == EINTR) {
                     goto again;
                 } else {
                     return -1;
                 }
             } else {
-                //we do not care about how  many data has been wrote to socket output buffer
-                //discard read buffer some data
-                BufferDiscard(readBuffer, wt);
+                //we do not care about how  many data has been wrote to client socket
+                //discard transfer station buffer some data
+                BufferDiscard(transfer_station, wt);
                 return 1;
             }
         }
     }
+}
+
+/**
+ * calculate rest space to write
+ * **/
+int OutputBufferTransferStationSpaceRest(struct OutputBuffer *output) {
+    return (CLIENT_RECEIVE_BUFFER_SIZE - output->transfer_station->write_pos);
+}
+
+/**
+ * readable bytes for transfer station
+ * **/
+int OutputBufferTransferStationReadableSize(struct OutputBuffer *output) {
+    return output->transfer_station->size;
+}
+
+/**
+ * readable bytes for internal buffer
+ * **/
+int OutputBufferInternalReadableSize(struct OutputBuffer *output) {
+    return output->buffer->size;
 }

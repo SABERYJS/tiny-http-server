@@ -59,6 +59,7 @@ int ReadFromSource(int socket, struct ClientBuffer *buffer) {
  * has read some data,so discard them
  * **/
 void BufferDiscard(struct ClientBuffer *buffer, size_t off) {
+    BufferMoveForward(buffer);//move memory forward
     buffer->read_pos += off;
     buffer->size -= off;
 }

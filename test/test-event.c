@@ -47,12 +47,8 @@ struct ClientSocket {
 };
 
 void clientSocketHandleCallback(int type, void *data) {
-    printf("clientSocketHandleCallback\n");
     struct ClientSocket *csk = (struct ClientSocket *) data;
     struct EventDepositary *depositary = csk->depositary;
-    /*char buffer[100];
-    read(csk->fd, buffer, 100);
-    printf("received from client:%s\n", buffer);*/
     EventRemove(depositary, EVENT_READABLE, csk->fd);
     struct HttpRequest *request = HttpRequestCreate(csk->fd, &csk->clientAddr);
     if (!request) {
@@ -65,7 +61,6 @@ void clientSocketHandleCallback(int type, void *data) {
         return;
     }
     EventAdd(depositary, EVENT_READABLE, csk->fd, request, HttpEventHandleCallback);
-    printf("ffff\n");
 }
 
 

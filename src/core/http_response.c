@@ -72,6 +72,7 @@ struct HttpResponse *HttpResponseCreate(struct Client *client, int readFd, struc
             response->status_parsed = 0;
             response->response_status_code = 0;
             response->content_type_checked = 0;
+            response->header_sent = 0;
             memset(response->header_buffer, 0, HTTP_RESPONSE_HEADER_BUFFER_SIZE);
             return response;
         }
@@ -150,7 +151,6 @@ static int HttpResponseParseHeader(struct HttpResponse *response) {
                                 } else {
                                     memcpy(header->name, HTTP_HEADER_CONTENT_TYPE(1), header_name_len);
                                     memcpy(header->value, html_header, header_value_len);
-                                    LogInfo(log, "app default content-type provided:%s\n", html_header);
                                 }
                             }
                         }
@@ -172,7 +172,6 @@ static int HttpResponseParseHeader(struct HttpResponse *response) {
                                     return -1;
                                 }
                                 response->response_status_code = atoi(ptr);
-                                LogInfo(log, "Parse Status from CGI Response:%d\n", response->response_status_code);
                                 status_code_parsed = 1;
                                 shouldAsHeader = 0;
                             }
@@ -183,8 +182,6 @@ static int HttpResponseParseHeader(struct HttpResponse *response) {
                                 //first line is status line
                                 response->response_status_code = atoi(BufferSubstr(buffer, len));
                                 status_code_parsed = 1;
-                                LogInfo(log, "Parse response code from status line:%d\n",
-                                        response->response_status_code);
                                 shouldAsHeader = 0;
                             }
                         }
@@ -192,7 +189,6 @@ static int HttpResponseParseHeader(struct HttpResponse *response) {
                         response->status_parsed = 1;
                         if (!status_code_parsed) {
                             response->response_status_code = 200;
-                            LogInfo(log, "because no status code return,so default 200 replaced\n");
                         }
                     }
                     if (shouldAsHeader) {
@@ -212,7 +208,6 @@ static int HttpResponseParseHeader(struct HttpResponse *response) {
                             if (ContentTypeDetect(header_name)) {
                                 response->content_type_checked = 1;
                             }
-                            LogInfo(log, "CGI response header[%s]:%s\n", header->name, header->value);
                         }
                     }
                     processed += (i - start + 2);//include character '\n'
@@ -236,7 +231,6 @@ static int HttpResponseParseHeader(struct HttpResponse *response) {
 void HttpResponseHandleInternalError(struct HttpResponse *response) {
     if (response->status == HTTP_RESPONSE_STATUS_ERROR) {
         //server internal error happened
-
     }
 }
 
@@ -282,14 +276,6 @@ void HttpResponseReadableEventCallback(int type, void *data) {
             response->pipe_closed = 1;
             //remove pipe readable event
             EventRemove(server.depositary, EVENT_READABLE, response->output->providerFd);
-            EventRemove(server.depositary, EVENT_WRITEABLE, response->output->providerFd);
-            if (response->output->buffer->size <= 0) {
-                //close client connection
-                close(buffer->targetFd);
-                //remove readable and writeable event
-                EventRemove(server.depositary, EVENT_READABLE, buffer->targetFd);
-                EventRemove(server.depositary, EVENT_WRITEABLE, buffer->targetFd);
-            }
         } else {
             //we need to parse CGI return headers,for example:Content-Type or Http Response Status line missing
             HttpResponseParseHeader(response);
@@ -306,43 +292,36 @@ void HttpResponseWritableEventCallback(int type, void *data) {
     struct List *headers = response->headers;
     struct HttpHeader *header = NULL;
     struct ListNode *node = NULL;
-    int ret;
     if (response->status == HTTP_RESPONSE_STATUS_ERROR) {
         //for safety reason
         return;
     }
-    if (response->output->buffer->size <= 0) {
-        return;
-    }
-    if (!response->header_parse_finished) {
-        return;
-    } else {
-        //http header parse finished
-        node = headers->header;
-        while (node) {
-            header = (struct HttpHeader *) node->data;
-            if (node == headers->tail) {
-                HttpResponseWriteLastHeader(response, header->name, header->value);
-            } else {
-                HttpResponseWriteHeader(response, header->name, header->value);
-            }
-            node = node->next;
-        }
-    }
-    //send status line
 
-    if ((ret = OutputBufferCanWrite(response->output)) < 0) {
-        response->status = HTTP_RESPONSE_STATUS_ERROR;
+    if (!response->header_parse_finished) {
+        //header must be parsed before anything output to client
         return;
     } else {
-        //no  more data to write and pipe connected to CGI was closed
-        if (buffer->buffer->size <= 0 && response->pipe_closed) {
-            //close client connection
-            close(buffer->targetFd);
-            //remove readable and writeable event
-            EventRemove(server.depositary, EVENT_READABLE, buffer->targetFd);
-            EventRemove(server.depositary, EVENT_WRITEABLE, buffer->targetFd);
+        //http header parse finished,because http response header is not too large,
+        //so we are sure about that transfer station has enough space to store,
+        //then any safety checking is unnecessary
+        if (!response->header_sent) {
+            //firstly,write http response status line
+            HttpResponseWriteStatusLine(response, response->response_status_code);
+            node = headers->header;
+            while (node) {
+                header = (struct HttpHeader *) node->data;
+                if (node == headers->tail) {
+                    HttpResponseWriteLastHeader(response, header->name, header->value);
+                } else {
+                    HttpResponseWriteHeader(response, header->name, header->value);
+                }
+                node = node->next;
+            }
+            //work that write http response header to transfer station is finished
+            response->header_sent = 1;
         }
+        HttpResponseWriteBody(response);
+        HttpResponseWriteContentToClient(response);
     }
 }
 
@@ -502,7 +481,7 @@ int HttpResponseWriteStatusLine(struct HttpResponse *response, int code) {
 
     size_t protocolLen = strlen(client->protocol_version);
     char codeBuf[4] = {TAIL};
-    struct ClientBuffer *buffer = response->output->buffer;
+    struct ClientBuffer *buffer = response->output->transfer_station;
     //itoa(code, codeBuf, 4);
     sprintf(codeBuf, "%d", code);
     size_t overLen = strlen(overview);
@@ -516,7 +495,7 @@ int HttpResponseWriteStatusLine(struct HttpResponse *response, int code) {
 }
 
 int HttpResponseWriteHeader(struct HttpResponse *response, char *header, char *value) {
-    struct ClientBuffer *buffer = response->output->buffer;
+    struct ClientBuffer *buffer = response->output->transfer_station;
     WriteToBufferManual(buffer, header, strlen(header));
     WriteToBufferManual(buffer, ": ", 2);
     WriteToBufferManual(buffer, value, strlen(value));
@@ -529,6 +508,49 @@ int HttpResponseWriteHeader(struct HttpResponse *response, char *header, char *v
  * **/
 int HttpResponseWriteLastHeader(struct HttpResponse *response, char *header, char *value) {
     HttpResponseWriteHeader(response, header, value);
-    WriteToBufferManual(response->output->buffer, RESPONSE_LINE_TAIL, 2);
+    WriteToBufferManual(response->output->transfer_station, RESPONSE_LINE_TAIL, 2);
     return 1;
 }
+
+static int HttpResponseWriteBody(struct HttpResponse *response) {
+    struct OutputBuffer *buffer = response->output;
+    struct ClientBuffer *station = response->output->transfer_station;
+    size_t byteLen = 0;
+    if (!response->header_sent) {
+        return -1;
+    } else {
+        //send content to client
+        if (!(byteLen = OutputBufferInternalReadableSize(buffer))) {
+            return 1;
+        } else {
+            //how many bytes we can write to transfer station depend on space left of transfer station and internal readable buffer size
+            byteLen = (OutputBufferTransferStationSpaceRest(buffer) >= byteLen
+                       ? byteLen : OutputBufferTransferStationSpaceRest(buffer));
+            WriteToBufferManual(station, BufferSubstr(buffer->buffer, 0), byteLen);
+            BufferDiscard(buffer->buffer, byteLen);
+            return 1;
+        }
+    }
+}
+
+static int HttpResponseWriteContentToClient(struct HttpResponse *response) {
+    struct OutputBuffer *buffer = response->output;
+    //check if pipe has been closed
+    if (OutputBufferCanWrite(buffer) < 0) {
+        response->status = HTTP_RESPONSE_STATUS_ERROR;
+        return -1;
+    } else {
+        //no  more data to write and pipe connected to CGI was closed
+        if (!OutputBufferTransferStationReadableSize(buffer)
+            && !OutputBufferInternalReadableSize(buffer) &&
+            response->pipe_closed) {
+            //close client connection
+            close(buffer->targetFd);
+            //remove readable and writeable event
+            EventRemove(server.depositary, EVENT_READABLE, buffer->targetFd);
+            EventRemove(server.depositary, EVENT_WRITEABLE, buffer->targetFd);
+            LogInfo(response->log, "HttpResponseWriteContentToClient close fd[%d]\n", buffer->targetFd);
+        }
+    }
+}
+

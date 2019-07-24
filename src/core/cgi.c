@@ -90,7 +90,6 @@ int BackendExecuteCgiScript(struct Backend *backend) {
             return 1;
         } else {
             BackendCreateEnvironmentVariables(backend);
-            LogInfo(backend->log, "BackendCreateEnvironmentVariables\n");
             BackendCreateExecArgv(backend);
             //child process,execute cgi script
             if (backend->pipes[0] != STDIN_FILENO) {
@@ -124,7 +123,6 @@ int BackendCreateExecArgv(struct Backend *backend) {
     } else {
         memcpy(cgiPath, server.cgiPath, lenCgiPath);
         backend->exec_argv[0] = cgiPath;
-        LogInfo(log, "cig path:%s\n", cgiPath);
     }
 
     size_t len = strlen(backend->client->entry_file ?: server.default_file);
@@ -134,7 +132,6 @@ int BackendCreateExecArgv(struct Backend *backend) {
     } else {
         memcpy(entry_file, backend->client->entry_file ?: server.default_file, len);
         backend->exec_argv[1] = entry_file;
-        LogInfo(log, "entry file:%s\n", entry_file);
         backend->exec_argv[2] = NULL;
         return 1;
     }
@@ -198,7 +195,6 @@ int CgiServerSoftwareInitCallback(struct Backend *backend, int next) {
         memcpy(software, CGI_SERVER_SOFTWARE_TEXT, prefixLen);
         memcpy(software + prefixLen, SERVER_NAME, serverNameLen);
         backend->environments[next] = software;
-        LogInfo(backend->log, "cgi-env:%s\n", software);
         return 1;
     }
 }
@@ -218,7 +214,6 @@ int CgiServerNameInitCallback(struct Backend *backend, int next) {
         memcpy(host, CGI_SERVER_NAME_TEXT, prefixLen);
         memcpy(host + prefixLen, backend->client->host, hostLen);
         backend->environments[next] = host;
-        LogInfo(backend->log, "cgi-env:%s\n", host);
         return 1;
     }
 }
@@ -239,7 +234,6 @@ int CgiServerProtocolInitCallback(struct Backend *backend, int next) {
         memcpy(protocol, CGI_SERVER_PROTOCOL_TEXT, prefixLen);
         memcpy(protocol + prefixLen, client->protocol_version, protocolLen);
         backend->environments[next] = protocol;
-        LogInfo(backend->log, "cgi-env:%s\n", protocol);
         return 1;
     }
 }
@@ -259,7 +253,6 @@ int CgiServerPortInitCallback(struct Backend *backend, int next) {
         memcpy(port, CGI_SERVER_PORT_TEXT, prefixLen);
         memcpy(port + prefixLen, client->port, portLen);
         backend->environments[next] = port;
-        LogInfo(backend->log, "cgi-env:%s\n", port);
         return 1;
     }
 }
@@ -280,7 +273,6 @@ int CgiRequestMethodInitCallback(struct Backend *backend, int next) {
         memcpy(method, CGI_REQUEST_METHOD_TEXT, prefixLen);
         memcpy(method + prefixLen, client->tMethod, methodLen);
         backend->environments[next] = method;
-        LogInfo(backend->log, "cgi-env:%s\n", method);
         return 1;
     }
 }
@@ -301,7 +293,6 @@ int CgiPathInfoInitCallback(struct Backend *backend, int next) {
         memcpy(pathInfo, CGI_PATH_INFO_TEXT, prefixLen);
         memcpy(pathInfo + prefixLen, client->path_info, piLen);
         backend->environments[next] = pathInfo;
-        LogInfo(backend->log, "cgi-env:%s\n", pathInfo);
         return 1;
     }
 }
@@ -321,7 +312,6 @@ int CgiScriptNameInitCallback(struct Backend *backend, int next) {
         memcpy(scriptName, CGI_SCRIPT_NAME_TEXT, prefixLen);
         memcpy(scriptName + prefixLen, client->script_name, scriptNameLen);
         backend->environments[next] = scriptName;
-        LogInfo(backend->log, "cgi-env:%s\n", scriptName);
         return 1;
     }
 }
@@ -343,7 +333,6 @@ int CgiQueryStringInitCallback(struct Backend *backend, int next) {
         memcpy(queryString, CGI_QUERY_STRING_TEXT, prefixLen);
         memcpy(queryString + prefixLen, client->query_string, queryStringLen);
         backend->environments[next] = queryString;
-        LogInfo(backend->log, "cgi-env:%s\n", queryString);
         return 1;
     }
 }
@@ -368,7 +357,6 @@ int CgiRemoteAddrInitCallback(struct Backend *backend, int next) {
             memcpy(addr, CGI_REMOTE_ADDR_TEXT, prefixLen);
             memcpy(addr + prefixLen, ip, ipLen - 1);
             backend->environments[next] = addr;
-            LogInfo(backend->log, "cgi-env:%s\n", addr);
             return 1;
         }
     }
@@ -389,7 +377,6 @@ int CgiContentTypeInitCallback(struct Backend *backend, int next) {
             memcpy(addr, CGI_CONTENT_TYPE_TEXT, prefixLen);
             memcpy(addr + prefixLen, client->content_type, ctLen);
             backend->environments[next] = addr;
-            LogInfo(backend->log, "cgi-env:%s\n", addr);
             return 1;
         }
     }
@@ -407,7 +394,6 @@ int CgiPhpRedirectStatusInitCallback(struct Backend *backend, int next) {
     } else {
         memcpy(buf, CGI_REDIRECT_STATUS_TEXT, len);
         backend->environments[next] = buf;
-        LogInfo(backend->log, "cgi-env:%s\n", buf);
         return 1;
     }
 }
@@ -423,7 +409,6 @@ int CgiDocumentRootInitCallback(struct Backend *backend, int next) {
         memcpy(docRoot, CGI_DOCUMENT_ROOT_TEXT, prefixLen);
         memcpy(docRoot + prefixLen, server.docRoot, docLen);
         backend->environments[next] = strReplace(docRoot, '\\', '/');
-        LogInfo(backend->log, "cgi-env:%s\n", docRoot);
         return 1;
     }
 }
@@ -456,7 +441,6 @@ int CgiScriptFilenameInitCallback(struct Backend *backend, int next) {
         memcpy(buf + prefixLen, rootDir, rootLen);
         memcpy(buf + rootLen + prefixLen, scriptName, scriptNameLen);
         backend->environments[next] = strReplace(buf, '\\', '/');
-        LogInfo(backend->log, "cgi-env:%s\n", buf);
         return 1;
     }
 }

@@ -242,7 +242,6 @@ int ConfigProcessOneLine(struct Config *config, int kstart, int kend, int vstart
         } else {
             memcpy(item->key, BufferSubstr(buffer, kstart), (kend - kstart + 1));
             memcpy(item->value, BufferSubstr(buffer, vstart), (vend - vstart + 1));
-            LogInfo(config->log, "config parsed[%s]:%s\n", item->key, item->value);
             if (HashAdd(config->config_items, item->key, item) < 0) {
                 goto failed;
             } else {

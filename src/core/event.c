@@ -175,11 +175,9 @@ static void EventReInitSingleFd(struct RbTreeNode *node) {
     struct EventHandler *handler = (struct EventHandler *) node->data;
     struct EventDepositary *depositary = handler->depositary;
     if (handler->flag & EVENT_READABLE) {
-        printf("socket[%d] add readable event\n", handler->fd);
         FD_SET(handler->fd, &depositary->rs);
     }
     if (handler->flag & EVENT_WRITEABLE) {
-        printf("socket[%d] add writeable event\n", handler->fd);
         FD_SET(handler->fd, &depositary->ws);
     }
     if (handler->flag & EVENT_ERROR) {
@@ -196,7 +194,6 @@ static void EventReInitLoop(struct EventDepositary *depositary) {
 
 static void EventHandleCallback(struct RbTreeNode *node) {
     struct EventHandler *handler = (struct EventHandler *) node->data;
-    printf("EventHandleCallback entered,fd is:%d\n", handler->fd);
     struct EventDepositary *depositary = handler->depositary;
     if (FD_ISSET(handler->fd, &depositary->rs)) {
         handler->callback(EVENT_READABLE, handler->data);
@@ -210,10 +207,10 @@ static void EventHandleCallback(struct RbTreeNode *node) {
 }
 
 int EventLoop(struct EventDepositary *depositary) {
-    printf("enter  event loop again\n");
     int ret;
     EventReInitLoop(depositary);
     ret = select(FD_SETSIZE, &depositary->rs, &depositary->ws, &depositary->es, depositary->tv);
+    //printf("EventLoop called\n");
     if (ret < 0) {
         return -1;
     } else {
@@ -224,6 +221,9 @@ int EventLoop(struct EventDepositary *depositary) {
             //after iteration finish,we start to handle pending add or delete request
             EventHandlePendingDelete(depositary);//delete fd
             EventHandlePendingAdd(depositary);//add fd
+            if (depositary->rbTree->count == 1) {
+                printf("left fd count:%d\n", depositary->rbTree->count);
+            }
         }
         return 1;
     }
@@ -238,7 +238,6 @@ static void EventHandlePendingDelete(struct EventDepositary *depositary) {
         delete = (struct EventPendingDelete *) lm->data;
         EventRemove(depositary, delete->flag, delete->fd);
         removeNode(depositary->pending_deleted, lm);//remove node from list
-        free(lm->data);// free node data
         free(lm);//free current node
     }
 }

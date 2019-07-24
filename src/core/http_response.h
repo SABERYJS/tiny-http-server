@@ -61,6 +61,7 @@ struct HttpResponse {
     char header_buffer[HTTP_RESPONSE_HEADER_BUFFER_SIZE];//buffer to store header
     int response_status_code;//response http status code
     short content_type_checked;//whether content type has been checked
+    short header_sent;//whether http response header has been sent
 };
 
 
@@ -94,5 +95,9 @@ static int HttpResponseHeaderCompare(struct ListNode *node, void *data);
 
 
 static int HttpResponseParseHeader(struct HttpResponse *response);
+
+static int HttpResponseWriteBody(struct HttpResponse *response);
+
+static int HttpResponseWriteContentToClient(struct HttpResponse *response);
 
 #endif //STL_CLONE_HTTP_RESPONSE_H

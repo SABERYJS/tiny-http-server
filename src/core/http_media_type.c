@@ -136,7 +136,6 @@ int MediaTypeConfigParse(struct MediaTypeConfig *config, const char *filename) {
                             //not match first alpha
                             if (!CharIsAlpha(c)) {
                                 if (!CharIsSpace(c) && !CharIsNewLine(c) && !CharIsEnter(c)) {
-                                    LogInfo(log, "Invalid char detected before match one line\n");
                                     return -1;
                                 } else {
                                     i++;
@@ -247,7 +246,6 @@ int MediaTypeConfigParse(struct MediaTypeConfig *config, const char *filename) {
                                                                 LogError(log, "add ext[%s] to hash failed\n", ext);
                                                                 return -1;
                                                             }else{
-                                                                LogInfo(log,"parsed ext[%s],header value:%s\n",entry->ext_name,entry->header_value);
                                                             }
                                                         }
                                                     }

@@ -37,12 +37,19 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
 struct OutputBuffer {
-    struct ClientBuffer *buffer;//read  from file descriptor
+    struct ClientBuffer *buffer;//buffer for reading  from file descriptor
+    struct ClientBuffer *transfer_station;//buffer that store content(ompressed,or...) that will be sent to client
     int providerFd;//source to read
     int targetFd;//target to write
     struct Log *log;//for debug
     struct MemoryBlockAllocator *allocator;//reserved
 };
+
+int OutputBufferTransferStationSpaceRest(struct OutputBuffer *output);
+
+int OutputBufferTransferStationReadableSize(struct OutputBuffer *output);
+
+int OutputBufferInternalReadableSize(struct OutputBuffer *output);
 
 struct OutputBuffer *OutputBufferCreate(int rfd, int wfd, struct Log *log);
 

@@ -210,7 +210,6 @@ void HttpEventHandleCallback(int type, void *data) {
     struct HttpRequest *request = (struct HttpRequest *) data;
     struct Client *client = request->client;
     ReadFromSource(client->sock, client->buffer);
-    printf("%s\n", client->buffer->buf);
     if (type == EVENT_READABLE) {
         if (client->status == STATUS_RECEIVING_HEADER) {
             HttpParseRequestLine(request);
@@ -376,7 +375,6 @@ void HttpEventHandleCallback(int type, void *data) {
  * **/
 short HttpParseUrl(const char *url, size_t len, struct Client *client) {
     struct Log *log = client->request->log;
-    LogInfo(log, "client request url:%s\n", url);
     if (!(client->request_url = MemAlloc(len + 1))) {
         return -1;
     } else {
@@ -521,7 +519,6 @@ short HttpParseUrl(const char *url, size_t len, struct Client *client) {
                         memcpy(tb, pc + equalPos + 1, vl);
                         param->value = tb;
                     }
-                    LogInfo(log, "query name:%s  and value%s\n", param->name, param->value);
                     if (reachLast) {
                         break;
                     }
@@ -600,10 +597,8 @@ int HttpParseRequestVersion(struct HttpRequest *request) {
                 memcpy(vb, BufferSubstr(buffer, start), (i - start));
                 version = atof(vb);
                 MemFree(vb);
-                LogInfo(request->log, "http version is:%f\n", version);
                 client->http_version = version;
                 BufferDiscard(buffer, end + 2);//include tail \r\n
-                LogInfo(request->log, "rest content；%s\n", BufferSubstr(buffer, 0));
                 client->request_line_parse_status = HTTP_REQUEST_LINE_FINISHED;//request line parse finished,next step parse headers
 
                 return 1;
@@ -649,7 +644,6 @@ int HttpParseHeader(struct HttpRequest *request) {
             if (CharIsEnter(c)) {
                 if (!last) {
                     //header match finished
-                    LogInfo(request->log, "header match finished\n");
                     if (client->method == HTTP_METHOD_GET) {
                         client->status = STATUS_RECEIVED_FROM_CLIENT_FINISHED;//no body
                     } else {
@@ -699,7 +693,6 @@ int HttpParseHeader(struct HttpRequest *request) {
             matchStart = 0;//reset flag
             colonMatched = 0;
             processed += (end - start + 2);//include tail \r\n
-            LogInfo(request->log, "handle one header[%s]:%s\n", header->name, header->value);
         }
     }
     //the case: last \r\n not match,so code run to here
