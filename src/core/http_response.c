@@ -545,10 +545,10 @@ static int HttpResponseWriteContentToClient(struct HttpResponse *response) {
             && !OutputBufferInternalReadableSize(buffer) &&
             response->pipe_closed) {
             //close client connection
-            close(buffer->targetFd);
+            //close(buffer->targetFd);
             //remove readable and writeable event
             EventRemove(server.depositary, EVENT_READABLE, buffer->targetFd);
-            EventRemove(server.depositary, EVENT_WRITEABLE, buffer->targetFd);
+            EventRemove(server.depositary, EVENT_WRITEABLE | EVENT_AUTOLOAD_REMOVE_FILE_DESCRIPTOR, buffer->targetFd);
             LogInfo(response->log, "HttpResponseWriteContentToClient close fd[%d]\n", buffer->targetFd);
         }
     }

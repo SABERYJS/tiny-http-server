@@ -36,6 +36,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define EVENT_READABLE 1
 #define EVENT_WRITEABLE 2
 #define EVENT_ERROR 4
+#define EVENT_AUTOLOAD_REMOVE_FILE_DESCRIPTOR 8
 
 #define DEPOSITARY_IDLE 1
 #define DEPOSITARY_BUSY 2
@@ -69,14 +70,14 @@ struct EventDepositary {
     fd_set es;
     short status;
     struct timeval *tv;
-    struct RbTree *rbTree;
+    struct List *data;
     struct List *pending_add;//event to add
     struct List *pending_deleted;//event to deleted
 };
 
-static int compare(struct RbTreeNode *a, struct RbTreeNode *b) {
+static int compare(struct ListNode *a, void *b) {
     struct EventHandler *ha = (struct EventHandler *) a->data;
-    struct EventHandler *hb = (struct EventHandler *) b->data;
+    struct EventHandler *hb = (struct EventHandler *) b;
     return ha->fd > hb->fd ? 1 : (ha->fd == hb->fd ? 0 : -1);
 }
 
@@ -89,7 +90,7 @@ int EventRemove(struct EventDepositary *depositary, unsigned int type, int fd);
 
 int EventLoop(struct EventDepositary *depositary);
 
-static void EventReInitSingleFd(struct RbTreeNode *node);
+static void EventReInitSingleFd(struct ListNode *node);
 
 static void EventHandleEvent(struct RbTreeNode *node);
 
@@ -98,5 +99,7 @@ static void EventReInitLoop(struct EventDepositary *depositary);
 static void EventHandlePendingAdd(struct EventDepositary *depositary);
 
 static void EventHandlePendingDelete(struct EventDepositary *depositary);
+
+void printEventNode(struct RbTreeNode *node);
 
 #endif //QC_EVENT_H

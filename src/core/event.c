@@ -34,12 +34,12 @@ struct EventDepositary *EventCreateDepositary(struct timeval *out) {
     if (!depositary) {
         return NULL;
     } else {
-        depositary->rbTree = RbTreeCreate(compare, NULL, NULL);
+        depositary->data = createList(compare, NULL);
         depositary->pending_add = createList(NULL, NULL);
         depositary->pending_deleted = createList(NULL, NULL);
-        if (!depositary->rbTree || !depositary->pending_add || !depositary->pending_deleted) {
-            if (depositary->rbTree) {
-                free(depositary->rbTree);
+        if (!depositary->data || !depositary->pending_add || !depositary->pending_deleted) {
+            if (depositary->data) {
+                free(depositary->data);
             }
             if (depositary->pending_deleted) {
                 free(depositary->pending_deleted);
@@ -58,6 +58,12 @@ struct EventDepositary *EventCreateDepositary(struct timeval *out) {
             return depositary;
         }
     }
+}
+
+
+void printEventNode(struct RbTreeNode *node) {
+    struct EventHandler *handler = (struct EventHandler *) node->data;
+    printf("printEventNode print fd:%d\n", handler->fd);
 }
 
 int EventAdd(struct EventDepositary *depositary, unsigned int type, int fd, void *data, eventHandleCallback callback) {
@@ -85,7 +91,7 @@ int EventAdd(struct EventDepositary *depositary, unsigned int type, int fd, void
             return -1;
         } else {
             handler->fd = fd;
-            struct RbTreeNode *node = RbTreeSearch(depositary->rbTree, handler);
+            struct ListNode *node = searchNode(depositary->data, handler);
             int set = 0;
             if (!node) {
                 handler->data = data;
@@ -93,7 +99,7 @@ int EventAdd(struct EventDepositary *depositary, unsigned int type, int fd, void
                 handler->ref = 0;
                 handler->flag = 0;
                 handler->depositary = depositary;
-                if (!RbTreeInsertNode(depositary->rbTree, handler)) {
+                if (appendNode(depositary->data, handler) < 0) {
                     return -1;
                 }
             } else {
@@ -128,7 +134,7 @@ int EventAdd(struct EventDepositary *depositary, unsigned int type, int fd, void
 }
 
 int EventRemove(struct EventDepositary *depositary, unsigned int type, int fd) {
-    if (type != EVENT_READABLE && type != EVENT_WRITEABLE && type != EVENT_ERROR) {
+    if (!(type & EVENT_READABLE) && !(type & EVENT_WRITEABLE) && !(type & EVENT_ERROR)) {
         return -1;
     } else {
         if (depositary->status == DEPOSITARY_BUSY) {
@@ -149,21 +155,32 @@ int EventRemove(struct EventDepositary *depositary, unsigned int type, int fd) {
             return -1;
         } else {
             handler->fd = fd;
-            struct RbTreeNode *node = RbTreeSearch(depositary->rbTree, handler);
+            struct ListNode *node = searchNode(depositary->data, handler);
+            short matched = 0;
             free(handler);
             if (node) {
+                printf("event remove fd:%d,type %s\n", fd, type == EVENT_READABLE ? "read" : "write");
                 handler = (struct EventHandler *) node->data;
-                if (type == EVENT_READABLE && FD_ISSET(fd, &depositary->rs)) {
+                if (type & EVENT_READABLE && FD_ISSET(fd, &depositary->rs)) {
                     FD_CLR(fd, &depositary->rs);
-                } else if (type == EVENT_WRITEABLE && FD_ISSET(fd, &depositary->ws)) {
+                    matched = 1;
+                } else if (type & EVENT_WRITEABLE && FD_ISSET(fd, &depositary->ws)) {
                     FD_CLR(fd, &depositary->ws);
+                    matched = 1;
                 } else if (FD_ISSET(fd, &depositary->es)) {
                     FD_CLR(fd, &depositary->es);
+                    matched = 1;
                 }
-                --handler->ref;
-                handler->flag &= (~type);
-                if (!handler->ref) {
-                    RbTreeDeleteNode(depositary->rbTree, node);
+                if (matched) {
+                    --handler->ref;
+                    handler->flag &= (~type);
+                    if (!handler->ref) {
+                        removeNode(depositary->data, node);
+                        if (type & EVENT_AUTOLOAD_REMOVE_FILE_DESCRIPTOR) {
+                            close(handler->fd);
+                            printf("EVENT_AUTOLOAD_REMOVE_FILE_DESCRIPTOR closed [%d]\n", handler->fd);
+                        }
+                    }
                 }
             }
             return 1;
@@ -171,7 +188,7 @@ int EventRemove(struct EventDepositary *depositary, unsigned int type, int fd) {
     }
 }
 
-static void EventReInitSingleFd(struct RbTreeNode *node) {
+static void EventReInitSingleFd(struct ListNode *node) {
     struct EventHandler *handler = (struct EventHandler *) node->data;
     struct EventDepositary *depositary = handler->depositary;
     if (handler->flag & EVENT_READABLE) {
@@ -189,10 +206,10 @@ static void EventReInitLoop(struct EventDepositary *depositary) {
     FD_ZERO(&depositary->rs);
     FD_ZERO(&depositary->ws);
     FD_ZERO(&depositary->es);
-    RbTreeIterate(depositary->rbTree->root, EventReInitSingleFd);
+    iterateList(depositary->data, EventReInitSingleFd);
 }
 
-static void EventHandleCallback(struct RbTreeNode *node) {
+static void EventHandleCallback(struct ListNode *node) {
     struct EventHandler *handler = (struct EventHandler *) node->data;
     struct EventDepositary *depositary = handler->depositary;
     if (FD_ISSET(handler->fd, &depositary->rs)) {
@@ -210,20 +227,16 @@ int EventLoop(struct EventDepositary *depositary) {
     int ret;
     EventReInitLoop(depositary);
     ret = select(FD_SETSIZE, &depositary->rs, &depositary->ws, &depositary->es, depositary->tv);
-    //printf("EventLoop called\n");
     if (ret < 0) {
         return -1;
     } else {
         if (ret > 0) {
             depositary->status = DEPOSITARY_BUSY;
-            RbTreeIterate(depositary->rbTree->root, EventHandleCallback);
+            iterateList(depositary->data, EventHandleCallback);
             depositary->status = DEPOSITARY_IDLE;
             //after iteration finish,we start to handle pending add or delete request
             EventHandlePendingDelete(depositary);//delete fd
             EventHandlePendingAdd(depositary);//add fd
-            if (depositary->rbTree->count == 1) {
-                printf("left fd count:%d\n", depositary->rbTree->count);
-            }
         }
         return 1;
     }

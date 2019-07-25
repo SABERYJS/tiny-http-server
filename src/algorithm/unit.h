@@ -28,8 +28,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
 
-#ifndef STL_CLONE_UNIT_HH
-#define STL_CLONE_UNIT_HH
+#ifndef STL_CLONE_UNIT_H
+#define STL_CLONE_UNIT_H
 struct Unit {
     int a;
 };
