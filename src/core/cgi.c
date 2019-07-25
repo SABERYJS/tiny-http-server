@@ -56,7 +56,7 @@ struct Backend *BackendCreate(struct Client *client, char *cgi, struct Log *log)
             backend->entry = client->entry_file;
 
             //after create backend finished,we need create HttpResponse object
-            client->response = HttpResponseCreate(client, backend->pipes[0], log);
+            client->response = HttpResponseCreate(client, backend->pipes[0], log, 0, NULL, 0, 0);
             if (!client->response) {
                 goto failed;
             }

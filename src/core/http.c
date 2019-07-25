@@ -87,11 +87,82 @@ int HttpParseFinished(struct HttpRequest *request) {
     //no longer receive data from client
     EventRemove(server.depositary, EVENT_READABLE, client->sock);
     struct Log *log = LogCreate(0, STDOUT_FILENO, NULL, LOG_LEVEL_INFO);
-    struct Backend *backend = BackendCreate(request->client, NULL, log);
-    if (!backend) {
+    char *entry = request->client->entry_file;
+    size_t i = 0;
+    size_t uriLen = 0;
+    if (!entry) {
+        uriLen = strlen(client->uri);
+        i = uriLen - 1;
+        while (i >= 0) {
+            if (CharIsBlackSlash(client->uri[i])) {
+                if (!(entry = MemAlloc(uriLen - i))) {
+                    return -1;
+                } else {
+                    memcpy(entry, client->uri + i + 1, (uriLen - (i + 1)));
+                    break;
+                }
+            }
+            i--;
+        }
+    }
+    if (entry && strncmp(FileExtension(entry), "php", 3) != 0) {
+        return HttpRequestProcessStaticFile(request, entry);
+    } else {
+        struct Backend *backend = BackendCreate(request->client, NULL, log);
+        if (!backend) {
+            return -1;
+        } else {
+            return BackendExecuteCgiScript(backend);
+        }
+    }
+}
+
+/**
+ * process static file
+ * **/
+int HttpRequestProcessStaticFile(struct HttpRequest *request, char *entry) {
+    char *root = server.docRoot;
+    struct Client *client = request->client;
+    size_t rl = strlen(root);
+    size_t el = strlen(entry);
+    size_t tl = rl + el;
+    int fd;
+    short is_error = 0;
+    char ext[10] = {TAIL};
+    char *path = MemAlloc(tl + 2);
+    struct HttpResponse *response;
+    struct stat st;
+    if (!path) {
         return -1;
     } else {
-        BackendExecuteCgiScript(backend);
+        memcpy(path, root, rl);
+        path[rl] = CHAR_BACKSLASH;
+        memcpy(path + rl + 1, entry, el);
+        if (!FileExist(path)) {
+            fd = FileOpen(server.error_page, FILE_OPEN_READ_ONLY, 0);
+            is_error = 1;
+        } else {
+            fd = FileOpen(path, FILE_OPEN_READ_ONLY, 0);
+        }
+        if (!fd) {
+            return -1;
+        } else {
+            fstat(fd, &st);//get file size
+            memcpy(ext, FileExtension(path), 10);
+            response = HttpResponseCreate(client, fd, NULL, 1,
+                                          (!is_error ? MediaTypeQuery(server.config, ext) : "text/html"),
+                                          (is_error ? 404 : 200), st.st_size);
+            if (!response) {
+                return -1;
+            } else {
+                if (!HttpResponseRegisterReadEvent(response, server.depositary) ||
+                    !HttpResponseRegisterWriteEvent(response, server.depositary)) {
+                    return -1;
+                } else {
+                    return 1;
+                }
+            }
+        }
     }
 }
 

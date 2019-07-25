@@ -33,6 +33,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "../src/core/http.h"
 #include "../src/core/server.h"
 #include "../src/core/config.h"
+#include "../src/core/http_media_type.h"
 
 
 struct ListenSocket {
@@ -80,12 +81,25 @@ void ListenSocketEventCallback(int type, void *data) {
 
 int main() {
     printf("start parse config file\n");
+    char *mime_type_config_file = "E:\\code\\algorithm\\mime.types";
     struct Config *config = ConfigCreate("../app.conf");
     if (!config) {
         printf("Create config file failed,%s\n", strerror(errno));
         exit(0);
     }
     ConfigFileParse(config);
+    struct MediaTypeConfig *mediaTypeConfig = MediaTypeCreate(100, NULL, NULL);
+    if (!mediaTypeConfig) {
+        printf("create media type config failed\n");
+        exit(1);
+    } else {
+        if (!MediaTypeConfigParse(mediaTypeConfig, mime_type_config_file)) {
+            printf("parse  media config failed\n");
+            exit(1);
+        } else {
+            server.config = mediaTypeConfig;
+        }
+    }
     printf("socket server start bootstrap\n");
     int fd = socket(AF_INET, SOCK_STREAM, 0);
     if (fd < 0) {

@@ -35,6 +35,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "http.h"
 #include "http_code.h"
 #include "http_header.h"
+#include "client.h"
 
 
 #define HTTP_RESPONSE_STATUS_NORMAL 1
@@ -62,12 +63,17 @@ struct HttpResponse {
     int response_status_code;//response http status code
     short content_type_checked;//whether content type has been checked
     short header_sent;//whether http response header has been sent
+    short is_static;//whether response is  static file
+    char *content_type;//suitable for static file
+    size_t content_length;//content length for static file
 };
 
 
 void HttpResponseHandleInternalError(struct HttpResponse *response);
 
-struct HttpResponse *HttpResponseCreate(struct Client *client, int readFd, struct Log *log);
+struct HttpResponse *
+HttpResponseCreate(struct Client *client, int readFd, struct Log *log, short is_static, char *content_type,
+                   short status_code, size_t content_length);
 
 int HttpResponseRegisterEvent(struct HttpResponse *response, struct EventDepositary *depositary);
 
@@ -99,5 +105,7 @@ static int HttpResponseParseHeader(struct HttpResponse *response);
 static int HttpResponseWriteBody(struct HttpResponse *response);
 
 static int HttpResponseWriteContentToClient(struct HttpResponse *response);
+
+static struct HttpHeader *HttpResponseCreateHeader(char *header_name, char *header_value);
 
 #endif //STL_CLONE_HTTP_RESPONSE_H

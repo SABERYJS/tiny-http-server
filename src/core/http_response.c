@@ -32,7 +32,9 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /**
  * called   before CGI script was executed
  * **/
-struct HttpResponse *HttpResponseCreate(struct Client *client, int readFd, struct Log *log) {
+struct HttpResponse *
+HttpResponseCreate(struct Client *client, int readFd, struct Log *log, short is_static, char *content_type,
+                   short status_code, size_t content_length) {
     struct HttpResponse *response = MemAlloc(sizeof(struct HttpResponse));
     int flag = 0;
     if (!response) {
@@ -70,9 +72,12 @@ struct HttpResponse *HttpResponseCreate(struct Client *client, int readFd, struc
             response->status_line_sent = 0;
             response->header_parse_finished = 0;
             response->status_parsed = 0;
-            response->response_status_code = 0;
+            response->response_status_code = status_code;
             response->content_type_checked = 0;
             response->header_sent = 0;
+            response->is_static = is_static;
+            response->content_type = content_type;
+            response->content_length = content_length;
             memset(response->header_buffer, 0, HTTP_RESPONSE_HEADER_BUFFER_SIZE);
             return response;
         }
@@ -84,6 +89,25 @@ static int HttpResponseHeaderCompare(struct ListNode *node, void *data) {
     struct HttpHeader *hd1 = (struct HttpHeader *) node->data;
     struct HttpHeader *hd2 = (struct HttpHeader *) data;
     return strcmp(hd1->name, hd2->name);
+}
+
+
+static struct HttpHeader *HttpResponseCreateHeader(char *header_name, char *header_value) {
+    struct HttpHeader *header;
+    int header_name_len = 0, header_value_len = 0;
+    if (!(header = MemAlloc(sizeof(struct HttpHeader)))) {
+        return NULL;
+    } else {
+        header_name_len = strlen(header_name);
+        header_value_len = strlen(header_value);
+        if (!(header->name = MemAlloc(header_name_len + 1)) || !(header->value = MemAlloc(header_value_len + 1))) {
+            return NULL;
+        } else {
+            memcpy(header->name, header_name, header_name_len);
+            memcpy(header->value, header_value, header_value_len);
+            return header;
+        }
+    }
 }
 
 
@@ -104,8 +128,35 @@ static int HttpResponseParseHeader(struct HttpResponse *response) {
     int processed = 0;
     short lastReached = 0;
     char *html_header = "text/html";
+    char *content_type = "Content-Type";
+    char *content_length = "Content-Length";
+    char len_buf[12] = {TAIL};
     short shouldAsHeader = 1;
     int header_name_len = 0, header_value_len = 0;
+    if (response->is_static) {
+        //for static file,we do not parse header,because it is transparent
+        //content type
+        header = HttpResponseCreateHeader(content_type, response->content_type);
+        if (!header) {
+            return -1;
+        } else {
+            if (appendNode(response->headers, header) < 0) {
+                return -1;
+            }
+        }
+        sprintf(len_buf, "%d", response->content_length);
+        //content length
+        header = HttpResponseCreateHeader(content_length, len_buf);
+        if (!header) {
+            return -1;
+        } else {
+            if (appendNode(response->headers, header) < 0) {
+                return -1;
+            }
+        }
+        response->header_parse_finished = 1;
+        return 1;
+    }
     //return directly,if there is no data ro read
     if (buffer->size <= 0) {
         return 1;

@@ -33,6 +33,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include "global_header.h"
 #include "event.h"
+#include "http_media_type.h"
 
 
 extern char **environ;
@@ -47,6 +48,8 @@ struct Server {
     char *default_file;//default entry file
     struct EventDepositary *depositary;
     struct List *environables;//
+    char *error_page;
+    struct MediaTypeConfig *config;
 };
 
 /**

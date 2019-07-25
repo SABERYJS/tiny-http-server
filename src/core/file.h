@@ -66,4 +66,6 @@ short FileCanWrite(const char *filename);
 
 short FileCanExec(const char *filename);
 
+const char *FileExtension(const char *filename);
+
 #endif //STL_CLONE_FILE_H

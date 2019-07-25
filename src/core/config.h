@@ -61,6 +61,8 @@ int ConfigInitServerCgiExtDirectory(struct ConfigItem *configItem);
 
 int ConfigInitServerCgiDefaultFile(struct ConfigItem *configItem);
 
+int ConfigInitErrorPage(struct ConfigItem *configItem);
+
 struct SystemConfigDefinition {
     char *config_name;
     int flag;
@@ -73,6 +75,7 @@ static struct SystemConfigDefinition definitions[] = {
         {"docRoot", CONFIG_REQUIRED, ConfigInitServerDocDirectory},
         {"cgiExtName", CONFIG_REQUIRED, ConfigInitServerCgiExtDirectory},
         {"defaultFile", CONFIG_REQUIRED, ConfigInitServerCgiDefaultFile},
+        {"errorPage", CONFIG_REQUIRED, ConfigInitErrorPage},
         SentinelConfig
 };
 

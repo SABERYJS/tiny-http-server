@@ -309,3 +309,9 @@ int ConfigInitServerCgiDefaultFile(struct ConfigItem *configItem) {
     server.default_file = trim(configItem->value, strlen(configItem->value), CHARSPACE);
     return server.default_file ? 1 : -1;
 }
+
+
+int ConfigInitErrorPage(struct ConfigItem *configItem) {
+    server.error_page = trim(configItem->value, strlen(configItem->value), CHARSPACE);
+    return server.error_page ? 1 : -1;
+}

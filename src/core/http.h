@@ -132,4 +132,6 @@ int HttpParseContentType(struct HttpRequest *request, char *value);
 
 int HttpParseFinished(struct HttpRequest *request);
 
+int HttpRequestProcessStaticFile(struct HttpRequest *request, char *entry);
+
 #endif //STL_CLONE_HTTP_H

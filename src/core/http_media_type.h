@@ -60,4 +60,6 @@ struct MediaTypeConfig *MediaTypeCreate(size_t bucket_size, struct Log *log, uns
 
 int MediaTypeConfigParse(struct MediaTypeConfig *config, const char *filename);
 
+char *MediaTypeQuery(struct MediaTypeConfig *config, const char *key);
+
 #endif //STL_CLONE_HTTP_MEDIA_TYPE_H

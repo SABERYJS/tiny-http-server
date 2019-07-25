@@ -50,3 +50,15 @@ short FileCanWrite(const char *filename) {
 short FileCanExec(const char *filename) {
     return access(filename, X_OK) == 0;
 }
+
+const char *FileExtension(const char *filename) {
+    int i = 0;
+    size_t len = strlen(filename);
+    while (i < len) {
+        if (filename[i] == '.') {
+            return filename + (i + 1);
+        }
+        i++;
+    }
+    return NULL;
+}

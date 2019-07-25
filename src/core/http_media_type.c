@@ -65,7 +65,7 @@ int MediaTypeConfigParse(struct MediaTypeConfig *config, const char *filename) {
         return -1;
     } else {
         size_t rb;
-        char buffer[MEDIA_TYPE_CONFIG_FILE_PARSE_CHUNK]={TAIL};
+        char buffer[MEDIA_TYPE_CONFIG_FILE_PARSE_CHUNK] = {TAIL};
         short matchStart = 0;
         int i, j;
         char c, m;
@@ -84,7 +84,7 @@ int MediaTypeConfigParse(struct MediaTypeConfig *config, const char *filename) {
         short extItemMatchStart = 0;
         struct MediaTypeEntry *entry;
         short extLastChar = 0;
-        if((rb = read(fd, buffer, MEDIA_TYPE_CONFIG_FILE_PARSE_CHUNK))){
+        if ((rb = read(fd, buffer, MEDIA_TYPE_CONFIG_FILE_PARSE_CHUNK))) {
             ptr = buffer;
             i = 0;//reset count
             while (i < rb) {
@@ -92,20 +92,20 @@ int MediaTypeConfigParse(struct MediaTypeConfig *config, const char *filename) {
                 leftLen = strlen(ptr + i);//left character count
                 if (!matchStart) {
                     if (!CharIsAlpha(c)) {
-                        if(!CharIsSpace(c)&& !CharIsNewLine(c) && !CharIsEnter(c)){
-                            LogError(log,"Only space is permitted before block name\n");
+                        if (!CharIsSpace(c) && !CharIsNewLine(c) && !CharIsEnter(c)) {
+                            LogError(log, "Only space is permitted before block name\n");
                             return -1;
-                        }else{
+                        } else {
                             i++;
                             continue;
                         }
                     } else {
                         if (leftLen < 5) {
                             //byte num is not enough
-                            LogError(log,"check media type config file format\n");
+                            LogError(log, "check media type config file format\n");
                             return -1;
                         }
-                        if (strncmp(ptr+i, "types", 5) != 0) {
+                        if (strncmp(ptr + i, "types", 5) != 0) {
                             LogError(log, "please check file format,block name 'types' required\n");
                             return -1;
                         } else {
@@ -165,7 +165,7 @@ int MediaTypeConfigParse(struct MediaTypeConfig *config, const char *filename) {
                                         }
                                         if (!CharIsAlpha(c) && !CharIsNumber(c) && !CharIsBlackSlash(c) &&
                                             !CharIsPlus(c) &&
-                                            !CharIsBar(c)&&!CharDot(c)) {
+                                            !CharIsBar(c) && !CharDot(c)) {
                                             LogError(log,
                                                      "mime type can only contain alpha,number,backslash,dot and plus\n");
                                             return -1;
@@ -176,7 +176,7 @@ int MediaTypeConfigParse(struct MediaTypeConfig *config, const char *filename) {
                                     }
                                 } else {
                                     if (!extTrueMatched) {
-                                        if (CharIsAlpha(c)||CharIsNumber(c)) {
+                                        if (CharIsAlpha(c) || CharIsNumber(c)) {
                                             extStartPos = i;
                                             extTrueMatched = 1;
                                             i++;
@@ -245,7 +245,7 @@ int MediaTypeConfigParse(struct MediaTypeConfig *config, const char *filename) {
                                                             if (HashAdd(hash, ext, entry) < 0) {
                                                                 LogError(log, "add ext[%s] to hash failed\n", ext);
                                                                 return -1;
-                                                            }else{
+                                                            } else {
                                                             }
                                                         }
                                                     }
@@ -261,31 +261,37 @@ int MediaTypeConfigParse(struct MediaTypeConfig *config, const char *filename) {
                                     mediaTypeMatchEnded = 0;
                                     extMatchStart = 0;
                                     extTrueMatched = 0;
-                                    extItemMatchStart=0;
+                                    extItemMatchStart = 0;
                                     i++;
                                 }
                             }
                         }
                     }
                 } else {
-                    if(!CharIsSpace(c)&&!CharIsEnter(c)&&!CharIsNewLine(c)){
+                    if (!CharIsSpace(c) && !CharIsEnter(c) && !CharIsNewLine(c)) {
                         LogError(log, "block ended,but extra character is detected\n");
                         return -1;
-                    } else{
+                    } else {
                         i++;
                     }
                 }
             }
-        }else{
+        } else {
             LogError(log, "read  media config file :%s failed\n", filename);
             return -1;
         }
 
-        if(lineStartMatched||mediaTypeMatchEnded ||extMatchStart||extTrueMatched||extItemMatchStart){
-            LogError(log,"config file is  not complete\n");
+        if (lineStartMatched || mediaTypeMatchEnded || extMatchStart || extTrueMatched || extItemMatchStart) {
+            LogError(log, "config file is  not complete\n");
             return -1;
         }
         //config file parse finished
         return 1;
     }
+}
+
+
+char *MediaTypeQuery(struct MediaTypeConfig *config, const char *key) {
+    struct MediaTypeEntry *entry = (struct MediaTypeEntry *) HashSearch(config->hash, key);
+    return entry->header_value;
 }
