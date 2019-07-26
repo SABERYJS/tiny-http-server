@@ -38,8 +38,40 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "../src/core/http_media_type.h"
 #include "../src/core/http_url_encode.h"
 #include "../src/core/file.h"
+#include "sort_list.h"
+#include "../src/algorithm/unit.h"
+#include "../src/algorithm/list.h"
 
+
+int SortListCompare(struct ListNode *node, void *data) {
+    struct Unit *ua = (struct Unit *) node->data;
+    struct Unit *ub = (struct Unit *) data;
+    return ua->a > ub->a ? 1 : ((ua->a == ub->a) ? 0 : -1);
+}
 
 int main(void) {
-    printf("ext:%s\n", FileExtension("index.php"));
+    struct SortedList *list = SortListCreate(SortListCompare, NULL, NULL);
+    struct ListNode *node;
+    struct Unit *u;
+    u = malloc(sizeof(struct Unit));
+    u->a = 10;
+    SortListAppend(list, u);
+    u = malloc(sizeof(struct Unit));
+    u->a = 89;
+    SortListAppend(list, u);
+    u = malloc(sizeof(struct Unit));
+    u->a = 1;
+    SortListAppend(list, u);
+    u = malloc(sizeof(struct Unit));
+    u->a = 20;
+    SortListAppend(list, u);
+    u = malloc(sizeof(struct Unit));
+    u->a = 100;
+    SortListAppend(list, u);
+    node = list->list->header;
+    while (node) {
+        u = (struct Unit *) node->data;
+        printf("node value:%d\n", u->a);
+        node = node->next;
+    }
 }

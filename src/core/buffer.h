@@ -32,7 +32,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include "global_header.h"
 
-#define CLIENT_RECEIVE_BUFFER_SIZE 1024
+#define CLIENT_RECEIVE_BUFFER_SIZE 1024*1024
 
 struct ClientBuffer {
     char buf[CLIENT_RECEIVE_BUFFER_SIZE];//buffer that receive client input

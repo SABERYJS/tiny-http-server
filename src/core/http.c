@@ -106,7 +106,7 @@ int HttpParseFinished(struct HttpRequest *request) {
         }
     }
     if (entry && strncmp(FileExtension(entry), "php", 3) != 0) {
-        return HttpRequestProcessStaticFile(request, entry);
+        return HttpRequestProcessStaticFile(request);
     } else {
         struct Backend *backend = BackendCreate(request->client, NULL, log);
         if (!backend) {
@@ -120,24 +120,23 @@ int HttpParseFinished(struct HttpRequest *request) {
 /**
  * process static file
  * **/
-int HttpRequestProcessStaticFile(struct HttpRequest *request, char *entry) {
+int HttpRequestProcessStaticFile(struct HttpRequest *request) {
     char *root = server.docRoot;
     struct Client *client = request->client;
     size_t rl = strlen(root);
-    size_t el = strlen(entry);
+    size_t el = strlen(client->uri);
     size_t tl = rl + el;
     int fd;
     short is_error = 0;
     char ext[10] = {TAIL};
-    char *path = MemAlloc(tl + 2);
+    char *path = MemAlloc(tl + 1);
     struct HttpResponse *response;
     struct stat st;
     if (!path) {
         return -1;
     } else {
         memcpy(path, root, rl);
-        path[rl] = CHAR_BACKSLASH;
-        memcpy(path + rl + 1, entry, el);
+        memcpy(path + rl, client->uri, el);
         if (!FileExist(path)) {
             fd = FileOpen(server.error_page, FILE_OPEN_READ_ONLY, 0);
             is_error = 1;
@@ -788,9 +787,11 @@ int HttpParseSpecifedHeader(struct HttpRequest *request, char *name, char *value
     name = strlwr(name);
     size_t len = strlen(name);
     if (strncasecmp(name, "host", 4) == 0) {
-        HttpParseHeaderHost(request, value);
+        return HttpParseHeaderHost(request, value);
     } else if (strncmp(name, "content-type", 12) == 0) {
-        HttpParseContentType(request, value);
+        return HttpParseContentType(request, value);
+    } else if (strncmp(name, "accept-encoding", 15) == 0) {
+        return HttpParseAcceptEncoding(request, value);
     }
 }
 
@@ -961,4 +962,131 @@ int HttpParseContentType(struct HttpRequest *request, char *value) {
     }
     //content-type format is invalid
     return -1;
+}
+
+
+/**
+ * parse Accept-Encoding request header
+ * **/
+int HttpParseAcceptEncoding(struct HttpRequest *request, char *value) {
+    struct Log *log = request->log;
+    char *deflate = "deflate";
+    char *gzip = "gzip";
+    char *compress = "compress";
+    char *br = "br";
+    char *identity = "identity";
+    char *star = "*";
+    struct AcceptEncoding *encoding;
+    size_t len = strlen(value);
+    size_t encode_len = 0;
+    int i = 0;
+    char c = TAIL;
+    short startMatched = 0, semicolonMatched = 0, commaMatched = 0, reachEnd = 0;
+    int start = 0, semicolonPos = 0;
+    short numberMatched = 0, dotMatched = 0;
+    char *encode_name = NULL;
+    float encode_priority = 0;
+    short encode_flag = 0;
+    short encode_matched = 0;
+    char *ptr = NULL;
+    for (i = 0; i < len; i++) {
+        c = value[i];
+        if (!startMatched) {
+            if (CharIsAlpha(c)) {
+                startMatched = 1;
+                start = i;
+                continue;
+            } else if (!CharIsSpace(c)) {
+                LogError(log, "before match start,Invalid Character detected\n");
+                return -1;
+            } else {
+                continue;
+            }
+        } else if (CharIsComma(c)) {
+            commaMatched = 1;
+            if ((i - start) <= 1) {
+                return -1;
+            } else {
+                ptr = value + start;
+                if (strncmp(deflate, ptr, (encode_len = strlen(deflate))) == 0) {
+                    //deflate matched
+                    encode_matched = 1;
+                    encode_flag = ACCEPT_ENCODING_DEFLATE;
+                } else if (strncmp(gzip, ptr, (encode_len = strlen(gzip))) == 0) {
+                    encode_matched = 1;
+                    encode_flag = ACCEPT_ENCODING_GZIP;
+                } else if (strncmp(br, ptr, (encode_len = strlen(br))) == 0) {
+                    encode_matched = 1;
+                    encode_flag = ACCEPT_ENCODING_BR;
+                } else if (strncmp(compress, ptr, (encode_len = strlen(compress))) == 0) {
+                    encode_matched = 1;
+                    encode_flag = ACCEPT_ENCODING_COMPRESS;
+                } else if (strncmp(identity, ptr, (encode_len = strlen(identity))) == 0) {
+                    encode_matched = 1;
+                    encode_flag = ACCEPT_ENCODING_IDENTITY;
+                } else if (strncmp(star, ptr, (encode_len = 1)) == 0) {
+                    encode_matched = 1;
+                    encode_flag = ACCEPT_ENCODING_EXCEPT_OTHER;
+                }
+                if (encode_matched) {
+                    if (!(encoding = MemAlloc(sizeof(struct AcceptEncoding)))) {
+                        return -1;
+                    }
+                    if (semicolonMatched) {
+                        //parse priority
+                        ptr += (encode_len + 1);
+                        encode_priority = atof(ptr);
+                        if (encode_priority < 0) {
+                            LogError(log, "encode priority invalid\n");
+                            return -1;
+                        }
+                    } else {
+                        encode_priority = ACCEPT_ENCODING_PRIORITY_NOT_SPECIFIED;
+                    }
+                    encoding->priority = encode_priority;
+                    encoding->type = encode_flag;
+                    LogInfo(log, "encode [%d] matched,priority is %f\n", encoding->type, encoding->priority);
+
+                } else {
+                    //do nothing
+                }
+            }
+        } else {
+            if (!CharIsAlpha(c) && !CharIsSemicolon(c) && !CharIsStar(c) && !CharIsEqual(c) && !CharDot(c) &&
+                !CharIsNumber(c)) {
+                LogError(log, "before comma matched,Invalid Character detected\n");
+                return -1;
+            }
+            if (!semicolonMatched) {
+                //before semicolon matched
+                if (!CharIsAlpha(c)) {
+                    LogError(log, "Invalid Character detected before semicolon matched\n");
+                    return -1;
+                }
+            } else {
+                //only number can be matched after semicolon matched
+                if (!numberMatched && CharDot(c)) {
+                    LogError(log, "dot can only be matched after any number matched\n");
+                    return -1;
+                }
+                if (dotMatched && CharDot(c)) {
+                    LogError(log, "multiple dot matched,it is Invalid\n");
+                    return -1;
+                }
+
+                if (CharDot(c)) {
+                    dotMatched = 1;
+                    continue;
+                }
+                if (CharIsNumber(c)) {
+                    numberMatched = 1;
+                }
+            }
+            if (CharIsSemicolon(c)) {
+                semicolonMatched = 1;
+                semicolonPos = i;
+                continue;
+            }
+        }
+    }
 }

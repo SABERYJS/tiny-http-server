@@ -81,6 +81,9 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define CHARSPACE (' ')
 #define CharIsEqual(c)  (c==CharEqual)
 #define CharIsSemicolon(c)  (c==';')
+#define CharSemicolon (';')
+#define CharIsStar(c)  (c=='*')
+#define CharIsComma(c)  (c==',')
 
 #define DomainValidChar(c)  ((c>='a' && c<='z') || (c>='A' &&c<='Z') ||c=='-' ||c=='.' ||(c>='0' &&c<='9') ||c==':')
 
@@ -92,6 +95,20 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 struct HttpRequest {
     struct Client *client;
     struct Log *log;
+};
+
+#define ACCEPT_ENCODING_DEFLATE 1
+#define ACCEPT_ENCODING_GZIP 2
+#define ACCEPT_ENCODING_BR 3
+#define ACCEPT_ENCODING_EXCEPT_OTHER 4
+#define ACCEPT_ENCODING_IDENTITY 5
+#define ACCEPT_ENCODING_COMPRESS 6
+
+#define ACCEPT_ENCODING_PRIORITY_NOT_SPECIFIED -1
+
+struct AcceptEncoding {
+    float priority;
+    short type;
 };
 
 static inline short HttpCheckVersionValidity(char *version) {
@@ -132,6 +149,8 @@ int HttpParseContentType(struct HttpRequest *request, char *value);
 
 int HttpParseFinished(struct HttpRequest *request);
 
-int HttpRequestProcessStaticFile(struct HttpRequest *request, char *entry);
+int HttpRequestProcessStaticFile(struct HttpRequest *request);
+
+int HttpParseAcceptEncoding(struct HttpRequest *request, char *value);
 
 #endif //STL_CLONE_HTTP_H
